@@ -1,0 +1,414 @@
+\documentclass[11pt, a4paper, oneside]{article}
+
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{hyperref}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfgantt}
+
+\usepackage{perpage} %the perpage package
+\MakePerPage{footnote} %the perpage package command
+
+\usepackage{color}
+\usepackage{colortbl}
+
+\usepackage{makeidx}
+
+\usepackage{listings}
+\usepackage{CJKutf8}
+
+\usepackage{tabularx}
+\usepackage{multicol}
+
+\usepackage{pgfgantt} % planning gantt
+
+%arborescence
+\usepackage{dirtree}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\makeindex
+\makeatletter
+\renewenvironment{theindex}
+{
+    \thispagestyle{fancy}
+    \setlength{\parindent}{0pt}
+    \let
+    \item
+    \@idxitem
+}{\onecolumn}
+\makeatother
+
+\setlength{\parindent}{0cm}
+
+\lstset{
+    basicstyle=\ttfamily,
+    stringstyle=\ttfamily\color{green!50!black},
+    keywordstyle=\bfseries\color{blue},
+    commentstyle=\itshape\color{red!50!black},
+    showstringspaces=true,
+    tabsize=4,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    firstnumber=1,
+    stepnumber=1,
+    numbersep=5pt,
+    breaklines=true
+}
+
+\graphicspath{{img/}}
+
+\pagestyle{fancy}
+\setlength{\headheight}{14pt}
+\renewcommand{\headrulewidth}{0.5pt}
+\lhead{Yannick Brodard}
+\chead{Travail de semestre}
+\rhead{\today}
+\renewcommand{\footrulewidth}{0.5pt}
+\lfoot{CFPT - École d'informatique}
+\cfoot{Étude de Unreal Engine 4}
+\rfoot{Page \thepage ~sur \pageref{LastPage}}
+
+\newcommand{\teacherlastname}{Maréchal}
+\newcommand{\teacherfirstname}{Christophe}
+\newcommand{\teacheremail}{christophe.marechal@edu.ge.ch}
+
+\newcommand{\school}{CFPT-EI}
+\newcommand{\schoolyear}{2014-2015}
+
+\newcommand{\candidatelastname}{Brodard}
+\newcommand{\candidatefirstname}{Yannick}
+\newcommand{\candidatephone}{+41 79 137 67 11}
+\newcommand{\candidateemail}{yannick.r.brodard@gmail.com}
+
+\newcommand{\projectTitle}{Hel}
+\newcommand{\projectSubTitle}{The pixelated horror}
+
+% Niveau table des matières
+\setcounter{tocdepth}{3}
+% --------------------------------------------------
+\begin{document}
+% --------------------------------------------------
+\begin{titlepage}
+	\begin{center}
+		\vspace*{\fill}
+		\includegraphics[width=.5\textwidth]{cfpt_logo}\\[.4cm]
+		\textsc{\Large Centre de formation professionnelle technique}\\[.4cm]
+		\textsc{\Large Travail de diplôme}\\[.1cm]
+		\textsc{\Large Documentation}\\[0.4cm]
+		\textsc{\large \schoolyear}\\[0.4cm]
+		
+		% Title
+		\HRule \\[0.4cm]
+		{ \huge \bfseries \projectTitle \\[0.4cm] }
+		{ \Large \bfseries \emph{\projectSubTitle} \\[0.4cm] }
+		\HRule \\[1.5cm]
+		
+		% Author and supervisor
+		\noindent
+		\begin{minipage}{0.4\textwidth}
+		\begin{flushleft} \large
+		\emph{Auteur:}\\
+		\candidatefirstname \textsc{~\candidatelastname}\\[0.2cm]
+		{\small
+		\texttt{\candidateemail}\\
+		\texttt{\candidatephone}
+		}
+		\end{flushleft}
+		\end{minipage}%
+		\begin{minipage}{0.4\textwidth}
+		\begin{flushright} \large
+		\emph{Superviseur:} \\
+		\teacherfirstname \textsc{~\teacherlastname}\\[0.2cm]
+		{\small
+		\texttt{\teacheremail}\\
+		~
+		}
+		\end{flushright}
+		\end{minipage}
+		
+		\vspace*{\fill}
+		
+		% Bottom of the page
+		{\large \today}
+		
+	\end{center}
+\end{titlepage}
+% --------------------------------------------------
+\section{Avant-propos}
+\subsection{Résumé}
+\subsection{Abstract}
+\newpage
+% --------------------------------------------------
+\tableofcontents
+\newpage
+% --------------------------------------------------
+\section{Introduction}
+\subsection{But}
+L'objectif est de créer un jeu divertissant pour le joueur moyen. \projectTitle\footnote{\textit{\projectTitle} : Nom du jeu-vidéo et aussi nom de la déesse de la mort dans la mythologie nordique} doit être bien construit et doit avoir la possibilité d'ajouter du contenu facilement.\\[.5cm]
+Le jeu-vidéo est en deux dimensions (2D) avec une vue de dessus\footnote{Une vue de dessus peut être comparable au jeu Dwarf Fortress. Voir voir Figure \ref{fig:df} page \pageref{fig:df}} et inclue quelques aspects d'un jeu RPG\footnote{Rôle Playing Game : Un RPG est un jeu où le joueur fait évoluer son personnage avec ses choix et/ou ses compétences.}. L'utilisateur contrôle un personnage qui se retrouve coincé dans une pièce inconnue et doit s'aventurer dans cet environnement inconnu et découvrir ses mystères. Cette salle contient des ennemis que le joueur peut contourner ou vaincre. Grâce à ceci, le héros gagne des points de compétences qu'il peut dépenser pour augmenter ses capacités une fois que le joueur meurt. Quand le joueur meurt, celui-ci réapparaît au début de cette salle, mais sans perdre ses compétences, d'une part la pièce aura aussi changé. Des éléments de celui-ci auront disparu ou bougé et d'autres auront apparu. L'utilisateur devra s'aventurer dans cet endroit mystérieux pour essayer de trouver une sortie. Une fois que le joueur a trouvé la sortie, il affrontera \emph{Hel}, la déesse de la mort seulement après l'avoir vaincu qu'il pourra sortir de cette salle, mais si le héros meurt pendant l'affrontement, il devra recommencer depuis le début et perdra tous ses points de compétences.
+
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.45\textwidth]{df}
+	\caption{Dwarf Fortress - Jeu en pixel art fait par \textit{Bay 12 Games}}
+	\label{fig:df}
+	\end{center}
+\end{figure}
+
+\projectTitle~est principalement inspiré du jeu \emph{Don't Move} par "stvr" (voir Figure \ref{fig:dontmove} page \pageref{fig:dontmove}). \emph{Don't Move} est un jeu indépendant qui a reçu de très bonnes critiques. Le concept du jeu est simple, si le joueur bouge, il meurt, mais en faisant cela il débloque de nouvelles fonctionnalités du jeu et de nouveaux objectifs. Le but de \projectTitle~est de pousser ce concept encore plus loin et de l'améliorer avec plus de fonctionnalités.
+
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.265\textwidth]{dontmove}
+	\caption{Don't Move - jeu indépendant développé par "stvr"}
+	\label{fig:dontmove}
+	\end{center}
+\end{figure}
+
+\subsection{Description détaillée}
+\projectTitle~est un jeu solo (1 joueur seulement) qui est en deux dimensions. Le jeu sera développé de manière dynamique et générique qui permettra de facilité l'ajout de contenu. Ce contenu peut être :
+\begin{multicols}{2}
+\begin{itemize}
+	\item des armes
+	\item des ennemis
+	\item des nouvelles compétences
+	\item de nouveaux types de points de compétences
+	\item des objets de la salle
+	\item des différentes disposition de la salle
+	\item de nouvelles règles de jeu
+\end{itemize}
+\end{multicols}
+
+\subsubsection{Règles}
+\begin{description}
+	\item Le joueur peut : sauter, se déplacer sur l'axe X, se baisser (ceci active la furtivité), attaquer avec une arme, attaquer avec de la magie et bloquer des attaques pour minimiser les dégâts.
+	\item Le joueur a 100 points de vie par défaut.
+	\item Les dégâts et vie des ennemis seront à définir selon le meilleur équilibre de jeu.
+	\item Le joueur possède des sorts qu'il peut placer dans les touches attribuées pour les enclencher.
+\end{description}
+
+\subsubsection{Méchanismes}
+\paragraph{Salle}
+La salle du jeu change à chaque fois que le joueur meurt. Cette salle peut avoir de nouveaux éléments, de nouvelles textures ou même de nouveaux ennemis.
+
+\paragraph{Points de compétences}
+Le joueur peut gagner des points de compétences en tuant des ennemis ou en trouvant des pièces qui se trouve un peu partout dans la salle. Ces pièces sont défendu par des ennemis et peuvent disparaître si le joueur n'est pas discret. Il ne peut dépenser ces points après sa mort. 
+
+\paragraph{Compétences}
+Avant de réapparaître en jeu, le joueur peut attribuer ces points sur des compétences du personnage. Par exemple, le joueur peut dépenser 2 points de compétences sur la compétence "Force" pour avoir plus de dégâts sur les coups du personnage. Voici une liste des compétences :
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+	\hline
+	\textbf{Compétence} & \textbf{Description}\\
+	\hline \hline
+	Force & Apporte plus de dégâts sur les coups physiques du personnage.\\
+	Agilité & Les ennemis remarquent moins le joueur et celui-ci peut se déplacer plus rapidement\\
+	Vitalité & Apporte plus de points de vie au joueur\\
+	Magie & Apporte plus de dégâts pour les attaques magiques du joueur\\
+	\hline
+\end{tabularx}
+\end{center}
+
+\paragraph{Armes}
+Les armes sont des objets pouvant être récoltés en explorant la salle. Quand le joueur trouve une arme, cette arme est mise dans l'inventaire du joueur. Le joueur pourra équiper l'arme pour faire plus de dégâts. Les armes ont des statistiques qui augmentent les dégâts physiques et/ou magiques.
+
+\paragraph{Sorts}
+Les sorts sont des pouvoirs magiques que le joueur peut utiliser contre ses ennemis. Les dégâts magiques sont augmentés selon les points de compétences attribués à la magie. Des sorts peuvent être trouvés dans la salle sous forme de parchemin que le joueur peut ramasser, les sorts se placent dans l'inventaire et peuvent être attribués à des touches d'action (Maximum 4, touches par défaut : 1, 2, 3 ,4).
+
+\subsubsection{Contrôles}
+\begin{center}
+\begin{tabular}{|c|l|}
+	\hline
+	\textbf{Touche} & \textbf{Description}\\
+	\hline \hline
+	W & Sauter\\
+	\hline
+	A & Aller à gauche\\
+	\hline
+	D & Aller à droite\\
+	\hline
+	S & Se baisser (mode furtif)\\
+	\hline
+	Clique gauche & Attaquer (dégâts physique)\\
+	\hline
+	1 & Sort numéro 1\\
+	\hline
+	2 & Sort numéro 2\\
+	\hline
+	3 & Sort numéro 3\\
+	\hline
+	4 & Sort numéro 4\\
+	\hline
+	I & Afficher l'inventaire\\
+	\hline
+	ESC & Afficher le menu (met le jeu en pause)\\
+	\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Interface utilisateur}
+L'interface utilisateur doit permettre au joueur de régler plusieurs paramètres et exécuter des actions.
+
+\paragraph{Options}
+Les options de son, vidéo, difficulté et attribution des touches de jeu doivent être disponibles.
+\paragraph{Actions}
+Il doit être possible de commencer, sauvegarder et charger une partie, puis de visualiser les scores obtenus des parties terminées.
+
+\subsection{Inventaire hardware}
+\begin{itemize}
+	\item Intel Core i7 2600K @ 3.40GHz
+	\item 8.00Go Dual-Channel DDR3 @ 823MHz
+	\item 1024MB NVIDIA GeForce GTX 550 Ti
+\end{itemize}
+
+\subsection{Inventaire software}
+\begin{itemize}
+	\item Visual Studio 2013 Professional\\
+	\item MonoGame (C\#)\\ou
+	\item SDL (C++)
+\end{itemize}
+
+\subsection{Durée et dates du projet}
+Le projet se déroule sur une période de 7 semaines avec 40 heures de travail par semaine. Il y a aussi 3 jours fériés pendant le projet. Ce qui fait un total de 256 heures de travail.\\[0.3cm]
+Le projet commence le lundi, 13 avril 2015 avec une reddition intermédiaire (documentation + poster) le jeudi, 30 avril 2015, puis la reddition finale le lundi, 1\textsuperscript{er} juin 2015.
+
+\newpage
+
+\subsection{Estimation du budget}
+Sans compter l'amortissement de l'ordinateur, le budget se traduit par :
+
+\texttt{
+\begin{description}
+	\item Développeur : 200 CHF par heure
+	\item Temps total : 256 heures distribuées dans 7 semaines
+	\item
+	\item Coût total en CHF : $200*256=51200$ CHF
+\end{description}
+}
+
+\subsection{Livrables}
+\begin{itemize}
+	\item 1 journal de bord (cahier A5)
+	\item 1 poster A2
+	\item 2 exemplaires papier de la documentation technique
+	\item 2 exemplaires papier du mode d'emploi (si besoin)
+	\item 1 CD/DVD ROM contenant tous les fichiers (sources + documentation + poster)
+	\item une démonstration fonctionnelle du projet, une solution parmi :
+	\begin{itemize}
+		\item \emph{live CD, live USB}
+		\item machine virtuelle (\emph{VirtualBox}) pré-configurée
+		\item téléphone/tablette pré-installé
+	\end{itemize}
+\end{itemize}
+
+\newpage
+% --------------------------------------------------
+\section{Analyse préliminaire}
+\newpage
+% --------------------------------------------------
+\section{Analyse fonctionnelle}
+\newpage
+% --------------------------------------------------
+\section{Analyse organique}
+\newpage
+% --------------------------------------------------
+\section{Tests}
+\newpage
+% --------------------------------------------------
+\section{Conclusion}
+\newpage
+% --------------------------------------------------
+\section{Annexes}
+\subsection{Planning}
+\subsubsection{Initial}
+% avril
+\begin{figure}[htp]
+	\begin{center}
+	\begin{ganttchart}[vgrid, hgrid, y unit title=1cm, y unit chart=0.7cm, x unit=0.8cm]{1}{14}
+	    \gantttitle{Avril 2015}{14} \ganttnewline
+	
+	    \gantttitle{13}{1} % 1
+	    \gantttitle{14}{1} % 2
+	    \gantttitle{15}{1} % 3
+	    \gantttitle{16}{1} % 4
+	    \gantttitle{17}{1} % 5
+	    \gantttitle{20}{1} % 6
+	    \gantttitle{21}{1} % 7
+	    \gantttitle{22}{1} % 8
+	    \gantttitle{23}{1} % 9
+	    \gantttitle{24}{1} % 10
+	    \gantttitle{27}{1} % 11
+	    \gantttitle{28}{1} % 12
+	    \gantttitle{29}{1} % 13
+	    \gantttitle{30}{1} \ganttnewline % 14
+	
+	    
+	    \ganttbar[bar/.append style={fill=red}]{Code backbone}{6}{12} \ganttnewline
+	    \ganttbar[bar/.append style={fill=red}]{Code essentiel}{12}{14} \ganttnewline
+	    \ganttbar[bar/.append style={fill=blue}]{Poster}{13}{13} \ganttnewline
+	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{1}{14} \ganttnewline
+	    \ganttmilestone{Rendu inter doc + poster}{14}
+	\end{ganttchart}
+	\caption{Planning initial du mois d'avril}
+	\end{center}
+\end{figure}
+% mai 1
+\begin{figure}[htp]
+	\begin{center}
+	\begin{ganttchart}[vgrid, hgrid, y unit title=1cm, y unit chart=0.7cm, x unit=0.8cm]{1}{14}
+	    \gantttitle{Mai 2015}{14} \ganttnewline
+	
+	    \gantttitle{4}{1} % 1
+	    \gantttitle{5}{1} % 2
+	    \gantttitle{6}{1} % 3
+	    \gantttitle{7}{1} % 4
+	    \gantttitle{8}{1} % 5
+	    \gantttitle{11}{1} % 6
+	    \gantttitle{12}{1} % 7
+	    \gantttitle{13}{1} % 8
+	    \gantttitle{15}{1} % 9
+	    \gantttitle{18}{1} % 10
+	    \gantttitle{19}{1} % 11
+	    \gantttitle{20}{1} % 12
+	    \gantttitle{21}{1} % 13
+	    \gantttitle{22}{1} \ganttnewline % 14
+	
+	    \ganttbar[bar/.append style={fill=red}]{Code essentiel}{1}{8} \ganttnewline
+	    \ganttbar[bar/.append style={fill=green}]{Contenus}{8}{14} \ganttnewline
+	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{1}{14}
+	\end{ganttchart}
+	\caption{Planning initial de la première partie du mois de mai}
+	\end{center}
+\end{figure}
+% mai 2
+\begin{figure}[htp]
+	\begin{center}
+	\begin{ganttchart}[vgrid, hgrid, y unit title=1cm, y unit chart=0.7cm, x unit=0.8cm]{1}{6}
+	    \gantttitle{Mai 2015}{4}
+	    \gantttitle{Juin 2015}{2} \ganttnewline
+	
+	    \gantttitle{26}{1} % 1
+	    \gantttitle{27}{1} % 2
+	    \gantttitle{28}{1} % 3
+	    \gantttitle{29}{1} % 4
+	    \gantttitle{1}{2} \ganttnewline % 5
+	
+	    \ganttbar[bar/.append style={fill=green}]{Contenus}{1}{1} \ganttnewline
+	    \ganttbar[bar/.append style={fill=yellow}]{Tests}{2}{4} \ganttnewline
+	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{1}{5} \ganttnewline
+	    \ganttmilestone{Rendu final}{6}
+	\end{ganttchart}
+	\caption{Planning initial de la deuxième partie du mois de mai et le mois de juin}
+	\end{center}
+\end{figure}
+\end{document}
