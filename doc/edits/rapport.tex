@@ -32,6 +32,8 @@
 %arborescence
 \usepackage{dirtree}
 
+\usepackage{subfigure}
+
 \usepackage{etoolbox}
 \patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{}
 
@@ -104,7 +106,7 @@
 	\begin{center}
 		\vspace*{\fill}
 		\includegraphics[width=.5\textwidth]{cfpt_logo}\\[.4cm]
-		\textsc{\Large Centre de formation professionnelle technique}\\[.4cm]
+		\textsc{\Large Centre de formation professionnelle technique\\École d'informatique}\\[.4cm]
 		\textsc{\Large Travail de diplôme}\\[.1cm]
 		\textsc{\Large Documentation}\\[0.4cm]
 		\textsc{\large \schoolyear}\\[0.4cm]
@@ -154,7 +156,7 @@
 \tableofcontents
 \newpage
 % --------------------------------------------------
-\chapter{Introduction}
+\chapter{Cahier des charges}
 \section{But}
 L'objectif est de créer un jeu divertissant pour le joueur moyen. \projectTitle\footnote{\textit{\projectTitle} : Nom du jeu-vidéo et aussi nom de la déesse de la mort dans la mythologie nordique} doit être bien construit et doit avoir la possibilité d'ajouter du contenu facilement.\\[.5cm]
 Le jeu-vidéo est en deux dimensions (2D) avec une vue de dessus\footnote{Une vue de dessus peut être comparable au jeu Dwarf Fortress. Voir voir Figure \ref{fig:df} page \pageref{fig:df}} et inclue quelques aspects d'un jeu RPG\footnote{Rôle Playing Game : Un RPG est un jeu où le joueur fait évoluer son personnage avec ses choix et/ou ses compétences.}. L'utilisateur contrôle un personnage qui se retrouve coincé dans une pièce inconnue et doit s'aventurer dans cet environnement inconnu et découvrir ses mystères. Cette salle contient des ennemis que le joueur peut contourner ou vaincre. Grâce à ceci, le héros gagne des points de compétences qu'il peut dépenser pour augmenter ses capacités une fois que le joueur meurt. Quand le joueur meurt, celui-ci réapparaît au début de cette salle, mais sans perdre ses compétences, d'une part la pièce aura aussi changé. Des éléments de celui-ci auront disparu ou bougé et d'autres auront apparu. L'utilisateur devra s'aventurer dans cet endroit mystérieux pour essayer de trouver une sortie. Une fois que le joueur a trouvé la sortie, il affrontera \emph{Hel}, la déesse de la mort seulement après l'avoir vaincu qu'il pourra sortir de cette salle, mais si le héros meurt pendant l'affrontement, il devra recommencer depuis le début et perdra tous ses points de compétences.
@@ -269,9 +271,6 @@ Les options de son, vidéo, difficulté et attribution des touches de jeu doiven
 \subsubsection{Actions}
 Il doit être possible de commencer, sauvegarder et charger une partie, puis de visualiser les scores obtenus des parties terminées.
 
-\newpage
-% --------------------------------------------------
-\chapter{Analyse préliminaire}
 \section{Environnement de travail}
 \subsection{Inventaire hardware}
 \begin{itemize}
@@ -289,21 +288,75 @@ Il doit être possible de commencer, sauvegarder et charger une partie, puis de 
 \subsection{Durée et dates du projet}
 Le projet se déroule sur une période de 7 semaines avec 40 heures de travail par semaine. Il y a aussi 3 jours fériés pendant le projet. Ce qui fait un total de 256 heures de travail.\\[0.3cm]
 Le projet commence le lundi, 13 avril 2015 avec une reddition intermédiaire (documentation + poster) le jeudi, 30 avril 2015, puis la reddition finale le lundi, 1\textsuperscript{er} juin 2015.
-
+\newpage
+% --------------------------------------------------
+\chapter{Analyse préliminaire}
 \section{Analyse de l'existant}
+Il n'est pas anodin de trouver des jeux similaires dans le marché du jeu-vidéo, en effet, beaucoup d'indépendants et des grandes entreprises produisent ces divertissements. Parmi les plus connus qui peuvent ressembler à \projectTitle, il existe \emph{Diablo III} et \emph{Path of Exile} qui sont des jeux récents. Ils sont similaires par rapport au type de jeu, ce sont des RPG et des Hack and Slash.
+
+\emph{Bastion} et \emph{Transistor} sont également des jeux RPG et indépendant créer par la petite entreprise \emph{Supergiant Games}. Ces jeux sont prisés pour leur art, richesse graphique et histoire passionnante.
+\section{Critique de l'existant}
+\textbf{Diablo III} par \emph{Blizzard Entertainment} est actuellement le poids-lourd dans ce type de jeu, avec de hautes qualités graphiques, un contenu riche et une grande communauté active. Il est critiqué de ne pas être assez complexe et d'être trop facile à battre. 
+
+\textbf{Path of Exile} par \emph{Grinding Gear Games} est le concurrent direct de \emph{Diablo III}, il est valorisé avec sa complexité technique dans le gameplay. Il est critiqué de ne pas être assez accessible aux joueurs lambdas et d'être trop difficile.
+
+\textbf{Bastion} par \emph{Supergiant Games} est un jeu indépendant ayant gagné plusieurs titres pour sont originalité.
+\section{Différentiation du projet}
 
 \newpage
 % --------------------------------------------------
 \chapter{Analyse fonctionnelle}
+\section{Personnage}
+Un personnage est contrôlé par le joueur, celui-ci peut l'équiper avec divers objets trouvé dans la salle pour augmenter ses compétences. Il peut utiliser des sorts et ses armes pour vaincre ses ennemis. Le personnage possède 100 points de vie par défaut, ces points de vie augmente si le joueur décide d'améliorer sa vitalité avec des points de compétences ou des objets.
+\section{Compétences}
+Les compétences permettent d'augmenter les capacités du personnage. Il existe plusieurs compétences comme :
+
+\begin{description}
+	\item[Force] Apporte plus de dégats sur les coups physiques
+	\item[Agilité] Le personnage est plus discret et peut se déplacer plus rapidement
+	\item[Vitalité] Augmente les points de vie du personnage
+	\item[Magie] Augmente les dégâts magiques du personnage
+\end{description}
+
+\begin{figure}[ht]
+\centering
+\subfigure[Force]{%
+\includegraphics[width=.20\textwidth]{strenght}
+\label{fig:strenghtlogo}}
+\subfigure[Agilité]{%
+\includegraphics[width=.20\textwidth]{agility}
+\label{fig:agilitylogo}}
+\subfigure[Vitalité]{%
+\includegraphics[width=.20\textwidth]{vitality}
+\label{fig:vitalitylogo}}
+\subfigure[Magie]{%
+\includegraphics[width=.20\textwidth]{magic}
+\label{fig:magiclogo}}
+%
+\caption{Logos des compétences}
+\label{fig:competences}
+\end{figure}
+
+\subsection{Fonctionnement - à déplacer dans analyse organique}
+\paragraph{Force}Chaque point de force augmente les dégâts du personnage de 1\%.
+\paragraph{Agilité}Chaque point d'agilité diminue la distance de vue des ennemi de 0.25\% avec une limite à 50\%. Il augmente aussi la vitesse de déplacement de 0.5\% avec une vitesse de déplacement maximum de 150\%.
+\section{Équipement}
+\section{Sorts}
+\section{Salle(s)}
+\section{Interface utilisateur}
+\section{Contrôles}
 \newpage
 % --------------------------------------------------
 \chapter{Analyse organique}
+
 \newpage
 % --------------------------------------------------
 \chapter{Tests}
+
 \newpage
 % --------------------------------------------------
 \chapter{Conclusion}
+
 \newpage
 % --------------------------------------------------
 \chapter{Annexes}
@@ -313,7 +366,7 @@ Le planning du projet se décompose en plusieurs parties :\\
 \begin{description}
 	\item[Code backbone] Coeur du projet sur le quel le jeu se repose
 	\item[Code essentiel] Éléments du jeu qui sont essentiels
-	\item[Contenus] Contenus du jeu (Graphiques, Objets, etc.)
+	\item[Contenu] Contenu du jeu (Graphiques, Objets, etc.)
 	\item[Tests] Tests pour vérifier l'intégralité du jeu
 	\item[Poster] Poster préparer pour le projet
 	\item[Documentation] Documentation technique du projet
@@ -371,7 +424,7 @@ Le planning du projet se décompose en plusieurs parties :\\
 	    \gantttitle{22}{1} \ganttnewline % 14
 	
 	    \ganttbar[bar/.append style={fill=red}]{Code essentiel}{1}{8} \ganttnewline
-	    \ganttbar[bar/.append style={fill=green}]{Contenus}{8}{14} \ganttnewline
+	    \ganttbar[bar/.append style={fill=green}]{Contenu}{8}{14} \ganttnewline
 	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{1}{14}
 	\end{ganttchart}
 	\caption{Planning initial de la première partie du mois de mai}
@@ -390,7 +443,7 @@ Le planning du projet se décompose en plusieurs parties :\\
 	    \gantttitle{29}{1} % 4
 	    \gantttitle{1}{2} \ganttnewline % 5
 	
-	    \ganttbar[bar/.append style={fill=green}]{Contenus}{1}{1} \ganttnewline
+	    \ganttbar[bar/.append style={fill=green}]{Contenu}{1}{1} \ganttnewline
 	    \ganttbar[bar/.append style={fill=yellow}]{Tests}{2}{4} \ganttnewline
 	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{1}{5} \ganttnewline
 	    \ganttmilestone{Rendu final}{6}

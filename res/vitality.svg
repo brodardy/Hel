@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448"
+   height="1052.3622"
+   id="svg3344"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   viewBox="0 0 744.09448 1052.3622"
+   sodipodi:docname="Vitality.svg"
+   inkscape:export-filename="C:\Users\Yannick R. Brodard\Documents\GitHub\Hel\res\vitality.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs3346" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#ffffff"
+     borderopacity="0.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="0"
+     inkscape:zoom="0.35"
+     inkscape:cx="-681.42857"
+     inkscape:cy="520"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1680"
+     inkscape:window-height="988"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3349">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="fill:#820100;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3352"
+       cx="27.142855"
+       cy="448.07648"
+       r="530"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path5363"
+       d="m -335.97722,309.3402 q 5.20834,-84.07139 57.28767,-139.12674 71.4232,-61.00728 161.44576,-53.56737 90.022565,7.43992 145.078668,74.39912 28.271662,-37.19955 69.935172,-59.51929 86.30298,-32.735611 165.16606,-2.97596 78.86306,29.75964 114.57465,107.13473 22.31973,80.35105 7.4399,151.77421 -14.87982,71.42317 -59.5193,132.43044 Q 273.35198,591.3125 193.00093,659.75969 152.82541,696.95926 98.51367,738.62277 44.201912,780.28628 27.834878,781.77426 17.418999,780.28628 6.2587464,772.84637 -4.9014939,765.40645 -20.524917,753.5026 -36.148354,741.59873 -39.125095,738.62277 -240.00273,586.84856 -303.98598,466.32197 -341.18557,393.41084 -335.97722,309.33945 Z"
+       inkscape:connector-curvature="0"
+       style="fill:#ff2d2d;fill-opacity:1" />
+  </g>
+</svg>
