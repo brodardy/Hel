@@ -34,6 +34,9 @@
 
 \usepackage{subfigure}
 
+\usepackage{enumitem}
+\setlist[description]{leftmargin=\parindent,labelindent=\parindent}
+
 \usepackage{etoolbox}
 \patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{}
 
@@ -307,7 +310,10 @@ Il n'est pas anodin de trouver des jeux similaires dans le marché du jeu-vidéo
 % --------------------------------------------------
 \chapter{Analyse fonctionnelle}
 \section{Personnage}
+\subsection{Général}
 Un personnage est contrôlé par le joueur, celui-ci peut l'équiper avec divers objets trouvé dans la salle pour augmenter ses compétences. Il peut utiliser des sorts et ses armes pour vaincre ses ennemis. Le personnage possède 100 points de vie par défaut, ces points de vie augmente si le joueur décide d'améliorer sa vitalité avec des points de compétences ou des objets.
+\subsection{Inventaire}
+Le personnage possède un inventaire qui sert à stocker ses objets sur soi. Les objets stocké dans l'inventaire prennent une certaine place à l'intérieur. Il n'est pas de taille infini.
 \section{Compétences}
 Les compétences permettent d'augmenter les capacités du personnage. Il existe plusieurs compétences comme :
 
@@ -340,8 +346,131 @@ Les compétences permettent d'augmenter les capacités du personnage. Il existe 
 \subsection{Fonctionnement - à déplacer dans analyse organique}
 \paragraph{Force}Chaque point de force augmente les dégâts du personnage de 1\%.
 \paragraph{Agilité}Chaque point d'agilité diminue la distance de vue des ennemi de 0.25\% avec une limite à 50\%. Il augmente aussi la vitesse de déplacement de 0.5\% avec une vitesse de déplacement maximum de 150\%.
+\section{Looting}
+Le \emph{looting} est le moyen de trouver des objets. Lorsque qu'un ennemi meurt ou que l'on ouvre un coffre, par exemple, celui-ci fait tomber des objet. Cette action est appelée le \emph{looting}.
 \section{Équipement}
+Les équipements sont des objets que le personnage peut équiper sur lui-même pour augmenter ses points de compétences. Il existe des différents types d'objets.
+\begin{itemize}
+	\item Accessoires
+	\item Armes
+	\item Armures
+\end{itemize}
+\subsection{Accessoires}
+\label{subsec:accessoires}
+Les accessoires sont des objets spéciaux qui apporte des capacités spéciales au personnage.
+\begin{multicols}{2}
+\begin{itemize}
+    \item Amulette
+    \item Bagues
+    \item Carquois
+    \item Bouclier
+    \item Source de pouvoir
+\end{itemize}
+\end{multicols}
+\subsubsection{Amulette et bagues}
+Ces objets apportent aléatoirement 2 à 4 des caractéristiques suivants :
+\begin{description}[labelindent=1cm]
+    \item[Force] Le nombre de points de compétences de type \emph{Force} ajouté
+    \item[Agilité] Le nombre de points de compétences de type \emph{Agilité} ajouté
+    \item[Vitalité] Le nombre de points de compétences de type \emph{Vitalité} ajouté
+    \item[Magie] Le nombre de points de compétences de type \emph{Magie} ajouté
+\end{description}
+\subsubsection{Carquois}
+Le carquois apporte toujours ces caractéristiques :
+\begin{description}[labelindent=1cm]
+	\item[Vitesse d'attaque] Le temps d'action entre chaque attaque
+	\item[Agilité] Le nombre de points de compétences de type \emph{Agilité} ajouté
+\end{description}
+Il apporte aussi 0 à 3 de ces caractéristiques :
+\begin{description}[labelindent=1cm]
+    \item[Force] Le nombre de points de compétences de type \emph{Force} ajouté
+    \item[Vitalité] Le nombre de points de compétences de type \emph{Vitalité} ajouté
+    \item[Magie] Le nombre de points de compétences de type \emph{Magie} ajouté
+\end{description}
+\subsubsection{Bouclier}
+Le bouclier apporte toujours ces caractéristiques :
+
+\subsubsection{Source de pouvoir}
+
+\subsection{Armes}
+\begin{multicols}{2}
+\begin{itemize}
+    \item Épée
+    \item Épée à deux mains
+    \item Hache
+    \item Hache à deux mains
+    \item Baguette magique
+    \item Bâton magique
+    \item Arc
+\end{itemize}
+\end{multicols}
+Les armes sont séparé en plusieurs fonctions. En bleu les armes à une main, en rouge les armes à deux mains et en vert les accessoires complémentaires aux armes (voir section \ref{subsec:accessoires}).
+Le personnage peut équiper plusieurs armes en même temps selon les restrictions (voir figure \ref{fig:EquipmentRestrictions}).
+\begin{figure}[ht]
+	\begin{center}
+	\includegraphics[width=0.8\textwidth]{EquipmentRestrictions}
+	\caption{Restriction des armes}
+	\label{fig:EquipmentRestrictions}
+	\end{center}
+\end{figure}
+\newpage
+\subsubsection{Critères d'une arme}
+Une arme est dotée de plusieurs statistiques obligatoires qui apparaitront sur toutes les armes lootée dans le jeu:
+\begin{description}[labelindent=1cm]
+    \item[Dégâts] Les dégâts infligés après chaque attaque
+    \item[Vitesse d'attaque] Le temps d'action entre chaque attaque
+\end{description}
+Elle est aussi dotée de statistiques optionnelles qui peuvent y figurées, certains de ces statistiques apparaissent obligatoirement selon le type d'objet:
+\begin{description}[labelindent=1cm]
+    \item[Dégâts magique] Les dégâts magiques infligés après chaque attaque
+    \item[Force] Le nombre de points de compétences de type \emph{Force} ajouté
+    \item[Agilité] Le nombre de points de compétences de type \emph{Agilité} ajouté
+    \item[Vitalité] Le nombre de points de compétences de type \emph{Vitalité} ajouté
+    \item[Magie] Le nombre de points de compétences de type \emph{Magie} ajouté
+\end{description}
+\subsubsection{Spécialités des type d'armes}
+\begin{description}[labelindent=1cm]
+    \item[Épée] Arme à une main avec la plus grande vitesse d'attaque
+    \item[Épée à deux mains] Arme à deux mains avec la plus grande vitesse d'attaque
+    \item[Hache] Arme à une main avec le plus de dégâts
+    \item[Hache à deux mains] Arme à deux mains avec le plus de dégâts
+    \item[Bouclier] Réduit les dégâts subi
+    \item[Baguette magique] Permet d'avoir une source de pouvoir équipé en même temps.
+    \item[Bâton magique] Possède de haut dégâts magiques
+    \item[Source de pouvoir] Possède beaucoup de points de compétence de type \emph{magie}
+    \item[Arc] Haut dégâts physique à distance
+    \item[Carquois] Augmente la vitesse d'attaque
+\end{description}
+\subsection{Armures}
+\begin{multicols}{2}
+\begin{itemize}
+    \item Tête
+    \item Épaules
+    \item Corps
+    \item Mains
+    \item Jambes
+    \item Pieds
+\end{itemize}
+\end{multicols}
+\subsubsection{Critères d'une armure}
+\paragraph{Tête}
+
+\paragraph{Épaules}
+
+\paragraph{Corps}
+
+\paragraph{Mains}
+
+\paragraph{Jambes}
+
+\paragraph{Pieds}
+
+\paragraph{Doigts}
+
+\paragraph{Coup}
+
 \section{Sorts}
+
 \section{Salle(s)}
 \section{Interface utilisateur}
 \section{Contrôles}
