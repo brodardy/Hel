@@ -40,6 +40,9 @@
 \usepackage{etoolbox}
 \patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{}
 
+\usepackage{ragged2e}  % for '\RaggedRight' macro (allows hyphenation)
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X} 
+
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
 \makeindex
@@ -311,11 +314,14 @@ Il n'est pas anodin de trouver des jeux similaires dans le marché du jeu-vidéo
 \chapter{Analyse fonctionnelle}
 \section{Personnage}
 \subsection{Général}
-Un personnage est contrôlé par le joueur, celui-ci peut l'équiper avec divers objets trouvé dans la salle pour augmenter ses compétences. Il peut utiliser des sorts et ses armes pour vaincre ses ennemis. Le personnage possède 100 points de vie par défaut, ces points de vie augmente si le joueur décide d'améliorer sa vitalité avec des points de compétences ou des objets.
+Un personnage est contrôlé par le joueur, celui-ci peut l'équiper avec divers objets trouvé dans la salle pour augmenter ses caractéristiques. Il peut utiliser des sorts et ses armes pour vaincre ses ennemis. Le personnage possède 100 points de vie par défaut, ces points de vie augmente si le joueur décide d'améliorer sa vitalité avec des points de compétences ou des objets.
+
+Le personnage possède 4 compétences de bases (voir section \ref{sec:competences}), il peut gagner des compétences en tuant des ennemis ou en trouvant des pièces dans la salle.
 \subsection{Inventaire}
 Le personnage possède un inventaire qui sert à stocker ses objets sur soi. Les objets stocké dans l'inventaire prennent une certaine place à l'intérieur. Il n'est pas de taille infini.
 \section{Compétences}
-Les compétences permettent d'augmenter les capacités du personnage. Il existe plusieurs compétences comme :
+\label{sec:competences}
+Les compétences sont des caractéristiques pouvant être augmenter par le personnage. Ils permettent d'augmenter ses capacités. Il existe plusieurs compétences qui sont :
 
 \begin{description}
 	\item[Force] Apporte plus de dégats sur les coups physiques
@@ -343,11 +349,45 @@ Les compétences permettent d'augmenter les capacités du personnage. Il existe 
 \label{fig:competences}
 \end{figure}
 
+Le nombre
+
 \subsection{Fonctionnement - à déplacer dans analyse organique}
 \paragraph{Force}Chaque point de force augmente les dégâts du personnage de 1\%.
 \paragraph{Agilité}Chaque point d'agilité diminue la distance de vue des ennemi de 0.25\% avec une limite à 50\%. Il augmente aussi la vitesse de déplacement de 0.5\% avec une vitesse de déplacement maximum de 150\%.
 \section{Looting}
 Le \emph{looting} est le moyen de trouver des objets. Lorsque qu'un ennemi meurt ou que l'on ouvre un coffre, par exemple, celui-ci fait tomber des objet. Cette action est appelée le \emph{looting}.
+\section{Caractéristiques}
+Les caractéristiques sont des propriétés qui augmente les capacités du personnages. Les compétences sont des caractéristiques mais qui peuvent être augmenter par le héro, alors que les caractéristiques peuvent seulement être augmenter par des objets.\\
+
+\textbf{Liste des caractéristiques}
+\begin{description}[labelindent=0.3cm]
+    \item[Force] Le nombre de points de compétences de type \emph{Force} ajouté
+    \item[Agilité] Le nombre de points de compétences de type \emph{Agilité} ajouté
+    \item[Vitalité] Le nombre de points de compétences de type \emph{Vitalité} ajouté
+    \item[Magie] Le nombre de points de compétences de type \emph{Magie} ajouté
+    \item[Vitesse d'attaque] Le temps d'action entre chaque attaque
+    \item[Dégâts] Les dégâts infligés après chaque attaque
+    \item[Dégâts magiques] Les dégâts magiques infligés après chaque attaque
+    \item[Armure] Déduit les dégâts reçu
+    \item[Resistance magique] Déduit les dégâts magiques reçu
+\end{description}
+\begin{table}[ht]
+\begin{center}
+\begin{tabularx}{\textwidth}{| l | Y |}
+  \hline                     
+  Force 				& Augmente les dégâts de 1\%\\ \hline
+  Agilité 				& Diminue la distance de vue des ennemi de 0.0625\%. Il augmente aussi la vitesse de déplacement de 0.075\% \\ \hline
+  Vitalité 				& Augmente les points de vie de 1\% \\ \hline
+  Magie 				& Augmente les dégâts magiques de 1\% \\ \hline
+  Vitesse d'attaque 	& Augmente la vitesse d'attaque selon sa valeur \\ \hline
+  Dégâts 				& S'ajoute au dégâts du personnage \underline{avant} d'appliquer la \emph{force} \\ \hline
+  Dégâts magiques 		& S'ajoute au dégâts magiques du personnage \underline{avant} d'appliquer la \emph{magie} \\ \hline
+  Armure 				& Diminue les dégâts reçu de 0.075\% \\ \hline
+  Resistance magique 	& Diminue les dégâts magiques reçu de 0.075\% \\ \hline
+\end{tabularx}
+\caption{Fonctionnement des caractéristiques}
+\end{center}
+\end{table}
 \section{Équipement}
 Les équipements sont des objets que le personnage peut équiper sur lui-même pour augmenter ses points de compétences. Il existe des différents types d'objets.
 \begin{itemize}
@@ -355,6 +395,24 @@ Les équipements sont des objets que le personnage peut équiper sur lui-même p
 	\item Armes
 	\item Armures
 \end{itemize}
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Force 				& 2 & 3 & 4\\ \hline
+  Agilité 				& 5 & 6 & 4\\ \hline
+  Vitalité 				& 8 & 9 & 4\\ \hline
+  Magie 				& 8 & 9 & 4\\ \hline
+  Vitesse d'attaque 	& 8 & 9 & 4\\ \hline
+  Dégâts 				& 8 & 9 & 4\\ \hline
+  Dégâts magiques 		& 8 & 9 & 4\\ \hline
+  Armure 				& 8 & 9 & 4\\ \hline
+  Resistance magique 	& 8 & 9 & 4\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques}
+\end{center}
+\end{table}
 \subsection{Accessoires}
 \label{subsec:accessoires}
 Les accessoires sont des objets spéciaux qui apporte des capacités spéciales au personnage.
@@ -369,29 +427,112 @@ Les accessoires sont des objets spéciaux qui apporte des capacités spéciales 
 \end{multicols}
 \subsubsection{Amulette et bagues}
 Ces objets apportent aléatoirement 2 à 4 des caractéristiques suivants :
-\begin{description}[labelindent=1cm]
-    \item[Force] Le nombre de points de compétences de type \emph{Force} ajouté
-    \item[Agilité] Le nombre de points de compétences de type \emph{Agilité} ajouté
-    \item[Vitalité] Le nombre de points de compétences de type \emph{Vitalité} ajouté
-    \item[Magie] Le nombre de points de compétences de type \emph{Magie} ajouté
-\end{description}
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1    & 2 & 3\\ \hline \hline                 
+  Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Agilité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Magie 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Resistance magique 	& 2 - 5  & 10 - 20 & 30 - 55\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques d'une bague et d'une amulette}
+\end{center}
+\end{table}
 \subsubsection{Carquois}
 Le carquois apporte toujours ces caractéristiques :
-\begin{description}[labelindent=1cm]
-	\item[Vitesse d'attaque] Le temps d'action entre chaque attaque
-	\item[Agilité] Le nombre de points de compétences de type \emph{Agilité} ajouté
-\end{description}
+\begin{multicols}{2}
+\begin{itemize}
+	\item Vitesse d'attaque
+	\item Agilité
+\end{itemize}
+\end{multicols}
 Il apporte aussi 0 à 3 de ces caractéristiques :
-\begin{description}[labelindent=1cm]
-    \item[Force] Le nombre de points de compétences de type \emph{Force} ajouté
-    \item[Vitalité] Le nombre de points de compétences de type \emph{Vitalité} ajouté
-    \item[Magie] Le nombre de points de compétences de type \emph{Magie} ajouté
-\end{description}
+\begin{multicols}{2}
+\begin{itemize}
+    \item Force
+    \item Vitalité
+    \item Magie
+\end{itemize}
+\end{multicols}
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Force 				& 1 - 5 & 7 - 25 & 35 - 80\\ \hline
+  Agilité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitalité 				& 1 - 5 & 7 - 25 & 35 - 80\\ \hline
+  Magie 				& 1 - 5 & 7 - 25 & 35 - 80\\ \hline
+  Vitesse d'attaque 	& 1.5\% - 2.0\% & 2.5\% - 3.5\% & 4.0\% - 7.0\%\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques du carquois}
+\end{center}
+\end{table}
 \subsubsection{Bouclier}
 Le bouclier apporte toujours ces caractéristiques :
-
+\begin{multicols}{2}
+\begin{itemize}
+	\item Armure
+	\item Vitalité
+\end{itemize}
+\end{multicols}
+Il apporte aussi 0 à 3 de ces caractéristiques :
+\begin{multicols}{2}
+\begin{itemize}
+    \item Force
+    \item Agilité
+    \item Magie
+    \item Résistance magique
+\end{itemize}
+\end{multicols}
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Force 				& 1 - 5 & 7 - 25 & 35 - 80\\ \hline
+  Agilité 				& 1 - 5 & 7 - 25 & 35 - 80\\ \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Magie 				& 1 - 5 & 7 - 25 & 35 - 80\\ \hline
+  Armure 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Resistance magique 	& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques du bouclier}
+\end{center}
+\end{table}
 \subsubsection{Source de pouvoir}
-
+La source de pouvoir apporte toujours ces caractéristiques :
+\begin{multicols}{2}
+\begin{itemize}
+	\item Magie
+	\item Dégâts magiques
+\end{itemize}
+\end{multicols}
+Elle apporte aussi 0 à 2 de ces caractéristiques :
+\begin{multicols}{2}
+\begin{itemize}
+    \item Agilité
+    \item Vitalité
+    \item Vitesse d'attaque
+\end{itemize}
+\end{multicols}
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Agilité 				& 1 - 5 & 7 - 25 & 35 - 80\\ \hline
+  Vitalité 				& 1 - 5 & 7 - 25 & 35 - 80\\ \hline
+  Magie 				& 5 - 15 & 20 - 35 & 50 - 120\\ \hline
+  Vitesse d'attaque 	& 1.5\% & 2.0\% - 3.0\% & 3.5\% - 5.0\%\\ \hline
+  Dégâts magiques 		& 10 - 20 & 30 - 60 & 70 - 120\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques de la source de pouvoir}
+\end{center}
+\end{table}
 \subsection{Armes}
 \begin{multicols}{2}
 \begin{itemize}
@@ -413,33 +554,33 @@ Le personnage peut équiper plusieurs armes en même temps selon les restriction
 	\label{fig:EquipmentRestrictions}
 	\end{center}
 \end{figure}
-\newpage
 \subsubsection{Critères d'une arme}
-Une arme est dotée de plusieurs statistiques obligatoires qui apparaitront sur toutes les armes lootée dans le jeu:
-\begin{description}[labelindent=1cm]
-    \item[Dégâts] Les dégâts infligés après chaque attaque
-    \item[Vitesse d'attaque] Le temps d'action entre chaque attaque
-\end{description}
-Elle est aussi dotée de statistiques optionnelles qui peuvent y figurées, certains de ces statistiques apparaissent obligatoirement selon le type d'objet:
-\begin{description}[labelindent=1cm]
-    \item[Dégâts magique] Les dégâts magiques infligés après chaque attaque
-    \item[Force] Le nombre de points de compétences de type \emph{Force} ajouté
-    \item[Agilité] Le nombre de points de compétences de type \emph{Agilité} ajouté
-    \item[Vitalité] Le nombre de points de compétences de type \emph{Vitalité} ajouté
-    \item[Magie] Le nombre de points de compétences de type \emph{Magie} ajouté
-\end{description}
+Une arme est dotée de plusieurs caractéristiques obligatoires qui apparaitront sur toutes les armes lootée dans le jeu:
+\begin{multicols}{2}
+\begin{itemize}
+    \item Dégâts
+    \item Vitesse d'attaque
+\end{itemize}
+\end{multicols}
+Elle est aussi dotée de caractéristiques optionnelles qui peuvent y figurées, certains de ces caractéristiques apparaissent obligatoirement selon le type d'objet:
+\begin{multicols}{2}
+\begin{itemize}
+    \item Dégâts magique
+    \item Force
+    \item Agilité
+    \item Vitalité
+    \item Magie
+\end{itemize}
+\end{multicols}
 \subsubsection{Spécialités des type d'armes}
 \begin{description}[labelindent=1cm]
     \item[Épée] Arme à une main avec la plus grande vitesse d'attaque
     \item[Épée à deux mains] Arme à deux mains avec la plus grande vitesse d'attaque
     \item[Hache] Arme à une main avec le plus de dégâts
     \item[Hache à deux mains] Arme à deux mains avec le plus de dégâts
-    \item[Bouclier] Réduit les dégâts subi
     \item[Baguette magique] Permet d'avoir une source de pouvoir équipé en même temps.
     \item[Bâton magique] Possède de haut dégâts magiques
-    \item[Source de pouvoir] Possède beaucoup de points de compétence de type \emph{magie}
     \item[Arc] Haut dégâts physique à distance
-    \item[Carquois] Augmente la vitesse d'attaque
 \end{description}
 \subsection{Armures}
 \begin{multicols}{2}
