@@ -19,6 +19,8 @@
 \usepackage{color}
 \usepackage{colortbl}
 
+\usepackage{float}
+
 \usepackage{makeidx}
 
 \usepackage{listings}
@@ -349,11 +351,6 @@ Les compétences sont des caractéristiques pouvant être augmenter par le perso
 \label{fig:competences}
 \end{figure}
 
-Le nombre
-
-\subsection{Fonctionnement - à déplacer dans analyse organique}
-\paragraph{Force}Chaque point de force augmente les dégâts du personnage de 1\%.
-\paragraph{Agilité}Chaque point d'agilité diminue la distance de vue des ennemi de 0.25\% avec une limite à 50\%. Il augmente aussi la vitesse de déplacement de 0.5\% avec une vitesse de déplacement maximum de 150\%.
 \section{Looting}
 Le \emph{looting} est le moyen de trouver des objets. Lorsque qu'un ennemi meurt ou que l'on ouvre un coffre, par exemple, celui-ci fait tomber des objet. Cette action est appelée le \emph{looting}.
 \section{Caractéristiques}
@@ -395,24 +392,24 @@ Les équipements sont des objets que le personnage peut équiper sur lui-même p
 	\item Armes
 	\item Armures
 \end{itemize}
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{| l | c | c | c |}
-  \hline      
-  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
-  Force 				& 2 & 3 & 4\\ \hline
-  Agilité 				& 5 & 6 & 4\\ \hline
-  Vitalité 				& 8 & 9 & 4\\ \hline
-  Magie 				& 8 & 9 & 4\\ \hline
-  Vitesse d'attaque 	& 8 & 9 & 4\\ \hline
-  Dégâts 				& 8 & 9 & 4\\ \hline
-  Dégâts magiques 		& 8 & 9 & 4\\ \hline
-  Armure 				& 8 & 9 & 4\\ \hline
-  Resistance magique 	& 8 & 9 & 4\\ \hline
-\end{tabular}
-\caption{Valeurs des caractéristiques}
-\end{center}
-\end{table}
+%\begin{table}[H]
+%\begin{center}
+%\begin{tabular}{| l | c | c | c |}
+%  \hline      
+%  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+%  Force 				& 2 & 3 & 4\\ \hline
+%  Agilité 				& 5 & 6 & 4\\ \hline
+%  Vitalité 			& 8 & 9 & 4\\ \hline
+%  Magie 				& 8 & 9 & 4\\ \hline
+%  Vitesse d'attaque 	& 8 & 9 & 4\\ \hline
+%  Dégâts 				& 8 & 9 & 4\\ \hline
+%  Dégâts magiques 		& 8 & 9 & 4\\ \hline
+%  Armure 				& 8 & 9 & 4\\ \hline
+%  Resistance magique 	& 8 & 9 & 4\\ \hline
+%\end{tabular}
+%\caption{Valeurs des caractéristiques}
+%\end{center}
+%\end{table}
 \subsection{Accessoires}
 \label{subsec:accessoires}
 Les accessoires sont des objets spéciaux qui apporte des capacités spéciales au personnage.
@@ -457,7 +454,7 @@ Il apporte aussi 0 à 3 de ces caractéristiques :
     \item Magie
 \end{itemize}
 \end{multicols}
-\begin{table}[ht]
+\begin{table}[H]
 \begin{center}
 \begin{tabular}{| l | c | c | c |}
   \hline      
@@ -555,16 +552,16 @@ Le personnage peut équiper plusieurs armes en même temps selon les restriction
 	\end{center}
 \end{figure}
 \subsubsection{Critères d'une arme}
-Une arme est dotée de plusieurs caractéristiques obligatoires qui apparaitront sur toutes les armes lootée dans le jeu:
+Une arme est dotée de caractéristiques obligatoires qui apparaitront sur toutes les armes lootée dans le jeu:
 \begin{multicols}{2}
 \begin{itemize}
-    \item Dégâts
     \item Vitesse d'attaque
 \end{itemize}
 \end{multicols}
 Elle est aussi dotée de caractéristiques optionnelles qui peuvent y figurées, certains de ces caractéristiques apparaissent obligatoirement selon le type d'objet:
 \begin{multicols}{2}
 \begin{itemize}
+	\item Dégâts
     \item Dégâts magique
     \item Force
     \item Agilité
@@ -582,6 +579,195 @@ Elle est aussi dotée de caractéristiques optionnelles qui peuvent y figurées,
     \item[Bâton magique] Possède de haut dégâts magiques
     \item[Arc] Haut dégâts physique à distance
 \end{description}
+\subsubsection{Épée}
+L'épée apporte toujours ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Vitesse d'attaque 	& 1.40 & 1.40 & 1.40\\ \hline
+  Dégâts 				& 30 - 50 & 60 - 90 & 110 - 160\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques obligatoires de l'épée}
+\end{center}
+\end{table}
+Elle apporte aussi 2 à 4 de ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Agilité 				& 1 - 5 & 7 - 25 & 35 - 80\\ \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Magie 				& 1 - 5 & 7 - 25 & 35 - 80\\ \hline
+  Dégâts magiques 		& 5 - 10 & 20 - 40 & 50 - 80\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques optionnelles de l'épée}
+\end{center}
+\end{table}
+\subsubsection{Épée à deux mains}
+L'épée à deux mains apporte toujours ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitesse d'attaque 	& 1.10 & 1.10 & 1.10\\ \hline
+  Dégâts 				& 65 - 110 & 120 - 190 & 230 - 360\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques obligatoires de l'épée à deux mains}
+\end{center}
+\end{table}
+Elle apporte aussi 1 à 3 de ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Magie 				& 1 - 5 & 7 - 25 & 35 - 80\\ \hline
+  Dégâts magiques 		& 3 - 15 & 25 - 45 & 60 - 90\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques optionnelles de l'épée à deux mains}
+\end{center}
+\end{table}
+\subsubsection{Hache}
+La hache apporte toujours ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitesse d'attaque 	& 1.30 & 1.30 & 1.30\\ \hline
+  Dégâts 				& 30 - 50 & 60 - 90 & 110 - 160\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques obligatoires de la hache}
+\end{center}
+\end{table}
+Elle apporte aussi 1 à 3 de ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Magie 				& 1 - 5 & 7 - 25 & 35 - 80\\ \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Dégâts magiques 		& 3 - 10 & 20 - 40 & 50 - 80\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques optionnelles de la hache}
+\end{center}
+\end{table}
+\subsubsection{Hache à deux mains}
+La hache à deux mains apporte toujours ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitesse d'attaque 	& 1.00 & 1.00 & 1.00\\ \hline
+  Dégâts 				& 65 - 110 & 120 - 190 & 230 - 360\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques obligatoires de la hache à deux mains}
+\end{center}
+\end{table}
+Elle apporte aussi 0 à 2 de ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Magie 				& 1 - 5 & 7 - 25 & 35 - 80\\ \hline
+  Dégâts magiques 		& 3 - 15 & 25 - 45 & 60 - 90\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques optionnelles de la hache à deux mains}
+\end{center}
+\end{table}
+\subsubsection{Baguette magique}
+La baguette magique apporte toujours ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Magie 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitesse d'attaque 	& 1.40 & 1.40 & 1.40\\ \hline
+  Dégâts magiques 		& 30 - 50 & 60 - 90 & 110 - 160\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques obligatoires de la baguette magique}
+\end{center}
+\end{table}
+Elle apporte aussi 1 à 2 de ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Agilité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques optionnelles de la baguette magique}
+\end{center}
+\end{table}
+\subsubsection{Bâton magique}
+Le bâton magique apporte toujours ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Magie 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitesse d'attaque 	& 1.20 & 1.20 & 1.20\\ \hline
+  Dégâts magiques 		& 65 - 110 & 120 - 190 & 230 - 360\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques obligatoires du bâton magique}
+\end{center}
+\end{table}
+Il apporte aussi 1 à 2 de ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Agilité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques optionnelles du bâton magique}
+\end{center}
+\end{table}
+\subsubsection{Arc}
+L'arc apporte toujours ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Agilité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitesse d'attaque 	& 1.30 & 1.30 & 1.30\\ \hline
+  Dégâts 				& 30 - 50 & 60 - 90 & 110 - 160\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques obligatoires de l'arc}
+\end{center}
+\end{table}
+Il apporte aussi 1 à 3 de ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Magie 				& 1 - 5 & 7 - 25 & 35 - 80\\ \hline
+  Dégâts magiques 		& 3 - 10 & 20 - 40 & 50 - 80\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques optionnelles de l'arc}
+\end{center}
+\end{table}
 \subsection{Armures}
 \begin{multicols}{2}
 \begin{itemize}
@@ -593,23 +779,168 @@ Elle est aussi dotée de caractéristiques optionnelles qui peuvent y figurées,
     \item Pieds
 \end{itemize}
 \end{multicols}
-\subsubsection{Critères d'une armure}
-\paragraph{Tête}
-
-\paragraph{Épaules}
-
-\paragraph{Corps}
-
-\paragraph{Mains}
-
-\paragraph{Jambes}
-
-\paragraph{Pieds}
-
-\paragraph{Doigts}
-
-\paragraph{Coup}
-
+\subsubsection{Tête}
+Une armure pour la tête apporte obligatoirement ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Armure 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques obligatoire de l'armure pour la tête}
+\end{center}
+\end{table}
+Elle apporte aussi 0 à 2 de ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Agilité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Magie 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Resistance magique 	& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques optionnelles de l'armure pour la tête}
+\end{center}
+\end{table}
+\subsubsection{Épaules}
+Une armure pour les épaules apporte obligatoirement ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Armure 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques obligatoire de l'armure pour les épaules}
+\end{center}
+\end{table}
+Elle apporte aussi 1 à 3 de ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Agilité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Magie 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Resistance magique 	& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques optionnelles de l'armure pour les épaules}
+\end{center}
+\end{table}
+\subsubsection{Corps}
+Une armure pour le corps apporte obligatoirement ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Armure 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques obligatoire de l'armure pour le corps}
+\end{center}
+\end{table}
+Elle apporte aussi 1 à 3 de ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Agilité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Magie 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Resistance magique 	& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques optionnelles de l'armure pour le corps}
+\end{center}
+\end{table}
+\subsubsection{Mains}
+Une armure pour les mains apporte obligatoirement ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Agilité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Armure 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques obligatoire de l'armure pour les mains}
+\end{center}
+\end{table}
+Elle apporte aussi 0 à 2 de ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Magie 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Resistance magique 	& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques optionnelles de l'armure pour les mains}
+\end{center}
+\end{table}
+\subsubsection{Jambes}
+Une armure pour les jambes apporte obligatoirement ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Armure 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques obligatoire de l'armure pour les jambes}
+\end{center}
+\end{table}
+Elle apporte aussi 1 à 3 de ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Agilité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Magie 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Resistance magique 	& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques optionnelles de l'armure pour les jambes}
+\end{center}
+\end{table}
+\subsubsection{Pieds}
+Une armure pour les pieds apporte obligatoirement ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline
+  Agilité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Armure 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques obligatoire de l'armure pour les pieds}
+\end{center}
+\end{table}
+Elle apporte aussi 0 à 2 de ces caractéristiques :
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c | c |}
+  \hline      
+  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
+  Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Magie 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Resistance magique 	& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+\end{tabular}
+\caption{Valeurs des caractéristiques optionnelles de l'armure pour les pieds}
+\end{center}
+\end{table}
 \section{Sorts}
 
 \section{Salle(s)}
