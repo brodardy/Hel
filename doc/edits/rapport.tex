@@ -364,25 +364,29 @@ Les caractéristiques sont des propriétés qui augmente les capacités du perso
     \item[Agilité] Le nombre de points de compétences de type \emph{Agilité} ajouté
     \item[Vitalité] Le nombre de points de compétences de type \emph{Vitalité} ajouté
     \item[Magie] Le nombre de points de compétences de type \emph{Magie} ajouté
-    \item[Vitesse d'attaque] Le temps d'action entre chaque attaque
+    \item[Vitesse d'attaque] Le pourcentage de vitesse d'attaque ajouté au personnage
+    \item[Vitesse d'attaque initial] La vitesse d'attaque initial du personnage
     \item[Dégâts] Les dégâts infligés après chaque attaque
     \item[Dégâts magiques] Les dégâts magiques infligés après chaque attaque
     \item[Armure] Déduit les dégâts reçu
     \item[Resistance magique] Déduit les dégâts magiques reçu
+    \item[Régénération de vie] Régénère les points de vie
+    \item[Régénération de mana] Régénère les points de mana
 \end{description}
 \begin{table}[ht]
 \begin{center}
 \begin{tabularx}{\textwidth}{| l | Y |}
   \hline                     
-  Force 				& Augmente les dégâts de 1\%\\ \hline
-  Agilité 				& Diminue la distance de vue des ennemi de 0.0625\%. Il augmente aussi la vitesse de déplacement de 0.075\% \\ \hline
-  Vitalité 				& Augmente les points de vie de 100 \\ \hline
-  Magie 				& Augmente les dégâts magiques de 1\% \\ \hline
-  Vitesse d'attaque 	& Augmente la vitesse d'attaque selon la valeur \\ \hline
+  Force 				& Augmente les dégâts de \textbf{1\%}\\ \hline
+  Agilité 				& Diminue la distance de vue des ennemi de \textbf{0.0625\%}. Il augmente aussi la vitesse de déplacement de \textbf{0.075\%} \\ \hline
+  Vitalité 				& Augmente les points de vie de \textbf{100} \\ \hline
+  Magie 				& Augmente les dégâts magiques de \textbf{1\%} \\ \hline
+  Vitesse d'attaque 	& Augmente la vitesse d'attaque selon la valeur en \textbf{pourcentage} \\ \hline
+  Vitesse d'attaque initial	& Vitesse d'attaque initial du personnage\\ \hline
   Dégâts 				& S'ajoute au dégâts du personnage \underline{avant} d'appliquer la \emph{force} \\ \hline
   Dégâts magiques 		& S'ajoute au dégâts magiques du personnage \underline{avant} d'appliquer la \emph{magie} \\ \hline
-  Armure 				& Diminue les dégâts reçu de 0.075\% \\ \hline
-  Resistance magique 	& Diminue les dégâts magiques reçu de 0.075\% \\ \hline
+  Armure 				& Diminue les dégâts reçu de \textbf{0.075\%} \\ \hline
+  Resistance magique 	& Diminue les dégâts magiques reçu de \textbf{0.075\%} \\ \hline
   Régénération de vie 	& Augmente la régénération de points de vie selon la valeur\\ \hline
   Régénération de mana 	& Augmente la régénération de points de mana selon la valeur\\ \hline
 \end{tabularx}
@@ -573,7 +577,7 @@ Le personnage peut équiper plusieurs armes en même temps selon les restriction
 Une arme est dotée de caractéristiques obligatoires qui apparaitront sur toutes les armes lootée dans le jeu:
 \begin{multicols}{2}
 \begin{itemize}
-    \item Vitesse d'attaque
+    \item Vitesse d'attaque initial
 \end{itemize}
 \end{multicols}
 Elle est aussi dotée de caractéristiques optionnelles qui peuvent y figurées, certains de ces caractéristiques apparaissent obligatoirement selon le type d'objet:
@@ -603,9 +607,9 @@ L'épée apporte toujours ces caractéristiques :
 \begin{center}
 \begin{tabular}{| l | c | c | c |}
   \hline      
-  Niveau 				& 1 & 2 & 3\\ \hline \hline                 
-  Vitesse d'attaque 	& 1.40 & 1.40 & 1.40\\ \hline
-  Dégâts 				& 30 - 50 & 60 - 90 & 110 - 160\\ \hline
+  Niveau 					& 1 & 2 & 3\\ \hline \hline                 
+  Vitesse d'attaque initial	& 1.40 & 1.40 & 1.40\\ \hline
+  Dégâts 					& 30 - 50 & 60 - 90 & 110 - 160\\ \hline
 \end{tabular}
 \caption{Valeurs des caractéristiques obligatoires de l'épée}
 \end{center}
@@ -633,7 +637,7 @@ L'épée à deux mains apporte toujours ces caractéristiques :
   \hline      
   Niveau 				& 1 & 2 & 3\\ \hline \hline                 
   Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
-  Vitesse d'attaque 	& 1.10 & 1.10 & 1.10\\ \hline
+  Vitesse d'attaque initial	& 1.10 & 1.10 & 1.10\\ \hline
   Dégâts 				& 65 - 110 & 120 - 190 & 230 - 360\\ \hline
 \end{tabular}
 \caption{Valeurs des caractéristiques obligatoires de l'épée à deux mains}
@@ -662,7 +666,7 @@ La hache apporte toujours ces caractéristiques :
   \hline      
   Niveau 				& 1 & 2 & 3\\ \hline \hline                 
   Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
-  Vitesse d'attaque 	& 1.30 & 1.30 & 1.30\\ \hline
+  Vitesse d'attaque initial	& 1.30 & 1.30 & 1.30\\ \hline
   Dégâts 				& 30 - 50 & 60 - 90 & 110 - 160\\ \hline
 \end{tabular}
 \caption{Valeurs des caractéristiques obligatoires de la hache}
@@ -690,7 +694,7 @@ La hache à deux mains apporte toujours ces caractéristiques :
   Niveau 				& 1 & 2 & 3\\ \hline \hline                 
   Force 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
   Vitalité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
-  Vitesse d'attaque 	& 1.00 & 1.00 & 1.00\\ \hline
+  Vitesse d'attaque initial	& 1.00 & 1.00 & 1.00\\ \hline
   Dégâts 				& 65 - 110 & 120 - 190 & 230 - 360\\ \hline
 \end{tabular}
 \caption{Valeurs des caractéristiques obligatoires de la hache à deux mains}
@@ -718,7 +722,7 @@ La baguette magique apporte toujours ces caractéristiques :
   \hline      
   Niveau 				& 1 & 2 & 3\\ \hline \hline
   Magie 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
-  Vitesse d'attaque 	& 1.40 & 1.40 & 1.40\\ \hline
+  Vitesse d'attaque initial	& 1.40 & 1.40 & 1.40\\ \hline
   Dégâts magiques 		& 30 - 50 & 60 - 90 & 110 - 160\\ \hline
 \end{tabular}
 \caption{Valeurs des caractéristiques obligatoires de la baguette magique}
@@ -744,7 +748,7 @@ Le bâton magique apporte toujours ces caractéristiques :
   \hline      
   Niveau 				& 1 & 2 & 3\\ \hline \hline
   Magie 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
-  Vitesse d'attaque 	& 1.20 & 1.20 & 1.20\\ \hline
+  Vitesse d'attaque initial	& 1.20 & 1.20 & 1.20\\ \hline
   Dégâts magiques 		& 65 - 110 & 120 - 190 & 230 - 360\\ \hline
 \end{tabular}
 \caption{Valeurs des caractéristiques obligatoires du bâton magique}
@@ -772,7 +776,7 @@ L'arc apporte toujours ces caractéristiques :
   \hline      
   Niveau 				& 1 & 2 & 3\\ \hline \hline
   Agilité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
-  Vitesse d'attaque 	& 1.30 & 1.30 & 1.30\\ \hline
+  Vitesse d'attaque initial	& 1.30 & 1.30 & 1.30\\ \hline
   Dégâts 				& 30 - 50 & 60 - 90 & 110 - 160\\ \hline
 \end{tabular}
 \caption{Valeurs des caractéristiques obligatoires de l'arc}
@@ -1101,6 +1105,7 @@ Le portail mène vers un niveau (le terrain de combat) généré d'où il ne peu
 \newpage
 % --------------------------------------------------
 \chapter{Analyse organique}
+\section{Personnage}
 
 \newpage
 % --------------------------------------------------
@@ -1144,7 +1149,6 @@ Le planning du projet se décompose en plusieurs parties :\\
 	    \gantttitle{28}{1} % 12
 	    \gantttitle{29}{1} % 13
 	    \gantttitle{30}{1} \ganttnewline % 14
-	
 	    
 	    \ganttbar[bar/.append style={fill=red}]{Code backbone}{6}{12} \ganttnewline
 	    \ganttbar[bar/.append style={fill=red}]{Code essentiel}{12}{14} \ganttnewline
