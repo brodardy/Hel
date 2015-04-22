@@ -48,10 +48,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Features\HFeature.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="MainGame.cs" />
     <Compile Include="HObject.cs" />
-    <Compile Include="InputState.cs" />
-    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
