@@ -5,22 +5,46 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelProject", "HelProject\HelProject.csproj", "{C116D958-C0BC-49FA-BB90-EA717CDE72CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelProjectTests1", "HelProjectTests1\HelProjectTests1.csproj", "{954FAC55-A507-443B-BC94-E0D20A108CF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C116D958-C0BC-49FA-BB90-EA717CDE72CE}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{C116D958-C0BC-49FA-BB90-EA717CDE72CE}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{C116D958-C0BC-49FA-BB90-EA717CDE72CE}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{C116D958-C0BC-49FA-BB90-EA717CDE72CE}.Debug|x64.ActiveCfg = Debug|x86
 		{C116D958-C0BC-49FA-BB90-EA717CDE72CE}.Debug|x64.Build.0 = Debug|x86
 		{C116D958-C0BC-49FA-BB90-EA717CDE72CE}.Debug|x86.ActiveCfg = Debug|x86
 		{C116D958-C0BC-49FA-BB90-EA717CDE72CE}.Debug|x86.Build.0 = Debug|x86
+		{C116D958-C0BC-49FA-BB90-EA717CDE72CE}.Release|Any CPU.ActiveCfg = Release|x86
+		{C116D958-C0BC-49FA-BB90-EA717CDE72CE}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{C116D958-C0BC-49FA-BB90-EA717CDE72CE}.Release|Mixed Platforms.Build.0 = Release|x86
 		{C116D958-C0BC-49FA-BB90-EA717CDE72CE}.Release|x64.ActiveCfg = Release|x64
 		{C116D958-C0BC-49FA-BB90-EA717CDE72CE}.Release|x64.Build.0 = Release|x64
 		{C116D958-C0BC-49FA-BB90-EA717CDE72CE}.Release|x86.ActiveCfg = Release|x86
 		{C116D958-C0BC-49FA-BB90-EA717CDE72CE}.Release|x86.Build.0 = Release|x86
+		{954FAC55-A507-443B-BC94-E0D20A108CF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{954FAC55-A507-443B-BC94-E0D20A108CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{954FAC55-A507-443B-BC94-E0D20A108CF5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{954FAC55-A507-443B-BC94-E0D20A108CF5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{954FAC55-A507-443B-BC94-E0D20A108CF5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{954FAC55-A507-443B-BC94-E0D20A108CF5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{954FAC55-A507-443B-BC94-E0D20A108CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{954FAC55-A507-443B-BC94-E0D20A108CF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{954FAC55-A507-443B-BC94-E0D20A108CF5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{954FAC55-A507-443B-BC94-E0D20A108CF5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{954FAC55-A507-443B-BC94-E0D20A108CF5}.Release|x64.ActiveCfg = Release|Any CPU
+		{954FAC55-A507-443B-BC94-E0D20A108CF5}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

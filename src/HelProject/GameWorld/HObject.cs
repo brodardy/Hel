@@ -20,6 +20,10 @@ namespace HelProject.GameWorld
     /// </summary>
     public class HObject
     {
+        private const bool DEFAULT_IS_WALKABLE_VALUE = false;
+        private const float DEFAULT_POSITION_X_VALUE = 0.0f;
+        private const float DEFAULT_POSITION_Y_VALUE = 0.0f;
+
         #region ATTRIBUTES
         private FPosition _position;
         private bool _isWalkable;             // true if the object can be walked on by enitites
@@ -45,8 +49,18 @@ namespace HelProject.GameWorld
         }
         #endregion
 
+        #region CONSTRUCTORS
+        public HObject() : this(DEFAULT_IS_WALKABLE_VALUE, new FPosition(DEFAULT_POSITION_X_VALUE, DEFAULT_POSITION_Y_VALUE)) { /* no code... */ }
+        public HObject(FPosition position) : this(DEFAULT_IS_WALKABLE_VALUE, position) { /* no code... */ }
+        public HObject(bool isWalkable, FPosition position)
+        {
+            this.IsWalkable = isWalkable;
+            this.Position = position;
+        }
+        #endregion
+
         #region PUBLIC METHODS
-        
+
         #endregion
 
         #region PRIVATE METHODS

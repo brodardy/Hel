@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HelProject.GameWorld;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RogueSharp;
@@ -13,6 +14,9 @@ namespace HelProject
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private Texture2D _floor;
+        private Texture2D _wall;
+        private HMap _map;
 
         public MainGame()
             : base()
@@ -30,8 +34,11 @@ namespace HelProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             this.IsMouseVisible = true;
+
+            _map = new HMap(60, 100, 45);
+            _map.MakeRandomlyFilledMap();
+            _map.MakeCaverns();
 
             base.Initialize();
         }
@@ -46,6 +53,8 @@ namespace HelProject
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            _floor = Content.Load<Texture2D>("scenary/floor");
+            _wall = Content.Load<Texture2D>("scenary/wall");
         }
 
         /// <summary>
@@ -81,6 +90,27 @@ namespace HelProject
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
+
+            int sizeOfSprites = 32;
+            float scale = .25f;
+            spriteBatch.Begin();
+            for (int y = 0; y < _map.Height; y++)
+            {
+                for (int x = 0; x < _map.Width; x++)
+                {
+                    HObject cell = _map.GetCell(x, y);
+                    Vector2 position = new Vector2(cell.Position.X * sizeOfSprites * scale, cell.Position.Y * sizeOfSprites * scale);
+                    if (cell.IsWalkable)
+                    {
+                        spriteBatch.Draw(_floor, position, null, null, null, 0.0f, new Vector2(scale, scale), Color.White);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(_wall, position, null, null, null, 0.0f, new Vector2(scale, scale), Color.White);
+                    }
+                }
+            }
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
