@@ -47,13 +47,23 @@
     <OutputPath>bin\x64\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GameWorld\HCell.cs" />
     <Compile Include="GameWorld\HEntity.cs" />
     <Compile Include="GameWorld\HMap.cs" />
     <Compile Include="GameWorld\HObject.cs" />
     <Compile Include="Features\HFeature.cs" />
     <Compile Include="MainGame.cs" />
+    <Compile Include="UI\Image.cs" />
+    <Compile Include="Tools\XmlManager.cs" />
+    <Compile Include="UI\GameScreen.cs" />
+    <Compile Include="UI\Menu.cs" />
+    <Compile Include="UI\MenuItem.cs" />
+    <Compile Include="UI\MenuManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\ScreenManager.cs" />
+    <Compile Include="UI\SplashScreen.cs" />
+    <Compile Include="UI\TitleScreen.cs" />
     <Compile Include="Tools\Position.cs" />
     <Compile Include="Tools\FPosition.cs" />
   </ItemGroup>
@@ -78,16 +88,22 @@
       <Link>SDL.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\entities\heroi.png">
+    <Content Include="Content\Entities\heroi.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\scenary\floor.png">
+    <Content Include="Content\Scenary\floor.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\scenary\wall.png">
+    <Content Include="Content\Scenary\wall.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\SplashScreen\main1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="Load\SplashScreen.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
@@ -95,7 +111,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\Fonts\" />
+  </ItemGroup>
   <!-- Specify the search path explicitly so the ResolveAssemblyReferences task picks the right ones -->
   <Target Name="BeforeResolveReferences">
     <CreateProperty Value="$(MSBuildProgramFiles32)\MonoGame\v3.0\Assemblies\Windows;$(AssemblySearchPaths)">

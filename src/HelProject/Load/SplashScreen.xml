@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SplashScreen>
+  <Image>
+    <Path>SplashScreen/main1</Path>
+    <Text>Hel : The pixalated horror</Text>
+    <Position>
+      <X>640</X>
+      <Y>360</Y>
+    </Position>
+  </Image>
+</SplashScreen>
