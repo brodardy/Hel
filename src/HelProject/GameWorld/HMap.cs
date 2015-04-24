@@ -1,7 +1,7 @@
 ﻿/*
  * Author : Yannick R. Brodard
  * File name : HMap.cs
- * Version : 0.1.201504231041
+ * Version : 0.2.201504240835
  * Description : The map class, creates a map
  */
 /* Helped by : http://www.csharpprogramming.tips/2013/07/Rouge-like-dungeon-generation.html */
@@ -22,6 +22,8 @@ namespace HelProject.GameWorld
         private const int WALKABLE_AJDACENT_WALL_QUANTITY_LIMIT = 5;
         private const int NONWALKABLE_AJDACENT_WALL_QUANTITY_LIMIT = 4;
         private const int DEFAULT_NONWALKABLE_CELLS_PERCENTAGE = 40;
+        private const int DEFAULT_SMOOTHNESS = 5;
+        private const int MINIMUM_SMOOTHNESS = 1;
         private const int MINIMUM_HEIGHT = 10;
         private const int MINIMUM_WIDTH = 10;
         private const int MAXIMUM_HEIGHT = 200;
@@ -30,7 +32,7 @@ namespace HelProject.GameWorld
 
         #region ATTRIBUTES
         private Random rand = new Random(); // Randomizer
-        private HObject[,] _cells; // Cells of the map
+        private HCell[,] _cells; // Cells of the map
         private int _height; // Height of the map
         private int _width; // Width of the map
         private int _walkableSpacePercentage; // Percentage of walkable area in the map
@@ -67,7 +69,7 @@ namespace HelProject.GameWorld
         /// <summary>
         /// Cells of the map
         /// </summary>
-        private HObject[,] Cells
+        private HCell[,] Cells
         {
             get { return _cells; }
             set { _cells = value; }
@@ -113,19 +115,19 @@ namespace HelProject.GameWorld
                     // Fills the edges with walls
                     if (x == 0)
                     {
-                        this.Cells[x, y] = new HObject(false, new FPosition(x, y));
+                        this.Cells[x, y] = new HCell(false, new FPosition(x, y));
                     }
                     else if (y == 0)
                     {
-                        this.Cells[x, y] = new HObject(false, new FPosition(x, y));
+                        this.Cells[x, y] = new HCell(false, new FPosition(x, y));
                     }
                     else if (x == this.Width - 1)
                     {
-                        this.Cells[x, y] = new HObject(false, new FPosition(x, y));
+                        this.Cells[x, y] = new HCell(false, new FPosition(x, y));
                     }
                     else if (y == this.Height - 1)
                     {
-                        this.Cells[x, y] = new HObject(false, new FPosition(x, y));
+                        this.Cells[x, y] = new HCell(false, new FPosition(x, y));
                     }
                     else
                     {
@@ -133,12 +135,12 @@ namespace HelProject.GameWorld
                         // the middle always has a walkable cell for space logic
                         if (y == mapMiddle)
                         {
-                            this.Cells[x, y] = new HObject(true, new FPosition(x, y));
+                            this.Cells[x, y] = new HCell(true, new FPosition(x, y));
                         }
                         else
                         {
                             // Fills the rest with a random ratio
-                            this.Cells[x, y] = new HObject(!this.RandomPercent(this.WalkableSpacePercentage), new FPosition(x, y));
+                            this.Cells[x, y] = new HCell(!this.RandomPercent(this.WalkableSpacePercentage), new FPosition(x, y));
                         }
                     }
                 }
@@ -150,7 +152,7 @@ namespace HelProject.GameWorld
         /// </summary>
         public void ClearMap()
         {
-            this.Cells = new HObject[this.Width, this.Height];
+            this.Cells = new HCell[this.Width, this.Height];
         }
 
         /// <summary>
@@ -162,7 +164,7 @@ namespace HelProject.GameWorld
             {
                 for (int x = 0; x < this.Width; x++)
                 {
-                    this.Cells[x, y] = new HObject(false, new FPosition(x, y));
+                    this.Cells[x, y] = new HCell(false, new FPosition(x, y));
                 }
             }
         }
@@ -174,13 +176,18 @@ namespace HelProject.GameWorld
         /// It is best to call the RandomFillMap method before this one to
         /// get the best results
         /// </remarks>
-        public void MakeCaverns()
+        public void MakeCaverns(int smoothness = DEFAULT_SMOOTHNESS)
         {
-            for (int x = 0, y = 0; y < this.Height; y++)
-            {
-                for (x = 0; x < this.Width; x++)
+            smoothness = Math.Max(MINIMUM_SMOOTHNESS, smoothness);
+
+            for (int i = 0; i < smoothness; i++) // repeating the carverns algo makes the caverns smoother on the edges
+            {                                    // and gives a more natural look
+                for (int x = 0, y = 0; y < this.Height; y++)
                 {
-                    this.SetCell(x, y, PlaceCellLogic(x, y));
+                    for (x = 0; x < this.Width; x++)
+                    {
+                        this.SetCell(x, y, PlaceCellLogic(x, y));
+                    }
                 }
             }
         }
@@ -195,7 +202,7 @@ namespace HelProject.GameWorld
         {
             int nbUnwalkableCells = this.GetNumberOfAdjacentUnwalkableCells(x, y, 1, 1);
 
-            HObject cell = this.GetCell(x, y);
+            HCell cell = this.GetCell(x, y);
             // Checks if the cell is non-walkable
             if (cell.IsWalkable == false)
             {
@@ -274,7 +281,7 @@ namespace HelProject.GameWorld
                 return true; // Consider it non-walkable if it is
             }
 
-            HObject cell = this.GetCell(x, y);
+            HCell cell = this.GetCell(x, y);
 
             if (cell.IsWalkable == false)
             {
@@ -314,9 +321,9 @@ namespace HelProject.GameWorld
         /// <param name="x">X position of the cell</param>
         /// <param name="y">Y position of the cell</param>
         /// <returns>Copy of the cell</returns>
-        public HObject GetCellCopy(int x, int y)
+        public HCell GetCellCopy(int x, int y)
         {
-            return new HObject(this.Cells[x, y].IsWalkable, this.Cells[x, y].Position);
+            return new HCell(this.Cells[x, y].IsWalkable, this.Cells[x, y].Position);
         }
 
         /// <summary>
@@ -325,7 +332,7 @@ namespace HelProject.GameWorld
         /// <param name="x">X position of the cell</param>
         /// <param name="y">Y position of the cell</param>
         /// <returns>Specified cell</returns>
-        public HObject GetCell(int x, int y)
+        public HCell GetCell(int x, int y)
         {
             return this.Cells[x, y];
         }

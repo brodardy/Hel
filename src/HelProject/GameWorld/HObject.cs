@@ -1,8 +1,8 @@
 ﻿/*
  * Author : Yannick R. Brodard
  * File name : HEntity.cs
- * Version : 0.1.201504221304
- * Description : Base abstact class for all entities
+ * Version : 0.2.201504240836
+ * Description : Base abstact class for 'things' in the game world
  */
 
 #region USING STATEMENTS
@@ -18,11 +18,11 @@ namespace HelProject.GameWorld
     /// <summary>
     /// Abstract class for all entities of the game
     /// </summary>
-    public class HObject
+    public abstract class HObject
     {
-        private const bool DEFAULT_IS_WALKABLE_VALUE = false;
-        private const float DEFAULT_POSITION_X_VALUE = 0.0f;
-        private const float DEFAULT_POSITION_Y_VALUE = 0.0f;
+        protected const bool DEFAULT_IS_WALKABLE_VALUE = false;
+        protected const float DEFAULT_POSITION_X_VALUE = 0.0f;
+        protected const float DEFAULT_POSITION_Y_VALUE = 0.0f;
 
         #region ATTRIBUTES
         private FPosition _position;
@@ -50,24 +50,27 @@ namespace HelProject.GameWorld
         #endregion
 
         #region CONSTRUCTORS
+        /// <summary>
+        /// Creates an object
+        /// </summary>
         public HObject() : this(DEFAULT_IS_WALKABLE_VALUE, new FPosition(DEFAULT_POSITION_X_VALUE, DEFAULT_POSITION_Y_VALUE)) { /* no code... */ }
+
+        /// <summary>
+        /// Creates an object
+        /// </summary>
+        /// <param name="position">Position of the object</param>
         public HObject(FPosition position) : this(DEFAULT_IS_WALKABLE_VALUE, position) { /* no code... */ }
+
+        /// <summary>
+        /// Creates an object
+        /// </summary>
+        /// <param name="isWalkable">Can the object be 'walked' on by entities</param>
+        /// <param name="position">Position of the object</param>
         public HObject(bool isWalkable, FPosition position)
         {
             this.IsWalkable = isWalkable;
             this.Position = position;
         }
-        #endregion
-
-        #region PUBLIC METHODS
-
-        #endregion
-
-        #region PRIVATE METHODS
-
-        #endregion
-
-        #region ENUMS
         #endregion
     }
 }
