@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 #endregion
 
@@ -23,6 +24,8 @@ namespace HelProject.UI
         private Vector2 _position, _scale;
         private Texture2D _texture;
         private Rectangle _sourceRect;
+        private string _effects;
+        private bool _isActive;
         #endregion
 
         #region ATTRIBUTES
@@ -107,6 +110,15 @@ namespace HelProject.UI
             get { return _texture; }
             set { _texture = value; }
         }
+
+        /// <summary>
+        /// Is the image active
+        /// </summary>
+        public bool IsActive
+        {
+            get { return _isActive; }
+            set { _isActive = value; }
+        }
         #endregion
 
         #region CONSTRUCTORS
@@ -121,6 +133,15 @@ namespace HelProject.UI
             Scale = Vector2.One;
             AlphaChannel = 1.0f;
             SourceRect = Rectangle.Empty;
+        }
+
+        /// <summary>
+        /// Effects of the image
+        /// </summary>
+        public string Effects
+        {
+            get { return _effects; }
+            set { _effects = value; }
         }
         #endregion
 

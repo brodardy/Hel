@@ -10,9 +10,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 #endregion
 
@@ -74,18 +71,12 @@ namespace HelProject.UI
         /// Updates the content of the screen
         /// </summary>
         /// <param name="gameTime">Game time</param>
-        public virtual void Update(GameTime gameTime)
-        {
-
-        }
+        public virtual void Update(GameTime gameTime) { /* no code... */ }
 
         /// <summary>
         /// Draws the content of the screen
         /// </summary>
         /// <param name="spriteBatch">Sprite batch</param>
-        public virtual void Draw(SpriteBatch spriteBatch)
-        {
-
-        }
+        public virtual void Draw(SpriteBatch spriteBatch) { /* no code... */ }
     }
 }

@@ -13,6 +13,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using HelProject.Tools;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace HelProject.UI
 {
@@ -23,6 +25,11 @@ namespace HelProject.UI
     {
         protected const int DEFAULT_SCREEN_WIDTH = 1280;
         protected const int DEFAULT_SCREEN_HEIGHT = 720;
+
+        private bool _transitionDelayActive;
+        private int _transitionCountDown;
+        private int _lastCount;
+        private GameScreen _transitionScreen;
 
         private static ScreenManager _instance; // instance of this class
         private XmlManager<GameScreen> _xmlGameScreenManager; //xml manager for the screens
@@ -60,11 +67,21 @@ namespace HelProject.UI
         /// </summary>
         private ScreenManager()
         {
-            Dimensions = new Vector2(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
-            _currentScreen = new SplashScreen();
-            _xmlGameScreenManager = new XmlManager<GameScreen>();
-            _xmlGameScreenManager.TypeClass = _currentScreen.TypeClass;
-            _currentScreen = _xmlGameScreenManager.Load("Load/SplashScreen.xml");
+            this.Dimensions = new Vector2(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
+            this._currentScreen = new SplashScreen();
+            this._xmlGameScreenManager = new XmlManager<GameScreen>();
+            this._xmlGameScreenManager.TypeClass = _currentScreen.TypeClass;
+            this._currentScreen = _xmlGameScreenManager.Load("Load/SplashScreen.xml");
+
+            this._transitionDelayActive = false;
+            this._transitionCountDown = 0;
+            _transitionScreen = null;
+
+            GameScreen sndSC = new SplashScreen();
+            this._xmlGameScreenManager = new XmlManager<GameScreen>();
+            this._xmlGameScreenManager.TypeClass = sndSC.TypeClass;
+            sndSC = _xmlGameScreenManager.Load("Load/SplashScreen2.xml");
+            this.TransitionCountDown(sndSC, 20);
         }
 
         /// <summary>
@@ -92,6 +109,32 @@ namespace HelProject.UI
         public void Update(GameTime gameTime)
         {
             _currentScreen.Update(gameTime);
+
+            if (this._transitionDelayActive)
+            {
+                int currentTime = Convert.ToInt32(gameTime.TotalGameTime.Seconds);
+
+                Debug.WriteLine(currentTime);
+
+                if (this._lastCount == -1)
+                {
+                    this._lastCount = currentTime;
+                }
+                else
+                {
+                    int diff = currentTime - this._lastCount;
+                    if (diff > 0)
+                    {
+                        this._transitionCountDown -= diff;
+                    }
+                }
+
+                if (this._transitionCountDown <= 0)
+                {
+                    this._transitionDelayActive = false;
+                    this.Transition(_transitionScreen);
+                }
+            }
         }
 
         /// <summary>
@@ -101,6 +144,28 @@ namespace HelProject.UI
         public void Draw(SpriteBatch spriteBatch)
         {
             _currentScreen.Draw(spriteBatch);
+        }
+
+        /// <summary>
+        /// Transitions the screen to another one
+        /// </summary>
+        /// <param name="gameScreen"></param>
+        public void Transition(GameScreen gameScreen)
+        {
+            this._transitionCountDown = 0;
+            this._transitionDelayActive = false;
+            this._lastCount = -1;
+
+            this._currentScreen = gameScreen;
+            this._currentScreen.LoadContent();
+        }
+
+        public void TransitionCountDown(GameScreen nextScreen, int time)
+        {
+            this._transitionScreen = nextScreen;
+            this._transitionCountDown = time;
+            this._transitionDelayActive = true;
+            this._lastCount = -1;
         }
     }
 }
