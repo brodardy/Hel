@@ -1,4 +1,5 @@
 ﻿using HelProject.GameWorld;
+using HelProject.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,16 +13,13 @@ namespace HelProject
     /// </summary>
     public class MainGame : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        private Texture2D _floor;
-        private Texture2D _wall;
-        private HMap _map;
+        GraphicsDeviceManager _graphics;
+        SpriteBatch _spriteBatch;
 
         public MainGame()
             : base()
         {
-            graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
@@ -36,9 +34,13 @@ namespace HelProject
             // TODO: Add your initialization logic here
             this.IsMouseVisible = true;
 
-            _map = new HMap(60, 100, 45);
-            _map.MakeRandomlyFilledMap();
-            _map.MakeCaverns();
+            //_map = new HMap(60, 100, 45);
+            //_map.MakeRandomlyFilledMap();
+            //_map.MakeCaverns();
+
+            _graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
+            _graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
+            _graphics.ApplyChanges();
 
             base.Initialize();
         }
@@ -50,11 +52,15 @@ namespace HelProject
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            _floor = Content.Load<Texture2D>("scenary/floor");
-            _wall = Content.Load<Texture2D>("scenary/wall");
+            //_floor = Content.Load<Texture2D>("scenary/floor");
+            //_wall = Content.Load<Texture2D>("scenary/wall");
+
+            ScreenManager.Instance.GraphicsDevice = GraphicsDevice;
+            ScreenManager.Instance.SpriteBatch = _spriteBatch;
+            ScreenManager.Instance.LoadContent(Content);
         }
 
         /// <summary>
@@ -64,6 +70,7 @@ namespace HelProject
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            ScreenManager.Instance.UnloadContent();
         }
 
         /// <summary>
@@ -78,6 +85,8 @@ namespace HelProject
 
             // TODO: Add your update logic here
 
+            ScreenManager.Instance.Update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -91,26 +100,30 @@ namespace HelProject
 
             // TODO: Add your drawing code here
 
-            int sizeOfSprites = 32;
-            float scale = .25f;
-            spriteBatch.Begin();
-            for (int y = 0; y < _map.Height; y++)
-            {
-                for (int x = 0; x < _map.Width; x++)
-                {
-                    HObject cell = _map.GetCell(x, y);
-                    Vector2 position = new Vector2(cell.Position.X * sizeOfSprites * scale, cell.Position.Y * sizeOfSprites * scale);
-                    if (cell.IsWalkable)
-                    {
-                        spriteBatch.Draw(_floor, position, null, null, null, 0.0f, new Vector2(scale, scale), Color.White);
-                    }
-                    else
-                    {
-                        spriteBatch.Draw(_wall, position, null, null, null, 0.0f, new Vector2(scale, scale), Color.White);
-                    }
-                }
-            }
-            spriteBatch.End();
+            //int sizeOfSprites = 32;
+            //float scale = .25f;
+            //spriteBatch.Begin();
+            //for (int y = 0; y < _map.Height; y++)
+            //{
+            //    for (int x = 0; x < _map.Width; x++)
+            //    {
+            //        HObject cell = _map.GetCell(x, y);
+            //        Vector2 position = new Vector2(cell.Position.X * sizeOfSprites * scale, cell.Position.Y * sizeOfSprites * scale);
+            //        if (cell.IsWalkable)
+            //        {
+            //            spriteBatch.Draw(_floor, position, null, null, null, 0.0f, new Vector2(scale, scale), Color.White);
+            //        }
+            //        else
+            //        {
+            //            spriteBatch.Draw(_wall, position, null, null, null, 0.0f, new Vector2(scale, scale), Color.White);
+            //        }
+            //    }
+            //}
+            //spriteBatch.End();
+
+            _spriteBatch.Begin();
+            ScreenManager.Instance.Draw(_spriteBatch);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
