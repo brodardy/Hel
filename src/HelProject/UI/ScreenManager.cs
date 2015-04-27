@@ -1,20 +1,16 @@
 ﻿/*
  * Author : Yannick R. Brodard
  * File name : ScreenManager.cs
- * Version : 0.1.201504241035
+ * Version : 0.2.201504271045
  * Description : All the screens of the game are manage here
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+#region USING STATEMENTS
+using HelProject.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using HelProject.Tools;
-using System.Threading.Tasks;
-using System.Diagnostics;
+#endregion
 
 namespace HelProject.UI
 {
@@ -23,20 +19,31 @@ namespace HelProject.UI
     /// </summary>
     public class ScreenManager
     {
+        #region PROTECTED CONSTANTS
         protected const int DEFAULT_SCREEN_WIDTH = 1280;
         protected const int DEFAULT_SCREEN_HEIGHT = 720;
+        protected const int DEFAULT_SPLASH_SCREEN_TIME = 3;
+        #endregion
 
+        #region TRANSITION PRIVATE VARIABLES
         private bool _transitionDelayActive;
-        private int _transitionCountDown;
-        private int _lastCount;
+        private int _transitionTime;
+        private double _transitionFirstCount;
         private GameScreen _transitionScreen;
+        #endregion
 
+        #region PRIVATE VARIABLES
         private static ScreenManager _instance; // instance of this class
         private XmlManager<GameScreen> _xmlGameScreenManager; //xml manager for the screens
         private GameScreen _currentScreen; // current screen shown in the game
+        #endregion
+
+        #region PUBLIC VARIABLES
         public GraphicsDevice GraphicsDevice;
         public SpriteBatch SpriteBatch;
+        #endregion
 
+        #region PROPRIETIES
         /// <summary>
         /// Dimensions of the screen
         /// </summary>
@@ -61,29 +68,30 @@ namespace HelProject.UI
                 return _instance;
             }
         }
+        #endregion
 
+        #region CONSTRUCTORS
         /// <summary>
         /// Creates a screen manager
         /// </summary>
         private ScreenManager()
         {
-            this.Dimensions = new Vector2(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
-            this._currentScreen = new SplashScreen();
-            this._xmlGameScreenManager = new XmlManager<GameScreen>();
-            this._xmlGameScreenManager.TypeClass = _currentScreen.TypeClass;
-            this._currentScreen = _xmlGameScreenManager.Load("Load/SplashScreen.xml");
+            // Initialisation
+            this.Dimensions = new Vector2(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT); // fix the dim of the window
+            this._transitionDelayActive = false; // init transition variables
+            this._transitionTime = 0;
+            this._transitionScreen = null;
 
-            this._transitionDelayActive = false;
-            this._transitionCountDown = 0;
-            _transitionScreen = null;
+            // shows the first splash screen
+            this._currentScreen = this.PrepareScreen("Load/SplashScreen.xml", ScreenTypes.SPLASH);
 
-            GameScreen sndSC = new SplashScreen();
-            this._xmlGameScreenManager = new XmlManager<GameScreen>();
-            this._xmlGameScreenManager.TypeClass = sndSC.TypeClass;
-            sndSC = _xmlGameScreenManager.Load("Load/SplashScreen2.xml");
-            this.TransitionCountDown(sndSC, 20);
+            // prepares a transition screen
+            GameScreen sndSC = this.PrepareScreen("Load/SplashScreen2.xml", ScreenTypes.SPLASH);
+            this.TransitionCountDown(sndSC, DEFAULT_SPLASH_SCREEN_TIME); // time to the transition screen
         }
+        #endregion
 
+        #region METHODS
         /// <summary>
         /// Loads the content
         /// </summary>
@@ -91,7 +99,7 @@ namespace HelProject.UI
         public void LoadContent(ContentManager content)
         {
             this.Content = new ContentManager(content.ServiceProvider, "Content");
-            _currentScreen.LoadContent();
+            this._currentScreen.LoadContent();
         }
 
         /// <summary>
@@ -99,7 +107,7 @@ namespace HelProject.UI
         /// </summary>
         public void UnloadContent()
         {
-            _currentScreen.UnloadContent();
+            this._currentScreen.UnloadContent();
         }
 
         /// <summary>
@@ -108,31 +116,29 @@ namespace HelProject.UI
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
-            _currentScreen.Update(gameTime);
+            this._currentScreen.Update(gameTime);
 
+            // Transition mechanism
             if (this._transitionDelayActive)
             {
-                int currentTime = Convert.ToInt32(gameTime.TotalGameTime.Seconds);
+                double currentTime = gameTime.TotalGameTime.TotalSeconds; // gets the current time
 
-                Debug.WriteLine(currentTime);
-
-                if (this._lastCount == -1)
+                // initialise the first count if it's the first time it passes here
+                if (this._transitionFirstCount < 0.0d)
                 {
-                    this._lastCount = currentTime;
+                    this._transitionFirstCount = currentTime;
                 }
                 else
                 {
-                    int diff = currentTime - this._lastCount;
-                    if (diff > 0)
-                    {
-                        this._transitionCountDown -= diff;
-                    }
-                }
+                    // calculates the time difference between the first count and the current count
+                    double diff = currentTime - (double)this._transitionFirstCount;
 
-                if (this._transitionCountDown <= 0)
-                {
-                    this._transitionDelayActive = false;
-                    this.Transition(_transitionScreen);
+                    // if this time is superior or equal to the specified transition time
+                    // the Transition method is called with the specified screen
+                    if (diff >= (double)this._transitionTime)
+                    {
+                        this.Transition(this._transitionScreen);
+                    }
                 }
             }
         }
@@ -152,20 +158,77 @@ namespace HelProject.UI
         /// <param name="gameScreen"></param>
         public void Transition(GameScreen gameScreen)
         {
-            this._transitionCountDown = 0;
+            // resets the transition variables
+            this._transitionTime = 0;
             this._transitionDelayActive = false;
-            this._lastCount = -1;
+            this._transitionFirstCount = -1.0d;
 
-            this._currentScreen = gameScreen;
-            this._currentScreen.LoadContent();
+            this.UnloadContent(); // unloads the content of the current screen
+            this._currentScreen = gameScreen; // place the new screen
+            this._currentScreen.LoadContent(); // loads the new screen
         }
 
+        /// <summary>
+        /// Activates a screen transition for the specified time
+        /// </summary>
+        /// <param name="nextScreen">Next screen that will appear</param>
+        /// <param name="time">Time before transition</param>
         public void TransitionCountDown(GameScreen nextScreen, int time)
         {
             this._transitionScreen = nextScreen;
-            this._transitionCountDown = time;
+            this._transitionTime = time;
             this._transitionDelayActive = true;
-            this._lastCount = -1;
+            this._transitionFirstCount = -1.0d;
         }
+
+        /// <summary>
+        /// Prepares an initialized screen
+        /// </summary>
+        /// <param name="loadContent">Path to the XML file for the initialization information</param>
+        /// <param name="screenType">Type of the screen</param>
+        /// <returns>The prepared screen</returns>
+        public GameScreen PrepareScreen(string loadContent, ScreenTypes screenType)
+        {
+            GameScreen preparedScreen;
+
+            switch (screenType)
+            {
+                case ScreenTypes.SPLASH:
+                    preparedScreen = new SplashScreen();
+                    break;
+                case ScreenTypes.MENU:
+                    preparedScreen = new SplashScreen();
+                    break;
+                case ScreenTypes.INGAME:
+                    preparedScreen = new SplashScreen();
+                    break;
+                case ScreenTypes.LOADING:
+                    preparedScreen = new SplashScreen();
+                    break;
+                default:
+                    preparedScreen = new SplashScreen();
+                    break;
+            }
+
+            this._xmlGameScreenManager = new XmlManager<GameScreen>();
+            this._xmlGameScreenManager.TypeClass = preparedScreen.TypeClass;
+            preparedScreen = _xmlGameScreenManager.Load(loadContent);
+
+            return preparedScreen;
+        }
+        #endregion
+
+        #region PUBLIC ENUMERATORS
+        /// <summary>
+        /// Available screen types
+        /// </summary>
+        public enum ScreenTypes
+        {
+            SPLASH, // screen with an image
+            MENU,   // screen with an interactive menu
+            INGAME, // screen with integrated gameplay
+            LOADING // screen used for loading moments
+        };
+        #endregion
     }
 }
