@@ -31,7 +31,7 @@ namespace HelProject.UI
         private double _transitionFirstCount;
         private GameScreen _transitionScreen;
         #endregion
-
+        
         #region PRIVATE VARIABLES
         private static ScreenManager _instance; // instance of this class
         private XmlManager<GameScreen> _xmlGameScreenManager; //xml manager for the screens
