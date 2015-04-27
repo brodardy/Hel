@@ -1118,7 +1118,6 @@ Le portail mène vers un niveau (le terrain de combat) généré d'où il ne peu
 % --------------------------------------------------
 \chapter{Annexes}
 \section{Planning}
-\subsection{Initial}
 Le planning du projet se décompose en plusieurs parties :\\
 \begin{description}
 	\item[Code backbone] Coeur du projet sur le quel le jeu se repose
@@ -1128,8 +1127,9 @@ Le planning du projet se décompose en plusieurs parties :\\
 	\item[Poster] Poster préparer pour le projet
 	\item[Documentation] Documentation technique du projet
 \end{description}
+\subsection{Initial}
 % avril
-\begin{figure}[htp]
+\begin{figure}[H]
 	\begin{center}
 	\begin{ganttchart}[vgrid, hgrid, y unit title=1cm, y unit chart=0.7cm, x unit=0.8cm]{1}{14}
 	    \gantttitle{Avril 2015}{14} \ganttnewline
@@ -1159,7 +1159,7 @@ Le planning du projet se décompose en plusieurs parties :\\
 	\end{center}
 \end{figure}
 % mai 1
-\begin{figure}[htp]
+\begin{figure}[H]
 	\begin{center}
 	\begin{ganttchart}[vgrid, hgrid, y unit title=1cm, y unit chart=0.7cm, x unit=0.8cm]{1}{14}
 	    \gantttitle{Mai 2015}{14} \ganttnewline
@@ -1180,14 +1180,14 @@ Le planning du projet se décompose en plusieurs parties :\\
 	    \gantttitle{22}{1} \ganttnewline % 14
 	
 	    \ganttbar[bar/.append style={fill=red}]{Code essentiel}{1}{8} \ganttnewline
-	    \ganttbar[bar/.append style={fill=green}]{Contenu}{8}{14} \ganttnewline
+	    \ganttbar[bar/.append style={fill=green}]{Contenu \& Équilibrage}{8}{14} \ganttnewline
 	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{1}{14}
 	\end{ganttchart}
 	\caption{Planning initial de la première partie du mois de mai}
 	\end{center}
 \end{figure}
 % mai 2
-\begin{figure}[htp]
+\begin{figure}[H]
 	\begin{center}
 	\begin{ganttchart}[vgrid, hgrid, y unit title=1cm, y unit chart=0.7cm, x unit=0.8cm]{1}{6}
 	    \gantttitle{Mai 2015}{4}
@@ -1199,7 +1199,7 @@ Le planning du projet se décompose en plusieurs parties :\\
 	    \gantttitle{29}{1} % 4
 	    \gantttitle{1}{2} \ganttnewline % 5
 	
-	    \ganttbar[bar/.append style={fill=green}]{Contenu}{1}{1} \ganttnewline
+	    \ganttbar[bar/.append style={fill=green}]{Contenu \& Équilibrage}{1}{1} \ganttnewline
 	    \ganttbar[bar/.append style={fill=yellow}]{Tests}{2}{4} \ganttnewline
 	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{1}{5} \ganttnewline
 	    \ganttmilestone{Rendu final}{6}
@@ -1209,6 +1209,84 @@ Le planning du projet se décompose en plusieurs parties :\\
 \end{figure}
 \newpage
 \subsection{Final}
+\begin{figure}[H]
+	\begin{center}
+	\begin{ganttchart}[vgrid, hgrid, y unit title=1cm, y unit chart=0.7cm, x unit=0.8cm]{1}{14}
+	    \gantttitle{Avril 2015}{14} \ganttnewline
+	
+	    \gantttitle{13}{1} % 1
+	    \gantttitle{14}{1} % 2
+	    \gantttitle{15}{1} % 3
+	    \gantttitle{16}{1} % 4
+	    \gantttitle{17}{1} % 5
+	    \gantttitle{20}{1} % 6
+	    \gantttitle{21}{1} % 7
+	    \gantttitle{22}{1} % 8
+	    \gantttitle{23}{1} % 9
+	    \gantttitle{24}{1} % 10
+	    \gantttitle{27}{1} % 11
+	    \gantttitle{28}{1} % 12
+	    \gantttitle{29}{1} % 13
+	    \gantttitle{30}{1} \ganttnewline % 14
+	    
+	    \ganttbar[bar/.append style={fill=red}]{Code backbone}{7}{11} \ganttnewline
+	    \ganttbar[bar/.append style={fill=red}]{Code essentiel}{0}{0} \ganttnewline
+	    \ganttbar[bar/.append style={fill=blue}]{Poster}{0}{0} \ganttnewline
+	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{1}{8} \ganttnewline
+	    \ganttmilestone{Rendu inter. doc. + poster}{14}
+	\end{ganttchart}
+	\caption{Planning final du mois d'avril}
+	\end{center}
+\end{figure}
+% mai 1
+\begin{figure}[H]
+	\begin{center}
+	\begin{ganttchart}[vgrid, hgrid, y unit title=1cm, y unit chart=0.7cm, x unit=0.8cm]{1}{14}
+	    \gantttitle{Mai 2015}{14} \ganttnewline
+	
+	    \gantttitle{4}{1} % 1
+	    \gantttitle{5}{1} % 2
+	    \gantttitle{6}{1} % 3
+	    \gantttitle{7}{1} % 4
+	    \gantttitle{8}{1} % 5
+	    \gantttitle{11}{1} % 6
+	    \gantttitle{12}{1} % 7
+	    \gantttitle{13}{1} % 8
+	    \gantttitle{15}{1} % 9
+	    \gantttitle{18}{1} % 10
+	    \gantttitle{19}{1} % 11
+	    \gantttitle{20}{1} % 12
+	    \gantttitle{21}{1} % 13
+	    \gantttitle{22}{1} \ganttnewline % 14
+	
+	    \ganttbar[bar/.append style={fill=red}]{Code essentiel}{0}{0} \ganttnewline
+	    \ganttbar[bar/.append style={fill=green}]{Contenu \& Équilibrage}{0}{0} \ganttnewline
+	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{0}{0}
+	\end{ganttchart}
+	\caption{Planning final de la première partie du mois de mai}
+	\end{center}
+\end{figure}
+% mai 2
+\begin{figure}[H]
+	\begin{center}
+	\begin{ganttchart}[vgrid, hgrid, y unit title=1cm, y unit chart=0.7cm, x unit=0.8cm]{1}{6}
+	    \gantttitle{Mai 2015}{4}
+	    \gantttitle{Juin 2015}{2} \ganttnewline
+	
+	    \gantttitle{26}{1} % 1
+	    \gantttitle{27}{1} % 2
+	    \gantttitle{28}{1} % 3
+	    \gantttitle{29}{1} % 4
+	    \gantttitle{1}{2} \ganttnewline % 5
+	
+	    \ganttbar[bar/.append style={fill=green}]{Contenu \& Équilibrage}{0}{0} \ganttnewline
+	    \ganttbar[bar/.append style={fill=yellow}]{Tests}{0}{0} \ganttnewline
+	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{0}{0} \ganttnewline
+	    \ganttmilestone{Rendu final}{6}
+	\end{ganttchart}
+	\caption{Planning final de la deuxième partie du mois de mai et le mois de juin}
+	\end{center}
+\end{figure}
 \newpage
 % --------------------------------------------------
 \listoffigures
