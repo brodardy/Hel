@@ -84,10 +84,7 @@ namespace HelProject.UI
 
             // shows the first splash screen
             this._currentScreen = this.PrepareScreen("Load/SplashScreen.xml", ScreenTypes.SPLASH);
-
-            // prepares a transition screen
-            //GameScreen sndSC = this.PrepareScreen("Load/SplashScreen2.xml", ScreenTypes.SPLASH);
-            //this.TransitionCountDown(sndSC, DEFAULT_SPLASH_SCREEN_TIME); // time to the transition screen
+            (this._currentScreen as SplashScreen).NextScreen = this.PrepareScreen("Load/SplashScreen2.xml", ScreenTypes.SPLASH);
         }
         #endregion
 

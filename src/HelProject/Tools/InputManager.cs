@@ -172,7 +172,8 @@ namespace HelProject.Tools
             {
                 // If the key is not pressed and it is not in the release key list and is in one of the other two list
                 // we add it to the released key list and remove it in the others
-                if (KbState.IsKeyUp(key) && !this.IsKeyboardKeyReleased(key) && (this.IsKeyboardKeyPressed(key) || this.IsKeyboardKeyDown(key)))
+                if (KbState.IsKeyUp(key) && !this.IsKeyboardKeyReleased(key) &&
+                    (this.IsKeyboardKeyPressed(key) || this.IsKeyboardKeyDown(key)))
                 {
                     this.DownKeys.Remove(key);
                     this.PressedKeys.Remove(key);
@@ -204,7 +205,7 @@ namespace HelProject.Tools
 
         /// <summary>
         /// Updates the states of the mouse
-        /// </summary>
+        /// </summar>
         private void UpdateMouseInput()
         {
             this.MsState = Mouse.GetState();

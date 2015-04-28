@@ -2,7 +2,7 @@
  * Author : Yannick R. Brodard
  * File name : MenuScreen.cs
  * Version : 0.1.201504241035
- * Description : Title screen of the game
+ * Description : Main menu screen of the game
  */
 
 #region USING STATEMENTS
