@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -151,7 +151,7 @@
        width="511.42856"
        height="1345.7142"
        x="922.85712"
-       y="-462.08383" />
+       y="-459.22668" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot4188"
@@ -175,7 +175,7 @@
            x="60"
            y="627.58148"
            style="font-size:70px;" /></flowRegion><flowPara
-         id="flowPara4204"></flowPara></flowRoot>    <text
+         id="flowPara4204" /></flowRoot>    <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="68.571426"
@@ -227,9 +227,10 @@
          x="68.571426"
          y="-8.9598427"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:45px;font-family:'Lane - Narrow';-inkscape-font-specification:'Lane - Narrow';fill:#000000;fill-opacity:1"
-         id="tspan4847">     - Rôle playing game</tspan></text>
+         id="tspan4847">     - Role playing game</tspan></text>
     <g
-       id="g4766">
+       id="g4366"
+       transform="translate(0,2.8571355)">
       <rect
          y="668.28052"
          x="678.46948"
@@ -587,5 +588,79 @@
            style="fill:#383838" />
       </g>
     </g>
-  </g>
+    <g
+       id="g4467"
+       transform="translate(-71.26236,2.8571355)">
+      <rect
+         y="668.28052"
+         x="435.27997"
+         height="215.34988"
+         width="215.15434"
+         id="rect4186-7-9"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#bd0000;stroke-width:15;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <g
+         inkscape:label="Ebene 1"
+         id="layer1-2"
+         style="display:inline"
+         transform="matrix(0.37528943,0,0,0.37528943,449.03493,476.93336)">
+        <path
+           style="fill:#68217a;stroke:#ffffff;stroke-width:33.33043671;stroke-opacity:1"
+           d="M 483.29234,602.44472 372.10411,557.87392 178.02375,746.87661 61.150238,657.90867 l -44.44058,22.35039 -0.04444,233.31307 44.23249,22.18974 116.777852,-88.89395 194.55776,188.82908 111.10146,-44.39718 z"
+           id="path2998"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:#ffffff;stroke:none"
+           d="m 361.0373,713.50273 -111.05802,83.02234 111.10146,83.67329 z"
+           id="path3000"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:#ffffff;stroke:none"
+           d="m 72.191838,746.97093 0.0667,99.85788 55.483402,-50.26641 z"
+           id="path3002"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       id="g4474"
+       transform="translate(391.42857,223.59325)">
+      <rect
+         y="447.5444"
+         x="-341.86288"
+         height="215.34988"
+         width="215.15434"
+         id="rect4186-7-9-3"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#bd0000;stroke-width:15;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <g
+         inkscape:label="Layer 1"
+         id="layer1-7"
+         transform="matrix(0.68352716,0,0,1.1030577,-282.74537,494.32648)">
+        <path
+           inkscape:connector-curvature="0"
+           style="font-style:normal;font-weight:normal;font-size:230.00598145px;font-family:'Arial Unicode MS';fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 76.39954,85.302139 C 71.607597,103.79549 63.240688,117.5906 51.29879,126.68749 39.356628,135.78441 25.037422,140.33286 8.3411298,140.33287 -18.612758,140.33286 -38.247852,131.89108 -50.564211,115.0075 -62.880629,98.123964 -69.038824,77.815025 -69.038812,54.080624 -69.038824,27.800754 -61.79499,7.2297639 -47.30729,-7.6324065 -32.819656,-22.494287 -14.19533,-29.925299 8.5657451,-29.925467 24.588192,-29.925299 38.289706,-25.844794 49.67033,-17.683937 61.050692,-9.5227709 69.024524,2.4192595 73.59185,18.14219 L 52.253405,23.196032 C 48.659432,11.740782 43.1938,3.1305403 35.856494,-2.6347179 28.518954,-8.3996959 19.347175,-11.282255 8.3411298,-11.282404 -9.6281586,-11.282255 -23.254801,-5.3861114 -32.53884,6.4060445 -41.822974,18.198463 -46.465017,34.015102 -46.464983,53.856009 c -3.4e-5,22.910813 4.885342,39.944116 14.656143,51.099961 9.770703,11.15591 22.5176039,16.73385 38.2407405,16.73383 12.8778395,2e-5 23.3411545,-3.48151 31.3899765,-10.4446 8.048585,-6.96304 13.682678,-17.445075 16.902295,-31.446134 l 21.675368,5.503073 z m 134.4322,7.187687 -34.70305,0 -9.65845,47.843044 -17.07076,0 9.88307,-47.843044 -35.3769,0 -9.65845,47.843044 -17.070756,0 9.995376,-47.843044 -19.092293,0 0,-16.621526 22.236903,0 8.53538,-40.879969 -30.772283,0 0,-16.621526 34.029203,0 9.88307,-48.292272 16.73384,0 -9.65846,48.292272 35.26459,0 9.88307,-48.292272 16.73383,0 -9.65845,48.292272 19.54152,0 0,16.621526 -23.02306,0 -8.19845,40.879969 31.22151,0 0,16.621526 z m -39.75689,-57.501495 -35.4892,0 -8.19846,40.879969 35.15228,0 8.53538,-40.879969 z"
+           id="text2239" />
+      </g>
+    </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4479"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(8.5714286,-983.79077)"><flowRegion
+         id="flowRegion4481"><rect
+           id="rect4483"
+           width="774.28571"
+           height="591.42859"
+           x="60"
+           y="1090.4387"
+           style="text-align:center;text-anchor:middle" /></flowRegion><flowPara
+         id="flowPara4489"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:70px;font-family:'Lane - Narrow';-inkscape-font-specification:'Lane - Narrow'">Génération de mondes</flowPara><flowPara
+         id="flowPara4495"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:70px;font-family:'Lane - Narrow';-inkscape-font-specification:'Lane - Narrow'">Système de compétences</flowPara><flowPara
+         id="flowPara4497"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:70px;font-family:'Lane - Narrow';-inkscape-font-specification:'Lane - Narrow'">Système de looting</flowPara><flowPara
+         id="flowPara4499"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:70px;font-family:'Lane - Narrow';-inkscape-font-specification:'Lane - Narrow'">Sorts épiques</flowPara><flowPara
+         id="flowPara4501"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:70px;font-family:'Lane - Narrow';-inkscape-font-specification:'Lane - Narrow'">Ennemis redoutables</flowPara></flowRoot>  </g>
 </svg>
