@@ -31,7 +31,7 @@ namespace HelProject.UI
         private double _transitionFirstCount;
         private GameScreen _transitionScreen;
         #endregion
-        
+
         #region PRIVATE VARIABLES
         private static ScreenManager _instance; // instance of this class
         private XmlManager<GameScreen> _xmlGameScreenManager; //xml manager for the screens
@@ -86,8 +86,8 @@ namespace HelProject.UI
             this._currentScreen = this.PrepareScreen("Load/SplashScreen.xml", ScreenTypes.SPLASH);
 
             // prepares a transition screen
-            GameScreen sndSC = this.PrepareScreen("Load/SplashScreen2.xml", ScreenTypes.SPLASH);
-            this.TransitionCountDown(sndSC, DEFAULT_SPLASH_SCREEN_TIME); // time to the transition screen
+            //GameScreen sndSC = this.PrepareScreen("Load/SplashScreen2.xml", ScreenTypes.SPLASH);
+            //this.TransitionCountDown(sndSC, DEFAULT_SPLASH_SCREEN_TIME); // time to the transition screen
         }
         #endregion
 
@@ -215,6 +215,22 @@ namespace HelProject.UI
             preparedScreen = _xmlGameScreenManager.Load(loadContent);
 
             return preparedScreen;
+        }
+
+        public ScreenTypes GetCurrentScreenType()
+        {
+            if (this._currentScreen is SplashScreen)
+            {
+                return ScreenTypes.SPLASH;
+            }
+            else if (this._currentScreen is MenuScreen)
+            {
+                return ScreenTypes.MENU;
+            }
+            else
+            {
+                return ScreenTypes.LOADING;
+            }
         }
         #endregion
 

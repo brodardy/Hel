@@ -13,6 +13,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Xml.Serialization;
+using HelProject.Tools;
+using Microsoft.Xna.Framework.Input;
 #endregion
 
 namespace HelProject.UI
@@ -23,6 +25,16 @@ namespace HelProject.UI
     public class SplashScreen : GameScreen
     {
         private Image _backgroundImage;
+        private GameScreen _nextScreen;
+
+        /// <summary>
+        /// Next screen after the splash screen
+        /// </summary>
+        public GameScreen NextScreen
+        {
+            get { return _nextScreen; }
+            set { _nextScreen = value; }
+        }
 
         /// <summary>
         /// Background Image of the splashscreen
@@ -60,6 +72,19 @@ namespace HelProject.UI
         {
             base.Update(gameTime);
             BackgroundImage.Update(gameTime);
+            if (InputManager.Instance.IsKeyboardKeyReleased(Keys.Space))
+            {
+                if (this.NextScreen == null)
+                {
+                    this.NextScreen = new SplashScreen();
+                    this.NextScreen = ScreenManager.Instance.PrepareScreen("Load/SplashScreen2.xml", ScreenManager.ScreenTypes.SPLASH);
+                    //ScreenManager.Instance.Transition(test);
+                }
+                else
+                {
+                    ScreenManager.Instance.Transition(this.NextScreen);
+                }
+            }
         }
 
         /// <summary>

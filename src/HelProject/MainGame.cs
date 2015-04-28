@@ -1,4 +1,5 @@
 ﻿using HelProject.GameWorld;
+using HelProject.Tools;
 using HelProject.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -86,6 +87,8 @@ namespace HelProject
             // TODO: Add your update logic here
 
             ScreenManager.Instance.Update(gameTime);
+
+            InputManager.Instance.Update(gameTime);
 
             base.Update(gameTime);
         }
