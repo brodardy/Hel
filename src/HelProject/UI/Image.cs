@@ -156,11 +156,11 @@ namespace HelProject.UI
             // Gets the image if there is  one
             if (ImagePath != String.Empty)
             {
-                Texture = _content.Load<Texture2D>(ImagePath);
+                this.Texture = this._content.Load<Texture2D>(ImagePath);
             }
 
             // loads the font
-            _font = _content.Load<SpriteFont>(FontName);
+            this._font = _content.Load<SpriteFont>(FontName);
 
             Vector2 dimensions = Vector2.Zero;
 
@@ -182,7 +182,7 @@ namespace HelProject.UI
             }
 
             /* Create the image */
-            _renderTarget = new RenderTarget2D(ScreenManager.Instance.GraphicsDevice, (int)dimensions.X, (int)dimensions.Y);
+            this._renderTarget = new RenderTarget2D(ScreenManager.Instance.GraphicsDevice, (int)dimensions.X, (int)dimensions.Y);
             ScreenManager.Instance.GraphicsDevice.SetRenderTarget(_renderTarget);
             ScreenManager.Instance.GraphicsDevice.Clear(Color.Transparent);
             ScreenManager.Instance.SpriteBatch.Begin();
@@ -192,7 +192,7 @@ namespace HelProject.UI
             ScreenManager.Instance.SpriteBatch.End();
 
             // Places the new image in the texture
-            Texture = _renderTarget;
+            this.Texture = _renderTarget;
 
             // Gives back the render target to default
             ScreenManager.Instance.GraphicsDevice.SetRenderTarget(null);

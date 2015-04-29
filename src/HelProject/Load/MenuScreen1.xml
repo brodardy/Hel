@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MenuScreen>
+  <Image>
+    <Path>SplashScreen/main2</Path>
+    <Position>
+      <X>640</X>
+      <Y>360</Y>
+    </Position>
+  </Image>
+  <Items>
+    <MenuItem>
+      <Image>
+        <Text>Play</Text>
+        <Position>
+          <X>80</X>
+          <Y>200</Y>
+        </Position>
+      </Image>
+      <LinkType>1</LinkType>
+    </MenuItem>
+    <MenuItem>
+      <Image>
+        <Text>Options</Text>
+        <Position>
+          <X>80</X>
+          <Y>230</Y>
+        </Position>
+      </Image>
+      <LinkType>1</LinkType>
+    </MenuItem>
+    <MenuItem>
+      <Image>
+        <Text>Exit game</Text>
+        <Position>
+          <X>80</X>
+          <Y>260</Y>
+        </Position>
+      </Image>
+      <LinkType>1</LinkType>
+    </MenuItem>
+  </Items>
+</MenuScreen>

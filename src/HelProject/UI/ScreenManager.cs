@@ -7,6 +7,7 @@
 
 #region USING STATEMENTS
 using HelProject.Tools;
+using HelProject.UI.Menu;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -84,7 +85,7 @@ namespace HelProject.UI
 
             // shows the first splash screen
             this._currentScreen = this.PrepareScreen("Load/SplashScreen.xml", ScreenTypes.SPLASH);
-            (this._currentScreen as SplashScreen).NextScreen = this.PrepareScreen("Load/SplashScreen2.xml", ScreenTypes.SPLASH);
+            (this._currentScreen as SplashScreen).NextScreen = this.PrepareScreen("Load/MenuScreen1.xml", ScreenTypes.MENU);
         }
         #endregion
 
@@ -194,7 +195,7 @@ namespace HelProject.UI
                     preparedScreen = new SplashScreen();
                     break;
                 case ScreenTypes.MENU:
-                    preparedScreen = new SplashScreen();
+                    preparedScreen = new MenuScreen();
                     break;
                 case ScreenTypes.INGAME:
                     preparedScreen = new SplashScreen();
@@ -214,6 +215,10 @@ namespace HelProject.UI
             return preparedScreen;
         }
 
+        /// <summary>
+        /// Gives the current screen type of the game
+        /// </summary>
+        /// <returns></returns>
         public ScreenTypes GetCurrentScreenType()
         {
             if (this._currentScreen is SplashScreen)

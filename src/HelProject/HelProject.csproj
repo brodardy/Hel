@@ -59,9 +59,11 @@
     <Compile Include="UI\GameScreen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Menu\MenuItem.cs" />
+    <Compile Include="UI\Menu\MenuManager.cs" />
     <Compile Include="UI\ScreenManager.cs" />
     <Compile Include="UI\SplashScreen.cs" />
-    <Compile Include="UI\MenuScreen.cs" />
+    <Compile Include="UI\Menu\MenuScreen.cs" />
     <Compile Include="Tools\Position.cs" />
     <Compile Include="Tools\FPosition.cs" />
   </ItemGroup>
@@ -89,6 +91,9 @@
     <Content Include="Content\Entities\heroi.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\MenuScreen\strenght_mini.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Scenary\floor.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -102,6 +107,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="Load\MenuScreen1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Load\SplashScreen2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

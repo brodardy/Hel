@@ -77,7 +77,7 @@ namespace HelProject.UI
                 if (this.NextScreen == null)
                 {
                     this.NextScreen = new SplashScreen();
-                    this.NextScreen = ScreenManager.Instance.PrepareScreen("Load/SplashScreen2.xml",
+                    this.NextScreen = ScreenManager.Instance.PrepareScreen("Load/MenuScreen1.xml",
                                                                            ScreenManager.ScreenTypes.SPLASH);
                 }
 
