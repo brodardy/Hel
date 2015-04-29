@@ -1107,6 +1107,7 @@ Le portail mène vers un niveau (le terrain de combat) généré d'où il ne peu
 \chapter{Analyse organique}
 \section{Personnage}
 \section{Génération de la carte}
+\section{Gestion de l'écran}
 \newpage
 % --------------------------------------------------
 \chapter{Tests}
@@ -1230,11 +1231,13 @@ Le planning du projet se décompose en plusieurs parties :\\
 	    \gantttitle{29}{1} % 13
 	    \gantttitle{30}{1} \ganttnewline % 14
 	    
-	    \ganttbar[bar/.append style={fill=red}]{Code backbone}{7}{11} \ganttnewline
+	    \ganttbar[bar/.append style={fill=red}]{Code backbone}{7}{13} \ganttnewline
 	    \ganttbar[bar/.append style={fill=red}]{Code essentiel}{0}{0} \ganttnewline
-	    \ganttbar[bar/.append style={fill=blue}]{Poster}{11}{11} \ganttnewline
+	    \ganttbar[bar/.append style={fill=blue}]{Poster}{11}{11}
+	    \ganttbar[bar/.append style={fill=blue}]{}{13}{13}
+	    \ganttnewline
 	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{1}{8}
-	    \ganttbar[bar/.append style={fill=blue}]{}{11}{11}
+	    \ganttbar[bar/.append style={fill=blue}]{}{11}{13}
 	    \ganttnewline
 	    \ganttmilestone{Rendu inter. doc. + poster}{14}
 	\end{ganttchart}
