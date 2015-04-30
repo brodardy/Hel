@@ -14,14 +14,26 @@ namespace HelProject
     /// </summary>
     public class MainGame : Game
     {
+        private static MainGame _instance;
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
 
-        public MainGame()
+        public static MainGame Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new MainGame();
+                return _instance;
+            }
+        }
+
+        private MainGame()
             : base()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
         }
 
         /// <summary>
@@ -34,10 +46,6 @@ namespace HelProject
         {
             // TODO: Add your initialization logic here
             this.IsMouseVisible = true;
-
-            //_map = new HMap(60, 100, 45);
-            //_map.MakeRandomlyFilledMap();
-            //_map.MakeCaverns();
 
             _graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             _graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
@@ -56,8 +64,6 @@ namespace HelProject
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            //_floor = Content.Load<Texture2D>("scenary/floor");
-            //_wall = Content.Load<Texture2D>("scenary/wall");
 
             ScreenManager.Instance.GraphicsDevice = GraphicsDevice;
             ScreenManager.Instance.SpriteBatch = _spriteBatch;
@@ -81,8 +87,8 @@ namespace HelProject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            //Exit();
 
             // TODO: Add your update logic here
 
@@ -102,27 +108,6 @@ namespace HelProject
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-
-            //int sizeOfSprites = 32;
-            //float scale = .25f;
-            //spriteBatch.Begin();
-            //for (int y = 0; y < _map.Height; y++)
-            //{
-            //    for (int x = 0; x < _map.Width; x++)
-            //    {
-            //        HObject cell = _map.GetCell(x, y);
-            //        Vector2 position = new Vector2(cell.Position.X * sizeOfSprites * scale, cell.Position.Y * sizeOfSprites * scale);
-            //        if (cell.IsWalkable)
-            //        {
-            //            spriteBatch.Draw(_floor, position, null, null, null, 0.0f, new Vector2(scale, scale), Color.White);
-            //        }
-            //        else
-            //        {
-            //            spriteBatch.Draw(_wall, position, null, null, null, 0.0f, new Vector2(scale, scale), Color.White);
-            //        }
-            //    }
-            //}
-            //spriteBatch.End();
 
             _spriteBatch.Begin();
             ScreenManager.Instance.Draw(_spriteBatch);

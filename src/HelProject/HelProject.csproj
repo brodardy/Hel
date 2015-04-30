@@ -61,6 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Menu\MenuItem.cs" />
     <Compile Include="UI\Menu\MenuManager.cs" />
+    <Compile Include="UI\PlayScreen.cs" />
     <Compile Include="UI\ScreenManager.cs" />
     <Compile Include="UI\SplashScreen.cs" />
     <Compile Include="UI\Menu\MenuScreen.cs" />
@@ -110,7 +111,7 @@
     <Content Include="Load\MenuScreen1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Load\SplashScreen2.xml">
+    <Content Include="Load\PlayScreen1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Load\SplashScreen.xml">

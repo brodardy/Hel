@@ -15,6 +15,14 @@ namespace HelProject.UI.Menu
         private LinkTypes _linkType;
         private Image _itemImage;
 
+        private int _id;
+
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
         /// <summary>
         /// Image of the item
         /// </summary>

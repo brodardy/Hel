@@ -18,7 +18,7 @@ namespace HelProject
         [STAThread]
         static void Main()
         {
-            using (var game = new MainGame())
+            using (var game = MainGame.Instance)
                 game.Run();
         }
     }
