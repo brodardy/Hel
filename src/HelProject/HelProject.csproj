@@ -47,11 +47,13 @@
     <OutputPath>bin\x64\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Features\FeatureCollection.cs" />
+    <Compile Include="GameWorld\Entities\GHero.cs" />
     <Compile Include="GameWorld\HCell.cs" />
-    <Compile Include="GameWorld\HEntity.cs" />
-    <Compile Include="GameWorld\HMap.cs" />
+    <Compile Include="GameWorld\Entities\HEntity.cs" />
+    <Compile Include="GameWorld\Map\GMap.cs" />
+    <Compile Include="GameWorld\Map\HMap.cs" />
     <Compile Include="GameWorld\HObject.cs" />
-    <Compile Include="Features\HFeature.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Tools\InputManager.cs" />
     <Compile Include="UI\Image.cs" />
@@ -90,6 +92,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Entities\heroi.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\MenuScreen\selector.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\MenuScreen\selectorw.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\MenuScreen\strenght_mini.png">

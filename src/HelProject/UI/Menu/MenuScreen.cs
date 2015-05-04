@@ -92,7 +92,7 @@ namespace HelProject.UI.Menu
             this.Items = menuItems;
             this.HighlightIndex = highlightIndex;
             this._selectionIndicator = new Image();
-            this._selectionIndicator.ImagePath = "MenuScreen/strenght_mini";
+            this._selectionIndicator.ImagePath = "MenuScreen/selectorw";
         }
 
         /// <summary>
@@ -156,10 +156,12 @@ namespace HelProject.UI.Menu
                 {
                     int totalOffSet = ((itm.ItemImage.SourceRect.Width / 2) + (this._selectionIndicator.SourceRect.Width / 2) + 10);
 
+                    this._selectionIndicator.Scale = new Vector2(1, 1);
                     this._selectionIndicator.Position = new Vector2(
                         itm.ItemImage.Position.X - totalOffSet, itm.ItemImage.Position.Y);
                     this._selectionIndicator.Draw(spriteBatch);
 
+                    this._selectionIndicator.Scale = new Vector2(-1, -1);
                     this._selectionIndicator.Position = new Vector2(
                         itm.ItemImage.Position.X + totalOffSet, itm.ItemImage.Position.Y);
                     this._selectionIndicator.Draw(spriteBatch);
