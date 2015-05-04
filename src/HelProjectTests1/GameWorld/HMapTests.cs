@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HelProject.GameWorld;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HelProject.Tools;
+using HelProject.GameWorld.Map;
 namespace HelProject.GameWorld.Tests
 {
     [TestClass()]

@@ -7,6 +7,7 @@
 
 #region USING STATEMENTS
 using HelProject.GameWorld;
+using HelProject.GameWorld.Map;
 using HelProject.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -21,9 +22,13 @@ namespace HelProject.UI
 {
     public class PlayScreen : GameScreen
     {
-        private HMap _map;
-        private Texture2D _floor;
-        private Texture2D _wall;
+        private GMap _map;
+
+        public GMap Map
+        {
+            get { return _map; }
+            set { _map = value; }
+        }
 
         /// <summary>
         /// Loads the content of the window
@@ -31,13 +36,9 @@ namespace HelProject.UI
         public override void LoadContent()
         {
             base.LoadContent();
-
-            _map = new HMap(80, 80, 46);
-            _map.MakeRandomlyFilledMap();
-            _map.MakeCaverns(5);
-
-            _floor = Content.Load<Texture2D>("scenary/floor");
-            _wall = Content.Load<Texture2D>("scenary/wall");
+            this.Map = new GMap(1.75f, 80, 80);
+            this.Map.MakeCaverns();
+            this.Map.LoadContent();
         }
 
         /// <summary>
@@ -46,6 +47,7 @@ namespace HelProject.UI
         public override void UnloadContent()
         {
             base.UnloadContent();
+            this.Map.UnloadContent();
         }
 
         /// <summary>
@@ -56,8 +58,8 @@ namespace HelProject.UI
         {
             if (InputManager.Instance.IsKeyboardKeyDown(Keys.Space))
             {
-                _map.MakeRandomlyFilledMap();
-                _map.MakeCaverns(3);
+                this.Map.MakeRandomlyFilledMap();
+                this.Map.MakeCaverns();
             }
         }
 
@@ -67,24 +69,7 @@ namespace HelProject.UI
         /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            int sizeOfSprites = 32;
-            float scale = .25f;
-            for (int y = 0; y < _map.Height; y++)
-            {
-                for (int x = 0; x < _map.Width; x++)
-                {
-                    HObject cell = _map.GetCell(x, y);
-                    Vector2 position = new Vector2(cell.Position.X * sizeOfSprites * scale, cell.Position.Y * sizeOfSprites * scale);
-                    if (cell.IsWalkable)
-                    {
-                        spriteBatch.Draw(_floor, position, null, null, null, 0.0f, new Vector2(scale, scale), Color.White);
-                    }
-                    else
-                    {
-                        spriteBatch.Draw(_wall, position, null, null, null, 0.0f, new Vector2(scale, scale), Color.White);
-                    }
-                }
-            }
+            this.Map.Draw(spriteBatch);
         }
     }
 }

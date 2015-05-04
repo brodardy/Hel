@@ -11,7 +11,7 @@ using HelProject.Tools;
 using System;
 #endregion
 
-namespace HelProject.GameWorld
+namespace HelProject.GameWorld.Map
 {
     /// <summary>
     /// Used the create a map for the game
@@ -19,15 +19,15 @@ namespace HelProject.GameWorld
     public class HMap
     {
         #region CONSTANTS
-        private const int WALKABLE_AJDACENT_WALL_QUANTITY_LIMIT = 5;
-        private const int NONWALKABLE_AJDACENT_WALL_QUANTITY_LIMIT = 4;
-        private const int DEFAULT_NONWALKABLE_CELLS_PERCENTAGE = 40;
-        private const int DEFAULT_SMOOTHNESS = 5;
-        private const int MINIMUM_SMOOTHNESS = 1;
-        private const int MINIMUM_HEIGHT = 10;
-        private const int MINIMUM_WIDTH = 10;
-        private const int MAXIMUM_HEIGHT = 200;
-        private const int MAXIMUM_WIDTH = 200;
+        protected const int WALKABLE_AJDACENT_WALL_QUANTITY_LIMIT = 5;
+        protected const int NONWALKABLE_AJDACENT_WALL_QUANTITY_LIMIT = 4;
+        protected const int DEFAULT_NONWALKABLE_CELLS_PERCENTAGE = 46;
+        protected const int DEFAULT_SMOOTHNESS = 5;
+        protected const int MINIMUM_SMOOTHNESS = 1;
+        protected const int MINIMUM_HEIGHT = 10;
+        protected const int MINIMUM_WIDTH = 10;
+        protected const int MAXIMUM_HEIGHT = 200;
+        protected const int MAXIMUM_WIDTH = 200;
         #endregion
 
         #region ATTRIBUTES
@@ -93,7 +93,7 @@ namespace HelProject.GameWorld
             this.WalkableSpacePercentage = walkableSpacePercentage;
 
             this.ClearMap();
-            this.MakeFullMap();
+            this.MakeRandomlyFilledMap();
         }
         #endregion
 
