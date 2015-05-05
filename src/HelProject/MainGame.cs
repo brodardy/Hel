@@ -65,8 +65,8 @@ namespace HelProject
 
             // TODO: use this.Content to load your game content here
 
-            ScreenManager.Instance.GraphicsDevice = GraphicsDevice;
-            ScreenManager.Instance.SpriteBatch = _spriteBatch;
+            ScreenManager.Instance.SMGraphicsDevice = GraphicsDevice;
+            ScreenManager.Instance.SMSpriteBatch = _spriteBatch;
             ScreenManager.Instance.LoadContent(Content);
         }
 

@@ -182,20 +182,20 @@ namespace HelProject.UI
             }
 
             /* Create the image */
-            this._renderTarget = new RenderTarget2D(ScreenManager.Instance.GraphicsDevice, (int)dimensions.X, (int)dimensions.Y);
-            ScreenManager.Instance.GraphicsDevice.SetRenderTarget(_renderTarget);
-            ScreenManager.Instance.GraphicsDevice.Clear(Color.Transparent);
-            ScreenManager.Instance.SpriteBatch.Begin();
+            this._renderTarget = new RenderTarget2D(ScreenManager.Instance.SMGraphicsDevice, (int)dimensions.X, (int)dimensions.Y);
+            ScreenManager.Instance.SMGraphicsDevice.SetRenderTarget(_renderTarget);
+            ScreenManager.Instance.SMGraphicsDevice.Clear(Color.Transparent);
+            ScreenManager.Instance.SMSpriteBatch.Begin();
             if (Texture != null)
-                ScreenManager.Instance.SpriteBatch.Draw(Texture, Vector2.Zero, Color.White);
-            ScreenManager.Instance.SpriteBatch.DrawString(_font, Text, Vector2.Zero, Color.White);
-            ScreenManager.Instance.SpriteBatch.End();
+                ScreenManager.Instance.SMSpriteBatch.Draw(Texture, Vector2.Zero, Color.White);
+            ScreenManager.Instance.SMSpriteBatch.DrawString(_font, Text, Vector2.Zero, Color.White);
+            ScreenManager.Instance.SMSpriteBatch.End();
 
             // Places the new image in the texture
             this.Texture = _renderTarget;
 
             // Gives back the render target to default
-            ScreenManager.Instance.GraphicsDevice.SetRenderTarget(null);
+            ScreenManager.Instance.SMGraphicsDevice.SetRenderTarget(null);
         }
 
         /// <summary>

@@ -389,6 +389,8 @@ Les caractéristiques sont des propriétés qui augmente les capacités du perso
   Resistance magique 	& Diminue les dégâts magiques reçu de \textbf{0.075\%} \\ \hline
   Régénération de vie 	& Augmente la régénération de points de vie selon la valeur\\ \hline
   Régénération de mana 	& Augmente la régénération de points de mana selon la valeur\\ \hline
+  Vitesse de déplacement initial& Fixe la vitesse de déplacement de base du personnage\\ \hline
+  Vitesse de déplacement& Augmente la vitesse de déplacement\\ \hline
 \end{tabularx}
 \caption{Fonctionnement des caractéristiques}
 \end{center}
@@ -954,6 +956,7 @@ Une armure pour les pieds apporte obligatoirement ces caractéristiques :
   \hline      
   Niveau 				& 1 & 2 & 3\\ \hline \hline
   Agilité 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
+  Vitesse de déplacement initial& 6\% - 12\% & 6\% - 12\% & 6\% - 12\%\\ \hline
   Armure 				& 3 - 10 & 15 - 30 & 45 - 100\\ \hline
 \end{tabular}
 \caption{Valeurs des caractéristiques obligatoire de l'armure pour les pieds}
@@ -1114,11 +1117,52 @@ Le portail mène vers un niveau (le terrain de combat) généré d'où il ne peu
 	\end{center}
 \end{figure}
 \section{Génération de la carte}
-
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=1\textwidth]{mapgeneration}
+	\caption{Diagramme de flux de la génération de carte (cavernes)}
+	\label{fig:mapgeneration}
+	\end{center}
+\end{figure}
 \section{Gestion de l'écran}
-
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=1\textwidth]{screenmanagement}
+	\caption{Diagramme de classe de la gestion d'écrans}
+	\label{fig:screenmanagement}
+	\end{center}
+\end{figure}
 \section{Gestion des entrées}
-
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=0.35\textwidth]{InputManager}
+	\caption{Diagramme de classe du manager d'entrées}
+	\label{fig:InputManager}
+	\end{center}
+\end{figure}
+\section{Sérialisation XML}
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=0.35\textwidth]{XmlManager}
+	\caption{Diagramme de classe du manager de sérialisation XML}
+	\label{fig:XmlManager}
+	\end{center}
+\end{figure}
+\section{Caractéristiques}
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=0.5\textwidth]{FeatureGlobalWork}
+	\caption{Schémas simple de fonctionnement des caractéristiques}
+	\label{fig:FeatureGlobalWork}
+	\end{center}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=0.35\textwidth]{FeatureCollection}
+	\caption{Diagramme de classe de la collection de caractéristiques}
+	\label{fig:FeatureCollection}
+	\end{center}
+\end{figure}
 \newpage
 % --------------------------------------------------
 \chapter{Tests}

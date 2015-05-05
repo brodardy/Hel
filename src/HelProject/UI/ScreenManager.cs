@@ -40,8 +40,8 @@ namespace HelProject.UI
         #endregion
 
         #region PUBLIC VARIABLES
-        public GraphicsDevice GraphicsDevice;
-        public SpriteBatch SpriteBatch;
+        public GraphicsDevice SMGraphicsDevice;
+        public SpriteBatch SMSpriteBatch;
         #endregion
 
         #region PROPRIETIES
@@ -153,8 +153,8 @@ namespace HelProject.UI
         /// <summary>
         /// Transitions the screen to another one
         /// </summary>
-        /// <param name="gameScreen"></param>
-        public void Transition(GameScreen gameScreen)
+        /// <param name="nextScreen"></param>
+        public void Transition(GameScreen nextScreen)
         {
             // resets the transition variables
             this._transitionTime = 0;
@@ -162,7 +162,7 @@ namespace HelProject.UI
             this._transitionFirstCount = -1.0d;
 
             this.UnloadContent(); // unloads the content of the current screen
-            this._currentScreen = gameScreen; // place the new screen
+            this._currentScreen = nextScreen; // place the new screen
             this._currentScreen.LoadContent(); // loads the new screen
         }
 
@@ -171,7 +171,7 @@ namespace HelProject.UI
         /// </summary>
         /// <param name="nextScreen">Next screen that will appear</param>
         /// <param name="time">Time before transition</param>
-        public void TransitionCountDown(GameScreen nextScreen, int time)
+        public void Transition(GameScreen nextScreen, int time)
         {
             this._transitionScreen = nextScreen;
             this._transitionTime = time;

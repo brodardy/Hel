@@ -18,7 +18,7 @@ namespace HelProject.UI
     /// <summary>
     /// Base class for all the screens of the game
     /// </summary>
-    public class GameScreen
+    public abstract class GameScreen
     {
         [XmlIgnore]
         private Type _type;
