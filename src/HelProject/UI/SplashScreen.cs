@@ -68,7 +68,7 @@ namespace HelProject.UI
         {
             base.Update(gameTime);
             BackgroundImage.Update(gameTime);
-            if (InputManager.Instance.IsKeyboardKeyReleased(Keys.Space))
+            if (InputManager.Instance.ReleasedKeys.Count > 0)
             {
                 if (this.NextScreen == null)
                 {

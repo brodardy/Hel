@@ -48,7 +48,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Features\FeatureCollection.cs" />
-    <Compile Include="GameWorld\Entities\GHero.cs" />
+    <Compile Include="Features\FeatureManager.cs" />
     <Compile Include="GameWorld\HCell.cs" />
     <Compile Include="GameWorld\Entities\HEntity.cs" />
     <Compile Include="GameWorld\Map\GMap.cs" />
@@ -121,6 +121,7 @@
     </Content>
     <Content Include="Load\PlayScreen1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Load\SplashScreen.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

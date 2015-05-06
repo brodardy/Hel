@@ -36,8 +36,8 @@ namespace HelProject.UI
         public override void LoadContent()
         {
             base.LoadContent();
-            this.Map = new GMap(1.75f, 80, 80);
-            this.Map.MakeCaverns();
+            this.Map = new GMap(0.12f, 200, 200, 45);
+            //this.Map.MakeCaverns();
             this.Map.LoadContent();
         }
 

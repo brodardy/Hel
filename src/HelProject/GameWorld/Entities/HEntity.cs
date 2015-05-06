@@ -6,6 +6,7 @@
  */
 
 using HelProject.Features;
+using HelProject.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,10 @@ namespace HelProject.GameWorld.Entities
 
         private FeatureCollection _initialFeatures;
 
+
+        /// <summary>
+        /// Initial feature of the entity
+        /// </summary>
         public FeatureCollection InitialFeatures
         {
             get { return _initialFeatures; }
@@ -37,33 +42,41 @@ namespace HelProject.GameWorld.Entities
         /// Creates an entity
         /// </summary>
         public HEntity()
-            : this(DEFAULT_STRENGHT, DEFAULT_VITALITY, DEFAULT_AGILITY, DEFAULT_MAGIC, DEFAULT_ATTACKSPEED,
-                DEFAULT_MINUMUMDAMAGE, DEFAULT_MAXIMUMDAMAGE, DEFAULT_MANAREGENERATION, DEFAULT_MOVEMENTSPEED) { /* no code... */ }
+            : this(new FeatureCollection()
+            {
+                Strenght = DEFAULT_STRENGHT,
+                Vitality = DEFAULT_VITALITY,
+                Agility = DEFAULT_AGILITY,
+                Magic = DEFAULT_MAGIC,
+                InitialAttackSpeed = DEFAULT_ATTACKSPEED,
+                MinimumDamage = DEFAULT_MINUMUMDAMAGE,
+                MaximumDamage = DEFAULT_MAXIMUMDAMAGE,
+                InitialManaRegeneration = DEFAULT_MANAREGENERATION,
+                InitialMovementSpeed = DEFAULT_MOVEMENTSPEED
+            }, new FPosition()) { /* no code... */ }
+
+        public HEntity(FPosition position)
+            : this(new FeatureCollection()
+            {
+                Strenght = DEFAULT_STRENGHT,
+                Vitality = DEFAULT_VITALITY,
+                Agility = DEFAULT_AGILITY,
+                Magic = DEFAULT_MAGIC,
+                InitialAttackSpeed = DEFAULT_ATTACKSPEED,
+                MinimumDamage = DEFAULT_MINUMUMDAMAGE,
+                MaximumDamage = DEFAULT_MAXIMUMDAMAGE,
+                InitialManaRegeneration = DEFAULT_MANAREGENERATION,
+                InitialMovementSpeed = DEFAULT_MOVEMENTSPEED
+            }, position) { /* no code... */ }
 
         /// <summary>
         /// Creates an entity
         /// </summary>
-        /// <param name="initialStrenght"></param>
-        /// <param name="initialVitality"></param>
-        /// <param name="initialAgility"></param>
-        /// <param name="initialMagic"></param>
-        /// <param name="initialAttackSpeed"></param>
-        /// <param name="initialMinimumDamage"></param>
-        /// <param name="initialManaRegeneration"></param>
-        /// <param name="initialMovementSpeed"></param>
-        public HEntity(float initialStrenght, float initialVitality, float initialAgility, float initialMagic, float initialAttackSpeed, float initialMinimumDamage, float initialMaximumDamage, float initialManaRegeneration, float initialMovementSpeed)
-            : base(true, new Tools.FPosition())
+        public HEntity(FeatureCollection initialFeatures, FPosition position)
+            : base(true, position)
         {
-            this._initialFeatures = new FeatureCollection();
-            this._initialFeatures.Strenght = initialStrenght;
-            this._initialFeatures.Vitality = initialVitality;
-            this._initialFeatures.Agility = initialAgility;
-            this._initialFeatures.Magic = initialMagic;
-            this._initialFeatures.InitialAttackSpeed = initialAttackSpeed;
-            this._initialFeatures.MinimumDamage = initialMinimumDamage;
-            this._initialFeatures.MaximumDamage = initialMaximumDamage;
-            this._initialFeatures.ManaRegeneration = initialManaRegeneration;
-            this._initialFeatures.MovementSpeed = initialMovementSpeed;
+            this.InitialFeatures = initialFeatures;
+            this.Position = position;
         }
     }
 }

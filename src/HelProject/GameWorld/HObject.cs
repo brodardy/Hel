@@ -6,11 +6,9 @@
  */
 
 #region USING STATEMENTS
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using HelProject.Tools;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 #endregion
 
 namespace HelProject.GameWorld
@@ -71,6 +69,11 @@ namespace HelProject.GameWorld
             this.IsWalkable = isWalkable;
             this.Position = position;
         }
+
+        public virtual void LoadContent() { /* no code... */ }
+        public virtual void UnloadContent() { /* no code... */ }
+        public virtual void Update(GameTime gameTime) { /* no code... */ }
+        public virtual void Draw(SpriteBatch spriteBatch) { /* no code... */ }
         #endregion
     }
 }

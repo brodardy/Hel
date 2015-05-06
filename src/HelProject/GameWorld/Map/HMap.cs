@@ -21,7 +21,7 @@ namespace HelProject.GameWorld.Map
         #region CONSTANTS
         protected const int WALKABLE_AJDACENT_WALL_QUANTITY_LIMIT = 5;
         protected const int NONWALKABLE_AJDACENT_WALL_QUANTITY_LIMIT = 4;
-        protected const int DEFAULT_NONWALKABLE_CELLS_PERCENTAGE = 46;
+        protected const int DEFAULT_NONWALKABLE_CELLS_PERCENTAGE = 45;
         protected const int DEFAULT_SMOOTHNESS = 5;
         protected const int MINIMUM_SMOOTHNESS = 1;
         protected const int MINIMUM_HEIGHT = 10;
@@ -42,7 +42,7 @@ namespace HelProject.GameWorld.Map
         /// <summary>
         /// Percentage of walkable area in the map
         /// </summary>
-        public int WalkableSpacePercentage
+        public int NonWalkableSpacePercentage
         {
             get { return _walkableSpacePercentage; }
             private set { _walkableSpacePercentage = value; }
@@ -82,15 +82,15 @@ namespace HelProject.GameWorld.Map
         /// </summary>
         /// <param name="height">Height of the map</param>
         /// <param name="width">Width of the map</param>
-        /// <param name="walkableSpacePercentage">Amount (percentage) of non-walkable area in the map for random filling</param>
+        /// <param name="nonWalkableSpacePercentage">Amount (percentage) of non-walkable area in the map for random filling</param>
         /// <remarks>
         /// Use the 'Make' methods to transform the map
         /// </remarks>
-        public HMap(int height, int width, int walkableSpacePercentage = HMap.DEFAULT_NONWALKABLE_CELLS_PERCENTAGE)
+        public HMap(int height, int width, int nonWalkableSpacePercentage = HMap.DEFAULT_NONWALKABLE_CELLS_PERCENTAGE)
         {
             this.Height = Math.Min(HMap.MAXIMUM_HEIGHT, Math.Max(height, HMap.MINIMUM_HEIGHT));
             this.Width = Math.Min(HMap.MAXIMUM_WIDTH, Math.Max(width, HMap.MINIMUM_WIDTH));
-            this.WalkableSpacePercentage = walkableSpacePercentage;
+            this.NonWalkableSpacePercentage = nonWalkableSpacePercentage;
 
             this.ClearMap();
             this.MakeRandomlyFilledMap();
@@ -140,7 +140,7 @@ namespace HelProject.GameWorld.Map
                         else
                         {
                             // Fills the rest with a random ratio
-                            this.Cells[x, y] = new HCell(!this.RandomPercent(this.WalkableSpacePercentage), new FPosition(x, y));
+                            this.Cells[x, y] = new HCell(!this.RandomPercent(this.NonWalkableSpacePercentage), new FPosition(x, y));
                         }
                     }
                 }
@@ -178,15 +178,24 @@ namespace HelProject.GameWorld.Map
         /// </remarks>
         public void MakeCaverns(int smoothness = DEFAULT_SMOOTHNESS)
         {
-            smoothness = Math.Max(MINIMUM_SMOOTHNESS, smoothness);
+            //smoothness = Math.Max(MINIMUM_SMOOTHNESS, smoothness);
 
             for (int i = 0; i < smoothness; i++) // repeating the carverns algo makes the caverns smoother on the edges
             {                                    // and gives a more natural look
+                HCell[,] grid = new HCell[this.Width, this.Height];
                 for (int x = 0, y = 0; y < this.Height; y++)
                 {
                     for (x = 0; x < this.Width; x++)
                     {
-                        this.SetCell(x, y, PlaceCellLogic(x, y));
+                        grid[x, y] = new HCell(PlaceCellLogic(x, y), this.Cells[x,y].Position);
+                        //this.SetCell(x, y, PlaceCellLogic(x, y));
+                    }
+                }
+                for (int x = 0, y = 0; y < this.Height; y++)
+                {
+                    for (x = 0; x < this.Width; x++)
+                    {
+                        this.Cells[x, y] = grid[x, y];
                     }
                 }
             }

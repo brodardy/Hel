@@ -16,6 +16,7 @@ namespace HelProject.Features
     {
         private float _initialAttackSpeed;
         private float _initialMovementSpeed;
+        private float _initialManaRegeneration;
         private float _strenght;
         private float _agility;
         private float _vitality;
@@ -47,6 +48,15 @@ namespace HelProject.Features
         {
             get { return _initialMovementSpeed; }
             set { _initialMovementSpeed = value; }
+        }
+
+        /// <summary>
+        /// Imposed mana regeneration (mana per second)
+        /// </summary>
+        public float InitialManaRegeneration
+        {
+            get { return _initialManaRegeneration; }
+            set { _initialManaRegeneration = value; }
         }
 
         /// <summary>
