@@ -17,6 +17,7 @@ namespace HelProject.Features
         private float _initialAttackSpeed;
         private float _initialMovementSpeed;
         private float _initialManaRegeneration;
+        private float _initialLifePoints;
         private float _strenght;
         private float _agility;
         private float _vitality;
@@ -31,6 +32,16 @@ namespace HelProject.Features
         private float _lifeRegeneration;
         private float _manaRegeneration;
         private float _movementSpeed;
+        private float _lifePoints;
+
+        /// <summary>
+        /// Imposed life points
+        /// </summary>
+        public float InitialLifePoints
+        {
+            get { return _initialLifePoints; }
+            set { _initialLifePoints = value; }
+        }
 
         /// <summary>
         /// Imposed attack speed (attacks per second)
@@ -188,6 +199,15 @@ namespace HelProject.Features
         }
 
         /// <summary>
+        /// Life points
+        /// </summary>
+        public float LifePoints
+        {
+            get { return _lifePoints; }
+            set { _lifePoints = value; }
+        }
+
+        /// <summary>
         /// Creates a feature collection
         /// </summary>
         public FeatureCollection()
@@ -197,6 +217,7 @@ namespace HelProject.Features
             this._attackSpeed = .0f;
             this._initialAttackSpeed = .0f;
             this._initialMovementSpeed = .0f;
+            this._initialManaRegeneration = .0f;
             this._lifeRegeneration = .0f;
             this._magic = .0f;
             this._magicResistance = .0f;
@@ -208,6 +229,8 @@ namespace HelProject.Features
             this._movementSpeed = .0f;
             this._strenght = .0f;
             this._vitality = .0f;
+            this._initialLifePoints = .0f;
+            this._lifePoints = .0f;
         }
     }
 }

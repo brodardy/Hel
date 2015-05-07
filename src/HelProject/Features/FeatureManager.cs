@@ -92,6 +92,7 @@ namespace HelProject.Features
                 MinimumDamage = this.GetTotalMinimumDamage(),
                 MinimumMagicDamage = this.GetTotalMinimumMagicDamage(),
                 InitialMovementSpeed = this.GetTotalMovementSpeed(),
+                LifePoints = this.GetTotalLifePoints(),
             };
         }
 
@@ -415,7 +416,21 @@ namespace HelProject.Features
         /// <returns>Total LifePoints</returns>
         public float GetTotalLifePoints()
         {
-            return this.GetTotalVitality() * LIFE_PER_VITALITY;
+            float iniLifePoints = this.InitialFeatures.InitialLifePoints;
+
+            for (int i = 0; i < this.ActiveSpells.Count; i++)
+            {
+                if (iniLifePoints < this.ActiveSpells[i].Features.InitialLifePoints)
+                    iniLifePoints = this.ActiveSpells[i].Features.InitialLifePoints;
+            }
+
+            for (int i = 0; i < this.ActiveItems.Count; i++)
+            {
+                if (iniLifePoints < this.ActiveItems[i].Features.InitialLifePoints)
+                    iniLifePoints = this.ActiveItems[i].Features.InitialLifePoints;
+            }
+
+            return this.GetTotalVitality() * LIFE_PER_VITALITY + iniLifePoints;
         }
     }
 }
