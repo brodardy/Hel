@@ -35,7 +35,7 @@ namespace HelProject.GameWorld.Map
             : base(height, width, smoothness)
         {
             this.Scale = zoom;
-            this.Hero = new HEntity();
+            //this.Hero = new HEntity();
         }
 
         public void LoadContent()

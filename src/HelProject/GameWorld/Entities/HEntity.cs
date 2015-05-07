@@ -1,8 +1,8 @@
 ﻿/*
  * Author : Yannick R. Brodard
  * File name : HEntity.cs
- * Version : 0.2.201505070926
- * Description : Base entity of the game
+ * Version : 0.3.201505071412
+ * Description : Base abstract class for the entities of the game
  */
 
 using HelProject.Features;
@@ -14,7 +14,7 @@ using System.Text;
 
 namespace HelProject.GameWorld.Entities
 {
-    public class HEntity : HObject
+    public abstract class HEntity : HObject
     {
         public const float DEFAULT_STRENGHT = 5.0f;
         public const float DEFAULT_AGILITY = 5.0f;
@@ -28,15 +28,35 @@ namespace HelProject.GameWorld.Entities
         public const float DEFAULT_LIFEPOINTS = 100.0f;
 
         private FeatureCollection _initialFeatures;
-        private float lifePoints;
+        private FeatureCollection _actualFeatures;
+        private FeatureCollection _maximizedFeatures;
+        private FeatureManager _featureCalculator;
 
         /// <summary>
-        /// Life points of the enitity
+        /// Maximized features
         /// </summary>
-        public float LifePoints
+        public FeatureCollection MaximizedFeatures
         {
-            get { return lifePoints; }
-            set { lifePoints = value; }
+            get { return _maximizedFeatures; }
+            set { _maximizedFeatures = value; }
+        }
+
+        /// <summary>
+        /// Feature manager to calculate the actual features
+        /// </summary>
+        public FeatureManager FeatureCalculator
+        {
+            get { return _featureCalculator; }
+            set { _featureCalculator = value; }
+        }
+
+        /// <summary>
+        /// Actual features of the entity
+        /// </summary>
+        public FeatureCollection ActualFeatures
+        {
+            get { return _actualFeatures; }
+            set { _actualFeatures = value; }
         }
 
         /// <summary>
@@ -51,20 +71,12 @@ namespace HelProject.GameWorld.Entities
         /// <summary>
         /// Creates an entity
         /// </summary>
-        public HEntity()
-            : this(new FeatureCollection()
-            {
-                Strenght = DEFAULT_STRENGHT,
-                Vitality = DEFAULT_VITALITY,
-                Agility = DEFAULT_AGILITY,
-                Magic = DEFAULT_MAGIC,
-                InitialAttackSpeed = DEFAULT_ATTACKSPEED,
-                MinimumDamage = DEFAULT_MINUMUMDAMAGE,
-                MaximumDamage = DEFAULT_MAXIMUMDAMAGE,
-                InitialManaRegeneration = DEFAULT_MANAREGENERATION,
-                InitialMovementSpeed = DEFAULT_MOVEMENTSPEED
-            }, new FPosition(), DEFAULT_LIFEPOINTS) { /* no code... */ }
+        public HEntity() : this(new FPosition()) { /* no code... */ }
 
+        /// <summary>
+        /// Creates an entity
+        /// </summary>
+        /// <param name="position">Position of the entity</param>
         public HEntity(FPosition position)
             : this(new FeatureCollection()
             {
@@ -76,18 +88,24 @@ namespace HelProject.GameWorld.Entities
                 MinimumDamage = DEFAULT_MINUMUMDAMAGE,
                 MaximumDamage = DEFAULT_MAXIMUMDAMAGE,
                 InitialManaRegeneration = DEFAULT_MANAREGENERATION,
-                InitialMovementSpeed = DEFAULT_MOVEMENTSPEED
-            }, position, DEFAULT_LIFEPOINTS) { /* no code... */ }
+                InitialMovementSpeed = DEFAULT_MOVEMENTSPEED,
+                InitialLifePoints = DEFAULT_LIFEPOINTS
+            }, position) { /* no code... */ }
 
         /// <summary>
         /// Creates an entity
         /// </summary>
-        public HEntity(FeatureCollection initialFeatures, FPosition position, float lifePoints)
+        /// <param name="initialFeatures">Initial Features of the enitity</param>
+        /// <param name="position">Position of the entity</param>
+        /// <param name="lifePoints">Life points of the entity</param>
+        public HEntity(FeatureCollection initialFeatures, FPosition position)
             : base(true, position)
         {
             this.InitialFeatures = initialFeatures;
             this.Position = position;
-            this.LifePoints = lifePoints;
+            this.FeatureCalculator = new FeatureManager(this.InitialFeatures);
+            this.ActualFeatures = this.FeatureCalculator.GetCalculatedFeatures();
+            this.MaximizedFeatures = (FeatureCollection)this.ActualFeatures.Clone();
         }
     }
 }
