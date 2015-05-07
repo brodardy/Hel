@@ -22,9 +22,9 @@ namespace HelProject.UI
 {
     public class PlayScreen : GameScreen
     {
-        private GMap _map;
+        private HMap _map;
 
-        public GMap Map
+        public HMap Map
         {
             get { return _map; }
             set { _map = value; }
@@ -36,8 +36,8 @@ namespace HelProject.UI
         public override void LoadContent()
         {
             base.LoadContent();
-            this.Map = new GMap(0.12f, 200, 200, 45);
-            //this.Map.MakeCaverns();
+            this.Map = new HMap(50, 50, 0.25f);
+            this.Map.MakeCaverns();
             this.Map.LoadContent();
         }
 

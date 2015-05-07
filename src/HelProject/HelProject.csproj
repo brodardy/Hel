@@ -53,7 +53,6 @@
     <Compile Include="GameWorld\HItem.cs" />
     <Compile Include="GameWorld\Map\HCell.cs" />
     <Compile Include="GameWorld\Entities\HEntity.cs" />
-    <Compile Include="GameWorld\Map\GMap.cs" />
     <Compile Include="GameWorld\Map\HMap.cs" />
     <Compile Include="GameWorld\HObject.cs" />
     <Compile Include="GameWorld\Spells\HSpell.cs" />

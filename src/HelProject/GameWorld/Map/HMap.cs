@@ -8,6 +8,10 @@
 
 #region USING STATEMENTS
 using HelProject.Tools;
+using HelProject.UI;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 #endregion
 
@@ -36,9 +40,22 @@ namespace HelProject.GameWorld.Map
         private int _height; // Height of the map
         private int _width; // Width of the map
         private int _walkableSpacePercentage; // Percentage of walkable area in the map
+        private Texture2D _floor; // texture for the floor
+        private Texture2D _wall;  // texture for the walls
+        private ContentManager _content; // content manager
+        private float _scale;
         #endregion
 
         #region PROPRIETIES
+        /// <summary>
+        /// Scale of the map
+        /// </summary>
+        public float Scale
+        {
+            get { return _scale; }
+            set { _scale = value; }
+        }
+
         /// <summary>
         /// Percentage of walkable area in the map
         /// </summary>
@@ -86,11 +103,12 @@ namespace HelProject.GameWorld.Map
         /// <remarks>
         /// Use the 'Make' methods to transform the map
         /// </remarks>
-        public HMap(int height, int width, int nonWalkableSpacePercentage = HMap.DEFAULT_NONWALKABLE_CELLS_PERCENTAGE)
+        public HMap(int height, int width, float scale = 1.0f, int nonWalkableSpacePercentage = HMap.DEFAULT_NONWALKABLE_CELLS_PERCENTAGE)
         {
             this.Height = Math.Min(HMap.MAXIMUM_HEIGHT, Math.Max(height, HMap.MINIMUM_HEIGHT));
             this.Width = Math.Min(HMap.MAXIMUM_WIDTH, Math.Max(width, HMap.MINIMUM_WIDTH));
             this.NonWalkableSpacePercentage = nonWalkableSpacePercentage;
+            this.Scale = scale;
 
             this.ClearMap();
             this.MakeRandomlyFilledMap();
@@ -187,7 +205,7 @@ namespace HelProject.GameWorld.Map
                 {
                     for (x = 0; x < this.Width; x++)
                     {
-                        grid[x, y] = new HCell(PlaceCellLogic(x, y), this.Cells[x,y].Position);
+                        grid[x, y] = new HCell(PlaceCellLogic(x, y), this.Cells[x, y].Position);
                         //this.SetCell(x, y, PlaceCellLogic(x, y));
                     }
                 }
@@ -355,6 +373,39 @@ namespace HelProject.GameWorld.Map
         public void SetCell(int x, int y, bool isWalkable)
         {
             this.Cells[x, y].IsWalkable = isWalkable;
+        }
+
+        public void LoadContent()
+        {
+            this._content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
+            _floor = this._content.Load<Texture2D>("scenary/floor");
+            _wall = this._content.Load<Texture2D>("scenary/wall");
+        }
+
+        public void UnloadContent()
+        {
+            this._content.Unload();
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            int sizeOfSprites = this._floor.Height;
+            for (int y = 0; y < this.Height; y++)
+            {
+                for (int x = 0; x < this.Width; x++)
+                {
+                    HCell cell = this.GetCell(x, y);
+                    Vector2 position = new Vector2(cell.Position.X * sizeOfSprites * this.Scale, cell.Position.Y * sizeOfSprites * this.Scale);
+                    if (cell.IsWalkable)
+                    {
+                        spriteBatch.Draw(_floor, position, null, null, null, 0.0f, new Vector2(this.Scale, this.Scale), Color.White);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(_wall, position, null, null, null, 0.0f, new Vector2(this.Scale, this.Scale), Color.White);
+                    }
+                }
+            }
         }
         #endregion
 

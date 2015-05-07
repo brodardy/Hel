@@ -1,16 +1,14 @@
 ﻿/*
  * Author : Yannick R. Brodard
  * File name : HEntity.cs
- * Version : 0.3.201505071412
+ * Version : 0.4.201505071500
  * Description : Base abstract class for the entities of the game
  */
 
 using HelProject.Features;
 using HelProject.Tools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace HelProject.GameWorld.Entities
 {

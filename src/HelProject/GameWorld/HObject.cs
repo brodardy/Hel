@@ -70,9 +70,26 @@ namespace HelProject.GameWorld
             this.Position = position;
         }
 
+        /// <summary>
+        /// Override this to load content
+        /// </summary>
         public virtual void LoadContent() { /* no code... */ }
+
+        /// <summary>
+        /// Override this to unload content
+        /// </summary>
         public virtual void UnloadContent() { /* no code... */ }
+
+        /// <summary>
+        /// Override this to update object
+        /// </summary>
+        /// <param name="gameTime"></param>
         public virtual void Update(GameTime gameTime) { /* no code... */ }
+
+        /// <summary>
+        /// Override this to draw object
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public virtual void Draw(SpriteBatch spriteBatch) { /* no code... */ }
         #endregion
     }
