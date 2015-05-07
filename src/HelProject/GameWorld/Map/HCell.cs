@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 #endregion
 
-namespace HelProject.GameWorld
+namespace HelProject.GameWorld.Map
 {
     /// <summary>
     /// Cell of a map
