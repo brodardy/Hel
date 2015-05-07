@@ -1,7 +1,7 @@
 ﻿/*
  * Author : Yannick R. Brodard
  * File name : HEntity.cs
- * Version : 0.1.201505040924
+ * Version : 0.2.201505070926
  * Description : Base entity of the game
  */
 
@@ -25,9 +25,19 @@ namespace HelProject.GameWorld.Entities
         public const float DEFAULT_MAXIMUMDAMAGE = 3.0f;
         public const float DEFAULT_MANAREGENERATION = 1.0f;
         public const float DEFAULT_MOVEMENTSPEED = 1.0f;
+        public const float DEFAULT_LIFEPOINTS = 100.0f;
 
         private FeatureCollection _initialFeatures;
+        private float lifePoints;
 
+        /// <summary>
+        /// Life points of the enitity
+        /// </summary>
+        public float LifePoints
+        {
+            get { return lifePoints; }
+            set { lifePoints = value; }
+        }
 
         /// <summary>
         /// Initial feature of the entity
@@ -53,7 +63,7 @@ namespace HelProject.GameWorld.Entities
                 MaximumDamage = DEFAULT_MAXIMUMDAMAGE,
                 InitialManaRegeneration = DEFAULT_MANAREGENERATION,
                 InitialMovementSpeed = DEFAULT_MOVEMENTSPEED
-            }, new FPosition()) { /* no code... */ }
+            }, new FPosition(), DEFAULT_LIFEPOINTS) { /* no code... */ }
 
         public HEntity(FPosition position)
             : this(new FeatureCollection()
@@ -67,16 +77,17 @@ namespace HelProject.GameWorld.Entities
                 MaximumDamage = DEFAULT_MAXIMUMDAMAGE,
                 InitialManaRegeneration = DEFAULT_MANAREGENERATION,
                 InitialMovementSpeed = DEFAULT_MOVEMENTSPEED
-            }, position) { /* no code... */ }
+            }, position, DEFAULT_LIFEPOINTS) { /* no code... */ }
 
         /// <summary>
         /// Creates an entity
         /// </summary>
-        public HEntity(FeatureCollection initialFeatures, FPosition position)
+        public HEntity(FeatureCollection initialFeatures, FPosition position, float lifePoints)
             : base(true, position)
         {
             this.InitialFeatures = initialFeatures;
             this.Position = position;
+            this.LifePoints = lifePoints;
         }
     }
 }
