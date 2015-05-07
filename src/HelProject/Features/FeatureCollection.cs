@@ -12,7 +12,7 @@ using System.Text;
 
 namespace HelProject.Features
 {
-    public class FeatureCollection
+    public class FeatureCollection : Object, ICloneable
     {
         private float _initialAttackSpeed;
         private float _initialMovementSpeed;
@@ -231,6 +231,34 @@ namespace HelProject.Features
             this._vitality = .0f;
             this._initialLifePoints = .0f;
             this._lifePoints = .0f;
+        }
+
+        /// <summary>
+        /// Clones the object
+        /// </summary>
+        /// <returns>object</returns>
+        public object Clone()
+        {
+            FeatureCollection obj = new FeatureCollection();
+
+            obj.InitialAttackSpeed = this.InitialAttackSpeed;
+            obj.InitialLifePoints = this.InitialLifePoints;
+            obj.InitialManaRegeneration = this.InitialManaRegeneration;
+            obj.InitialMovementSpeed = this.InitialMovementSpeed;
+            obj.LifePoints = this.LifePoints;
+            obj.LifeRegeneration = this.LifeRegeneration;
+            obj.Magic = this.Magic;
+            obj.MagicResistance = this.MagicResistance;
+            obj.ManaRegeneration = this.ManaRegeneration;
+            obj.MaximumDamage = this.MaximumDamage;
+            obj.MaximumMagicDamage = this.MaximumMagicDamage;
+            obj.MinimumDamage = this.MinimumDamage;
+            obj.MinimumMagicDamage = this.MinimumMagicDamage;
+            obj.MovementSpeed = this.MovementSpeed;
+            obj.Strenght = this.Strenght;
+            obj.Vitality = this.Vitality;
+
+            return obj;
         }
     }
 }

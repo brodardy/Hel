@@ -50,6 +50,7 @@
     <Compile Include="Features\FeatureCollection.cs" />
     <Compile Include="Features\FeatureManager.cs" />
     <Compile Include="GameWorld\Entities\HHero.cs" />
+    <Compile Include="GameWorld\HItem.cs" />
     <Compile Include="GameWorld\Map\HCell.cs" />
     <Compile Include="GameWorld\Entities\HEntity.cs" />
     <Compile Include="GameWorld\Map\GMap.cs" />
