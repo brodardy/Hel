@@ -1,0 +1,5 @@
+<map id="HelProject.UI.GameScreen" name="HelProject.UI.GameScreen">
+<area shape="rect" id="node2" href="$class_hel_project_1_1_u_i_1_1_menu_1_1_menu_screen.html" title="Title screen of the game " alt="" coords="5,80,216,107"/>
+<area shape="rect" id="node3" href="$class_hel_project_1_1_u_i_1_1_play_screen.html" title="HelProject.UI.PlayScreen" alt="" coords="241,80,410,107"/>
+<area shape="rect" id="node4" href="$class_hel_project_1_1_u_i_1_1_splash_screen.html" title="Splash screen " alt="" coords="434,80,617,107"/>
+</map>

@@ -36,7 +36,7 @@ namespace HelProject.UI
         public override void LoadContent()
         {
             base.LoadContent();
-            this.Map = new HMap(50, 50, 0.25f);
+            this.Map = new HMap(200, 200, 0.125f);
             this.Map.MakeCaverns();
             this.Map.LoadContent();
         }

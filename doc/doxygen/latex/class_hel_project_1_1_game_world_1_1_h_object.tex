@@ -1,0 +1,180 @@
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_object}{}\section{Hel\+Project.\+Game\+World.\+H\+Object Class Reference}
+\label{class_hel_project_1_1_game_world_1_1_h_object}\index{Hel\+Project.\+Game\+World.\+H\+Object@{Hel\+Project.\+Game\+World.\+H\+Object}}
+
+
+Abstract class for all entities of the game  
+
+
+
+
+Inheritance diagram for Hel\+Project.\+Game\+World.\+H\+Object\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_h_object_ac10ea2725a0721b3f60d8e04bc89eda5}{H\+Object} ()
+\begin{DoxyCompactList}\small\item\em Creates an object \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_h_object_ae8ff8fe02b0ed2a9928f863757ccb8d5}{H\+Object} (\hyperlink{class_hel_project_1_1_tools_1_1_f_position}{F\+Position} position)
+\begin{DoxyCompactList}\small\item\em Creates an object \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_h_object_a66675ff8875b73497dfaee22decacf9d}{H\+Object} (bool is\+Walkable, \hyperlink{class_hel_project_1_1_tools_1_1_f_position}{F\+Position} position)
+\begin{DoxyCompactList}\small\item\em Creates an object \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_hel_project_1_1_game_world_1_1_h_object_a2de39710b20f7af4e1e2463ca93656f8}{Load\+Content} ()
+\begin{DoxyCompactList}\small\item\em Override this to load content \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_hel_project_1_1_game_world_1_1_h_object_a30efa177423e89a85e45b76fe35d6724}{Unload\+Content} ()
+\begin{DoxyCompactList}\small\item\em Override this to unload content \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_hel_project_1_1_game_world_1_1_h_object_a2e4ba3d334e48c9b74cc1b2b821f030b}{Update} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Override this to update object \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_hel_project_1_1_game_world_1_1_h_object_aa48c9288756739f80a59bdf6f4fe7f3f}{Draw} (Sprite\+Batch sprite\+Batch)
+\begin{DoxyCompactList}\small\item\em Override this to draw object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_object_aa48be7d1041c9417c831a904bd52377f}{}const bool {\bfseries D\+E\+F\+A\+U\+L\+T\+\_\+\+I\+S\+\_\+\+W\+A\+L\+K\+A\+B\+L\+E\+\_\+\+V\+A\+L\+U\+E} = false\label{class_hel_project_1_1_game_world_1_1_h_object_aa48be7d1041c9417c831a904bd52377f}
+
+\item 
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_object_a32e043831c6f30e1a73ee033f9d00483}{}const float {\bfseries D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+X\+\_\+\+V\+A\+L\+U\+E} = 0.\+0f\label{class_hel_project_1_1_game_world_1_1_h_object_a32e043831c6f30e1a73ee033f9d00483}
+
+\item 
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_object_a5b601f5ab506ca13d2f27ec8d0bd0540}{}const float {\bfseries D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+Y\+\_\+\+V\+A\+L\+U\+E} = 0.\+0f\label{class_hel_project_1_1_game_world_1_1_h_object_a5b601f5ab506ca13d2f27ec8d0bd0540}
+
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hel_project_1_1_tools_1_1_f_position}{F\+Position} \hyperlink{class_hel_project_1_1_game_world_1_1_h_object_ac7f41f5a7036bbc845fea1b27bb9d110}{Position}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Position of the entity \end{DoxyCompactList}\item 
+bool \hyperlink{class_hel_project_1_1_game_world_1_1_h_object_a97444e657db0148fb442570fbd7fe98f}{Is\+Walkable}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Can be walked by entities \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract class for all entities of the game 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_object_ac10ea2725a0721b3f60d8e04bc89eda5}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}!H\+Object@{H\+Object}}
+\index{H\+Object@{H\+Object}!Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}}
+\subsubsection[{H\+Object}]{\setlength{\rightskip}{0pt plus 5cm}Hel\+Project.\+Game\+World.\+H\+Object.\+H\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_h_object_ac10ea2725a0721b3f60d8e04bc89eda5}
+
+
+Creates an object 
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_object_ae8ff8fe02b0ed2a9928f863757ccb8d5}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}!H\+Object@{H\+Object}}
+\index{H\+Object@{H\+Object}!Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}}
+\subsubsection[{H\+Object}]{\setlength{\rightskip}{0pt plus 5cm}Hel\+Project.\+Game\+World.\+H\+Object.\+H\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf F\+Position}}]{position}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_h_object_ae8ff8fe02b0ed2a9928f863757ccb8d5}
+
+
+Creates an object 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Position of the object\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_object_a66675ff8875b73497dfaee22decacf9d}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}!H\+Object@{H\+Object}}
+\index{H\+Object@{H\+Object}!Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}}
+\subsubsection[{H\+Object}]{\setlength{\rightskip}{0pt plus 5cm}Hel\+Project.\+Game\+World.\+H\+Object.\+H\+Object (
+\begin{DoxyParamCaption}
+\item[{bool}]{is\+Walkable, }
+\item[{{\bf F\+Position}}]{position}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_h_object_a66675ff8875b73497dfaee22decacf9d}
+
+
+Creates an object 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\+Walkable} & Can the object be \textquotesingle{}walked\textquotesingle{} on by entities\\
+\hline
+{\em position} & Position of the object\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_object_aa48c9288756739f80a59bdf6f4fe7f3f}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}!Draw@{Draw}}
+\index{Draw@{Draw}!Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}}
+\subsubsection[{Draw}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Hel\+Project.\+Game\+World.\+H\+Object.\+Draw (
+\begin{DoxyParamCaption}
+\item[{Sprite\+Batch}]{sprite\+Batch}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_hel_project_1_1_game_world_1_1_h_object_aa48c9288756739f80a59bdf6f4fe7f3f}
+
+
+Override this to draw object 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Batch} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_object_a2de39710b20f7af4e1e2463ca93656f8}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}!Load\+Content@{Load\+Content}}
+\index{Load\+Content@{Load\+Content}!Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}}
+\subsubsection[{Load\+Content}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Hel\+Project.\+Game\+World.\+H\+Object.\+Load\+Content (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_hel_project_1_1_game_world_1_1_h_object_a2de39710b20f7af4e1e2463ca93656f8}
+
+
+Override this to load content 
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_object_a30efa177423e89a85e45b76fe35d6724}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}!Unload\+Content@{Unload\+Content}}
+\index{Unload\+Content@{Unload\+Content}!Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}}
+\subsubsection[{Unload\+Content}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Hel\+Project.\+Game\+World.\+H\+Object.\+Unload\+Content (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_hel_project_1_1_game_world_1_1_h_object_a30efa177423e89a85e45b76fe35d6724}
+
+
+Override this to unload content 
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_object_a2e4ba3d334e48c9b74cc1b2b821f030b}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}!Update@{Update}}
+\index{Update@{Update}!Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Hel\+Project.\+Game\+World.\+H\+Object.\+Update (
+\begin{DoxyParamCaption}
+\item[{Game\+Time}]{game\+Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_hel_project_1_1_game_world_1_1_h_object_a2e4ba3d334e48c9b74cc1b2b821f030b}
+
+
+Override this to update object 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Property Documentation}
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_object_a97444e657db0148fb442570fbd7fe98f}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}!Is\+Walkable@{Is\+Walkable}}
+\index{Is\+Walkable@{Is\+Walkable}!Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}}
+\subsubsection[{Is\+Walkable}]{\setlength{\rightskip}{0pt plus 5cm}bool Hel\+Project.\+Game\+World.\+H\+Object.\+Is\+Walkable\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_game_world_1_1_h_object_a97444e657db0148fb442570fbd7fe98f}
+
+
+Can be walked by entities 
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_object_ac7f41f5a7036bbc845fea1b27bb9d110}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}!Position@{Position}}
+\index{Position@{Position}!Hel\+Project\+::\+Game\+World\+::\+H\+Object@{Hel\+Project\+::\+Game\+World\+::\+H\+Object}}
+\subsubsection[{Position}]{\setlength{\rightskip}{0pt plus 5cm}{\bf F\+Position} Hel\+Project.\+Game\+World.\+H\+Object.\+Position\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_game_world_1_1_h_object_ac7f41f5a7036bbc845fea1b27bb9d110}
+
+
+Position of the entity 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Hel\+Project/\+Game\+World/H\+Object.\+cs\end{DoxyCompactItemize}

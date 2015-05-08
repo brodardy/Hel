@@ -39,7 +39,7 @@ namespace HelProject.GameWorld.Map
         private HCell[,] _cells; // Cells of the map
         private int _height; // Height of the map
         private int _width; // Width of the map
-        private int _walkableSpacePercentage; // Percentage of walkable area in the map
+        private int _nonWalkableSpacePercentage; // Percentage of walkable area in the map
         private Texture2D _floor; // texture for the floor
         private Texture2D _wall;  // texture for the walls
         private ContentManager _content; // content manager
@@ -61,8 +61,8 @@ namespace HelProject.GameWorld.Map
         /// </summary>
         public int NonWalkableSpacePercentage
         {
-            get { return _walkableSpacePercentage; }
-            private set { _walkableSpacePercentage = value; }
+            get { return _nonWalkableSpacePercentage; }
+            private set { _nonWalkableSpacePercentage = value; }
         }
 
         /// <summary>

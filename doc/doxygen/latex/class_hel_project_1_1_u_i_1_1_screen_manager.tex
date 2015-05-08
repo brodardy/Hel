@@ -1,0 +1,242 @@
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager}{}\section{Hel\+Project.\+U\+I.\+Screen\+Manager Class Reference}
+\label{class_hel_project_1_1_u_i_1_1_screen_manager}\index{Hel\+Project.\+U\+I.\+Screen\+Manager@{Hel\+Project.\+U\+I.\+Screen\+Manager}}
+
+
+Singleton class, all the screens of the game are managed here  
+
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_af86dcb0d11cec6ce52f50e9b98798175}{Screen\+Types} \{ {\bfseries S\+P\+L\+A\+S\+H}, 
+{\bfseries M\+E\+N\+U}, 
+{\bfseries I\+N\+G\+A\+M\+E}, 
+{\bfseries L\+O\+A\+D\+I\+N\+G}
+ \}
+\begin{DoxyCompactList}\small\item\em Available screen types \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_a0077b58a60247c9dc7b4a4cc451b1830}{Load\+Content} (Content\+Manager content)
+\begin{DoxyCompactList}\small\item\em Loads the content \end{DoxyCompactList}\item 
+void \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_a63aa06a4fbc8185e0d414cfc6a54a380}{Unload\+Content} ()
+\begin{DoxyCompactList}\small\item\em Unloads the content \end{DoxyCompactList}\item 
+void \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_aaffdee1d0be5822763de36ce685e12ef}{Update} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the content \end{DoxyCompactList}\item 
+void \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_a3eeb4573fdec335fbf349c2593cf9908}{Draw} (Sprite\+Batch sprite\+Batch)
+\begin{DoxyCompactList}\small\item\em Draws the content \end{DoxyCompactList}\item 
+void \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_abd464cca71b81c7d1ee583314eb920d6}{Transition} (\hyperlink{class_hel_project_1_1_u_i_1_1_game_screen}{Game\+Screen} next\+Screen)
+\begin{DoxyCompactList}\small\item\em Transitions the screen to another one \end{DoxyCompactList}\item 
+void \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_af8280a0980fb4b12d2d4d7c2b299f3d9}{Transition} (\hyperlink{class_hel_project_1_1_u_i_1_1_game_screen}{Game\+Screen} next\+Screen, int time)
+\begin{DoxyCompactList}\small\item\em Activates a screen transition for the specified time \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_u_i_1_1_game_screen}{Game\+Screen} \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_a61f086a7ce24b6c365d09c5a0d4f74bb}{Prepare\+Screen} (string load\+Content, \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_af86dcb0d11cec6ce52f50e9b98798175}{Screen\+Types} screen\+Type)
+\begin{DoxyCompactList}\small\item\em Prepares an initialized screen \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_af86dcb0d11cec6ce52f50e9b98798175}{Screen\+Types} \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_a7c9a1573412a1177692cfff5302a63cc}{Get\+Current\+Screen\+Type} ()
+\begin{DoxyCompactList}\small\item\em Gives the current screen type of the game \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_a3d4d17256df969e1b5627c3112cf4415}{}Graphics\+Device {\bfseries S\+M\+Graphics\+Device}\label{class_hel_project_1_1_u_i_1_1_screen_manager_a3d4d17256df969e1b5627c3112cf4415}
+
+\item 
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_abebd23e127c1340fbb916fa14cf5b1a4}{}Sprite\+Batch {\bfseries S\+M\+Sprite\+Batch}\label{class_hel_project_1_1_u_i_1_1_screen_manager_abebd23e127c1340fbb916fa14cf5b1a4}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_a6135e97988ecb7b97fc2c0e3e950d406}{}const int {\bfseries D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+T\+H} = 1280\label{class_hel_project_1_1_u_i_1_1_screen_manager_a6135e97988ecb7b97fc2c0e3e950d406}
+
+\item 
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_ae5d532987a0f23f1ffd79da7ee442014}{}const int {\bfseries D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+H\+T} = 720\label{class_hel_project_1_1_u_i_1_1_screen_manager_ae5d532987a0f23f1ffd79da7ee442014}
+
+\item 
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_af7b676812b28083a4de9a910e70f3e7b}{}const int {\bfseries D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+P\+L\+A\+S\+H\+\_\+\+S\+C\+R\+E\+E\+N\+\_\+\+T\+I\+M\+E} = 3\label{class_hel_project_1_1_u_i_1_1_screen_manager_af7b676812b28083a4de9a910e70f3e7b}
+
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+Vector2 \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_abb86f242ecaa5f540e91701af01696de}{Dimensions}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Dimensions of the screen \end{DoxyCompactList}\item 
+Content\+Manager \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_a0e0ac0e0475a6a7fa4e21c2c413a7bcc}{Content}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Content of the screen \end{DoxyCompactList}\item 
+static \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager}{Screen\+Manager} \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_acf1138ad8b8146a517d7b5288e3792de}{Instance}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Singleton instance of this class \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Singleton class, all the screens of the game are managed here 
+
+
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_af86dcb0d11cec6ce52f50e9b98798175}{}\index{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}!Screen\+Types@{Screen\+Types}}
+\index{Screen\+Types@{Screen\+Types}!Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}}
+\subsubsection[{Screen\+Types}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Hel\+Project.\+U\+I.\+Screen\+Manager.\+Screen\+Types}}\label{class_hel_project_1_1_u_i_1_1_screen_manager_af86dcb0d11cec6ce52f50e9b98798175}
+
+
+Available screen types 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_a3eeb4573fdec335fbf349c2593cf9908}{}\index{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}!Draw@{Draw}}
+\index{Draw@{Draw}!Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}}
+\subsubsection[{Draw}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+U\+I.\+Screen\+Manager.\+Draw (
+\begin{DoxyParamCaption}
+\item[{Sprite\+Batch}]{sprite\+Batch}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_u_i_1_1_screen_manager_a3eeb4573fdec335fbf349c2593cf9908}
+
+
+Draws the content 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Batch} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_a7c9a1573412a1177692cfff5302a63cc}{}\index{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}!Get\+Current\+Screen\+Type@{Get\+Current\+Screen\+Type}}
+\index{Get\+Current\+Screen\+Type@{Get\+Current\+Screen\+Type}!Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}}
+\subsubsection[{Get\+Current\+Screen\+Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Screen\+Types} Hel\+Project.\+U\+I.\+Screen\+Manager.\+Get\+Current\+Screen\+Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_u_i_1_1_screen_manager_a7c9a1573412a1177692cfff5302a63cc}
+
+
+Gives the current screen type of the game 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_a0077b58a60247c9dc7b4a4cc451b1830}{}\index{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}!Load\+Content@{Load\+Content}}
+\index{Load\+Content@{Load\+Content}!Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}}
+\subsubsection[{Load\+Content}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+U\+I.\+Screen\+Manager.\+Load\+Content (
+\begin{DoxyParamCaption}
+\item[{Content\+Manager}]{content}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_u_i_1_1_screen_manager_a0077b58a60247c9dc7b4a4cc451b1830}
+
+
+Loads the content 
+
+
+\begin{DoxyParams}{Parameters}
+{\em content} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_a61f086a7ce24b6c365d09c5a0d4f74bb}{}\index{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}!Prepare\+Screen@{Prepare\+Screen}}
+\index{Prepare\+Screen@{Prepare\+Screen}!Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}}
+\subsubsection[{Prepare\+Screen}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Screen} Hel\+Project.\+U\+I.\+Screen\+Manager.\+Prepare\+Screen (
+\begin{DoxyParamCaption}
+\item[{string}]{load\+Content, }
+\item[{{\bf Screen\+Types}}]{screen\+Type}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_u_i_1_1_screen_manager_a61f086a7ce24b6c365d09c5a0d4f74bb}
+
+
+Prepares an initialized screen 
+
+
+\begin{DoxyParams}{Parameters}
+{\em load\+Content} & Path to the X\+M\+L file for the initialization information\\
+\hline
+{\em screen\+Type} & Type of the screen\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The prepared screen
+\end{DoxyReturn}
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_abd464cca71b81c7d1ee583314eb920d6}{}\index{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}!Transition@{Transition}}
+\index{Transition@{Transition}!Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}}
+\subsubsection[{Transition}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+U\+I.\+Screen\+Manager.\+Transition (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Screen}}]{next\+Screen}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_u_i_1_1_screen_manager_abd464cca71b81c7d1ee583314eb920d6}
+
+
+Transitions the screen to another one 
+
+
+\begin{DoxyParams}{Parameters}
+{\em next\+Screen} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_af8280a0980fb4b12d2d4d7c2b299f3d9}{}\index{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}!Transition@{Transition}}
+\index{Transition@{Transition}!Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}}
+\subsubsection[{Transition}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+U\+I.\+Screen\+Manager.\+Transition (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Screen}}]{next\+Screen, }
+\item[{int}]{time}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_u_i_1_1_screen_manager_af8280a0980fb4b12d2d4d7c2b299f3d9}
+
+
+Activates a screen transition for the specified time 
+
+
+\begin{DoxyParams}{Parameters}
+{\em next\+Screen} & Next screen that will appear\\
+\hline
+{\em time} & Time before transition\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_a63aa06a4fbc8185e0d414cfc6a54a380}{}\index{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}!Unload\+Content@{Unload\+Content}}
+\index{Unload\+Content@{Unload\+Content}!Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}}
+\subsubsection[{Unload\+Content}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+U\+I.\+Screen\+Manager.\+Unload\+Content (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_u_i_1_1_screen_manager_a63aa06a4fbc8185e0d414cfc6a54a380}
+
+
+Unloads the content 
+
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_aaffdee1d0be5822763de36ce685e12ef}{}\index{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}!Update@{Update}}
+\index{Update@{Update}!Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+U\+I.\+Screen\+Manager.\+Update (
+\begin{DoxyParamCaption}
+\item[{Game\+Time}]{game\+Time}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_u_i_1_1_screen_manager_aaffdee1d0be5822763de36ce685e12ef}
+
+
+Updates the content 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Property Documentation}
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_a0e0ac0e0475a6a7fa4e21c2c413a7bcc}{}\index{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}!Content@{Content}}
+\index{Content@{Content}!Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}}
+\subsubsection[{Content}]{\setlength{\rightskip}{0pt plus 5cm}Content\+Manager Hel\+Project.\+U\+I.\+Screen\+Manager.\+Content\hspace{0.3cm}{\ttfamily [get]}}\label{class_hel_project_1_1_u_i_1_1_screen_manager_a0e0ac0e0475a6a7fa4e21c2c413a7bcc}
+
+
+Content of the screen 
+
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_abb86f242ecaa5f540e91701af01696de}{}\index{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}!Dimensions@{Dimensions}}
+\index{Dimensions@{Dimensions}!Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}}
+\subsubsection[{Dimensions}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Hel\+Project.\+U\+I.\+Screen\+Manager.\+Dimensions\hspace{0.3cm}{\ttfamily [get]}}\label{class_hel_project_1_1_u_i_1_1_screen_manager_abb86f242ecaa5f540e91701af01696de}
+
+
+Dimensions of the screen 
+
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_acf1138ad8b8146a517d7b5288e3792de}{}\index{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}!Instance@{Instance}}
+\index{Instance@{Instance}!Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}}
+\subsubsection[{Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Screen\+Manager} Hel\+Project.\+U\+I.\+Screen\+Manager.\+Instance\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [get]}}\label{class_hel_project_1_1_u_i_1_1_screen_manager_acf1138ad8b8146a517d7b5288e3792de}
+
+
+Singleton instance of this class 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Hel\+Project/\+U\+I/Screen\+Manager.\+cs\end{DoxyCompactItemize}

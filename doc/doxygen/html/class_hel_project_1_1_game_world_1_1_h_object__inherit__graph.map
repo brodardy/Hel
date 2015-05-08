@@ -1,0 +1,4 @@
+<map id="HelProject.GameWorld.HObject" name="HelProject.GameWorld.HObject">
+<area shape="rect" id="node2" href="$class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity.html" title="HelProject.GameWorld.Entities.\lHEntity" alt="" coords="5,80,212,121"/>
+<area shape="rect" id="node3" href="$class_hel_project_1_1_game_world_1_1_map_1_1_h_cell.html" title="Cell of a map " alt="" coords="236,80,424,121"/>
+</map>

@@ -1,0 +1,161 @@
+\hypertarget{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell}{}\section{Hel\+Project.\+Game\+World.\+Spells.\+H\+Spell Class Reference}
+\label{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell}\index{Hel\+Project.\+Game\+World.\+Spells.\+H\+Spell@{Hel\+Project.\+Game\+World.\+Spells.\+H\+Spell}}
+
+
+Spell of the game  
+
+
+
+
+Inheritance diagram for Hel\+Project.\+Game\+World.\+Spells.\+H\+Spell\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a0320952c7e7ed4bda12288dc6f9e0f62}{H\+Spell} (\hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_hero}{H\+Hero} hero, \hyperlink{class_hel_project_1_1_features_1_1_feature_collection}{Feature\+Collection} features, float time\+Of\+Effect, string name)
+\begin{DoxyCompactList}\small\item\em Creates a spell \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a2c30200e62a6a938156035098a9c6a1f}{Load\+Content} ()
+\begin{DoxyCompactList}\small\item\em Loads the content of the spell \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a760e3d340c43f234465d07e2782e3e3a}{Unload\+Content} ()
+\begin{DoxyCompactList}\small\item\em Unloads the content of the spell \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a19c9c7c407b20861184ef8538614142b}{Update} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the spell in the game loop \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a71cfca2b0bd3d7bcc91d8fae7180a21f}{Draw} (Sprite\+Batch sprite\+Batch)
+\begin{DoxyCompactList}\small\item\em Draws the spell \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_hero}{H\+Hero} \hyperlink{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a1867f356bf0a68b755703db7e556cbbd}{Hero}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Hero that the spell is attached to \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_features_1_1_feature_collection}{Feature\+Collection} \hyperlink{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a404a775604d84ff622ecc2a72cf5f91a}{Features}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em \hyperlink{namespace_hel_project_1_1_features}{Features} of the spell \end{DoxyCompactList}\item 
+string \hyperlink{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a66d41a1b498d10e9d77229bdb39fd783}{Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Name of the spell \end{DoxyCompactList}\item 
+float \hyperlink{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_ae6cb50ade7feb332679ed6b45079d1ce}{Time\+Of\+Effect}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Time of effect once the spell is active \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Spell of the game 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a0320952c7e7ed4bda12288dc6f9e0f62}{}\index{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}!H\+Spell@{H\+Spell}}
+\index{H\+Spell@{H\+Spell}!Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}}
+\subsubsection[{H\+Spell}]{\setlength{\rightskip}{0pt plus 5cm}Hel\+Project.\+Game\+World.\+Spells.\+H\+Spell.\+H\+Spell (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+Hero}}]{hero, }
+\item[{{\bf Feature\+Collection}}]{features, }
+\item[{float}]{time\+Of\+Effect, }
+\item[{string}]{name}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a0320952c7e7ed4bda12288dc6f9e0f62}
+
+
+Creates a spell 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hero} & Hero that the spell is attached to\\
+\hline
+{\em features} & \hyperlink{namespace_hel_project_1_1_features}{Features} of the spell\\
+\hline
+{\em time\+Of\+Effect} & Time of effect once the spell is active\\
+\hline
+{\em name} & Name of the spell\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a71cfca2b0bd3d7bcc91d8fae7180a21f}{}\index{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}!Draw@{Draw}}
+\index{Draw@{Draw}!Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}}
+\subsubsection[{Draw}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Hel\+Project.\+Game\+World.\+Spells.\+H\+Spell.\+Draw (
+\begin{DoxyParamCaption}
+\item[{Sprite\+Batch}]{sprite\+Batch}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a71cfca2b0bd3d7bcc91d8fae7180a21f}
+
+
+Draws the spell 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Batch} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a2c30200e62a6a938156035098a9c6a1f}{}\index{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}!Load\+Content@{Load\+Content}}
+\index{Load\+Content@{Load\+Content}!Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}}
+\subsubsection[{Load\+Content}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Hel\+Project.\+Game\+World.\+Spells.\+H\+Spell.\+Load\+Content (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a2c30200e62a6a938156035098a9c6a1f}
+
+
+Loads the content of the spell 
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a760e3d340c43f234465d07e2782e3e3a}{}\index{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}!Unload\+Content@{Unload\+Content}}
+\index{Unload\+Content@{Unload\+Content}!Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}}
+\subsubsection[{Unload\+Content}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Hel\+Project.\+Game\+World.\+Spells.\+H\+Spell.\+Unload\+Content (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a760e3d340c43f234465d07e2782e3e3a}
+
+
+Unloads the content of the spell 
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a19c9c7c407b20861184ef8538614142b}{}\index{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}!Update@{Update}}
+\index{Update@{Update}!Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Hel\+Project.\+Game\+World.\+Spells.\+H\+Spell.\+Update (
+\begin{DoxyParamCaption}
+\item[{Game\+Time}]{game\+Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a19c9c7c407b20861184ef8538614142b}
+
+
+Updates the spell in the game loop 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Property Documentation}
+\hypertarget{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a404a775604d84ff622ecc2a72cf5f91a}{}\index{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}!Features@{Features}}
+\index{Features@{Features}!Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}}
+\subsubsection[{Features}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Feature\+Collection} Hel\+Project.\+Game\+World.\+Spells.\+H\+Spell.\+Features\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a404a775604d84ff622ecc2a72cf5f91a}
+
+
+\hyperlink{namespace_hel_project_1_1_features}{Features} of the spell 
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a1867f356bf0a68b755703db7e556cbbd}{}\index{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}!Hero@{Hero}}
+\index{Hero@{Hero}!Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}}
+\subsubsection[{Hero}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+Hero} Hel\+Project.\+Game\+World.\+Spells.\+H\+Spell.\+Hero\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a1867f356bf0a68b755703db7e556cbbd}
+
+
+Hero that the spell is attached to 
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a66d41a1b498d10e9d77229bdb39fd783}{}\index{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}!Name@{Name}}
+\index{Name@{Name}!Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}}
+\subsubsection[{Name}]{\setlength{\rightskip}{0pt plus 5cm}string Hel\+Project.\+Game\+World.\+Spells.\+H\+Spell.\+Name\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_a66d41a1b498d10e9d77229bdb39fd783}
+
+
+Name of the spell 
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_ae6cb50ade7feb332679ed6b45079d1ce}{}\index{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}!Time\+Of\+Effect@{Time\+Of\+Effect}}
+\index{Time\+Of\+Effect@{Time\+Of\+Effect}!Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell@{Hel\+Project\+::\+Game\+World\+::\+Spells\+::\+H\+Spell}}
+\subsubsection[{Time\+Of\+Effect}]{\setlength{\rightskip}{0pt plus 5cm}float Hel\+Project.\+Game\+World.\+Spells.\+H\+Spell.\+Time\+Of\+Effect\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_game_world_1_1_spells_1_1_h_spell_ae6cb50ade7feb332679ed6b45079d1ce}
+
+
+Time of effect once the spell is active 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Hel\+Project/\+Game\+World/\+Spells/H\+Spell.\+cs\end{DoxyCompactItemize}
