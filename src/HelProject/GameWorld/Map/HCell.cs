@@ -7,6 +7,7 @@
 
 #region USING STATEMENTS
 using HelProject.Tools;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace HelProject.GameWorld.Map
         /// <summary>
         /// Cell that represents a part of the map
         /// </summary>
-        public HCell() : this(DEFAULT_IS_WALKABLE_VALUE, new FPosition(DEFAULT_POSITION_X_VALUE, DEFAULT_POSITION_Y_VALUE)) { /* no code... */ }
+        public HCell() : this(DEFAULT_IS_WALKABLE_VALUE, new Vector2(DEFAULT_POSITION_X_VALUE, DEFAULT_POSITION_Y_VALUE)) { /* no code... */ }
 
         /// <summary>
         /// Cell that represents a part of the map
@@ -33,7 +34,7 @@ namespace HelProject.GameWorld.Map
         /// <remarks>
         /// The cell position is rounded to the base digit.
         /// </remarks>
-        public HCell(FPosition position) : this(DEFAULT_IS_WALKABLE_VALUE, position) { /* no code... */ }
+        public HCell(Vector2 position) : this(DEFAULT_IS_WALKABLE_VALUE, position) { /* no code... */ }
 
         /// <summary>
         /// Cell that represents a part of the map
@@ -43,10 +44,10 @@ namespace HelProject.GameWorld.Map
         /// <remarks>
         /// The cell position is rounded to the base digit.
         /// </remarks>
-        public HCell(bool isWalkable, FPosition position)
+        public HCell(bool isWalkable, Vector2 position)
         {
             this.IsWalkable = isWalkable;
-            this.Position = new FPosition((int)position.X, (int)position.Y); // casted to only have round numbers for cells
+            this.Position = new Vector2((int)position.X, (int)position.Y); // casted to only have round numbers for cells
         }
         #endregion
     }

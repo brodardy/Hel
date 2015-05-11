@@ -44,9 +44,19 @@ namespace HelProject.GameWorld.Map
         private Texture2D _wall;  // texture for the walls
         private ContentManager _content; // content manager
         private float _scale;
+        private Vector2 _focusPosition;
         #endregion
 
         #region PROPRIETIES
+        /// <summary>
+        /// Center of the screen position
+        /// </summary>
+        public Vector2 FocusPosition
+        {
+            get { return _focusPosition; }
+            set { _focusPosition = value; }
+        }
+
         /// <summary>
         /// Scale of the map
         /// </summary>
@@ -133,19 +143,19 @@ namespace HelProject.GameWorld.Map
                     // Fills the edges with walls
                     if (x == 0)
                     {
-                        this.Cells[x, y] = new HCell(false, new FPosition(x, y));
+                        this.Cells[x, y] = new HCell(false, new Vector2(x, y));
                     }
                     else if (y == 0)
                     {
-                        this.Cells[x, y] = new HCell(false, new FPosition(x, y));
+                        this.Cells[x, y] = new HCell(false, new Vector2(x, y));
                     }
                     else if (x == this.Width - 1)
                     {
-                        this.Cells[x, y] = new HCell(false, new FPosition(x, y));
+                        this.Cells[x, y] = new HCell(false, new Vector2(x, y));
                     }
                     else if (y == this.Height - 1)
                     {
-                        this.Cells[x, y] = new HCell(false, new FPosition(x, y));
+                        this.Cells[x, y] = new HCell(false, new Vector2(x, y));
                     }
                     else
                     {
@@ -153,12 +163,12 @@ namespace HelProject.GameWorld.Map
                         // the middle always has a walkable cell for space logic
                         if (y == mapMiddle)
                         {
-                            this.Cells[x, y] = new HCell(true, new FPosition(x, y));
+                            this.Cells[x, y] = new HCell(true, new Vector2(x, y));
                         }
                         else
                         {
                             // Fills the rest with a random ratio
-                            this.Cells[x, y] = new HCell(!this.RandomPercent(this.NonWalkableSpacePercentage), new FPosition(x, y));
+                            this.Cells[x, y] = new HCell(!this.RandomPercent(this.NonWalkableSpacePercentage), new Vector2(x, y));
                         }
                     }
                 }
@@ -182,7 +192,7 @@ namespace HelProject.GameWorld.Map
             {
                 for (int x = 0; x < this.Width; x++)
                 {
-                    this.Cells[x, y] = new HCell(false, new FPosition(x, y));
+                    this.Cells[x, y] = new HCell(false, new Vector2(x, y));
                 }
             }
         }
@@ -387,22 +397,44 @@ namespace HelProject.GameWorld.Map
             this._content.Unload();
         }
 
+        /// <summary>
+        /// Draws the map
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             int sizeOfSprites = this._floor.Height;
-            for (int y = 0; y < this.Height; y++)
+
+            float offSetX = 0f, offSetY = 0f;
+            offSetX = -this.FocusPosition.X;
+            offSetY = -this.FocusPosition.Y;
+            Point startPoint = new Point((int)this.FocusPosition.X - (int)(spriteBatch.GraphicsDevice.Viewport.Width / 2 / sizeOfSprites + 1),
+                                     (int)this.FocusPosition.Y - (int)(spriteBatch.GraphicsDevice.Viewport.Height / 2 / sizeOfSprites) - 1);
+
+            Point endPoint = new Point((int)this.FocusPosition.X + (int)(spriteBatch.GraphicsDevice.Viewport.Width / 2 / sizeOfSprites + 1),
+                                     (int)this.FocusPosition.Y + (int)(spriteBatch.GraphicsDevice.Viewport.Height / 2 / sizeOfSprites + 1));
+
+            for (int y = startPoint.Y; y < endPoint.Y; y++)
             {
-                for (int x = 0; x < this.Width; x++)
+                for (int x = startPoint.X; x < endPoint.X; x++)
                 {
-                    HCell cell = this.GetCell(x, y);
-                    Vector2 position = new Vector2(cell.Position.X * sizeOfSprites * this.Scale, cell.Position.Y * sizeOfSprites * this.Scale);
-                    if (cell.IsWalkable)
+                    if (!this.IsCellOutOfBounds(x, y))
                     {
-                        spriteBatch.Draw(_floor, position, null, null, null, 0.0f, new Vector2(this.Scale, this.Scale), Color.White);
-                    }
-                    else
-                    {
-                        spriteBatch.Draw(_wall, position, null, null, null, 0.0f, new Vector2(this.Scale, this.Scale), Color.White);
+                        HCell cell = this.GetCell(x, y);
+                        Vector2 position = new Vector2(cell.Position.X * sizeOfSprites * this.Scale + // X Pos
+                                                       offSetX * sizeOfSprites * this.Scale +
+                                                       spriteBatch.GraphicsDevice.Viewport.Width / 2,
+                                                       cell.Position.Y * sizeOfSprites * this.Scale + // Y Pos
+                                                       offSetY * sizeOfSprites * this.Scale +
+                                                       spriteBatch.GraphicsDevice.Viewport.Height / 2);
+                        if (cell.IsWalkable)
+                        {
+                            spriteBatch.Draw(_floor, position, null, null, null, 0.0f, new Vector2(this.Scale, this.Scale), Color.White);
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(_wall, position, null, null, null, 0.0f, new Vector2(this.Scale, this.Scale), Color.White);
+                        }
                     }
                 }
             }

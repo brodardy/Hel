@@ -23,7 +23,7 @@ namespace HelProject.GameWorld
         protected const float DEFAULT_POSITION_Y_VALUE = 0.0f;
 
         #region ATTRIBUTES
-        private FPosition _position;
+        private Vector2 _position;
         private bool _isWalkable;             // true if the object can be walked on by enitites
         #endregion
 
@@ -31,7 +31,7 @@ namespace HelProject.GameWorld
         /// <summary>
         /// Position of the entity
         /// </summary>
-        public FPosition Position
+        public Vector2 Position
         {
             get { return _position; }
             set { _position = value; }
@@ -51,20 +51,20 @@ namespace HelProject.GameWorld
         /// <summary>
         /// Creates an object
         /// </summary>
-        public HObject() : this(DEFAULT_IS_WALKABLE_VALUE, new FPosition(DEFAULT_POSITION_X_VALUE, DEFAULT_POSITION_Y_VALUE)) { /* no code... */ }
+        public HObject() : this(DEFAULT_IS_WALKABLE_VALUE, new Vector2(DEFAULT_POSITION_X_VALUE, DEFAULT_POSITION_Y_VALUE)) { /* no code... */ }
 
         /// <summary>
         /// Creates an object
         /// </summary>
         /// <param name="position">Position of the object</param>
-        public HObject(FPosition position) : this(DEFAULT_IS_WALKABLE_VALUE, position) { /* no code... */ }
+        public HObject(Vector2 position) : this(DEFAULT_IS_WALKABLE_VALUE, position) { /* no code... */ }
 
         /// <summary>
         /// Creates an object
         /// </summary>
         /// <param name="isWalkable">Can the object be 'walked' on by entities</param>
         /// <param name="position">Position of the object</param>
-        public HObject(bool isWalkable, FPosition position)
+        public HObject(bool isWalkable, Vector2 position)
         {
             this.IsWalkable = isWalkable;
             this.Position = position;

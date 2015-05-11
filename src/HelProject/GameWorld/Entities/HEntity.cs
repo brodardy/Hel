@@ -1,7 +1,7 @@
 ﻿/*
  * Author : Yannick R. Brodard
  * File name : HEntity.cs
- * Version : 0.4.201505071500
+ * Version : 0.5.201505110823
  * Description : Base abstract class for the entities of the game
  */
 
@@ -12,6 +12,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace HelProject.GameWorld.Entities
 {
+    /// <summary>
+    /// Base abstract class for the entities of the game
+    /// </summary>
     public abstract class HEntity : HObject
     {
         public const float DEFAULT_STRENGHT = 5.0f;
@@ -22,13 +25,33 @@ namespace HelProject.GameWorld.Entities
         public const float DEFAULT_MINUMUMDAMAGE = 1.0f;
         public const float DEFAULT_MAXIMUMDAMAGE = 3.0f;
         public const float DEFAULT_MANAREGENERATION = 1.0f;
-        public const float DEFAULT_MOVEMENTSPEED = 1.0f;
+        public const float DEFAULT_MOVEMENTSPEED = 5.0f;
         public const float DEFAULT_LIFEPOINTS = 100.0f;
 
         private FeatureCollection _initialFeatures;
         private FeatureCollection _actualFeatures;
         private FeatureCollection _maximizedFeatures;
         private FeatureManager _featureCalculator;
+        private EntityState _state;
+        private Vector2 _direction;
+
+        /// <summary>
+        /// Direction the character is facing
+        /// </summary>
+        public Vector2 Direction
+        {
+            get { return _direction; }
+            set { _direction = value; }
+        }
+
+        /// <summary>
+        /// State of the entity
+        /// </summary>
+        public EntityState State
+        {
+            get { return _state; }
+            set { _state = value; }
+        }
 
         /// <summary>
         /// Maximized features
@@ -69,13 +92,13 @@ namespace HelProject.GameWorld.Entities
         /// <summary>
         /// Creates an entity
         /// </summary>
-        public HEntity() : this(new FPosition()) { /* no code... */ }
+        public HEntity() : this(Vector2.Zero) { /* no code... */ }
 
         /// <summary>
         /// Creates an entity
         /// </summary>
         /// <param name="position">Position of the entity</param>
-        public HEntity(FPosition position)
+        public HEntity(Vector2 position)
             : this(new FeatureCollection()
             {
                 Strenght = DEFAULT_STRENGHT,
@@ -95,8 +118,7 @@ namespace HelProject.GameWorld.Entities
         /// </summary>
         /// <param name="initialFeatures">Initial Features of the enitity</param>
         /// <param name="position">Position of the entity</param>
-        /// <param name="lifePoints">Life points of the entity</param>
-        public HEntity(FeatureCollection initialFeatures, FPosition position)
+        public HEntity(FeatureCollection initialFeatures, Vector2 position)
             : base(true, position)
         {
             this.InitialFeatures = initialFeatures;
@@ -104,6 +126,19 @@ namespace HelProject.GameWorld.Entities
             this.FeatureCalculator = new FeatureManager(this.InitialFeatures);
             this.ActualFeatures = this.FeatureCalculator.GetCalculatedFeatures();
             this.MaximizedFeatures = (FeatureCollection)this.ActualFeatures.Clone();
+            this.State = EntityState.Idle;
+        }
+
+        /// <summary>
+        /// State of the entity
+        /// </summary>
+        public enum EntityState
+        {
+            Idle,
+            Running,
+            MeleeAttacking,
+            RangeAttacking,
+            SpellCasting,
         }
     }
 }

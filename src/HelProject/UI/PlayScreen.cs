@@ -6,7 +6,9 @@
  */
 
 #region USING STATEMENTS
+using HelProject.Features;
 using HelProject.GameWorld;
+using HelProject.GameWorld.Entities;
 using HelProject.GameWorld.Map;
 using HelProject.Tools;
 using Microsoft.Xna.Framework;
@@ -23,7 +25,32 @@ namespace HelProject.UI
     public class PlayScreen : GameScreen
     {
         private HMap _map;
+        private HHero _hero;
+        private static PlayScreen _instance;
 
+        public static PlayScreen Instance
+        {
+            get {
+                if (_instance == null)
+                    _instance = new PlayScreen();
+                return _instance;
+            }
+        }
+
+        private PlayScreen() { }
+
+        /// <summary>
+        /// Playable character
+        /// </summary>
+        public HHero Hero
+        {
+            get { return _hero; }
+            set { _hero = value; }
+        }
+
+        /// <summary>
+        /// Map of the game
+        /// </summary>
         public HMap Map
         {
             get { return _map; }
@@ -36,9 +63,28 @@ namespace HelProject.UI
         public override void LoadContent()
         {
             base.LoadContent();
-            this.Map = new HMap(200, 200, 0.125f);
+            this.Map = new HMap(200, 200, 1f);
+            this.Map.FocusPosition = new Vector2(10, 10);
             this.Map.MakeCaverns();
             this.Map.LoadContent();
+
+            FeatureCollection f = new FeatureCollection()
+            {
+                Strenght = HEntity.DEFAULT_STRENGHT,
+                Vitality = HEntity.DEFAULT_VITALITY,
+                Agility = HEntity.DEFAULT_AGILITY,
+                Magic = HEntity.DEFAULT_MAGIC,
+                InitialAttackSpeed = HEntity.DEFAULT_ATTACKSPEED,
+                MinimumDamage = HEntity.DEFAULT_MINUMUMDAMAGE,
+                MaximumDamage = HEntity.DEFAULT_MAXIMUMDAMAGE,
+                InitialManaRegeneration = HEntity.DEFAULT_MANAREGENERATION,
+                InitialMovementSpeed = HEntity.DEFAULT_MOVEMENTSPEED,
+                InitialLifePoints = HEntity.DEFAULT_LIFEPOINTS
+            };
+            this.Hero = new HHero(f, new Vector2(10, 10));
+            this.Hero.Texture = new Image();
+            this.Hero.Texture.ImagePath = "Entities/hero_a";
+            this.Hero.LoadContent();
         }
 
         /// <summary>
@@ -48,6 +94,7 @@ namespace HelProject.UI
         {
             base.UnloadContent();
             this.Map.UnloadContent();
+            this.Hero.UnloadContent();
         }
 
         /// <summary>
@@ -61,6 +108,9 @@ namespace HelProject.UI
                 this.Map.MakeRandomlyFilledMap();
                 this.Map.MakeCaverns();
             }
+
+            this.Hero.Update(gameTime);
+            //this.Map.FocusPosition = this.Hero.Position;
         }
 
         /// <summary>
@@ -70,6 +120,7 @@ namespace HelProject.UI
         public override void Draw(SpriteBatch spriteBatch)
         {
             this.Map.Draw(spriteBatch);
+            this.Hero.Draw(spriteBatch);
         }
     }
 }

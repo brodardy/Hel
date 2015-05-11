@@ -58,6 +58,8 @@ namespace HelProject.Features
         /// <remarks>Null values will be initialized (except the "features" parameter).</remarks>
         public FeatureManager(FeatureCollection features, List<HSpell> spells = null, List<HItem> items = null)
         {
+            this.InitialFeatures = features;
+
             if (spells != null)
                 this.ActiveSpells = spells;
             else

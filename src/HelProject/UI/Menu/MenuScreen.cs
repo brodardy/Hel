@@ -29,7 +29,7 @@ namespace HelProject.UI.Menu
         private const int DEFAULT_MENU_POS_Y = 0;
         private const int DEFAULT_HIGHLIGHT_INDEX = 0;
 
-        private Position _menuPosition;
+        private Point _menuPosition;
         private List<MenuItem> _items;
         private int _highlightIndex;
         private Image _backgroundImage;
@@ -57,7 +57,7 @@ namespace HelProject.UI.Menu
         /// <summary>
         /// Position of the menu
         /// </summary>
-        public Position MenuPosition
+        public Point MenuPosition
         {
             get { return _menuPosition; }
             set { _menuPosition = value; }
@@ -76,17 +76,17 @@ namespace HelProject.UI.Menu
         /// Creates an empty menu
         /// </summary>
         public MenuScreen() :
-            this(new Position(DEFAULT_MENU_POS_X, DEFAULT_MENU_POS_Y), new List<MenuItem>()) { /* no code... */ }
+            this(new Point(DEFAULT_MENU_POS_X, DEFAULT_MENU_POS_Y), new List<MenuItem>()) { /* no code... */ }
 
         /// <summary>
         /// Creates a menu
         /// </summary>
         /// <param name="menuPosition">Position of the menu</param>
         /// <param name="menuItems">Items of the menu</param>
-        public MenuScreen(Position menuPosition, List<MenuItem> menuItems)
+        public MenuScreen(Point menuPosition, List<MenuItem> menuItems)
             : this(menuPosition, menuItems, DEFAULT_HIGHLIGHT_INDEX) { /* no code... */ }
 
-        public MenuScreen(Position menuPosition, List<MenuItem> menuItems, int highlightIndex)
+        public MenuScreen(Point menuPosition, List<MenuItem> menuItems, int highlightIndex)
         {
             this.MenuPosition = menuPosition;
             this.Items = menuItems;
@@ -233,7 +233,7 @@ namespace HelProject.UI.Menu
                 if (itm.Id == 1 && this.HighlightIndex == 0)
                 {
                     this.UnloadContent();
-                    GameScreen ps = new PlayScreen();
+                    GameScreen ps = PlayScreen.Instance;
                     ScreenManager.Instance.Transition(ps);
                 }
                 else if (itm.Id == 3 && this.HighlightIndex == 2)

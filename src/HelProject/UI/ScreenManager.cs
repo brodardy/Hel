@@ -234,6 +234,20 @@ namespace HelProject.UI
                 return ScreenTypes.LOADING;
             }
         }
+
+        public Vector2 GetCorrectScreenPosition(Vector2 pos, int tileSize, float scale = 1.0f)
+        {
+            float offSetX = 0f, offSetY = 0f;
+            offSetX = -pos.X;
+            offSetY = -pos.Y;
+
+            return new Vector2(pos.X * tileSize * scale + // X Pos
+                               offSetX * tileSize * scale +
+                               this.Dimensions.X / 2,
+                               pos.Y * tileSize * scale + // Y Pos
+                               offSetY * tileSize * scale +
+                               this.Dimensions.Y / 2);
+        }
         #endregion
 
         #region PUBLIC ENUMERATORS
