@@ -118,10 +118,16 @@ namespace HelProject.GameWorld.Entities
                 direction.Normalize();
 
                 float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-                PlayScreen.Instance.Map.FocusPosition += this.Direction * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed());
+                Vector2 newPosition = this.Position;
+                newPosition += direction * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed());
                 this.Direction = direction;
-            }
 
+                if (!PlayScreen.Instance.Map.IsCellNonwalkable(Convert.ToInt32(newPosition.X), Convert.ToInt32(newPosition.Y)))
+                {
+                    PlayScreen.Instance.Camera.Position = newPosition;
+                    this.Position = newPosition;
+                }
+            }
         }
 
         /// <summary>

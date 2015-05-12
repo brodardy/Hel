@@ -25,7 +25,7 @@ namespace HelProject.GameWorld.Entities
         public const float DEFAULT_MINUMUMDAMAGE = 1.0f;
         public const float DEFAULT_MAXIMUMDAMAGE = 3.0f;
         public const float DEFAULT_MANAREGENERATION = 1.0f;
-        public const float DEFAULT_MOVEMENTSPEED = 5.0f;
+        public const float DEFAULT_MOVEMENTSPEED = 7.0f;
         public const float DEFAULT_LIFEPOINTS = 100.0f;
 
         private FeatureCollection _initialFeatures;

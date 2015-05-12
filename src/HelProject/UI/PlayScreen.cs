@@ -27,10 +27,18 @@ namespace HelProject.UI
         private HMap _map;
         private HHero _hero;
         private static PlayScreen _instance;
+        private Camera _camera;
+
+        public Camera Camera
+        {
+            get { return _camera; }
+            set { _camera = value; }
+        }
 
         public static PlayScreen Instance
         {
-            get {
+            get
+            {
                 if (_instance == null)
                     _instance = new PlayScreen();
                 return _instance;
@@ -63,8 +71,10 @@ namespace HelProject.UI
         public override void LoadContent()
         {
             base.LoadContent();
+
+            this.Camera = new Camera(new Vector2(10, 10), MainGame.Instance.GraphicsDevice.Viewport.Width, MainGame.Instance.GraphicsDevice.Viewport.Height);
+
             this.Map = new HMap(200, 200, 1f);
-            this.Map.FocusPosition = new Vector2(10, 10);
             this.Map.MakeCaverns();
             this.Map.LoadContent();
 
@@ -119,7 +129,7 @@ namespace HelProject.UI
         /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            this.Map.Draw(spriteBatch);
+            this.Map.Draw(spriteBatch, this.Camera);
             this.Hero.Draw(spriteBatch);
         }
     }
