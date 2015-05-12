@@ -47,6 +47,14 @@ namespace HelProject.UI
         }
 
         /// <summary>
+        /// Getter of the font
+        /// </summary>
+        public SpriteFont Font
+        {
+            get { return _font; }
+        }
+
+        /// <summary>
         /// Path of the image file
         /// </summary>
         [XmlElement("Path")]

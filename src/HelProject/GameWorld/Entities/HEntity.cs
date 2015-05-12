@@ -5,8 +5,10 @@
  * Description : Base abstract class for the entities of the game
  */
 
+using HelHelProject.Tools;
 using HelProject.Features;
 using HelProject.Tools;
+using HelProject.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -25,7 +27,7 @@ namespace HelProject.GameWorld.Entities
         public const float DEFAULT_MINUMUMDAMAGE = 1.0f;
         public const float DEFAULT_MAXIMUMDAMAGE = 3.0f;
         public const float DEFAULT_MANAREGENERATION = 1.0f;
-        public const float DEFAULT_MOVEMENTSPEED = 7.0f;
+        public const float DEFAULT_MOVEMENTSPEED = 5.0f;
         public const float DEFAULT_LIFEPOINTS = 100.0f;
 
         private FeatureCollection _initialFeatures;
@@ -34,6 +36,26 @@ namespace HelProject.GameWorld.Entities
         private FeatureManager _featureCalculator;
         private EntityState _state;
         private Vector2 _direction;
+        private FRectangle _bounds;
+        private Texture2D _texture;
+
+        /// <summary>
+        /// Texture of the entity
+        /// </summary>
+        public Texture2D Texture
+        {
+            get { return _texture; }
+            set { _texture = value; }
+        }
+
+        /// <summary>
+        /// Bounds of the entity
+        /// </summary>
+        public FRectangle Bounds
+        {
+            get { return _bounds; }
+            set { _bounds = value; }
+        }
 
         /// <summary>
         /// Direction the character is facing
@@ -111,14 +133,14 @@ namespace HelProject.GameWorld.Entities
                 InitialManaRegeneration = DEFAULT_MANAREGENERATION,
                 InitialMovementSpeed = DEFAULT_MOVEMENTSPEED,
                 InitialLifePoints = DEFAULT_LIFEPOINTS
-            }, position) { /* no code... */ }
+            }, position, null, null) { /* no code... */ }
 
         /// <summary>
         /// Creates an entity
         /// </summary>
         /// <param name="initialFeatures">Initial Features of the enitity</param>
         /// <param name="position">Position of the entity</param>
-        public HEntity(FeatureCollection initialFeatures, Vector2 position)
+        public HEntity(FeatureCollection initialFeatures, Vector2 position, FRectangle bounds = null, Texture2D texture = null)
             : base(true, position)
         {
             this.InitialFeatures = initialFeatures;
@@ -127,6 +149,39 @@ namespace HelProject.GameWorld.Entities
             this.ActualFeatures = this.FeatureCalculator.GetCalculatedFeatures();
             this.MaximizedFeatures = (FeatureCollection)this.ActualFeatures.Clone();
             this.State = EntityState.Idle;
+            this.Bounds = bounds;
+            this.Texture = texture;
+        }
+
+        /// <summary>
+        /// Draws the entity
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+
+            if (this.Texture != null && this.Bounds != null)
+            {
+                Vector2 boundsPosA = new Vector2(this.Bounds.X, this.Bounds.Y);
+                Vector2 boundsPosB = new Vector2(this.Bounds.X + this.Bounds.Width, this.Bounds.Y);
+                Vector2 boundsPosC = new Vector2(this.Bounds.X + this.Bounds.Width, this.Bounds.Y + this.Bounds.Height);
+                Vector2 boundsPosD = new Vector2(this.Bounds.X, this.Bounds.Y + this.Bounds.Height);
+
+                Vector2 position = ScreenManager.Instance.GetCorrectScreenPosition(boundsPosA);
+                spriteBatch.Draw(this.Texture, position, Color.White);
+
+                boundsPosA = ScreenManager.Instance.GetCorrectScreenPosition(boundsPosA);
+                boundsPosB = ScreenManager.Instance.GetCorrectScreenPosition(boundsPosB);
+                boundsPosC = ScreenManager.Instance.GetCorrectScreenPosition(boundsPosC);
+                boundsPosD = ScreenManager.Instance.GetCorrectScreenPosition(boundsPosD);
+
+                /* CONTINUE HERE */
+                Primitives2D.DrawLine(boundsPosA, boundsPosB, Color.Red);
+                Primitives2D.DrawLine(boundsPosB, boundsPosC, Color.Red);
+                Primitives2D.DrawLine(boundsPosC, boundsPosD, Color.Red);
+                Primitives2D.DrawLine(boundsPosD, boundsPosA, Color.Red);
+            }
         }
 
         /// <summary>

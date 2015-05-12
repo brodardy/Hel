@@ -235,7 +235,7 @@ namespace HelProject.UI
             }
         }
 
-        public Vector2 GetCorrectScreenPosition(Vector2 pos, int tileSize, float scale = 1.0f)
+        public Vector2 GetCorrectScreenPosition(Vector2 pos, int tileSize = 32, float scale = 1.0f)
         {
             float offSetX = 0f, offSetY = 0f;
             offSetX = -pos.X;

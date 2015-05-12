@@ -1,4 +1,5 @@
-﻿using HelProject.Tools;
+﻿using HelHelProject.Tools;
+using HelProject.Tools;
 using HelProject.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -48,6 +49,8 @@ namespace HelProject
         {
             // TODO: Add your initialization logic here
             this.IsMouseVisible = true;
+
+            Primitives2D.Initialize(this.GraphicsDevice);
 
             _graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             _graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;

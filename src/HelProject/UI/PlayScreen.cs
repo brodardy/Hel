@@ -114,15 +114,15 @@ namespace HelProject.UI
             base.LoadContent();
 
             /* MAP INITIALISATION */
-            this.MapDifficultyEasy = new HMap(800, 800, 1f);
+            this.MapDifficultyEasy = new HMap(200, 200, 1f);
             this.MapDifficultyEasy.MakeCaverns();
             this.MapDifficultyEasy.LoadContent();
 
-            this.MapDifficultyMedium = new HMap(800, 800, 1f);
+            this.MapDifficultyMedium = new HMap(200, 200, 1f);
             this.MapDifficultyMedium.MakeCaverns();
             this.MapDifficultyMedium.LoadContent();
 
-            this.MapDifficultyHard = new HMap(800, 800, 1f);
+            this.MapDifficultyHard = new HMap(200, 200, 1f);
             this.MapDifficultyHard.MakeCaverns();
             this.MapDifficultyHard.LoadContent();
 
@@ -142,7 +142,10 @@ namespace HelProject.UI
                 InitialMovementSpeed = HEntity.DEFAULT_MOVEMENTSPEED,
                 InitialLifePoints = HEntity.DEFAULT_LIFEPOINTS
             };
-            this.PlayableCharacter = new HHero(f, new Vector2(10, 10));
+            Texture2D texture = MainGame.Instance.Content.Load<Texture2D>("Entities/hero_a");
+            Vector2 position = new Vector2(10, 10);
+            FRectangle bounds = new FRectangle(position.X - texture.Width / 2f, position.Y - texture.Height / 2f, 0.8f, 1.5f);
+            this.PlayableCharacter = new HHero(f, position, bounds, texture);
             this.PlayableCharacter.Texture = new Image();
             this.PlayableCharacter.Texture.ImagePath = "Entities/hero_a";
             this.PlayableCharacter.LoadContent();

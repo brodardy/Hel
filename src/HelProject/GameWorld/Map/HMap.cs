@@ -314,13 +314,10 @@ namespace HelProject.GameWorld.Map
             {
                 return true;
             }
-
-            if (cell.IsWalkable == true)
+            else
             {
                 return false;
             }
-
-            return false;
         }
 
         /// <summary>
