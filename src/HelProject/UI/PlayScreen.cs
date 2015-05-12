@@ -1,40 +1,86 @@
 ﻿/*
  * Author : Yannick R. Brodard
  * File name : PlayScreen.cs
- * Version : 0.1.201504301315
+ * Version : 0.3.201505120902
  * Description : Screen for the gameplay
  */
 
 #region USING STATEMENTS
 using HelProject.Features;
-using HelProject.GameWorld;
 using HelProject.GameWorld.Entities;
 using HelProject.GameWorld.Map;
 using HelProject.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 #endregion
 
 namespace HelProject.UI
 {
+    /// <summary>
+    /// Screen for the gameplay
+    /// </summary>
     public class PlayScreen : GameScreen
     {
-        private HMap _map;
+        private HMap _mapDifficultyEasy;
+        private HMap _mapDifficultyMedium;
+        private HMap _mapDifficultyHard;
+        private HMap _currentMap;
         private HHero _hero;
         private static PlayScreen _instance;
         private Camera _camera;
 
-        public Camera Camera
+        /// <summary>
+        /// Map of the game with easy difficulty
+        /// </summary>
+        public HMap MapDifficultyEasy
         {
-            get { return _camera; }
-            set { _camera = value; }
+            get { return _mapDifficultyEasy; }
+            set { _mapDifficultyEasy = value; }
         }
 
+        /// <summary>
+        /// Map of the game with medium difficulty
+        /// </summary>
+        public HMap MapDifficultyMedium
+        {
+            get { return _mapDifficultyMedium; }
+            set { _mapDifficultyMedium = value; }
+        }
+
+        /// <summary>
+        /// Map of the game with hard difficulty
+        /// </summary>
+        public HMap MapDifficultyHard
+        {
+            get { return _mapDifficultyHard; }
+            set { _mapDifficultyHard = value; }
+        }
+
+        /// <summary>
+        /// Current map where the hero is
+        /// </summary>
+        public HMap CurrentMap
+        {
+            get { return _currentMap; }
+            set { _currentMap = value; }
+        }
+
+        /// <summary>
+        /// Playable character
+        /// </summary>
+        public HHero PlayableCharacter
+        {
+            get { return _hero; }
+            set { _hero = value; }
+        }
+
+        /// <summary>
+        /// Instance of the play screen
+        /// </summary>
+        /// <remarks>
+        /// This is a singleton class
+        /// </remarks>
         public static PlayScreen Instance
         {
             get
@@ -45,25 +91,20 @@ namespace HelProject.UI
             }
         }
 
-        private PlayScreen() { }
-
         /// <summary>
-        /// Playable character
+        /// Camera of the play screen
         /// </summary>
-        public HHero Hero
+        public Camera Camera
         {
-            get { return _hero; }
-            set { _hero = value; }
+            get { return _camera; }
+            set { _camera = value; }
         }
 
+
         /// <summary>
-        /// Map of the game
+        /// Private constructor
         /// </summary>
-        public HMap Map
-        {
-            get { return _map; }
-            set { _map = value; }
-        }
+        private PlayScreen() { /* no code... */ }
 
         /// <summary>
         /// Loads the content of the window
@@ -72,12 +113,22 @@ namespace HelProject.UI
         {
             base.LoadContent();
 
-            this.Camera = new Camera(new Vector2(10, 10), MainGame.Instance.GraphicsDevice.Viewport.Width, MainGame.Instance.GraphicsDevice.Viewport.Height);
+            /* MAP INITIALISATION */
+            this.MapDifficultyEasy = new HMap(800, 800, 1f);
+            this.MapDifficultyEasy.MakeCaverns();
+            this.MapDifficultyEasy.LoadContent();
 
-            this.Map = new HMap(200, 200, 1f);
-            this.Map.MakeCaverns();
-            this.Map.LoadContent();
+            this.MapDifficultyMedium = new HMap(800, 800, 1f);
+            this.MapDifficultyMedium.MakeCaverns();
+            this.MapDifficultyMedium.LoadContent();
 
+            this.MapDifficultyHard = new HMap(800, 800, 1f);
+            this.MapDifficultyHard.MakeCaverns();
+            this.MapDifficultyHard.LoadContent();
+
+            this.CurrentMap = this.MapDifficultyEasy;
+
+            /* PLAYABLE CHARACTER INITIALISATION */
             FeatureCollection f = new FeatureCollection()
             {
                 Strenght = HEntity.DEFAULT_STRENGHT,
@@ -91,10 +142,14 @@ namespace HelProject.UI
                 InitialMovementSpeed = HEntity.DEFAULT_MOVEMENTSPEED,
                 InitialLifePoints = HEntity.DEFAULT_LIFEPOINTS
             };
-            this.Hero = new HHero(f, new Vector2(10, 10));
-            this.Hero.Texture = new Image();
-            this.Hero.Texture.ImagePath = "Entities/hero_a";
-            this.Hero.LoadContent();
+            this.PlayableCharacter = new HHero(f, new Vector2(10, 10));
+            this.PlayableCharacter.Texture = new Image();
+            this.PlayableCharacter.Texture.ImagePath = "Entities/hero_a";
+            this.PlayableCharacter.LoadContent();
+
+            // Camera initialisation, gets the width and height of the window
+            // and the position of the hero
+            this.Camera = new Camera(this.PlayableCharacter.Position, MainGame.Instance.GraphicsDevice.Viewport.Width, MainGame.Instance.GraphicsDevice.Viewport.Height);
         }
 
         /// <summary>
@@ -103,8 +158,8 @@ namespace HelProject.UI
         public override void UnloadContent()
         {
             base.UnloadContent();
-            this.Map.UnloadContent();
-            this.Hero.UnloadContent();
+            this.MapDifficultyEasy.UnloadContent();
+            this.PlayableCharacter.UnloadContent();
         }
 
         /// <summary>
@@ -113,14 +168,23 @@ namespace HelProject.UI
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            if (InputManager.Instance.IsKeyboardKeyDown(Keys.Space))
+            if (InputManager.Instance.IsKeyboardKeyDown(Keys.F8))
             {
-                this.Map.MakeRandomlyFilledMap();
-                this.Map.MakeCaverns();
+                this.CurrentMap.MakeRandomlyFilledMap();
+                this.CurrentMap.MakeCaverns();
             }
 
-            this.Hero.Update(gameTime);
-            //this.Map.FocusPosition = this.Hero.Position;
+            if (InputManager.Instance.IsKeyboardKeyDown(Keys.F9))
+            {
+                if (this.CurrentMap == this.MapDifficultyEasy)
+                    this.CurrentMap = this.MapDifficultyMedium;
+                else if (this.CurrentMap == this.MapDifficultyMedium)
+                    this.CurrentMap = this.MapDifficultyHard;
+                else if (this.CurrentMap == this.MapDifficultyHard)
+                    this.CurrentMap = this.MapDifficultyEasy;
+            }
+
+            this.PlayableCharacter.Update(gameTime);
         }
 
         /// <summary>
@@ -129,8 +193,8 @@ namespace HelProject.UI
         /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            this.Map.Draw(spriteBatch, this.Camera);
-            this.Hero.Draw(spriteBatch);
+            this.CurrentMap.Draw(spriteBatch, this.Camera);
+            this.PlayableCharacter.Draw(spriteBatch);
         }
     }
 }

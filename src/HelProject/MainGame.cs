@@ -1,11 +1,7 @@
-﻿using HelProject.GameWorld;
-using HelProject.Tools;
+﻿using HelProject.Tools;
 using HelProject.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using RogueSharp;
-using RogueSharp.Random;
 
 namespace HelProject
 {
@@ -18,6 +14,9 @@ namespace HelProject
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
 
+        /// <summary>
+        /// Instance of the Main Game
+        /// </summary>
         public static MainGame Instance
         {
             get
@@ -28,6 +27,9 @@ namespace HelProject
             }
         }
 
+        /// <summary>
+        /// private Constructor
+        /// </summary>
         private MainGame()
             : base()
         {

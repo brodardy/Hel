@@ -122,7 +122,7 @@ namespace HelProject.GameWorld.Entities
                 newPosition += direction * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed());
                 this.Direction = direction;
 
-                if (!PlayScreen.Instance.Map.IsCellNonwalkable(Convert.ToInt32(newPosition.X), Convert.ToInt32(newPosition.Y)))
+                if (!PlayScreen.Instance.CurrentMap.IsCellNonwalkable(Convert.ToInt32(newPosition.X), Convert.ToInt32(newPosition.Y)))
                 {
                     PlayScreen.Instance.Camera.Position = newPosition;
                     this.Position = newPosition;

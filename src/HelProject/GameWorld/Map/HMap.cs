@@ -1,7 +1,7 @@
 ﻿/*
  * Author : Yannick R. Brodard
  * File name : HMap.cs
- * Version : 0.2.201504240835
+ * Version : 0.4.201505120916
  * Description : The map class, creates a map
  */
 /* Helped by : http://www.csharpprogramming.tips/2013/07/Rouge-like-dungeon-generation.html */
@@ -30,8 +30,8 @@ namespace HelProject.GameWorld.Map
         protected const int MINIMUM_SMOOTHNESS = 1;
         protected const int MINIMUM_HEIGHT = 10;
         protected const int MINIMUM_WIDTH = 10;
-        protected const int MAXIMUM_HEIGHT = 200;
-        protected const int MAXIMUM_WIDTH = 200;
+        protected const int MAXIMUM_HEIGHT = 800;
+        protected const int MAXIMUM_WIDTH = 800;
         #endregion
 
         #region ATTRIBUTES
@@ -375,6 +375,9 @@ namespace HelProject.GameWorld.Map
             this.Cells[x, y].IsWalkable = isWalkable;
         }
 
+        /// <summary>
+        /// Loads the content
+        /// </summary>
         public void LoadContent()
         {
             this._content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
@@ -382,6 +385,9 @@ namespace HelProject.GameWorld.Map
             _wall = this._content.Load<Texture2D>("scenary/wall");
         }
 
+        /// <summary>
+        /// Unloads the content
+        /// </summary>
         public void UnloadContent()
         {
             this._content.Unload();
@@ -390,20 +396,26 @@ namespace HelProject.GameWorld.Map
         /// <summary>
         /// Draws the map
         /// </summary>
-        /// <param name="spriteBatch"></param>
+        /// <param name="spriteBatch">Spritebatch for drawing</param>
+        /// <param name="camera">Camera to determine where to draw</param>
         public void Draw(SpriteBatch spriteBatch, Camera camera)
         {
             int sizeOfSprites = this._floor.Height;
 
+            // Places the offset of the position so it is centered on the screen
             float offSetX = 0f, offSetY = 0f;
             offSetX = -camera.Position.X;
             offSetY = -camera.Position.Y;
+
+            // determins the start point for the drawing, so it doesn't draw useless cells
             Point startPoint = new Point((int)camera.Position.X - (int)(camera.Width / 2 / sizeOfSprites + 1),
                                      (int)camera.Position.Y - (int)(camera.Height / 2 / sizeOfSprites) - 1);
 
+            // determins the end point for the drawing, so it doesn't draw useless cells
             Point endPoint = new Point((int)camera.Position.X + (int)(camera.Width / 2 / sizeOfSprites + 1),
                                      (int)camera.Position.Y + (int)(camera.Height / 2 / sizeOfSprites + 2));
 
+            // For each cell from the start to end point, it draws it
             for (int y = startPoint.Y; y < endPoint.Y; y++)
             {
                 for (int x = startPoint.X; x < endPoint.X; x++)
