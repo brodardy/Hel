@@ -241,7 +241,7 @@ namespace HelProject.UI
         /// <param name="pos">Position of the object</param>
         /// <param name="tileSize">Size of a tile</param>
         /// <param name="scale">Scale</param>
-        /// <returns></returns>
+        /// <returns>On screen position</returns>
         public Vector2 GetCorrectScreenPosition(Vector2 pos, Vector2 cameraPostion, int tileSize = HelProject.GameWorld.Map.HCell.TILE_SIZE, float scale = 1.0f)
         {
             float offSetX = 0f, offSetY = 0f;

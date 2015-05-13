@@ -429,6 +429,35 @@ namespace HelProject.GameWorld.Map
                 }
             }
         }
+
+        /// <summary>
+        /// Gets a random walkable area
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 GetRandomSpawnPoint()
+        {
+            bool foundPosition = false;
+            Vector2 position = Vector2.One;
+            while (!foundPosition)
+            {
+                int rX = rand.Next(0, this.Width);
+                int rY = rand.Next(0, this.Height);
+
+                HCell foundCell = this.GetCell(rX, rY);
+
+                if (foundCell.IsWalkable)
+                {
+                    int unWalkableCells = this.GetNumberOfAdjacentUnwalkableCells(rX, rY, 1, 1);
+                    if (unWalkableCells == 0)
+                    {
+                        foundPosition = true;
+                        position = foundCell.Position;
+                    }
+                }
+            }
+
+            return position;
+        }
         #endregion
 
         #region PRIVATE METHODS

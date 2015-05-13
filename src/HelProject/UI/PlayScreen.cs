@@ -143,7 +143,7 @@ namespace HelProject.UI
                 InitialLifePoints = HEntity.DEFAULT_LIFEPOINTS
             };
             Texture2D texture = MainGame.Instance.Content.Load<Texture2D>("Entities/hero_a");
-            Vector2 position = new Vector2(10, 10);
+            Vector2 position = this.CurrentMap.GetRandomSpawnPoint();
             this.PlayableCharacter = new HHero(f, position, 1f, 1.5f, texture);
             this.PlayableCharacter.LoadContent();
 
@@ -158,7 +158,10 @@ namespace HelProject.UI
         public override void UnloadContent()
         {
             base.UnloadContent();
+            this.CurrentMap = null;
             this.MapDifficultyEasy.UnloadContent();
+            this.MapDifficultyMedium.UnloadContent();
+            this.MapDifficultyHard.UnloadContent();
             this.PlayableCharacter.UnloadContent();
         }
 
