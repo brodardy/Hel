@@ -32,7 +32,9 @@ void \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_af8280a0980fb4b12d2
 \hyperlink{class_hel_project_1_1_u_i_1_1_game_screen}{Game\+Screen} \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_a61f086a7ce24b6c365d09c5a0d4f74bb}{Prepare\+Screen} (string load\+Content, \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_af86dcb0d11cec6ce52f50e9b98798175}{Screen\+Types} screen\+Type)
 \begin{DoxyCompactList}\small\item\em Prepares an initialized screen \end{DoxyCompactList}\item 
 \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_af86dcb0d11cec6ce52f50e9b98798175}{Screen\+Types} \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_a7c9a1573412a1177692cfff5302a63cc}{Get\+Current\+Screen\+Type} ()
-\begin{DoxyCompactList}\small\item\em Gives the current screen type of the game \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Gives the current screen type of the game \end{DoxyCompactList}\item 
+Vector2 \hyperlink{class_hel_project_1_1_u_i_1_1_screen_manager_adcd226de04d0359300cdd2bc8dd32968}{Get\+Correct\+Screen\+Position} (Vector2 pos, Vector2 camera\+Postion, int tile\+Size=Hel\+Project.\+Game\+World.\+Map.\+H\+Cell.\+T\+I\+L\+E\+\_\+\+S\+I\+Z\+E, float scale=1.\+0f)
+\begin{DoxyCompactList}\small\item\em Gets the correct position on the screen \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -97,6 +99,32 @@ Draws the content
 {\em sprite\+Batch} & \\
 \hline
 \end{DoxyParams}
+\hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_adcd226de04d0359300cdd2bc8dd32968}{}\index{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}!Get\+Correct\+Screen\+Position@{Get\+Correct\+Screen\+Position}}
+\index{Get\+Correct\+Screen\+Position@{Get\+Correct\+Screen\+Position}!Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}}
+\subsubsection[{Get\+Correct\+Screen\+Position}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Hel\+Project.\+U\+I.\+Screen\+Manager.\+Get\+Correct\+Screen\+Position (
+\begin{DoxyParamCaption}
+\item[{Vector2}]{pos, }
+\item[{Vector2}]{camera\+Postion, }
+\item[{int}]{tile\+Size = {\ttfamily HelProject.GameWorld.Map.HCell.TILE\+\_\+SIZE}, }
+\item[{float}]{scale = {\ttfamily 1.0f}}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_u_i_1_1_screen_manager_adcd226de04d0359300cdd2bc8dd32968}
+
+
+Gets the correct position on the screen 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & Position of the object\\
+\hline
+{\em tile\+Size} & Size of a tile\\
+\hline
+{\em scale} & Scale\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+On screen position
+\end{DoxyReturn}
 \hypertarget{class_hel_project_1_1_u_i_1_1_screen_manager_a7c9a1573412a1177692cfff5302a63cc}{}\index{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}!Get\+Current\+Screen\+Type@{Get\+Current\+Screen\+Type}}
 \index{Get\+Current\+Screen\+Type@{Get\+Current\+Screen\+Type}!Hel\+Project\+::\+U\+I\+::\+Screen\+Manager@{Hel\+Project\+::\+U\+I\+::\+Screen\+Manager}}
 \subsubsection[{Get\+Current\+Screen\+Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Screen\+Types} Hel\+Project.\+U\+I.\+Screen\+Manager.\+Get\+Current\+Screen\+Type (

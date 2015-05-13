@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['xmlmanager',['XmlManager',['../class_hel_project_1_1_tools_1_1_xml_manager.html',1,'HelProject::Tools']]],
-  ['xmlmanager_3c_20helproject_3a_3aui_3a_3agamescreen_20_3e',['XmlManager&lt; HelProject::UI::GameScreen &gt;',['../class_hel_project_1_1_tools_1_1_xml_manager.html',1,'HelProject::Tools']]]
+  ['playscreen',['PlayScreen',['../class_hel_project_1_1_u_i_1_1_play_screen.html',1,'HelProject::UI']]]
 ];

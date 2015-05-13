@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_hel_project_1_1_game_world_1_1_h_item.html" title="Item class " alt="" coords="5,5,199,32"/>
+<area shape="rect" id="node1" href="$class_hel_project_1_1_game_world_1_1_h_object.html" title="Abstract class for all entities of the game " alt="" coords="5,46,212,73"/>
+<area shape="rect" id="node2" href="$class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity.html" title="Base abstract class for the entities of the game " alt="" coords="260,5,467,47"/>
+<area shape="rect" id="node4" href="$class_hel_project_1_1_game_world_1_1_map_1_1_h_cell.html" title="Cell of a map " alt="" coords="269,71,457,112"/>
+<area shape="rect" id="node3" href="$class_hel_project_1_1_game_world_1_1_entities_1_1_h_hero.html" title="Controllable entity " alt="" coords="515,5,721,47"/>
 </map>
