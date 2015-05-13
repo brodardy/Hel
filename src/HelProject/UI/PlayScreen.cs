@@ -100,7 +100,6 @@ namespace HelProject.UI
             set { _camera = value; }
         }
 
-
         /// <summary>
         /// Private constructor
         /// </summary>
@@ -113,7 +112,50 @@ namespace HelProject.UI
         {
             base.LoadContent();
 
-            /* MAP INITIALISATION */
+            this.LoadMaps();
+            this.LoadPlayableCharacter();
+
+            // Camera initialisation, gets the width and height of the window
+            // and the position of the hero
+            this.Camera = new Camera(this.PlayableCharacter.Position, MainGame.Instance.GraphicsDevice.Viewport.Width, MainGame.Instance.GraphicsDevice.Viewport.Height);
+        }
+
+        /// <summary>
+        /// Unloads the content of the window
+        /// </summary>
+        public override void UnloadContent()
+        {
+            base.UnloadContent();
+
+            this.UnloadMaps();
+            this.PlayableCharacter.UnloadContent();
+        }
+
+        /// <summary>
+        /// Updates the mechanisms
+        /// </summary>
+        /// <param name="gameTime"></param>
+        public override void Update(GameTime gameTime)
+        {
+            this.UpdateMapControl();
+            this.PlayableCharacter.Update(gameTime);
+        }
+
+        /// <summary>
+        /// Draws on the window
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            this.CurrentMap.Draw(spriteBatch, this.Camera);
+            this.PlayableCharacter.Draw(spriteBatch);
+        }
+
+        /// <summary>
+        /// Map initialization
+        /// </summary>
+        private void LoadMaps()
+        {
             this.MapDifficultyEasy = new HMap(200, 200, 1f);
             this.MapDifficultyEasy.MakeCaverns();
             this.MapDifficultyEasy.LoadContent();
@@ -127,8 +169,24 @@ namespace HelProject.UI
             this.MapDifficultyHard.LoadContent();
 
             this.CurrentMap = this.MapDifficultyEasy;
+        }
 
-            /* PLAYABLE CHARACTER INITIALISATION */
+        /// <summary>
+        /// Unloads the maps
+        /// </summary>
+        private void UnloadMaps()
+        {
+            this.CurrentMap = null;
+            this.MapDifficultyEasy.UnloadContent();
+            this.MapDifficultyMedium.UnloadContent();
+            this.MapDifficultyHard.UnloadContent();
+        }
+
+        /// <summary>
+        /// Loads the playable character
+        /// </summary>
+        private void LoadPlayableCharacter()
+        {
             FeatureCollection f = new FeatureCollection()
             {
                 Strenght = HEntity.DEFAULT_STRENGHT,
@@ -146,30 +204,12 @@ namespace HelProject.UI
             Vector2 position = this.CurrentMap.GetRandomSpawnPoint();
             this.PlayableCharacter = new HHero(f, position, 1f, 1.5f, texture);
             this.PlayableCharacter.LoadContent();
-
-            // Camera initialisation, gets the width and height of the window
-            // and the position of the hero
-            this.Camera = new Camera(this.PlayableCharacter.Position, MainGame.Instance.GraphicsDevice.Viewport.Width, MainGame.Instance.GraphicsDevice.Viewport.Height);
         }
 
         /// <summary>
-        /// Unloads the content of the window
+        /// Update method to update the map control mechanisms
         /// </summary>
-        public override void UnloadContent()
-        {
-            base.UnloadContent();
-            this.CurrentMap = null;
-            this.MapDifficultyEasy.UnloadContent();
-            this.MapDifficultyMedium.UnloadContent();
-            this.MapDifficultyHard.UnloadContent();
-            this.PlayableCharacter.UnloadContent();
-        }
-
-        /// <summary>
-        /// Updates the mechanisms
-        /// </summary>
-        /// <param name="gameTime"></param>
-        public override void Update(GameTime gameTime)
+        private void UpdateMapControl()
         {
             if (InputManager.Instance.IsKeyboardKeyDown(Keys.F8))
             {
@@ -186,18 +226,6 @@ namespace HelProject.UI
                 else if (this.CurrentMap == this.MapDifficultyHard)
                     this.CurrentMap = this.MapDifficultyEasy;
             }
-
-            this.PlayableCharacter.Update(gameTime);
-        }
-
-        /// <summary>
-        /// Draws on the window
-        /// </summary>
-        /// <param name="spriteBatch"></param>
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            this.CurrentMap.Draw(spriteBatch, this.Camera);
-            this.PlayableCharacter.Draw(spriteBatch);
         }
     }
 }

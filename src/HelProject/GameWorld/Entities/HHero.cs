@@ -112,9 +112,8 @@ namespace HelProject.GameWorld.Entities
 
                 float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds; // gets the elapsed time in seconds from the last update
                 newPosition += direction * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed()); // Calculates the new position
-                FRectangle newBounds = new FRectangle(this.Bounds.Width, this.Bounds.Height);
+                FRectangle newBounds = new FRectangle(this.Bounds.Width, this.Bounds.Height); // ready the new bounds of the character
                 newBounds.SetBounds(newPosition, this.Texture.Width, this.Texture.Height);
-                this.Direction = direction; // Update the direction the hero is facing
 
                 // Is the position of the hero on a walkable area ?
                 if (this.IsCharacterSurfaceWalkable(newPosition, newBounds))
@@ -123,6 +122,56 @@ namespace HelProject.GameWorld.Entities
                     this.Position = newPosition; // Apply the new position to the hero
                     this.Bounds = newBounds; // Apply the new bounds to the hero
                 }
+                else
+                {
+                    newPosition = this.Position;
+                    float nX = (direction.X >= 0) ? direction.X : direction.X * -1;
+                    float nY = (direction.Y >= 0) ? direction.Y : direction.Y * -1;
+
+                    if (nX > nY)
+                    {
+                        newPosition += new Vector2(direction.X, 0.0f) * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed());
+                    }
+                    else if (nX < nY)
+                    {
+                        newPosition += new Vector2(0.0f, direction.Y) * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed());
+                    }
+
+                    newBounds.SetBounds(newPosition, this.Texture.Width, this.Texture.Height);
+
+                    if (this.IsCharacterSurfaceWalkable(newPosition, newBounds))
+                    {
+                        PlayScreen.Instance.Camera.Position = newPosition; // Apply the new position to the camera
+                        this.Position = newPosition; // Apply the new position to the hero
+                        this.Bounds = newBounds; // Apply the new bounds to the hero
+                    }
+                    else
+                    {
+                        newPosition = this.Position;
+                        nX = (direction.X >= 0) ? direction.X : direction.X * -1;
+                        nY = (direction.Y >= 0) ? direction.Y : direction.Y * -1;
+
+                        if (nX < nY)
+                        {
+                            newPosition += new Vector2(direction.X, 0.0f) * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed());
+                        }
+                        else if (nX > nY)
+                        {
+                            newPosition += new Vector2(0.0f, direction.Y) * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed());
+                        }
+
+                        newBounds.SetBounds(newPosition, this.Texture.Width, this.Texture.Height);
+
+                        if (this.IsCharacterSurfaceWalkable(newPosition, newBounds))
+                        {
+                            PlayScreen.Instance.Camera.Position = newPosition; // Apply the new position to the camera
+                            this.Position = newPosition; // Apply the new position to the hero
+                            this.Bounds = newBounds; // Apply the new bounds to the hero
+                        }
+                    }
+                }
+
+                this.Direction = direction; // Update the direction the hero is facing
             }
             else
             {
@@ -139,38 +188,12 @@ namespace HelProject.GameWorld.Entities
         public bool IsCharacterSurfaceWalkable(Vector2 position, FRectangle bounds)
         {
             bool validArea = true;
+            List<HCell> unwalkableAdjacentCells = PlayScreen.Instance.CurrentMap.GetAdjacentUnwalkableCells((int)this.Position.X, (int)this.Position.Y, 1, 1);
+            int nbrCells = unwalkableAdjacentCells.Count;
 
-            HCell testedCell = PlayScreen.Instance.CurrentMap.GetCell((int)bounds.Left, (int)bounds.Top);
-            if (!testedCell.IsWalkable)
+            for (int i = 0; i < nbrCells; i++)
             {
-                if (bounds.Intersects(testedCell.Bounds))
-                {
-                    validArea = false;
-                }
-            }
-
-            testedCell = PlayScreen.Instance.CurrentMap.GetCell((int)bounds.Right, (int)this.Bounds.Top);
-            if (!testedCell.IsWalkable)
-            {
-                if (bounds.Intersects(testedCell.Bounds))
-                {
-                    validArea = false;
-                }
-            }
-
-            testedCell = PlayScreen.Instance.CurrentMap.GetCell((int)bounds.Left, (int)bounds.Bottom);
-            if (!testedCell.IsWalkable)
-            {
-                if (bounds.Intersects(testedCell.Bounds))
-                {
-                    validArea = false;
-                }
-            }
-
-            testedCell = PlayScreen.Instance.CurrentMap.GetCell((int)bounds.Right, (int)bounds.Bottom);
-            if (!testedCell.IsWalkable)
-            {
-                if (bounds.Intersects(testedCell.Bounds))
+                if (bounds.Intersects(unwalkableAdjacentCells[i].Bounds))
                 {
                     validArea = false;
                 }

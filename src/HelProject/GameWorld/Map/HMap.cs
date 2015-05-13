@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 #endregion
 
 namespace HelProject.GameWorld.Map
@@ -290,6 +291,35 @@ namespace HelProject.GameWorld.Map
             }
 
             return wallCounter;
+        }
+
+        public List<HCell> GetAdjacentUnwalkableCells(int x, int y, int scopeX, int scopeY)
+        {
+            List<HCell> unwalkableCells = new List<HCell>();
+
+            int startX = x - scopeX;
+            int startY = y - scopeY;
+            int endX = x + scopeX;
+            int endY = y + scopeY;
+
+            int iX = startX;
+            int iY = startY;
+
+            for (iY = startY; iY <= endY; iY++)
+            {
+                for (iX = startX; iX <= endX; iX++)
+                {
+                    if (!(iX == x && iY == y))
+                    {
+                        if (this.IsCellNonwalkable(iX, iY))
+                        {
+                            unwalkableCells.Add(this.GetCell(iX, iY));
+                        }
+                    }
+                }
+            }
+
+            return unwalkableCells;
         }
 
         /// <summary>
