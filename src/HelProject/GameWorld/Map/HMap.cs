@@ -40,8 +40,6 @@ namespace HelProject.GameWorld.Map
         private int _height; // Height of the map
         private int _width; // Width of the map
         private int _nonWalkableSpacePercentage; // Percentage of walkable area in the map
-        private Texture2D _floor; // texture for the floor
-        private Texture2D _wall;  // texture for the walls
         private ContentManager _content; // content manager
         private float _scale;
         #endregion
@@ -378,8 +376,6 @@ namespace HelProject.GameWorld.Map
         public void LoadContent()
         {
             this._content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
-            _floor = this._content.Load<Texture2D>("scenary/floor");
-            _wall = this._content.Load<Texture2D>("scenary/wall");
         }
 
         /// <summary>
@@ -397,7 +393,9 @@ namespace HelProject.GameWorld.Map
         /// <param name="camera">Camera to determine where to draw</param>
         public void Draw(SpriteBatch spriteBatch, Camera camera)
         {
-            int sizeOfSprites = this._floor.Height;
+            int sizeOfSprites = HCell.TILE_SIZE;
+            Texture2D _floor = TextureManager.Instance.LoadedTextures["floor"];
+            Texture2D _wall = TextureManager.Instance.LoadedTextures["wall"];
 
             // determins the start point for the drawing, so it doesn't draw useless cells
             Point startPoint = new Point((int)camera.Position.X - (int)(camera.Width / 2 / sizeOfSprites + 1),

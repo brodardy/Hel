@@ -142,7 +142,7 @@ namespace HelProject.UI
                 InitialMovementSpeed = HEntity.DEFAULT_MOVEMENTSPEED,
                 InitialLifePoints = HEntity.DEFAULT_LIFEPOINTS
             };
-            Texture2D texture = MainGame.Instance.Content.Load<Texture2D>("Entities/hero_a");
+            Texture2D texture = TextureManager.Instance.LoadedTextures["hero"];
             Vector2 position = this.CurrentMap.GetRandomSpawnPoint();
             this.PlayableCharacter = new HHero(f, position, 1f, 1.5f, texture);
             this.PlayableCharacter.LoadContent();

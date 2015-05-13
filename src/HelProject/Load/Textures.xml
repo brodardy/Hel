@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<items xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <TemporaryDictionnaryItem id="wall" path="scenary/wall" />
+  <TemporaryDictionnaryItem id="floor" path="scenary/floor" />
+  <TemporaryDictionnaryItem id="hero" path="entities/hero_a" />
+</items>

@@ -3,6 +3,7 @@ using HelProject.Tools;
 using HelProject.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace HelProject
 {
@@ -55,6 +56,8 @@ namespace HelProject
             _graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             _graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
             _graphics.ApplyChanges();
+
+            TextureManager.Instance.Load("Load/Textures.xml");
 
             base.Initialize();
         }
