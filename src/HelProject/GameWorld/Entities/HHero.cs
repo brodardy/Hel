@@ -115,61 +115,7 @@ namespace HelProject.GameWorld.Entities
                 FRectangle newBounds = new FRectangle(this.Bounds.Width, this.Bounds.Height); // ready the new bounds of the character
                 newBounds.SetBounds(newPosition, this.Texture.Width, this.Texture.Height);
 
-                // Is the position of the hero on a walkable area ?
-                if (this.IsCharacterSurfaceWalkable(newPosition, newBounds))
-                {
-                    PlayScreen.Instance.Camera.Position = newPosition; // Apply the new position to the camera
-                    this.Position = newPosition; // Apply the new position to the hero
-                    this.Bounds = newBounds; // Apply the new bounds to the hero
-                }
-                else
-                {
-                    newPosition = this.Position;
-                    float nX = (direction.X >= 0) ? direction.X : direction.X * -1;
-                    float nY = (direction.Y >= 0) ? direction.Y : direction.Y * -1;
-
-                    if (nX > nY)
-                    {
-                        newPosition += new Vector2(direction.X, 0.0f) * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed());
-                    }
-                    else if (nX < nY)
-                    {
-                        newPosition += new Vector2(0.0f, direction.Y) * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed());
-                    }
-
-                    newBounds.SetBounds(newPosition, this.Texture.Width, this.Texture.Height);
-
-                    if (this.IsCharacterSurfaceWalkable(newPosition, newBounds))
-                    {
-                        PlayScreen.Instance.Camera.Position = newPosition; // Apply the new position to the camera
-                        this.Position = newPosition; // Apply the new position to the hero
-                        this.Bounds = newBounds; // Apply the new bounds to the hero
-                    }
-                    else
-                    {
-                        newPosition = this.Position;
-                        nX = (direction.X >= 0) ? direction.X : direction.X * -1;
-                        nY = (direction.Y >= 0) ? direction.Y : direction.Y * -1;
-
-                        if (nX < nY)
-                        {
-                            newPosition += new Vector2(direction.X, 0.0f) * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed());
-                        }
-                        else if (nX > nY)
-                        {
-                            newPosition += new Vector2(0.0f, direction.Y) * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed());
-                        }
-
-                        newBounds.SetBounds(newPosition, this.Texture.Width, this.Texture.Height);
-
-                        if (this.IsCharacterSurfaceWalkable(newPosition, newBounds))
-                        {
-                            PlayScreen.Instance.Camera.Position = newPosition; // Apply the new position to the camera
-                            this.Position = newPosition; // Apply the new position to the hero
-                            this.Bounds = newBounds; // Apply the new bounds to the hero
-                        }
-                    }
-                }
+                this.ApplyFluidMovement(direction, newPosition, newBounds, elapsedTime);
 
                 this.Direction = direction; // Update the direction the hero is facing
             }
@@ -177,29 +123,6 @@ namespace HelProject.GameWorld.Entities
             {
                 this.State = EntityState.Idle;
             }
-        }
-
-        /// <summary>
-        /// Checks if the surface where the hero is present if walkable
-        /// </summary>
-        /// <param name="position">Position of the hero</param>
-        /// <param name="bounds">Bounds of the hero</param>
-        /// <returns></returns>
-        public bool IsCharacterSurfaceWalkable(Vector2 position, FRectangle bounds)
-        {
-            bool validArea = true;
-            List<HCell> unwalkableAdjacentCells = PlayScreen.Instance.CurrentMap.GetAdjacentUnwalkableCells((int)this.Position.X, (int)this.Position.Y, 1, 1);
-            int nbrCells = unwalkableAdjacentCells.Count;
-
-            for (int i = 0; i < nbrCells; i++)
-            {
-                if (bounds.Intersects(unwalkableAdjacentCells[i].Bounds))
-                {
-                    validArea = false;
-                }
-            }
-
-            return validArea;
         }
 
         /// <summary>
