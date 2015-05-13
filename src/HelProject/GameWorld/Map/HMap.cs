@@ -399,11 +399,6 @@ namespace HelProject.GameWorld.Map
         {
             int sizeOfSprites = this._floor.Height;
 
-            // Places the offset of the position so it is centered on the screen
-            float offSetX = 0f, offSetY = 0f;
-            offSetX = -camera.Position.X;
-            offSetY = -camera.Position.Y;
-
             // determins the start point for the drawing, so it doesn't draw useless cells
             Point startPoint = new Point((int)camera.Position.X - (int)(camera.Width / 2 / sizeOfSprites + 1),
                                      (int)camera.Position.Y - (int)(camera.Height / 2 / sizeOfSprites) - 1);
@@ -420,12 +415,8 @@ namespace HelProject.GameWorld.Map
                     if (!this.IsCellOutOfBounds(x, y))
                     {
                         HCell cell = this.GetCell(x, y);
-                        Vector2 position = new Vector2(cell.Position.X * sizeOfSprites * this.Scale + // X Pos
-                                                       offSetX * sizeOfSprites * this.Scale +
-                                                       spriteBatch.GraphicsDevice.Viewport.Width / 2,
-                                                       cell.Position.Y * sizeOfSprites * this.Scale + // Y Pos
-                                                       offSetY * sizeOfSprites * this.Scale +
-                                                       spriteBatch.GraphicsDevice.Viewport.Height / 2);
+                        Vector2 position = ScreenManager.Instance.GetCorrectScreenPosition(cell.Position, camera.Position);
+
                         if (cell.IsWalkable)
                         {
                             spriteBatch.Draw(_floor, position, null, null, null, 0.0f, new Vector2(this.Scale, this.Scale), Color.White);

@@ -6,6 +6,7 @@
  */
 
 using HelProject.Features;
+using HelProject.GameWorld.Map;
 using HelProject.GameWorld.Spells;
 using HelProject.Tools;
 using HelProject.UI;
@@ -28,16 +29,6 @@ namespace HelProject.GameWorld.Entities
         private HSpell _spellSlot2;
         private HSpell _spellSlot3;
         private HSpell _spellSlot4;
-        private Image _texture;
-
-        /// <summary>
-        /// Sprite of the hero
-        /// </summary>
-        public Image Texture
-        {
-            get { return _texture; }
-            set { _texture = value; }
-        }
 
         /// <summary>
         /// Spell present in slot 1
@@ -80,7 +71,7 @@ namespace HelProject.GameWorld.Entities
         /// </summary>
         /// <param name="initialFeatures">Initial features of the entity</param>
         /// <param name="position">Position of the enitity</param>
-        public HHero(FeatureCollection initialFeatures, Vector2 position, FRectangle bounds, Texture2D texture) : base(initialFeatures, position, bounds, texture) { /* no code... */ }
+        public HHero(FeatureCollection initialFeatures, Vector2 position, float width, float height, Texture2D texture) : base(initialFeatures, position, width, height, texture) { /* no code... */ }
 
         /// <summary>
         /// Loads the content of the entity
@@ -88,7 +79,6 @@ namespace HelProject.GameWorld.Entities
         public override void LoadContent()
         {
             base.LoadContent();
-            this.Texture.LoadContent();
         }
 
         /// <summary>
@@ -97,7 +87,6 @@ namespace HelProject.GameWorld.Entities
         public override void UnloadContent()
         {
             base.UnloadContent();
-            this.Texture.UnloadContent();
         }
 
         /// <summary>
@@ -112,60 +101,82 @@ namespace HelProject.GameWorld.Entities
             MouseState ms = InputManager.Instance.MsState; // gets the current state of the mouse
 
             // is the right button of the mouse clicked ?
-            if (ms.RightButton == ButtonState.Pressed)
+            if (ms.LeftButton == ButtonState.Pressed)
             {
                 // Update hero state to running
                 this.State = EntityState.Running;
 
                 Vector2 mouseVector = ms.Position.ToVector2(); // Gets mouse position
-                Vector2 direction = mouseVector - ScreenManager.Instance.GetCorrectScreenPosition(this.Position, 32); // Gets the direction of the mouse from the player
+                Vector2 direction = mouseVector - ScreenManager.Instance.GetCorrectScreenPosition(this.Position, PlayScreen.Instance.Camera.Position, 32); // Gets the direction of the mouse from the player
                 direction.Normalize(); // Normalize the direction vector
 
                 float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds; // gets the elapsed time in seconds from the last update
                 newPosition += direction * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed()); // Calculates the new position
+                FRectangle newBounds = new FRectangle(this.Bounds.Width, this.Bounds.Height);
+                newBounds.SetBounds(newPosition, this.Texture.Width, this.Texture.Height);
                 this.Direction = direction; // Update the direction the hero is facing
 
-                //// Is the position of the hero on a walkable area ?
-                //if (!PlayScreen.Instance.CurrentMap.IsCellNonwalkable(Convert.ToInt32(newPosition.X), Convert.ToInt32(newPosition.Y)))
-                //{
-                //    PlayScreen.Instance.Camera.Position = newPosition; // Apply the new position to the camera
-                //    this.Position = newPosition;// Apply the new position to the hero
-                //}
-
-                if (this.IsCharacterSurfaceWalkable(newPosition))
+                // Is the position of the hero on a walkable area ?
+                if (this.IsCharacterSurfaceWalkable(newPosition, newBounds))
                 {
                     PlayScreen.Instance.Camera.Position = newPosition; // Apply the new position to the camera
-                    this.Position = newPosition;// Apply the new position to the hero
+                    this.Position = newPosition; // Apply the new position to the hero
+                    this.Bounds = newBounds; // Apply the new bounds to the hero
                 }
             }
             else
             {
                 this.State = EntityState.Idle;
             }
-
-            this.Texture.Update(gameTime); // Updates the texture of the hero
         }
 
-        public bool IsCharacterSurfaceWalkable(Vector2 position)
+        /// <summary>
+        /// Checks if the surface where the hero is present if walkable
+        /// </summary>
+        /// <param name="position">Position of the hero</param>
+        /// <param name="bounds">Bounds of the hero</param>
+        /// <returns></returns>
+        public bool IsCharacterSurfaceWalkable(Vector2 position, FRectangle bounds)
         {
-            //bool validArea = true;
-            //for (int i = 1; i <= this.Texture.Texture.Width; i++)
-            //{
-            //    float mapRelatedTextureHeight = (float)this.Texture.Texture.Height / 128f;
-            //    float mapRelatedTextureWidth = (float)this.Texture.Texture.Width / 128f;
+            bool validArea = true;
 
-            //    float testY = position.Y - mapRelatedTextureHeight / 2f;
-            //    float testX = (position.X - mapRelatedTextureWidth / 2f) + ((float)i / 32f);
-            //    if (PlayScreen.Instance.CurrentMap.IsCellNonwalkable((int)testX, (int)testY))
-            //    {
-            //        validArea = false;
-            //        break;
-            //    }
-            //}
+            HCell testedCell = PlayScreen.Instance.CurrentMap.GetCell((int)bounds.Left, (int)bounds.Top);
+            if (!testedCell.IsWalkable)
+            {
+                if (bounds.Intersects(testedCell.Bounds))
+                {
+                    validArea = false;
+                }
+            }
 
-            //return validArea;
+            testedCell = PlayScreen.Instance.CurrentMap.GetCell((int)bounds.Right, (int)this.Bounds.Top);
+            if (!testedCell.IsWalkable)
+            {
+                if (bounds.Intersects(testedCell.Bounds))
+                {
+                    validArea = false;
+                }
+            }
 
-            return !PlayScreen.Instance.CurrentMap.IsCellNonwalkable(Convert.ToInt32(position.X), Convert.ToInt32(position.Y));
+            testedCell = PlayScreen.Instance.CurrentMap.GetCell((int)bounds.Left, (int)bounds.Bottom);
+            if (!testedCell.IsWalkable)
+            {
+                if (bounds.Intersects(testedCell.Bounds))
+                {
+                    validArea = false;
+                }
+            }
+
+            testedCell = PlayScreen.Instance.CurrentMap.GetCell((int)bounds.Right, (int)bounds.Bottom);
+            if (!testedCell.IsWalkable)
+            {
+                if (bounds.Intersects(testedCell.Bounds))
+                {
+                    validArea = false;
+                }
+            }
+
+            return validArea;
         }
 
         /// <summary>
@@ -178,13 +189,13 @@ namespace HelProject.GameWorld.Entities
             //spriteBatch.Draw(this.Texture.Texture, ScreenManager.Instance.GetCorrectScreenPosition(this.Texture.Position, 32),
             //    this.Texture.SourceRect, Color.White, 0.0f, this.Texture.Position, 1f, SpriteEffects.None, 0f);
 
-            Vector2 position = ScreenManager.Instance.GetCorrectScreenPosition(this.Position);
+            //Vector2 position = ScreenManager.Instance.GetCorrectScreenPosition(this.Position);
             //Vector2 offSet = new Vector2(16);
             //this.Texture.Position = position + offSet;
             //this.Texture.Draw(spriteBatch);
 
-            SpriteFont font = this.Texture.Font;
-            spriteBatch.DrawString(font, "@", position, Color.Black);
+            //SpriteFont font = this.Texture.Font;
+            //spriteBatch.DrawString(font, "@", position, Color.Black);
         }
     }
 }

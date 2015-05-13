@@ -7,6 +7,7 @@
 
 using HelHelProject.Tools;
 using HelProject.Features;
+using HelProject.GameWorld.Map;
 using HelProject.Tools;
 using HelProject.UI;
 using Microsoft.Xna.Framework;
@@ -133,14 +134,14 @@ namespace HelProject.GameWorld.Entities
                 InitialManaRegeneration = DEFAULT_MANAREGENERATION,
                 InitialMovementSpeed = DEFAULT_MOVEMENTSPEED,
                 InitialLifePoints = DEFAULT_LIFEPOINTS
-            }, position, null, null) { /* no code... */ }
+            }, position, 0f, 0f, null) { /* no code... */ }
 
         /// <summary>
         /// Creates an entity
         /// </summary>
         /// <param name="initialFeatures">Initial Features of the enitity</param>
         /// <param name="position">Position of the entity</param>
-        public HEntity(FeatureCollection initialFeatures, Vector2 position, FRectangle bounds = null, Texture2D texture = null)
+        public HEntity(FeatureCollection initialFeatures, Vector2 position, float width, float height, Texture2D texture)
             : base(true, position)
         {
             this.InitialFeatures = initialFeatures;
@@ -149,8 +150,9 @@ namespace HelProject.GameWorld.Entities
             this.ActualFeatures = this.FeatureCalculator.GetCalculatedFeatures();
             this.MaximizedFeatures = (FeatureCollection)this.ActualFeatures.Clone();
             this.State = EntityState.Idle;
-            this.Bounds = bounds;
             this.Texture = texture;
+            this.Bounds = new FRectangle(width, height);
+            this.Bounds.SetBounds(position, texture.Width, texture.Height);
         }
 
         /// <summary>
@@ -164,23 +166,9 @@ namespace HelProject.GameWorld.Entities
             if (this.Texture != null && this.Bounds != null)
             {
                 Vector2 boundsPosA = new Vector2(this.Bounds.X, this.Bounds.Y);
-                Vector2 boundsPosB = new Vector2(this.Bounds.X + this.Bounds.Width, this.Bounds.Y);
-                Vector2 boundsPosC = new Vector2(this.Bounds.X + this.Bounds.Width, this.Bounds.Y + this.Bounds.Height);
-                Vector2 boundsPosD = new Vector2(this.Bounds.X, this.Bounds.Y + this.Bounds.Height);
 
-                Vector2 position = ScreenManager.Instance.GetCorrectScreenPosition(boundsPosA);
+                Vector2 position = ScreenManager.Instance.GetCorrectScreenPosition(boundsPosA, PlayScreen.Instance.Camera.Position);
                 spriteBatch.Draw(this.Texture, position, Color.White);
-
-                boundsPosA = ScreenManager.Instance.GetCorrectScreenPosition(boundsPosA);
-                boundsPosB = ScreenManager.Instance.GetCorrectScreenPosition(boundsPosB);
-                boundsPosC = ScreenManager.Instance.GetCorrectScreenPosition(boundsPosC);
-                boundsPosD = ScreenManager.Instance.GetCorrectScreenPosition(boundsPosD);
-
-                /* CONTINUE HERE */
-                Primitives2D.DrawLine(boundsPosA, boundsPosB, Color.Red);
-                Primitives2D.DrawLine(boundsPosB, boundsPosC, Color.Red);
-                Primitives2D.DrawLine(boundsPosC, boundsPosD, Color.Red);
-                Primitives2D.DrawLine(boundsPosD, boundsPosA, Color.Red);
             }
         }
 

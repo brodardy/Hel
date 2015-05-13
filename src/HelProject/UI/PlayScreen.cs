@@ -144,10 +144,7 @@ namespace HelProject.UI
             };
             Texture2D texture = MainGame.Instance.Content.Load<Texture2D>("Entities/hero_a");
             Vector2 position = new Vector2(10, 10);
-            FRectangle bounds = new FRectangle(position.X - texture.Width / 2f, position.Y - texture.Height / 2f, 0.8f, 1.5f);
-            this.PlayableCharacter = new HHero(f, position, bounds, texture);
-            this.PlayableCharacter.Texture = new Image();
-            this.PlayableCharacter.Texture.ImagePath = "Entities/hero_a";
+            this.PlayableCharacter = new HHero(f, position, 1f, 1.5f, texture);
             this.PlayableCharacter.LoadContent();
 
             // Camera initialisation, gets the width and height of the window

@@ -21,6 +21,19 @@ namespace HelProject.GameWorld.Map
     /// </summary>
     public class HCell : HObject
     {
+        public const int TILE_SIZE = 32;
+
+        private FRectangle _bounds;
+
+        /// <summary>
+        /// Bounds of the cells
+        /// </summary>
+        public FRectangle Bounds
+        {
+            get { return _bounds; }
+            set { _bounds = value; }
+        }
+
         #region CONSTRUCTORS
         /// <summary>
         /// Cell that represents a part of the map
@@ -48,6 +61,7 @@ namespace HelProject.GameWorld.Map
         {
             this.IsWalkable = isWalkable;
             this.Position = new Vector2((int)position.X, (int)position.Y); // casted to only have round numbers for cells
+            this.Bounds = new FRectangle(position.X, position.Y, 1f, 1f);
         }
         #endregion
     }

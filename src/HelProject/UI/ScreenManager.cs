@@ -235,18 +235,25 @@ namespace HelProject.UI
             }
         }
 
-        public Vector2 GetCorrectScreenPosition(Vector2 pos, int tileSize = 32, float scale = 1.0f)
+        /// <summary>
+        /// Gets the correct position on the screen
+        /// </summary>
+        /// <param name="pos">Position of the object</param>
+        /// <param name="tileSize">Size of a tile</param>
+        /// <param name="scale">Scale</param>
+        /// <returns></returns>
+        public Vector2 GetCorrectScreenPosition(Vector2 pos, Vector2 cameraPostion, int tileSize = HelProject.GameWorld.Map.HCell.TILE_SIZE, float scale = 1.0f)
         {
             float offSetX = 0f, offSetY = 0f;
-            offSetX = -pos.X;
-            offSetY = -pos.Y;
+            offSetX = -cameraPostion.X;
+            offSetY = -cameraPostion.Y;
 
-            return new Vector2(pos.X * tileSize * scale + // X Pos
-                               offSetX * tileSize * scale +
-                               this.Dimensions.X / 2,
-                               pos.Y * tileSize * scale + // Y Pos
-                               offSetY * tileSize * scale +
-                               this.Dimensions.Y / 2);
+            return new Vector2(pos.X * (float)tileSize * scale + // X Pos
+                               offSetX * (float)tileSize * scale +
+                               this.Dimensions.X / 2f,
+                               pos.Y * (float)tileSize * scale + // Y Pos
+                               offSetY * (float)tileSize * scale +
+                               this.Dimensions.Y / 2f);
         }
         #endregion
 
