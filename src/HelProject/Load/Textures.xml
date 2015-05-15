@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <items xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <TemporaryDictionnaryItem id="wall" path="scenary/wall" />
+  <TemporaryDictionnaryItem id="wallblack" path="scenary/wallblack" />
+  <TemporaryDictionnaryItem id="wallnoborders" path="scenary/wallnoborders" />
+  <TemporaryDictionnaryItem id="wallnoleftborder" path="scenary/wallnoleftborder" />
+  <TemporaryDictionnaryItem id="wallnorightborder" path="scenary/wallnorightborder" />
   <TemporaryDictionnaryItem id="floor" path="scenary/floor" />
   <TemporaryDictionnaryItem id="hero" path="entities/hero_a" />
   <TemporaryDictionnaryItem id="notexture" path="notexture" />

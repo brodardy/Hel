@@ -102,11 +102,11 @@ namespace HelProject.UI
         {
             Texture2D texture;
 
-            try
+            if (this.LoadedTextures.ContainsKey(key))
             {
                 texture = this.LoadedTextures[key];
             }
-            catch (System.Collections.Generic.KeyNotFoundException)
+            else
             {
                 texture = this.LoadedTextures["notexture"];
             }

@@ -544,9 +544,104 @@ namespace HelProject.GameWorld.Map
 
             return position;
         }
+
+        /// <summary>
+        /// Decorates the map
+        /// </summary>
+        public void DecorateMap()
+        {
+            for (int y = 0; y < this.Height; y++)
+            {
+                for (int x = 0; x < this.Width; x++)
+                {
+                    if (this.GetNumberOfAdjacentUnwalkableCells(x, y, 1, 1) >= 8)
+                    {
+                        this.Cells[x, y].Type = "wallblack";
+                    }
+                    else
+                    {
+                        if (this.Cells[x, y].Type == "wall")
+                        {
+                            if (this.GetLeftCell(x, y) != null && this.GetLeftCell(x, y).IsWalkable == false &&
+                                this.GetRightCell(x, y) != null && this.GetRightCell(x, y).IsWalkable == false)
+                            {
+                                this.Cells[x, y].Type = "wallnoborders";
+                            }
+                            else
+                            {
+                                if (this.GetLeftCell(x, y) != null && this.GetLeftCell(x, y).IsWalkable == false)
+                                {
+                                    this.Cells[x, y].Type = "wallnoleftborder";
+                                }
+                                else
+                                {
+                                    if (this.GetRightCell(x, y) != null && this.GetRightCell(x, y).IsWalkable == false)
+                                    {
+                                        this.Cells[x, y].Type = "wallnorightborder";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the top cell
+        /// </summary>
+        /// <param name="x">X position of the cell</param>
+        /// <param name="y">Y postiion of the cell</param>
+        /// <returns>Top cell</returns>
+        public HCell GetTopCell(int x, int y)
+        {
+            if (this.IsCellOutOfBounds(x, y - 1))
+                return null;
+            return this.GetCell(x, y - 1);
+        }
+
+        /// <summary>
+        /// Gets the bottom cell
+        /// </summary>
+        /// <param name="x">X position of the cell</param>
+        /// <param name="y">Y postiion of the cell</param>
+        /// <returns>Bottom cell</returns>
+        public HCell GetBottomCell(int x, int y)
+        {
+            if (this.IsCellOutOfBounds(x, y + 1))
+                return null;
+            return this.GetCell(x, y + 1);
+        }
+
+        /// <summary>
+        /// Gets the Left cell
+        /// </summary>
+        /// <param name="x">X position of the cell</param>
+        /// <param name="y">Y postiion of the cell</param>
+        /// <returns>Left cell</returns>
+        public HCell GetLeftCell(int x, int y)
+        {
+            if (this.IsCellOutOfBounds(x - 1, y))
+                return null;
+            return this.GetCell(x - 1, y);
+        }
+
+        /// <summary>
+        /// Gets the Right cell
+        /// </summary>
+        /// <param name="x">X position of the cell</param>
+        /// <param name="y">Y postiion of the cell</param>
+        /// <returns>Right cell</returns>
+        public HCell GetRightCell(int x, int y)
+        {
+            if (this.IsCellOutOfBounds(x + 1, y))
+                return null;
+            return this.GetCell(x + 1, y);
+        }
         #endregion
 
         #region PRIVATE METHODS
+
         /// <summary>
         /// Returns a bool depending on a given percentage
         /// </summary>

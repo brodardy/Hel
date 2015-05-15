@@ -173,14 +173,17 @@ namespace HelProject.UI
             this.MapDifficultyEasy = new HMap(125, 125, 1f);
             this.MapDifficultyEasy.MakeCaverns();
             this.MapDifficultyEasy.LoadContent();
+            this.MapDifficultyEasy.DecorateMap();
 
             this.MapDifficultyMedium = new HMap(125, 125, 1f);
             this.MapDifficultyMedium.MakeCaverns();
             this.MapDifficultyMedium.LoadContent();
+            this.MapDifficultyMedium.DecorateMap();
 
             this.MapDifficultyHard = new HMap(125, 125, 1f);
             this.MapDifficultyHard.MakeCaverns();
             this.MapDifficultyHard.LoadContent();
+            this.MapDifficultyHard.DecorateMap();
 
             this.CurrentMap = this.MapTown;
         }
@@ -229,6 +232,7 @@ namespace HelProject.UI
             {
                 this.CurrentMap.MakeRandomlyFilledMap();
                 this.CurrentMap.MakeCaverns();
+                this.CurrentMap.DecorateMap();
             }
 
             if (InputManager.Instance.IsKeyboardKeyDown(Keys.F9))

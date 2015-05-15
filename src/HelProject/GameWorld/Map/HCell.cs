@@ -47,7 +47,7 @@ namespace HelProject.GameWorld.Map
         public string Type
         {
             get { return _type; }
-            set { _type = value; }
+            set { _type = value.ToLower(); }
         }
 
         #region CONSTRUCTORS
