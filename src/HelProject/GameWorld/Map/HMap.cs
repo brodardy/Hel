@@ -1,7 +1,7 @@
 ﻿/*
  * Author : Yannick R. Brodard
  * File name : HMap.cs
- * Version : 0.4.201505120916
+ * Version : 0.5.201505151012
  * Description : The map class, creates a map
  */
 /* Helped by : http://www.csharpprogramming.tips/2013/07/Rouge-like-dungeon-generation.html */
@@ -14,6 +14,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 #endregion
 
 namespace HelProject.GameWorld.Map
@@ -85,14 +88,28 @@ namespace HelProject.GameWorld.Map
         /// <summary>
         /// Cells of the map
         /// </summary>
-        private HCell[,] Cells
+        public HCell[,] Cells
         {
             get { return _cells; }
-            set { _cells = value; }
+            private set { _cells = value; }
         }
         #endregion
 
         #region CONSTRUCTORS
+        /// <summary>
+        /// Creates a map from given cells
+        /// </summary>
+        /// <param name="cells">Cells of the map</param>
+        /// <param name="scale">Scale of the map</param>
+        public HMap(HCell[,] cells, float scale = 1.0f)
+        {
+            this.Width = cells.GetLength(0);
+            this.Height = cells.GetLength(1);
+            this.NonWalkableSpacePercentage = 0;
+            this.Scale = scale;
+            this.Cells = cells;
+        }
+
         /// <summary>
         /// Creates a map full of non-walkable cells
         /// </summary>
@@ -102,7 +119,7 @@ namespace HelProject.GameWorld.Map
         /// <remarks>
         /// Use the 'Make' methods to transform the map
         /// </remarks>
-        public HMap(int height, int width, float scale = 1.0f, int nonWalkableSpacePercentage = HMap.DEFAULT_NONWALKABLE_CELLS_PERCENTAGE)
+        public HMap(int width, int height, float scale = 1.0f, int nonWalkableSpacePercentage = HMap.DEFAULT_NONWALKABLE_CELLS_PERCENTAGE)
         {
             this.Height = Math.Min(HMap.MAXIMUM_HEIGHT, Math.Max(height, HMap.MINIMUM_HEIGHT));
             this.Width = Math.Min(HMap.MAXIMUM_WIDTH, Math.Max(width, HMap.MINIMUM_WIDTH));
@@ -293,6 +310,14 @@ namespace HelProject.GameWorld.Map
             return wallCounter;
         }
 
+        /// <summary>
+        /// Gets the adjacent non-walkable cells around the given point and scope
+        /// </summary>
+        /// <param name="x">X position</param>
+        /// <param name="y">Y position</param>
+        /// <param name="scopeX">Scope on the X axis</param>
+        /// <param name="scopeY">Scope on the Y axis</param>
+        /// <returns>A list of the adjacent non-walkable cells</returns>
         public List<HCell> GetAdjacentUnwalkableCells(int x, int y, int scopeX, int scopeY)
         {
             List<HCell> unwalkableCells = new List<HCell>();
@@ -452,7 +477,7 @@ namespace HelProject.GameWorld.Map
         /// <summary>
         /// Gets a random walkable area
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Position of the walkable position</returns>
         public Vector2 GetRandomSpawnPoint()
         {
             bool foundPosition = false;
@@ -484,7 +509,7 @@ namespace HelProject.GameWorld.Map
         /// Returns a bool depending on a given percentage
         /// </summary>
         /// <param name="percent">Percentage for it to be true</param>
-        /// <returns></returns>
+        /// <returns>True or false depending on the given percentage</returns>
         private bool RandomPercent(int percent)
         {
             if (percent >= rand.Next(1, 101))
@@ -492,6 +517,94 @@ namespace HelProject.GameWorld.Map
                 return true;
             }
             return false;
+        }
+        #endregion
+
+        #region STATIC METHODS
+        /// <summary>
+        /// Save the cells in an XML file
+        /// </summary>
+        /// <param name="path">Path of the file</param>
+        public static void SaveToXml(HMap map, string path)
+        {
+            XmlTextWriter writer = null;
+            writer = new XmlTextWriter(path, UTF8Encoding.Default);
+            writer.Formatting = Formatting.Indented;
+
+            writer.WriteStartElement("Map");
+            writer.WriteStartElement("Dimensions");
+            writer.WriteElementString("Width", map.Width.ToString());
+            writer.WriteElementString("Height", map.Height.ToString());
+            writer.WriteEndElement();
+            writer.WriteStartElement("Cells");
+
+            for (int y = 0; y < map.Height; y++)
+            {
+                for (int x = 0; x < map.Width; x++)
+                {
+                    writer.WriteStartElement("Cell");
+                    writer.WriteElementString("X", map.GetCell(x, y).Position.X.ToString());
+                    writer.WriteElementString("Y", map.GetCell(x, y).Position.Y.ToString());
+                    writer.WriteElementString("IsWalkable", map.GetCell(x, y).IsWalkable.ToString());
+                    writer.WriteElementString("Type", map.GetCell(x, y).Type);
+                    writer.WriteEndElement();
+                }
+            }
+
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+            writer.Close();
+        }
+
+        public static HCell[,] LoadFromXml(string path)
+        {
+            XmlTextReader reader = new XmlTextReader(path);
+
+            string currentElement = String.Empty;
+            int w = 0;
+            int h = 0;
+            List<int> posXs = new List<int>();
+            List<int> posYs = new List<int>();
+            List<bool> isWalkables = new List<bool>();
+            List<string> types = new List<string>();
+            while (reader.Read())
+            {
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        currentElement = reader.Name;
+                        break;
+                    case XmlNodeType.Text:
+                        if (currentElement == "Width")
+                            w = Convert.ToInt32(reader.Value);
+                        if (currentElement == "Height")
+                            h = Convert.ToInt32(reader.Value);
+                        if (currentElement == "X")
+                            posXs.Add(Convert.ToInt32(reader.Value));
+                        if (currentElement == "Y")
+                            posYs.Add(Convert.ToInt32(reader.Value));
+                        if (currentElement == "IsWalkable")
+                            isWalkables.Add(Convert.ToBoolean(reader.Value));
+                        if (currentElement == "Type")
+                            types.Add(reader.Value);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            HCell[,] cells = new HCell[w, h];
+
+            for (int i = 0; i < w * h; i++)
+            {
+                int x = posXs[i];
+                int y = posYs[i];
+                bool isWalkable = isWalkables[i];
+                string type = types[i];
+                cells[x, y] = new HCell(isWalkable, new Vector2(x, y), type);
+            }
+
+            return cells;
         }
         #endregion
     }

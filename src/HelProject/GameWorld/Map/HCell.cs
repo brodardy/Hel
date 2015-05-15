@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 #endregion
 
 namespace HelProject.GameWorld.Map
@@ -29,6 +31,7 @@ namespace HelProject.GameWorld.Map
         /// <summary>
         /// Bounds of the cells
         /// </summary>
+        [XmlIgnore]
         public FRectangle Bounds
         {
             get { return _bounds; }

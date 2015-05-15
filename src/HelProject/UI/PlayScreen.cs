@@ -13,6 +13,7 @@ using HelProject.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 #endregion
 
 namespace HelProject.UI
@@ -25,10 +26,20 @@ namespace HelProject.UI
         private HMap _mapDifficultyEasy;
         private HMap _mapDifficultyMedium;
         private HMap _mapDifficultyHard;
+        private HMap _mapTown;
         private HMap _currentMap;
         private HHero _hero;
         private static PlayScreen _instance;
         private Camera _camera;
+
+        /// <summary>
+        /// Starting point of the game : The town
+        /// </summary>
+        public HMap MapTown
+        {
+            get { return _mapTown; }
+            set { _mapTown = value; }
+        }
 
         /// <summary>
         /// Map of the game with easy difficulty
@@ -156,19 +167,22 @@ namespace HelProject.UI
         /// </summary>
         private void LoadMaps()
         {
-            this.MapDifficultyEasy = new HMap(200, 200, 1f);
+            this.MapTown = new HMap(HMap.LoadFromXml(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\easymap.xml"));
+            this.MapTown.LoadContent();
+
+            this.MapDifficultyEasy = new HMap(125, 125, 1f);
             this.MapDifficultyEasy.MakeCaverns();
             this.MapDifficultyEasy.LoadContent();
 
-            this.MapDifficultyMedium = new HMap(200, 200, 1f);
+            this.MapDifficultyMedium = new HMap(125, 125, 1f);
             this.MapDifficultyMedium.MakeCaverns();
             this.MapDifficultyMedium.LoadContent();
 
-            this.MapDifficultyHard = new HMap(200, 200, 1f);
+            this.MapDifficultyHard = new HMap(125, 125, 1f);
             this.MapDifficultyHard.MakeCaverns();
             this.MapDifficultyHard.LoadContent();
 
-            this.CurrentMap = this.MapDifficultyEasy;
+            this.CurrentMap = this.MapTown;
         }
 
         /// <summary>
@@ -180,6 +194,7 @@ namespace HelProject.UI
             this.MapDifficultyEasy.UnloadContent();
             this.MapDifficultyMedium.UnloadContent();
             this.MapDifficultyHard.UnloadContent();
+            this.MapTown.UnloadContent();
         }
 
         /// <summary>
@@ -224,7 +239,13 @@ namespace HelProject.UI
                 else if (this.CurrentMap == this.MapDifficultyMedium)
                     this.CurrentMap = this.MapDifficultyHard;
                 else if (this.CurrentMap == this.MapDifficultyHard)
+                    this.CurrentMap = this.MapTown;
+                else if (this.CurrentMap == this.MapTown)
                     this.CurrentMap = this.MapDifficultyEasy;
+
+                this.PlayableCharacter.Position = this.CurrentMap.GetRandomSpawnPoint();
+                this.PlayableCharacter.Bounds.SetBounds(this.PlayableCharacter.Position, this.PlayableCharacter.Texture.Width, this.PlayableCharacter.Texture.Height);
+                this.Camera.Position = this.PlayableCharacter.Position;
             }
         }
     }

@@ -80,6 +80,11 @@ namespace HelProject.Tools
         public Vector2 Position
         {
             get { return new Vector2(X, Y); }
+            set
+            {
+                this.X = value.X;
+                this.Y = value.Y;
+            }
         }
 
         /// <summary>

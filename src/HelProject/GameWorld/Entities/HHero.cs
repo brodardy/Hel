@@ -132,16 +132,6 @@ namespace HelProject.GameWorld.Entities
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            //spriteBatch.Draw(this.Texture.Texture, ScreenManager.Instance.GetCorrectScreenPosition(this.Texture.Position, 32),
-            //    this.Texture.SourceRect, Color.White, 0.0f, this.Texture.Position, 1f, SpriteEffects.None, 0f);
-
-            //Vector2 position = ScreenManager.Instance.GetCorrectScreenPosition(this.Position);
-            //Vector2 offSet = new Vector2(16);
-            //this.Texture.Position = position + offSet;
-            //this.Texture.Draw(spriteBatch);
-
-            //SpriteFont font = this.Texture.Font;
-            //spriteBatch.DrawString(font, "@", position, Color.Black);
         }
     }
 }
