@@ -3,4 +3,5 @@
   <TemporaryDictionnaryItem id="wall" path="scenary/wall" />
   <TemporaryDictionnaryItem id="floor" path="scenary/floor" />
   <TemporaryDictionnaryItem id="hero" path="entities/hero_a" />
+  <TemporaryDictionnaryItem id="notexture" path="notexture" />
 </items>

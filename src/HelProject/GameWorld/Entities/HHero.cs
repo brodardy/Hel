@@ -71,7 +71,7 @@ namespace HelProject.GameWorld.Entities
         /// </summary>
         /// <param name="initialFeatures">Initial features of the entity</param>
         /// <param name="position">Position of the enitity</param>
-        public HHero(FeatureCollection initialFeatures, Vector2 position, float width, float height, Texture2D texture) : base(initialFeatures, position, width, height, texture) { /* no code... */ }
+        public HHero(FeatureCollection initialFeatures, Vector2 position, float width, float height, string textureName) : base(initialFeatures, position, width, height, textureName) { /* no code... */ }
 
         /// <summary>
         /// Loads the content of the entity
@@ -97,6 +97,66 @@ namespace HelProject.GameWorld.Entities
         {
             base.Update(gameTime);
 
+            bool movementResult = this.UpdateMovement(gameTime);
+
+            List<HCell> adjacentCells = PlayScreen.Instance.CurrentMap.GetAdjacentCells((int)this.Position.X, (int)this.Position.Y, 1, 1, true);
+            int count = adjacentCells.Count;
+            for (int i = 0; i < count; i++)
+            {
+                if (adjacentCells[i].Type == "teleporteasy")
+                {
+                    if (this.Bounds.Intersects(adjacentCells[i].Bounds))
+                        this.Teleport(PlayScreen.Instance.MapDifficultyEasy, PlayScreen.Instance.MapDifficultyEasy.GetRandomFloorPoint());
+                }
+
+                if (adjacentCells[i].Type == "teleportmedium")
+                {
+                    if (this.Bounds.Intersects(adjacentCells[i].Bounds))
+                        this.Teleport(PlayScreen.Instance.MapDifficultyMedium, PlayScreen.Instance.MapDifficultyMedium.GetRandomFloorPoint());
+                }
+
+                if (adjacentCells[i].Type == "teleporthard")
+                {
+                    if (this.Bounds.Intersects(adjacentCells[i].Bounds))
+                        this.Teleport(PlayScreen.Instance.MapDifficultyHard, PlayScreen.Instance.MapDifficultyHard.GetRandomFloorPoint());
+                }
+            }
+
+            if (!(movementResult))
+            {
+                this.State = EntityState.Idle;
+            }
+        }
+
+        /// <summary>
+        /// Draws the entity on screen
+        /// </summary>
+        /// <param name="spriteBatch">Sprite batch used for the drawing</param>
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+        }
+
+        /// <summary>
+        /// Teleports the play to the designed area
+        /// </summary>
+        /// <param name="map">Map</param>
+        /// <param name="position">Position</param>
+        public void Teleport(HMap map, Vector2 position)
+        {
+            PlayScreen.Instance.CurrentMap = map;
+            this.Position = position;
+            this.Bounds.SetBounds(position, this.Texture.Width, this.Texture.Height);
+            PlayScreen.Instance.Camera.Position = position;
+        }
+
+        /// <summary>
+        /// Updates the movement of the character
+        /// </summary>
+        /// <param name="gameTime">Game time</param>
+        /// <returns>Did a movement happen ?</returns>
+        private bool UpdateMovement(GameTime gameTime)
+        {
             Vector2 newPosition = this.Position; // gets the current position
             MouseState ms = InputManager.Instance.MsState; // gets the current state of the mouse
 
@@ -118,20 +178,13 @@ namespace HelProject.GameWorld.Entities
                 this.ApplyFluidMovement(direction, newPosition, newBounds, elapsedTime);
 
                 this.Direction = direction; // Update the direction the hero is facing
+
+                return true;
             }
             else
             {
-                this.State = EntityState.Idle;
+                return false;
             }
-        }
-
-        /// <summary>
-        /// Draws the entity on screen
-        /// </summary>
-        /// <param name="spriteBatch">Sprite batch used for the drawing</param>
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
         }
     }
 }

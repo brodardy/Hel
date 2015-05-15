@@ -93,6 +93,26 @@ namespace HelProject.UI
                 this._serializer.Serialize(writer, this._texturesPaths.Select(kv => new TemporaryDictionnaryItem() { id = kv.Key, path = kv.Value }).ToArray());
             }
         }
+
+        /// <summary>
+        /// Gets the texture by the key
+        /// </summary>
+        /// <param name="key"></param>
+        public Texture2D GetTexture(string key)
+        {
+            Texture2D texture;
+
+            try
+            {
+                texture = this.LoadedTextures[key];
+            }
+            catch (System.Collections.Generic.KeyNotFoundException)
+            {
+                texture = this.LoadedTextures["notexture"];
+            }
+
+            return texture;
+        }
     }
 
     /// <summary>

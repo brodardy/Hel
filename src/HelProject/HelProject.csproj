@@ -111,6 +111,9 @@
     <Content Include="Content\MenuScreen\strenght_mini.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\notexture.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Scenary\floor.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -125,6 +128,9 @@
     </Content>
     <Content Include="Icon.ico" />
     <Content Include="Load\DefaultHero.xml" />
+    <Content Include="Load\MapTown.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Load\MenuScreen1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

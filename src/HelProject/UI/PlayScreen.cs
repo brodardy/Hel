@@ -167,7 +167,7 @@ namespace HelProject.UI
         /// </summary>
         private void LoadMaps()
         {
-            this.MapTown = new HMap(HMap.LoadFromXml(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\easymap.xml"));
+            this.MapTown = new HMap(HMap.LoadFromXml("Load/MapTown.xml"));
             this.MapTown.LoadContent();
 
             this.MapDifficultyEasy = new HMap(125, 125, 1f);
@@ -215,9 +215,8 @@ namespace HelProject.UI
                 InitialMovementSpeed = HEntity.DEFAULT_MOVEMENTSPEED,
                 InitialLifePoints = HEntity.DEFAULT_LIFEPOINTS
             };
-            Texture2D texture = TextureManager.Instance.LoadedTextures["hero"];
-            Vector2 position = this.CurrentMap.GetRandomSpawnPoint();
-            this.PlayableCharacter = new HHero(f, position, 1f, 1.5f, texture);
+            Vector2 position = this.CurrentMap.GetRandomFloorPoint();
+            this.PlayableCharacter = new HHero(f, position, 1f, 1.5f, "hero");
             this.PlayableCharacter.LoadContent();
         }
 
@@ -243,7 +242,7 @@ namespace HelProject.UI
                 else if (this.CurrentMap == this.MapTown)
                     this.CurrentMap = this.MapDifficultyEasy;
 
-                this.PlayableCharacter.Position = this.CurrentMap.GetRandomSpawnPoint();
+                this.PlayableCharacter.Position = this.CurrentMap.GetRandomFloorPoint();
                 this.PlayableCharacter.Bounds.SetBounds(this.PlayableCharacter.Position, this.PlayableCharacter.Texture.Width, this.PlayableCharacter.Texture.Height);
                 this.Camera.Position = this.PlayableCharacter.Position;
             }

@@ -142,7 +142,7 @@ namespace HelProject.GameWorld.Entities
         /// </summary>
         /// <param name="initialFeatures">Initial Features of the enitity</param>
         /// <param name="position">Position of the entity</param>
-        public HEntity(FeatureCollection initialFeatures, Vector2 position, float width, float height, Texture2D texture)
+        public HEntity(FeatureCollection initialFeatures, Vector2 position, float width, float height, string textureName)
             : base(true, position)
         {
             this.InitialFeatures = initialFeatures;
@@ -151,9 +151,9 @@ namespace HelProject.GameWorld.Entities
             this.ActualFeatures = this.FeatureCalculator.GetCalculatedFeatures();
             this.MaximizedFeatures = (FeatureCollection)this.ActualFeatures.Clone();
             this.State = EntityState.Idle;
-            this.Texture = texture;
+            this.Texture = TextureManager.Instance.GetTexture(textureName);
             this.Bounds = new FRectangle(width, height);
-            this.Bounds.SetBounds(position, texture.Width, texture.Height);
+            this.Bounds.SetBounds(position, this.Texture.Width, this.Texture.Height);
         }
 
         /// <summary>

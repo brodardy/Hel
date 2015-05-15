@@ -348,6 +348,48 @@ namespace HelProject.GameWorld.Map
         }
 
         /// <summary>
+        /// Gets the adjacent cells of the position
+        /// </summary>
+        /// <param name="x">X position</param>
+        /// <param name="y">Y position</param>
+        /// <param name="scopeX">X scope</param>
+        /// <param name="scopeY">Y scope</param>
+        /// <param name="includeDesignatedCell">Include the specified cell ?</param>
+        /// <returns>Adjacent cells</returns>
+        public List<HCell> GetAdjacentCells(int x, int y, int scopeX, int scopeY, bool includeDesignatedCell = false)
+        {
+            List<HCell> adjacentcells = new List<HCell>();
+
+            int startX = x - scopeX;
+            int startY = y - scopeY;
+            int endX = x + scopeX;
+            int endY = y + scopeY;
+
+            int iX = startX;
+            int iY = startY;
+
+            for (iY = startY; iY <= endY; iY++)
+            {
+                for (iX = startX; iX <= endX; iX++)
+                {
+                    if (!(iX == x && iY == y))
+                    {
+                        adjacentcells.Add(this.GetCell(iX, iY));
+                    }
+                    else
+                    {
+                        if (includeDesignatedCell)
+                        {
+                            adjacentcells.Add(this.GetCell(iX, iY));
+                        }
+                    }
+                }
+            }
+
+            return adjacentcells;
+        }
+
+        /// <summary>
         /// Verifies if the specified cell is walkable
         /// </summary>
         /// <param name="x">X position of the cell</param>
@@ -468,7 +510,7 @@ namespace HelProject.GameWorld.Map
                         HCell cell = this.GetCell(x, y);
                         Vector2 position = ScreenManager.Instance.GetCorrectScreenPosition(cell.Position, camera.Position);
 
-                        spriteBatch.Draw(TextureManager.Instance.LoadedTextures[cell.Type], position, null, null, null, 0.0f, new Vector2(this.Scale, this.Scale), Color.White);
+                        spriteBatch.Draw(TextureManager.Instance.GetTexture(cell.Type), position, null, null, null, 0.0f, new Vector2(this.Scale, this.Scale), Color.White);
                     }
                 }
             }
@@ -478,7 +520,7 @@ namespace HelProject.GameWorld.Map
         /// Gets a random walkable area
         /// </summary>
         /// <returns>Position of the walkable position</returns>
-        public Vector2 GetRandomSpawnPoint()
+        public Vector2 GetRandomFloorPoint()
         {
             bool foundPosition = false;
             Vector2 position = Vector2.One;
@@ -489,7 +531,7 @@ namespace HelProject.GameWorld.Map
 
                 HCell foundCell = this.GetCell(rX, rY);
 
-                if (foundCell.IsWalkable)
+                if (foundCell.IsWalkable && foundCell.Type == "floor")
                 {
                     int unWalkableCells = this.GetNumberOfAdjacentUnwalkableCells(rX, rY, 1, 1);
                     if (unWalkableCells == 0)
@@ -556,6 +598,11 @@ namespace HelProject.GameWorld.Map
             writer.Close();
         }
 
+        /// <summary>
+        /// Loads a map from an xml file
+        /// </summary>
+        /// <param name="path">Path of the file</param>
+        /// <returns>Cells of the map</returns>
         public static HCell[,] LoadFromXml(string path)
         {
             XmlTextReader reader = new XmlTextReader(path);
