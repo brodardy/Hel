@@ -424,8 +424,6 @@ namespace HelProject.GameWorld.Map
         public void Draw(SpriteBatch spriteBatch, Camera camera)
         {
             int sizeOfSprites = HCell.TILE_SIZE;
-            Texture2D _floor = TextureManager.Instance.LoadedTextures["floor"];
-            Texture2D _wall = TextureManager.Instance.LoadedTextures["wall"];
 
             // determins the start point for the drawing, so it doesn't draw useless cells
             Point startPoint = new Point((int)camera.Position.X - (int)(camera.Width / 2 / sizeOfSprites + 1),
@@ -445,14 +443,7 @@ namespace HelProject.GameWorld.Map
                         HCell cell = this.GetCell(x, y);
                         Vector2 position = ScreenManager.Instance.GetCorrectScreenPosition(cell.Position, camera.Position);
 
-                        if (cell.IsWalkable)
-                        {
-                            spriteBatch.Draw(_floor, position, null, null, null, 0.0f, new Vector2(this.Scale, this.Scale), Color.White);
-                        }
-                        else
-                        {
-                            spriteBatch.Draw(_wall, position, null, null, null, 0.0f, new Vector2(this.Scale, this.Scale), Color.White);
-                        }
+                        spriteBatch.Draw(TextureManager.Instance.LoadedTextures[cell.Type], position, null, null, null, 0.0f, new Vector2(this.Scale, this.Scale), Color.White);
                     }
                 }
             }

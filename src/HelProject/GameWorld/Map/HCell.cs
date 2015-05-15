@@ -24,6 +24,7 @@ namespace HelProject.GameWorld.Map
         public const int TILE_SIZE = 32;
 
         private FRectangle _bounds;
+        private string _type;
 
         /// <summary>
         /// Bounds of the cells
@@ -34,11 +35,23 @@ namespace HelProject.GameWorld.Map
             set { _bounds = value; }
         }
 
+        /// <summary>
+        /// Type of the cell
+        /// </summary>
+        /// <remarks>
+        /// Often corresponds with a texture
+        /// </remarks>
+        public string Type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
+
         #region CONSTRUCTORS
         /// <summary>
         /// Cell that represents a part of the map
         /// </summary>
-        public HCell() : this(DEFAULT_IS_WALKABLE_VALUE, new Vector2(DEFAULT_POSITION_X_VALUE, DEFAULT_POSITION_Y_VALUE)) { /* no code... */ }
+        public HCell() : this(new Vector2(DEFAULT_POSITION_X_VALUE, DEFAULT_POSITION_Y_VALUE)) { /* no code... */ }
 
         /// <summary>
         /// Cell that represents a part of the map
@@ -57,11 +70,28 @@ namespace HelProject.GameWorld.Map
         /// <remarks>
         /// The cell position is rounded to the base digit.
         /// </remarks>
-        public HCell(bool isWalkable, Vector2 position)
+        public HCell(bool isWalkable, Vector2 position) : this(isWalkable, position, String.Empty) { /* no code... */ }
+
+        /// <summary>
+        /// Cell that represents a part of the map
+        /// </summary>
+        /// <param name="isWalkable">The cell can be 'walked' on by entities</param>
+        /// <param name="position">The position of the cell</param>
+        /// <param name="type">Type of the cell</param>
+        /// <remarks>
+        /// The cell position is rounded to the base digit.
+        /// The type of the often corresponds with a texture
+        /// </remarks>
+        public HCell(bool isWalkable, Vector2 position, string type)
         {
             this.IsWalkable = isWalkable;
-            this.Position = new Vector2((int)position.X, (int)position.Y); // casted to only have round numbers for cells
+            this.Position = new Vector2((int)position.X, (int)position.Y); // casted to integer, to only have round numbers for cells
             this.Bounds = new FRectangle(position.X, position.Y, 1f, 1f);
+
+            if (type == String.Empty)
+                this.Type = (isWalkable) ? "floor" : "wall";
+            else
+                this.Type = type;
         }
         #endregion
     }
