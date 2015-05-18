@@ -173,6 +173,13 @@ namespace HelProject.GameWorld.Entities
             }
         }
 
+        /// <summary>
+        /// Corrects the movement. When the entity touches an unwalkable object, it slides instead of stopping completly
+        /// </summary>
+        /// <param name="direction">Direction of the movement</param>
+        /// <param name="newPosition">The new calculated position</param>
+        /// <param name="newBounds">The new bounds according to the position</param>
+        /// <param name="elapsedTime">Elapsed game time in seconds</param>
         public void ApplyFluidMovement(Vector2 direction, Vector2 newPosition, FRectangle newBounds, float elapsedTime)
         {
             // Is the position of the hero on a walkable area ?
