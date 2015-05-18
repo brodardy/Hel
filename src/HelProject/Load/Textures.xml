@@ -11,5 +11,6 @@
   <TemporaryDictionnaryItem id="wallnorightborderndb" path="scenary/wallnorightborderndb" />
   <TemporaryDictionnaryItem id="floor" path="scenary/floor" />
   <TemporaryDictionnaryItem id="hero" path="entities/hero_a" />
+  <TemporaryDictionnaryItem id="draugr" path="entities/draugr" />
   <TemporaryDictionnaryItem id="notexture" path="notexture" />
 </items>

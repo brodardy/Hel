@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 #endregion
 
 namespace HelProject.UI
@@ -125,6 +126,7 @@ namespace HelProject.UI
 
             this.LoadMaps();
             this.LoadPlayableCharacter();
+            this.LoadHostiles();
 
             // Camera initialisation, gets the width and height of the window
             // and the position of the hero
@@ -160,6 +162,7 @@ namespace HelProject.UI
         {
             this.CurrentMap.Draw(spriteBatch, this.Camera);
             this.PlayableCharacter.Draw(spriteBatch);
+            this.DrawHostiles(spriteBatch);
         }
 
         /// <summary>
@@ -187,6 +190,33 @@ namespace HelProject.UI
             this.MapDifficultyHard.DecorateMap();
 
             this.CurrentMap = this.MapTown;
+        }
+
+        private void LoadHostiles()
+        {
+            for (int i = 0; i < 150; i++)
+            {
+                this.MapDifficultyEasy.Hostiles.Add(new HHostile(new FeatureCollection(), this.MapDifficultyEasy.GetRandomFloorPoint(), 1f, 1.5f, "draugr"));
+            }
+            for (int i = 0; i < 250; i++)
+            {
+                this.MapDifficultyMedium.Hostiles.Add(new HHostile(new FeatureCollection(), this.MapDifficultyMedium.GetRandomFloorPoint(), 1f, 1.5f, "draugr"));
+            }
+            for (int i = 0; i < 500; i++)
+            {
+                this.MapDifficultyHard.Hostiles.Add(new HHostile(new FeatureCollection(), this.MapDifficultyHard.GetRandomFloorPoint(), 1f, 1.5f, "draugr"));
+            }
+        }
+
+        private void DrawHostiles(SpriteBatch sb)
+        {
+            List<HHostile> hostiles = this.CurrentMap.Hostiles;
+            int nbrHostiles = hostiles.Count;
+
+            for (int i = 0; i < nbrHostiles; i++)
+            {
+                hostiles[i].Draw(sb);
+            }
         }
 
         /// <summary>

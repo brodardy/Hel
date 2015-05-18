@@ -7,6 +7,7 @@
 /* Helped by : http://www.csharpprogramming.tips/2013/07/Rouge-like-dungeon-generation.html */
 
 #region USING STATEMENTS
+using HelProject.GameWorld.Entities;
 using HelProject.Tools;
 using HelProject.UI;
 using Microsoft.Xna.Framework;
@@ -46,9 +47,19 @@ namespace HelProject.GameWorld.Map
         private int _nonWalkableSpacePercentage; // Percentage of walkable area in the map
         private ContentManager _content; // content manager
         private float _scale;
+        private List<HHostile> _hostiles; // enemies of the map
         #endregion
 
         #region PROPRIETIES
+        /// <summary>
+        /// Enemies present in the map
+        /// </summary>
+        public List<HHostile> Hostiles
+        {
+            get { return _hostiles; }
+            set { _hostiles = value; }
+        }
+
         /// <summary>
         /// Scale of the map
         /// </summary>
@@ -125,6 +136,7 @@ namespace HelProject.GameWorld.Map
             this.Width = Math.Min(HMap.MAXIMUM_WIDTH, Math.Max(width, HMap.MINIMUM_WIDTH));
             this.NonWalkableSpacePercentage = nonWalkableSpacePercentage;
             this.Scale = scale;
+            this.Hostiles = new List<HHostile>();
 
             this.ClearMap();
             this.MakeRandomlyFilledMap();
@@ -473,6 +485,10 @@ namespace HelProject.GameWorld.Map
         public void LoadContent()
         {
             this._content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
+            if (this.Hostiles == null)
+            {
+                this.Hostiles = new List<HHostile>();
+            }
         }
 
         /// <summary>
