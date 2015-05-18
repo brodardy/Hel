@@ -185,7 +185,6 @@ namespace HelProject.GameWorld.Entities
             // Is the position of the hero on a walkable area ?
             if (this.IsCharacterSurfaceWalkable(newPosition, newBounds))
             {
-                PlayScreen.Instance.Camera.Position = newPosition; // Apply the new position to the camera
                 this.Position = newPosition; // Apply the new position to the hero
                 this.Bounds = newBounds; // Apply the new bounds to the hero
             }
@@ -208,7 +207,6 @@ namespace HelProject.GameWorld.Entities
 
                 if (this.IsCharacterSurfaceWalkable(newPosition, newBounds))
                 {
-                    PlayScreen.Instance.Camera.Position = newPosition; // Apply the new position to the camera
                     this.Position = newPosition; // Apply the new position to the hero
                     this.Bounds = newBounds; // Apply the new bounds to the hero
                 }
@@ -229,7 +227,6 @@ namespace HelProject.GameWorld.Entities
 
                     if (this.IsCharacterSurfaceWalkable(newPosition, newBounds))
                     {
-                        PlayScreen.Instance.Camera.Position = newPosition; // Apply the new position to the camera
                         this.Position = newPosition; // Apply the new position to the hero
                         this.Bounds = newBounds; // Apply the new bounds to the hero
                     }
@@ -247,15 +244,25 @@ namespace HelProject.GameWorld.Entities
         {
             bool validArea = true;
             List<HCell> unwalkableAdjacentCells = PlayScreen.Instance.CurrentMap.GetAdjacentUnwalkableCells((int)this.Position.X, (int)this.Position.Y, 1, 1);
+            List<HHostile> hostiles = PlayScreen.Instance.CurrentMap.Hostiles;
+            HHero hero = PlayScreen.Instance.PlayableCharacter;
             int nbrCells = unwalkableAdjacentCells.Count;
+            int nbrHostiles = hostiles.Count;
 
             for (int i = 0; i < nbrCells; i++)
             {
                 if (bounds.Intersects(unwalkableAdjacentCells[i].Bounds))
-                {
                     validArea = false;
-                }
             }
+
+            for (int i = 0; i < nbrHostiles; i++)
+            {
+                if (this != hostiles[i] && bounds.Intersects(hostiles[i].Bounds))
+                    validArea = false;
+            }
+
+            if (this != hero && bounds.Intersects(hero.Bounds))
+                validArea = false;
 
             return validArea;
         }

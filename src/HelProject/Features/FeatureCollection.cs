@@ -212,24 +212,24 @@ namespace HelProject.Features
         /// </summary>
         public FeatureCollection()
         {
-            this._agility = .0f;
+            this._agility = 5f;
             this._armor = .0f;
-            this._attackSpeed = .0f;
+            this._attackSpeed = 0.6f;
             this._initialAttackSpeed = .0f;
-            this._initialMovementSpeed = .0f;
+            this._initialMovementSpeed = 3.5f;
             this._initialManaRegeneration = .0f;
             this._lifeRegeneration = .0f;
-            this._magic = .0f;
+            this._magic = 5f;
             this._magicResistance = .0f;
-            this._manaRegeneration = .0f;
-            this._maximumDamage = .0f;
+            this._manaRegeneration = 1f;
+            this._maximumDamage = 1f;
             this._maximumMagicDamage = .0f;
-            this._minimumDamage = .0f;
+            this._minimumDamage = 3f;
             this._minimumMagicDamage = .0f;
             this._movementSpeed = .0f;
-            this._strenght = .0f;
-            this._vitality = .0f;
-            this._initialLifePoints = .0f;
+            this._strenght = 5f;
+            this._vitality = 5f;
+            this._initialLifePoints = 30.0f;
             this._lifePoints = .0f;
         }
 

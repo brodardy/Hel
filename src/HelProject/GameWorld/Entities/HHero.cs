@@ -126,6 +126,8 @@ namespace HelProject.GameWorld.Entities
             {
                 this.State = EntityState.Idle;
             }
+
+            PlayScreen.Instance.Camera.Position = this.Position; // Apply the new position to the camera
         }
 
         /// <summary>

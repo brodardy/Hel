@@ -152,6 +152,7 @@ namespace HelProject.UI
         {
             this.UpdateMapControl();
             this.PlayableCharacter.Update(gameTime);
+            UpdateHostiles(gameTime);
         }
 
         /// <summary>
@@ -192,22 +193,31 @@ namespace HelProject.UI
             this.CurrentMap = this.MapTown;
         }
 
+        /// <summary>
+        /// Loads the hostiles on the different maps
+        /// </summary>
         private void LoadHostiles()
         {
-            for (int i = 0; i < 150; i++)
+            for (int i = 0; i < 75; i++)
             {
                 this.MapDifficultyEasy.Hostiles.Add(new HHostile(new FeatureCollection(), this.MapDifficultyEasy.GetRandomFloorPoint(), 1f, 1.5f, "draugr"));
             }
-            for (int i = 0; i < 250; i++)
+
+            for (int i = 0; i < 175; i++)
             {
                 this.MapDifficultyMedium.Hostiles.Add(new HHostile(new FeatureCollection(), this.MapDifficultyMedium.GetRandomFloorPoint(), 1f, 1.5f, "draugr"));
             }
-            for (int i = 0; i < 500; i++)
+
+            for (int i = 0; i < 250; i++)
             {
                 this.MapDifficultyHard.Hostiles.Add(new HHostile(new FeatureCollection(), this.MapDifficultyHard.GetRandomFloorPoint(), 1f, 1.5f, "draugr"));
             }
         }
 
+        /// <summary>
+        /// Draws the hostiles on the current map
+        /// </summary>
+        /// <param name="sb">Sprite batch</param>
         private void DrawHostiles(SpriteBatch sb)
         {
             List<HHostile> hostiles = this.CurrentMap.Hostiles;
@@ -216,6 +226,21 @@ namespace HelProject.UI
             for (int i = 0; i < nbrHostiles; i++)
             {
                 hostiles[i].Draw(sb);
+            }
+        }
+
+        /// <summary>
+        /// Updates the mechanismes of the hostiles
+        /// </summary>
+        /// <param name="gameTime">Game time</param>
+        private void UpdateHostiles(GameTime gameTime)
+        {
+            List<HHostile> hostiles = this.CurrentMap.Hostiles;
+            int nbrHostiles = hostiles.Count;
+
+            for (int i = 0; i < nbrHostiles; i++)
+            {
+                hostiles[i].Update(gameTime);
             }
         }
 
