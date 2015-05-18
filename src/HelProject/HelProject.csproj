@@ -132,6 +132,18 @@
     <Content Include="Content\Scenary\wallnorightborder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Scenary\wallndb.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Scenary\wallnobordersndb.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Scenary\wallnoleftborderndb.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Scenary\wallnorightborderndb.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\SplashScreen\main1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -142,6 +154,7 @@
     <Content Include="Load\DefaultHero.xml" />
     <Content Include="Load\MapTown.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Load\MenuScreen1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -155,6 +168,7 @@
     </Content>
     <Content Include="Load\Textures.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

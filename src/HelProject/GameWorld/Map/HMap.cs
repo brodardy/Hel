@@ -531,7 +531,7 @@ namespace HelProject.GameWorld.Map
 
                 HCell foundCell = this.GetCell(rX, rY);
 
-                if (foundCell.IsWalkable && foundCell.Type == "floor")
+                if (foundCell.IsWalkable && foundCell.Type.Contains("floor"))
                 {
                     int unWalkableCells = this.GetNumberOfAdjacentUnwalkableCells(rX, rY, 1, 1);
                     if (unWalkableCells == 0)
@@ -566,21 +566,34 @@ namespace HelProject.GameWorld.Map
                                 this.GetRightCell(x, y) != null && this.GetRightCell(x, y).IsWalkable == false)
                             {
                                 this.Cells[x, y].Type = "wallnoborders";
+
+                                if (this.GetBottomCell(x, y) != null && this.GetBottomCell(x, y).IsWalkable == false)
+                                    this.Cells[x, y].Type = "wallnobordersndb";
                             }
                             else
                             {
                                 if (this.GetLeftCell(x, y) != null && this.GetLeftCell(x, y).IsWalkable == false)
                                 {
                                     this.Cells[x, y].Type = "wallnoleftborder";
+
+                                    if (this.GetBottomCell(x, y) != null && this.GetBottomCell(x, y).IsWalkable == false)
+                                        this.Cells[x, y].Type = "wallnoleftborderndb";
                                 }
                                 else
                                 {
                                     if (this.GetRightCell(x, y) != null && this.GetRightCell(x, y).IsWalkable == false)
                                     {
                                         this.Cells[x, y].Type = "wallnorightborder";
+
+                                        if (this.GetBottomCell(x, y) != null && this.GetBottomCell(x, y).IsWalkable == false)
+                                            this.Cells[x, y].Type = "wallnorightborderndb";
                                     }
                                 }
                             }
+                        }
+                        if (this.Cells[x, y].Type == "wall" && this.GetBottomCell(x, y) != null && this.GetBottomCell(x, y).IsWalkable == false)
+                        {
+                            this.Cells[x, y].Type = "wallndb";
                         }
                     }
                 }

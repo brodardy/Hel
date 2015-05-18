@@ -5,6 +5,10 @@
   <TemporaryDictionnaryItem id="wallnoborders" path="scenary/wallnoborders" />
   <TemporaryDictionnaryItem id="wallnoleftborder" path="scenary/wallnoleftborder" />
   <TemporaryDictionnaryItem id="wallnorightborder" path="scenary/wallnorightborder" />
+  <TemporaryDictionnaryItem id="wallndb" path="scenary/wallndb" />
+  <TemporaryDictionnaryItem id="wallnobordersndb" path="scenary/wallnobordersndb" />
+  <TemporaryDictionnaryItem id="wallnoleftborderndb" path="scenary/wallnoleftborderndb" />
+  <TemporaryDictionnaryItem id="wallnorightborderndb" path="scenary/wallnorightborderndb" />
   <TemporaryDictionnaryItem id="floor" path="scenary/floor" />
   <TemporaryDictionnaryItem id="hero" path="entities/hero_a" />
   <TemporaryDictionnaryItem id="notexture" path="notexture" />

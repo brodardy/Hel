@@ -24,7 +24,7 @@ namespace HelProject.Tools
         private List<Keys> _pressedKeys;
         private List<Keys> _releasedKeys;
         private MouseState _msState;
-        
+
         #endregion
 
         #region PROPRIETIES
@@ -166,7 +166,7 @@ namespace HelProject.Tools
         private void UpdateKeyboardInput()
         {
             KbState = Keyboard.GetState();
-            
+
             // Verifies all the keys of the keyboard
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
             {

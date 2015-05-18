@@ -169,6 +169,7 @@ namespace HelProject.UI
         {
             this.MapTown = new HMap(HMap.LoadFromXml("Load/MapTown.xml"));
             this.MapTown.LoadContent();
+            this.MapTown.DecorateMap();
 
             this.MapDifficultyEasy = new HMap(125, 125, 1f);
             this.MapDifficultyEasy.MakeCaverns();
