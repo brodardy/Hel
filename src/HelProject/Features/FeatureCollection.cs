@@ -216,7 +216,7 @@ namespace HelProject.Features
             this._armor = .0f;
             this._attackSpeed = 0.6f;
             this._initialAttackSpeed = .0f;
-            this._initialMovementSpeed = 3.5f;
+            this._initialMovementSpeed = 3.0f;
             this._initialManaRegeneration = .0f;
             this._lifeRegeneration = .0f;
             this._magic = 5f;

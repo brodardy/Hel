@@ -5,7 +5,6 @@
  * Description : Base abstract class for the entities of the game
  */
 
-using HelHelProject.Tools;
 using HelProject.Features;
 using HelProject.GameWorld.Map;
 using HelProject.Tools;

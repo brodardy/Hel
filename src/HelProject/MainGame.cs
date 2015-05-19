@@ -13,8 +13,10 @@ namespace HelProject
     public class MainGame : Game
     {
         private static MainGame _instance;
-        GraphicsDeviceManager _graphics;
-        SpriteBatch _spriteBatch;
+        private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
+        private Vector2 _cursorPosition;
+
 
         /// <summary>
         /// Instance of the Main Game
@@ -49,15 +51,18 @@ namespace HelProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            this.IsMouseVisible = true;
-
-            Primitives2D.Initialize(this.GraphicsDevice);
+            //this.IsMouseVisible = true;
 
             _graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             _graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
             _graphics.ApplyChanges();
 
             TextureManager.Instance.Load("Load/Textures.xml");
+
+            this._cursorPosition = new Vector2();
+            this.Window.Title = "Hel: The pixelated horror";
+            this.Window.Position = new Point(GraphicsDevice.DisplayMode.Width / 2 - (int)ScreenManager.Instance.Dimensions.X / 2,
+                                             GraphicsDevice.DisplayMode.Height / 2 - (int)ScreenManager.Instance.Dimensions.Y / 2);
 
             base.Initialize();
         }
@@ -72,7 +77,7 @@ namespace HelProject
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-
+            Primitives2D.Instance.LoadContent();
             ScreenManager.Instance.SMGraphicsDevice = GraphicsDevice;
             ScreenManager.Instance.SMSpriteBatch = _spriteBatch;
             ScreenManager.Instance.LoadContent(Content);
@@ -101,8 +106,9 @@ namespace HelProject
             // TODO: Add your update logic here
 
             ScreenManager.Instance.Update(gameTime);
-
             InputManager.Instance.Update(gameTime);
+            this._cursorPosition.X = InputManager.Instance.MsState.X;
+            this._cursorPosition.Y = InputManager.Instance.MsState.Y;
 
             base.Update(gameTime);
         }
@@ -119,6 +125,7 @@ namespace HelProject
 
             _spriteBatch.Begin();
             ScreenManager.Instance.Draw(_spriteBatch);
+            _spriteBatch.Draw(TextureManager.Instance.LoadedTextures["cursor_normal"], this._cursorPosition, Color.White);
             _spriteBatch.End();
 
             base.Draw(gameTime);

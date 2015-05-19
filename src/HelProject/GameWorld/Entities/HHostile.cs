@@ -20,7 +20,7 @@ namespace HelProject.GameWorld.Entities
 {
     public class HHostile : HEntity
     {
-        private const float ALERT_FOV_MUTLIPLIER = 1.5f;
+        private const float ALERT_FOV_MUTLIPLIER = 1.85f;
 
         private FRectangle _fieldOfView;
         private FRectangle _alertedFieldOfView;
@@ -61,7 +61,7 @@ namespace HelProject.GameWorld.Entities
         /// <param name="width">Width (in-game unit)</param>
         /// <param name="height">Height (in-game unit)</param>
         /// <param name="textureName">Name of the texture</param>
-        public HHostile(FeatureCollection initialFeatures, Vector2 position, float width, float height, string textureName, float fieldOfView = 9.25f)
+        public HHostile(FeatureCollection initialFeatures, Vector2 position, float width, float height, string textureName, float fieldOfView = 8.125f)
             : base(initialFeatures, position, width, height, textureName)
         {
             this.IsAlerted = false;
@@ -75,6 +75,7 @@ namespace HelProject.GameWorld.Entities
         public override void LoadContent()
         {
             base.LoadContent();
+            this.IsAlerted = false;
         }
 
         /// <summary>
@@ -83,6 +84,7 @@ namespace HelProject.GameWorld.Entities
         public override void UnloadContent()
         {
             base.UnloadContent();
+            this.IsAlerted = false;
         }
 
         /// <summary>
@@ -92,7 +94,6 @@ namespace HelProject.GameWorld.Entities
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
             this.CenterFieldOfView();
 
             if (this.FieldOfView.Intersects(PlayScreen.Instance.PlayableCharacter.Bounds) ||
@@ -128,6 +129,8 @@ namespace HelProject.GameWorld.Entities
         {
             base.Draw(spriteBatch);
         }
+
+
 
         /// <summary>
         /// Centers the field of view to the position

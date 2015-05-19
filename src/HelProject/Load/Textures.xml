@@ -10,7 +10,9 @@
   <TemporaryDictionnaryItem id="wallnoleftborderndb" path="scenary/wallnoleftborderndb" />
   <TemporaryDictionnaryItem id="wallnorightborderndb" path="scenary/wallnorightborderndb" />
   <TemporaryDictionnaryItem id="floor" path="scenary/floor" />
+  <TemporaryDictionnaryItem id="floorlava" path="scenary/floor_lava" />
   <TemporaryDictionnaryItem id="hero" path="entities/hero_a" />
   <TemporaryDictionnaryItem id="draugr" path="entities/draugr" />
   <TemporaryDictionnaryItem id="notexture" path="notexture" />
+  <TemporaryDictionnaryItem id="cursor_normal" path="UI/cursor_normal" />
 </items>

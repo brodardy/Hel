@@ -92,7 +92,7 @@ namespace HelProject.GameWorld.Map
             this.Bounds = new FRectangle(position.X, position.Y, 1f, 1f);
 
             if (type == String.Empty)
-                this.Type = (isWalkable) ? "floor" : "wall";
+                this.Type = (isWalkable) ? "floorlava" : "wall";
             else
                 this.Type = type;
         }
