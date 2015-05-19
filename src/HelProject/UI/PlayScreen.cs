@@ -6,10 +6,12 @@
  */
 
 #region USING STATEMENTS
+using HelHelProject.Tools;
 using HelProject.Features;
 using HelProject.GameWorld.Entities;
 using HelProject.GameWorld.Map;
 using HelProject.Tools;
+using HelProject.UI.HUD;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -32,6 +34,16 @@ namespace HelProject.UI
         private HHero _hero;
         private static PlayScreen _instance;
         private Camera _camera;
+        private FillingBar _playerHealth;
+
+        /// <summary>
+        /// Health of the player
+        /// </summary>
+        public FillingBar PlayerHealth
+        {
+            get { return _playerHealth; }
+            set { _playerHealth = value; }
+        }
 
         /// <summary>
         /// Starting point of the game : The town
@@ -128,6 +140,10 @@ namespace HelProject.UI
             this.LoadPlayableCharacter();
             this.LoadHostiles();
 
+            FRectangle r = new FRectangle(20, MainGame.Instance.GraphicsDevice.Viewport.Height - 170, 30, 150);
+            this.PlayerHealth = new FillingBar(FillingBar.FillingDirection.BottomToTop, r, Color.DarkRed, Color.Red, new Color(Color.Black, 0.75f),
+                                               this.PlayableCharacter.FeatureCalculator.GetTotalLifePoints(), this.PlayableCharacter.ActualFeatures.LifePoints);
+
             // Camera initialisation, gets the width and height of the window
             // and the position of the hero
             this.Camera = new Camera(this.PlayableCharacter.Position, MainGame.Instance.GraphicsDevice.Viewport.Width, MainGame.Instance.GraphicsDevice.Viewport.Height);
@@ -152,7 +168,8 @@ namespace HelProject.UI
         {
             this.UpdateMapControl();
             this.PlayableCharacter.Update(gameTime);
-            UpdateHostiles(gameTime);
+            this.UpdateHostiles(gameTime);
+            this.PlayerHealth.ActualValue = this.PlayableCharacter.ActualFeatures.LifePoints;
         }
 
         /// <summary>
@@ -164,6 +181,7 @@ namespace HelProject.UI
             this.CurrentMap.Draw(spriteBatch, this.Camera);
             this.PlayableCharacter.Draw(spriteBatch);
             this.DrawHostiles(spriteBatch);
+            this.PlayerHealth.Draw(spriteBatch);
         }
 
         /// <summary>
