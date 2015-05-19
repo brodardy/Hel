@@ -66,6 +66,8 @@
     <Compile Include="Tools\InputManager.cs" />
     <Compile Include="Tools\Primitives2D.cs" />
     <Compile Include="UI\Camera.cs" />
+    <Compile Include="UI\HUD\FillingBar.cs" />
+    <Compile Include="UI\HUD\HUDManager.cs" />
     <Compile Include="UI\Image.cs" />
     <Compile Include="Tools\XmlManager.cs" />
     <Compile Include="UI\GameScreen.cs" />

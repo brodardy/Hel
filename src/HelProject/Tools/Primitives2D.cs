@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿/*
+ * Author : Yannick R. Brodard
+ * File name : Primitives2D.cs
+ * Version : 0.1.201505191333
+ * Description : Primitives 2D for monogame
+ */
+
 using HelProject;
 using HelProject.Tools;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace HelHelProject.Tools
 {
