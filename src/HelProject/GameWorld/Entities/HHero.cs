@@ -145,7 +145,7 @@ namespace HelProject.GameWorld.Entities
         {
             PlayScreen.Instance.CurrentMap = map;
             this.Position = position;
-            this.Bounds.SetBounds(position, this.Texture.Width, this.Texture.Height);
+            this.Bounds.SetBoundsWithTexture(position, this.Texture.Width, this.Texture.Height);
             PlayScreen.Instance.Camera.Position = position;
         }
 
@@ -172,7 +172,7 @@ namespace HelProject.GameWorld.Entities
                 float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds; // gets the elapsed time in seconds from the last update
                 newPosition += direction * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed()); // Calculates the new position
                 FRectangle newBounds = new FRectangle(this.Bounds.Width, this.Bounds.Height); // ready the new bounds of the character
-                newBounds.SetBounds(newPosition, this.Texture.Width, this.Texture.Height);
+                newBounds.SetBoundsWithTexture(newPosition, this.Texture.Width, this.Texture.Height);
 
                 this.ApplyFluidMovement(direction, newPosition, newBounds, elapsedTime);
 

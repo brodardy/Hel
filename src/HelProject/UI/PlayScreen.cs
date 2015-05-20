@@ -35,7 +35,18 @@ namespace HelProject.UI
         private static PlayScreen _instance;
         private Camera _camera;
         private FillingBar _playerHealth;
+        private SelectionAid _selectionAssistant;
+
         private SpriteFont font;
+
+        /// <summary>
+        /// Selection assistant for the game
+        /// </summary>
+        public SelectionAid SelectionAssistant
+        {
+            get { return _selectionAssistant; }
+            set { _selectionAssistant = value; }
+        }
 
         /// <summary>
         /// Health of the player
@@ -141,6 +152,7 @@ namespace HelProject.UI
             this.LoadMaps();
             this.LoadPlayableCharacter();
             this.LoadHostiles();
+            this.SelectionAssistant = new SelectionAid();
 
             FRectangle r = new FRectangle(20, MainGame.Instance.GraphicsDevice.Viewport.Height - 170, 30, 150);
             this.PlayerHealth = new FillingBar(FillingBar.FillingDirection.BottomToTop, r, Color.DarkRed, Color.Red, new Color(Color.Black, 0.75f),
@@ -172,6 +184,7 @@ namespace HelProject.UI
             this.PlayableCharacter.Update(gameTime);
             this.UpdateHostiles(gameTime);
             this.PlayerHealth.ActualValue = this.PlayableCharacter.ActualFeatures.LifePoints;
+            this.SelectionAssistant.Update(gameTime);
         }
 
         /// <summary>
@@ -184,9 +197,12 @@ namespace HelProject.UI
             this.PlayableCharacter.Draw(spriteBatch);
             this.DrawHostiles(spriteBatch);
             this.PlayerHealth.Draw(spriteBatch);
+            this.DrawSelection(spriteBatch);
 
             Primitives2D.Instance.FillRectangle(spriteBatch, 0, 0, 200, 150, new Color(Color.LightBlue, 0.5f));
             Primitives2D.Instance.DrawRectangle(spriteBatch, 0, 0, 200, 150, Color.Black, 5);
+
+
 
             spriteBatch.DrawString(font, "Camera position (IG unit)", new Vector2(10, 10), Color.Black);
             spriteBatch.DrawString(font, "X => " + Camera.Position.X.ToString(), new Vector2(15, 30), Color.Black);
@@ -287,6 +303,27 @@ namespace HelProject.UI
         }
 
         /// <summary>
+        /// Draws the selection of the mouse
+        /// </summary>
+        /// <param name="sb">Sprite batch</param>
+        private void DrawSelection(SpriteBatch sb)
+        {
+            int nbObjects = this.SelectionAssistant.SelectedObjects.Count;
+            for (int i = 0; i < nbObjects; i++)
+            {
+                if (this.SelectionAssistant.SelectedObjects[i] is HHostile)
+                {
+                    HHostile hostile = this.SelectionAssistant.SelectedObjects[i] as HHostile;
+                    Vector2 start = ScreenManager.Instance.GetCorrectScreenPosition(hostile.Bounds.Position, this.Camera.Position);
+                    Vector2 end = ScreenManager.Instance.GetCorrectScreenPosition(new Vector2(hostile.Bounds.Position.X + hostile.Bounds.Width, hostile.Bounds.Position.Y + hostile.Bounds.Height), this.Camera.Position);
+                    end.X += 1f;
+                    end.Y += 1f;
+                    Primitives2D.Instance.DrawRectangle(sb, start, end, Color.Yellow, 2);
+                }
+            }
+        }
+
+        /// <summary>
         /// Loads the playable character
         /// </summary>
         private void LoadPlayableCharacter()
@@ -333,7 +370,7 @@ namespace HelProject.UI
                     this.CurrentMap = this.MapDifficultyEasy;
 
                 this.PlayableCharacter.Position = this.CurrentMap.GetRandomFloorPoint();
-                this.PlayableCharacter.Bounds.SetBounds(this.PlayableCharacter.Position, this.PlayableCharacter.Texture.Width, this.PlayableCharacter.Texture.Height);
+                this.PlayableCharacter.Bounds.SetBoundsWithTexture(this.PlayableCharacter.Position, this.PlayableCharacter.Texture.Width, this.PlayableCharacter.Texture.Height);
                 this.Camera.Position = this.PlayableCharacter.Position;
             }
         }

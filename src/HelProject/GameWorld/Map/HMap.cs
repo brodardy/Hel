@@ -552,8 +552,27 @@ namespace HelProject.GameWorld.Map
                     int unWalkableCells = this.GetNumberOfAdjacentUnwalkableCells(rX, rY, 1, 1);
                     if (unWalkableCells == 0)
                     {
-                        foundPosition = true;
-                        position = foundCell.Position;
+                        int nbHostiles = this.Hostiles.Count;
+                        bool noIntersection = true;
+                        for (int i = 0; i < nbHostiles; i++)
+                        {
+                            if (foundCell.Bounds.Intersects(this.Hostiles[i].Bounds))
+                            {
+                                noIntersection = false;
+                            }
+                        }
+
+                        if (PlayScreen.Instance.PlayableCharacter != null)
+                        {
+                            if (PlayScreen.Instance.PlayableCharacter.Bounds.Intersects(foundCell.Bounds))
+                                noIntersection = false;
+                        }
+
+                        if (noIntersection)
+                        {
+                            foundPosition = true;
+                            position = foundCell.Position;
+                        }
                     }
                 }
             }

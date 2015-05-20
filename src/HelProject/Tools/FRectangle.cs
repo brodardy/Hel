@@ -115,9 +115,32 @@ namespace HelProject.Tools
         }
 
         /// <summary>
+        /// Finds if a point is intersecting with this rectangle
+        /// </summary>
+        /// <param name="x">X position of the point</param>
+        /// <param name="y">Y position of the point</param>
+        /// <returns>Results if it's intersecting</returns>
+        public bool Intersects(float x, float y)
+        {
+            float b = 1f / (float)HCell.TILE_SIZE;
+            return this.Intersects(new FRectangle(x, y, b, b));
+        }
+
+        /// <summary>
+        /// Finds if a vector is intersecting with this rectangle
+        /// </summary>
+        /// <param name="position">Position</param>
+        /// <returns>Results if it's intersecting</returns>
+        public bool Intersects(Vector2 position)
+        {
+            float b = 1f / (float)HCell.TILE_SIZE;
+            return this.Intersects(new FRectangle(position.X, position.Y, b, b));
+        }
+
+        /// <summary>
         /// Sets the position of the bounds accordingly to the given position
         /// </summary>
-        public void SetBounds(Vector2 position, int textureWidth, int textureHeight)
+        public void SetBoundsWithTexture(Vector2 position, int textureWidth, int textureHeight)
         {
             this.X = position.X - (float)textureWidth / 2f / (float)HCell.TILE_SIZE;
             this.Y = position.Y - (float)textureHeight / 2f / (float)HCell.TILE_SIZE;

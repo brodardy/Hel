@@ -122,7 +122,7 @@ namespace HelProject.GameWorld.Entities
                 float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
                 newPosition += direction * elapsedTime * this.FeatureCalculator.GetTotalMovementSpeed();
                 FRectangle newBounds = new FRectangle(this.Bounds.Width, this.Bounds.Height); // ready the new bounds of the character
-                newBounds.SetBounds(newPosition, this.Texture.Width, this.Texture.Height);
+                newBounds.SetBoundsWithTexture(newPosition, this.Texture.Width, this.Texture.Height);
 
                 this.ApplyFluidMovement(direction, newPosition, newBounds, elapsedTime);
                 this.Direction = direction;

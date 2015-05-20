@@ -5,6 +5,7 @@
  * Description : Base abstract class for the entities of the game
  */
 
+using HelHelProject.Tools;
 using HelProject.Features;
 using HelProject.GameWorld.Map;
 using HelProject.Tools;
@@ -30,6 +31,8 @@ namespace HelProject.GameWorld.Entities
         public const float DEFAULT_MANAREGENERATION = 1.0f;
         public const float DEFAULT_MOVEMENTSPEED = 5.0f;
         public const float DEFAULT_LIFEPOINTS = 100.0f;
+        public const float DEFAULT_ATTACKBOUND_WIDTH = 1.8f;
+        public const float DEFAULT_ATTACKBOUND_HEIGHT = 2.7f;
 
         private FeatureCollection _initialFeatures;
         private FeatureCollection _actualFeatures;
@@ -38,7 +41,17 @@ namespace HelProject.GameWorld.Entities
         private EntityState _state;
         private Vector2 _direction;
         private FRectangle _bounds;
+        private FRectangle _attackBounds;
         private Texture2D _texture;
+
+        /// <summary>
+        /// Attack bounds of the entity
+        /// </summary>
+        public FRectangle AttackBounds
+        {
+            get { return _attackBounds; }
+            set { _attackBounds = value; }
+        }
 
         /// <summary>
         /// Texture of the entity
@@ -152,7 +165,22 @@ namespace HelProject.GameWorld.Entities
             this.State = EntityState.Idle;
             this.Texture = TextureManager.Instance.GetTexture(textureName);
             this.Bounds = new FRectangle(width, height);
-            this.Bounds.SetBounds(position, this.Texture.Width, this.Texture.Height);
+            this.Bounds.SetBoundsWithTexture(position, this.Texture.Width, this.Texture.Height);
+            this.AttackBounds = new FRectangle(DEFAULT_ATTACKBOUND_WIDTH, DEFAULT_ATTACKBOUND_HEIGHT);
+            this.AttackBounds.X = this.Position.X - this.AttackBounds.Width / 2f;
+            this.AttackBounds.Y = this.Position.Y - this.AttackBounds.Height / 2f;
+        }
+
+        /// <summary>
+        /// Updates the entity
+        /// </summary>
+        /// <param name="gameTime"></param>
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            this.AttackBounds.X = this.Position.X - this.AttackBounds.Width / 2f;
+            this.AttackBounds.Y = this.Position.Y - this.AttackBounds.Height / 2f;
         }
 
         /// <summary>
@@ -170,6 +198,12 @@ namespace HelProject.GameWorld.Entities
                 Vector2 position = ScreenManager.Instance.GetCorrectScreenPosition(boundsPosA, PlayScreen.Instance.Camera.Position);
                 spriteBatch.Draw(this.Texture, position, Color.White);
             }
+
+            Vector2 start = ScreenManager.Instance.GetCorrectScreenPosition(this.AttackBounds.Position, PlayScreen.Instance.Camera.Position);
+            Vector2 end = ScreenManager.Instance.GetCorrectScreenPosition(new Vector2(this.AttackBounds.Position.X + this.AttackBounds.Width, this.AttackBounds.Position.Y + this.AttackBounds.Height), PlayScreen.Instance.Camera.Position);
+            end.X += 1f;
+            end.Y += 1f;
+            Primitives2D.Instance.DrawRectangle(spriteBatch, start, end, Color.Red);
         }
 
         /// <summary>
@@ -202,7 +236,7 @@ namespace HelProject.GameWorld.Entities
                     newPosition += new Vector2(0.0f, direction.Y) * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed());
                 }
 
-                newBounds.SetBounds(newPosition, this.Texture.Width, this.Texture.Height);
+                newBounds.SetBoundsWithTexture(newPosition, this.Texture.Width, this.Texture.Height);
 
                 if (this.IsCharacterSurfaceWalkable(newPosition, newBounds))
                 {
@@ -222,7 +256,7 @@ namespace HelProject.GameWorld.Entities
                         newPosition += new Vector2(0.0f, direction.Y) * elapsedTime * (this.FeatureCalculator.GetTotalMovementSpeed());
                     }
 
-                    newBounds.SetBounds(newPosition, this.Texture.Width, this.Texture.Height);
+                    newBounds.SetBoundsWithTexture(newPosition, this.Texture.Width, this.Texture.Height);
 
                     if (this.IsCharacterSurfaceWalkable(newPosition, newBounds))
                     {
