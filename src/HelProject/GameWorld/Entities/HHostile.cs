@@ -5,6 +5,7 @@
  * Description : Base class for hostile entities
  */
 
+using HelHelProject.Tools;
 using HelProject.Features;
 using HelProject.GameWorld.Map;
 using HelProject.Tools;
@@ -108,12 +109,92 @@ namespace HelProject.GameWorld.Entities
         {
             base.Update(gameTime);
             this.CenterFieldOfView();
+            this.UpdatePursuit(gameTime);
+            this.UpdateHealthBar();
+        }
 
+        /// <summary>
+        /// Draws the hostile
+        /// </summary>
+        /// <param name="spriteBatch">Sprite batch</param>
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+            this.HealthBar.Draw(spriteBatch);
+
+            if (MainGame.Instance.DEBUG_MODE)
+            {
+                if (this.IsAlerted)
+                {
+                    Vector2 start = ScreenManager.Instance.GetCorrectScreenPosition(this.AlertedFieldOfView.Position, PlayScreen.Instance.Camera.Position);
+                    Vector2 end = ScreenManager.Instance.GetCorrectScreenPosition(new Vector2(this.AlertedFieldOfView.Position.X + this.AlertedFieldOfView.Width, this.AlertedFieldOfView.Position.Y + this.AlertedFieldOfView.Height), PlayScreen.Instance.Camera.Position);
+                    end.X += 1f;
+                    end.Y += 1f;
+                    Primitives2D.Instance.DrawRectangle(spriteBatch, start, end, Color.Blue);
+                }
+                else
+                {
+                    Vector2 start = ScreenManager.Instance.GetCorrectScreenPosition(this.FieldOfView.Position, PlayScreen.Instance.Camera.Position);
+                    Vector2 end = ScreenManager.Instance.GetCorrectScreenPosition(new Vector2(this.FieldOfView.Position.X + this.FieldOfView.Width, this.FieldOfView.Position.Y + this.FieldOfView.Height), PlayScreen.Instance.Camera.Position);
+                    end.X += 1f;
+                    end.Y += 1f;
+                    Primitives2D.Instance.DrawRectangle(spriteBatch, start, end, Color.Blue);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Destroys the hostile in the current map
+        /// </summary>
+        public void Destroy()
+        {
+            PlayScreen.Instance.CurrentMap.Hostiles.Remove(this);
+            this.UnloadContent();
+        }
+
+        /// <summary>
+        /// Updates the pursuit mechanism of the hostile
+        /// </summary>
+        /// <param name="gameTime">Game time</param>
+        private void UpdatePursuit(GameTime gameTime)
+        {
             if (this.FieldOfView.Intersects(PlayScreen.Instance.PlayableCharacter.Bounds) ||
-                (this.IsAlerted && this.AlertedFieldOfView.Intersects(PlayScreen.Instance.PlayableCharacter.Bounds)))
+               (this.IsAlerted && this.AlertedFieldOfView.Intersects(PlayScreen.Instance.PlayableCharacter.Bounds)))
+            {
+                this.IsAlerted = true;
+                this.UpdateAttackOnPlayer();
+                this.UpdateMovementTowardsPlayer(gameTime);
+            }
+            else
+            {
+                this.IsAlerted = false;
+            }
+        }
+
+        /// <summary>
+        /// Attacks the player
+        /// </summary>
+        private void UpdateAttackOnPlayer()
+        {
+            HHero target = PlayScreen.Instance.PlayableCharacter;
+            if (target.Bounds.Intersects(this.AttackBounds))
+            {
+                this.State = EntityState.MeleeAttacking;
+                this.BasicMeleeAttack(target);
+            }
+        }
+
+        /// <summary>
+        /// Updates the movement of the hostile so it can reach the player
+        /// </summary>
+        /// <param name="gameTime">Game time</param>
+        private void UpdateMovementTowardsPlayer(GameTime gameTime)
+        {
+            if ((this.State != EntityState.MeleeAttacking) &&
+                (this.State != EntityState.RangeAttacking) &&
+                (this.State != EntityState.NoMovement))
             {
                 this.State = EntityState.Running;
-                this.IsAlerted = true;
                 Vector2 newPosition = this.Position;
                 Vector2 heroPosition = new Vector2(PlayScreen.Instance.PlayableCharacter.Position.X, PlayScreen.Instance.PlayableCharacter.Position.Y);
                 Vector2 direction = heroPosition - newPosition; // new position is still actual position
@@ -127,25 +208,16 @@ namespace HelProject.GameWorld.Entities
                 this.ApplyFluidMovement(direction, newPosition, newBounds, elapsedTime);
                 this.Direction = direction;
             }
-            else
-            {
-                this.State = EntityState.Idle;
-                this.IsAlerted = false;
-            }
-
-            this.HealthBar.ActualValue = this.ActualFeatures.LifePoints;
-            Vector2 hbPos = new Vector2((this.Position.X - this.HealthBar.Container.Width / 2 / HCell.TILE_SIZE) + 1f / HCell.TILE_SIZE, this.Position.Y - this.Texture.Height / HCell.TILE_SIZE);
-            this.HealthBar.Container.Position = ScreenManager.Instance.GetCorrectScreenPosition(hbPos, PlayScreen.Instance.Camera.Position);
         }
 
         /// <summary>
-        /// Draws the hostile
+        /// Updates the health bar of the hostile
         /// </summary>
-        /// <param name="spriteBatch">Sprite batch</param>
-        public override void Draw(SpriteBatch spriteBatch)
+        private void UpdateHealthBar()
         {
-            base.Draw(spriteBatch);
-            this.HealthBar.Draw(spriteBatch);
+            this.HealthBar.ActualValue = this.ActualFeatures.LifePoints;
+            Vector2 hbPos = new Vector2((this.Position.X - this.HealthBar.Container.Width / 2 / HCell.TILE_SIZE) + 1f / HCell.TILE_SIZE, this.Position.Y - this.Texture.Height / HCell.TILE_SIZE);
+            this.HealthBar.Container.Position = ScreenManager.Instance.GetCorrectScreenPosition(hbPos, PlayScreen.Instance.Camera.Position);
         }
 
         /// <summary>

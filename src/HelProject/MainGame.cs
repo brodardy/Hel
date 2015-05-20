@@ -16,7 +16,7 @@ namespace HelProject
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Vector2 _cursorPosition;
-
+        public bool DEBUG_MODE;
 
         /// <summary>
         /// Instance of the Main Game
@@ -39,7 +39,7 @@ namespace HelProject
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
+            DEBUG_MODE = true;
         }
 
         /// <summary>

@@ -34,7 +34,7 @@ namespace HelProject.UI
         private HHero _hero;
         private static PlayScreen _instance;
         private Camera _camera;
-        private FillingBar _playerHealth;
+        
         private SelectionAid _selectionAssistant;
 
         private SpriteFont font;
@@ -46,15 +46,6 @@ namespace HelProject.UI
         {
             get { return _selectionAssistant; }
             set { _selectionAssistant = value; }
-        }
-
-        /// <summary>
-        /// Health of the player
-        /// </summary>
-        public FillingBar PlayerHealth
-        {
-            get { return _playerHealth; }
-            set { _playerHealth = value; }
         }
 
         /// <summary>
@@ -154,10 +145,6 @@ namespace HelProject.UI
             this.LoadHostiles();
             this.SelectionAssistant = new SelectionAid();
 
-            FRectangle r = new FRectangle(20, MainGame.Instance.GraphicsDevice.Viewport.Height - 170, 30, 150);
-            this.PlayerHealth = new FillingBar(FillingBar.FillingDirection.BottomToTop, r, Color.DarkRed, Color.Red, new Color(Color.Black, 0.75f),
-                                               this.PlayableCharacter.FeatureCalculator.GetTotalLifePoints(), this.PlayableCharacter.ActualFeatures.LifePoints);
-
             // Camera initialisation, gets the width and height of the window
             // and the position of the hero
             this.Camera = new Camera(this.PlayableCharacter.Position, MainGame.Instance.GraphicsDevice.Viewport.Width, MainGame.Instance.GraphicsDevice.Viewport.Height);
@@ -183,7 +170,6 @@ namespace HelProject.UI
             this.UpdateMapControl();
             this.PlayableCharacter.Update(gameTime);
             this.UpdateHostiles(gameTime);
-            this.PlayerHealth.ActualValue = this.PlayableCharacter.ActualFeatures.LifePoints;
             this.SelectionAssistant.Update(gameTime);
         }
 
@@ -196,20 +182,20 @@ namespace HelProject.UI
             this.CurrentMap.Draw(spriteBatch, this.Camera);
             this.PlayableCharacter.Draw(spriteBatch);
             this.DrawHostiles(spriteBatch);
-            this.PlayerHealth.Draw(spriteBatch);
             this.DrawSelection(spriteBatch);
 
-            Primitives2D.Instance.FillRectangle(spriteBatch, 0, 0, 200, 150, new Color(Color.LightBlue, 0.5f));
-            Primitives2D.Instance.DrawRectangle(spriteBatch, 0, 0, 200, 150, Color.Black, 5);
+            if (MainGame.Instance.DEBUG_MODE)
+            {
+                Primitives2D.Instance.FillRectangle(spriteBatch, 0, 0, 200, 150, new Color(Color.LightBlue, 0.5f));
+                Primitives2D.Instance.DrawRectangle(spriteBatch, 0, 0, 200, 150, Color.Black, 5);
 
-
-
-            spriteBatch.DrawString(font, "Camera position (IG unit)", new Vector2(10, 10), Color.Black);
-            spriteBatch.DrawString(font, "X => " + Camera.Position.X.ToString(), new Vector2(15, 30), Color.Black);
-            spriteBatch.DrawString(font, "Y => " + Camera.Position.Y.ToString(), new Vector2(15, 50), Color.Black);
-            spriteBatch.DrawString(font, "Mouse position (IG unit)", new Vector2(10, 80), Color.Black);
-            spriteBatch.DrawString(font, "X => " + Camera.GetMousePositionRelativeToMap().X, new Vector2(15, 100), Color.Black);
-            spriteBatch.DrawString(font, "Y => " + Camera.GetMousePositionRelativeToMap().Y.ToString(), new Vector2(15, 120), Color.Black);
+                spriteBatch.DrawString(font, "Camera position (IG unit)", new Vector2(10, 10), Color.Black);
+                spriteBatch.DrawString(font, "X => " + Camera.Position.X.ToString(), new Vector2(15, 30), Color.Black);
+                spriteBatch.DrawString(font, "Y => " + Camera.Position.Y.ToString(), new Vector2(15, 50), Color.Black);
+                spriteBatch.DrawString(font, "Mouse position (IG unit)", new Vector2(10, 80), Color.Black);
+                spriteBatch.DrawString(font, "X => " + Camera.GetMousePositionRelativeToMap().X, new Vector2(15, 100), Color.Black);
+                spriteBatch.DrawString(font, "Y => " + Camera.GetMousePositionRelativeToMap().Y.ToString(), new Vector2(15, 120), Color.Black);
+            }
         }
 
         /// <summary>

@@ -10,6 +10,7 @@ using HelProject.GameWorld.Map;
 using HelProject.GameWorld.Spells;
 using HelProject.Tools;
 using HelProject.UI;
+using HelProject.UI.HUD;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -26,6 +27,16 @@ namespace HelProject.GameWorld.Entities
         private HSpell _spellSlot2;
         private HSpell _spellSlot3;
         private HSpell _spellSlot4;
+        private FillingBar _playerHealth;
+
+        /// <summary>
+        /// Player's health bar
+        /// </summary>
+        public FillingBar PlayerHealth
+        {
+            get { return _playerHealth; }
+            set { _playerHealth = value; }
+        }
 
         /// <summary>
         /// Spell present in slot 1
@@ -76,6 +87,11 @@ namespace HelProject.GameWorld.Entities
         public override void LoadContent()
         {
             base.LoadContent();
+
+            // init player health bar
+            FRectangle r = new FRectangle(20, MainGame.Instance.GraphicsDevice.Viewport.Height - 170, 30, 150);
+            this.PlayerHealth = new FillingBar(FillingBar.FillingDirection.BottomToTop, r, Color.DarkRed, Color.Red, new Color(Color.Black, 0.75f),
+                                               this.FeatureCalculator.GetTotalLifePoints(), this.ActualFeatures.LifePoints);
         }
 
         /// <summary>
@@ -94,8 +110,76 @@ namespace HelProject.GameWorld.Entities
         {
             base.Update(gameTime);
 
-            bool movementResult = this.UpdateMovement(gameTime);
+            this.UpdateNoMovementKey();
+            this.UpdateBasicAttack();
+            this.UpdateMovement(gameTime);
+            this.UpdateTeleportUsage();
+            this.PlayerHealth.ActualValue = this.ActualFeatures.LifePoints;
 
+            PlayScreen.Instance.Camera.Position = this.Position; // Apply the new position to the camera
+        }
+
+        /// <summary>
+        /// Draws the entity on screen
+        /// </summary>
+        /// <param name="spriteBatch">Sprite batch used for the drawing</param>
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+            this.PlayerHealth.Draw(spriteBatch);
+        }
+
+        /// <summary>
+        /// Teleports the play to the designed area
+        /// </summary>
+        /// <param name="map">Map</param>
+        /// <param name="position">Position</param>
+        public void Teleport(HMap map, Vector2 position)
+        {
+            PlayScreen.Instance.CurrentMap = map;
+            this.Position = position;
+            this.Bounds.SetBoundsWithTexture(position, this.Texture.Width, this.Texture.Height);
+            PlayScreen.Instance.Camera.Position = position;
+        }
+
+        /// <summary>
+        /// Sets the state to nomovement if the left shift is pressed
+        /// </summary>
+        private void UpdateNoMovementKey()
+        {
+            if (InputManager.Instance.IsKeyboardKeyDown(Keys.LeftShift) ||
+                InputManager.Instance.IsKeyboardKeyPressed(Keys.LeftShift) ||
+                InputManager.Instance.IsKeyboardKeyReleased(Keys.LeftShift))
+                this.State = EntityState.NoMovement;
+        }
+
+        /// <summary>
+        /// Checks if the player is attacking something
+        /// </summary>
+        private void UpdateBasicAttack()
+        {
+            if (InputManager.Instance.MsState.LeftButton == ButtonState.Pressed)
+            {
+                if (PlayScreen.Instance.SelectionAssistant.SelectedObjects.Count > 0)
+                {
+                    if (PlayScreen.Instance.SelectionAssistant.SelectedObjects[0] is HHostile)
+                    {
+                        HHostile target = PlayScreen.Instance.SelectionAssistant.SelectedObjects[0] as HHostile;
+                        if (target.Bounds.Intersects(this.AttackBounds))
+                        {
+                            this.State = EntityState.MeleeAttacking;
+                            this.BasicMeleeAttack(target);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks if the player is using a teleporter
+        /// </summary>
+        private void UpdateTeleportUsage()
+        {
             List<HCell> adjacentCells = PlayScreen.Instance.CurrentMap.GetAdjacentCells((int)this.Position.X, (int)this.Position.Y, 1, 1, true);
             int count = adjacentCells.Count;
             for (int i = 0; i < count; i++)
@@ -118,35 +202,6 @@ namespace HelProject.GameWorld.Entities
                         this.Teleport(PlayScreen.Instance.MapDifficultyHard, PlayScreen.Instance.MapDifficultyHard.GetRandomFloorPoint());
                 }
             }
-
-            if (!(movementResult))
-            {
-                this.State = EntityState.Idle;
-            }
-
-            PlayScreen.Instance.Camera.Position = this.Position; // Apply the new position to the camera
-        }
-
-        /// <summary>
-        /// Draws the entity on screen
-        /// </summary>
-        /// <param name="spriteBatch">Sprite batch used for the drawing</param>
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
-        }
-
-        /// <summary>
-        /// Teleports the play to the designed area
-        /// </summary>
-        /// <param name="map">Map</param>
-        /// <param name="position">Position</param>
-        public void Teleport(HMap map, Vector2 position)
-        {
-            PlayScreen.Instance.CurrentMap = map;
-            this.Position = position;
-            this.Bounds.SetBoundsWithTexture(position, this.Texture.Width, this.Texture.Height);
-            PlayScreen.Instance.Camera.Position = position;
         }
 
         /// <summary>
@@ -154,13 +209,16 @@ namespace HelProject.GameWorld.Entities
         /// </summary>
         /// <param name="gameTime">Game time</param>
         /// <returns>Did a movement happen ?</returns>
-        private bool UpdateMovement(GameTime gameTime)
+        private void UpdateMovement(GameTime gameTime)
         {
             Vector2 newPosition = this.Position; // gets the current position
             MouseState ms = InputManager.Instance.MsState; // gets the current state of the mouse
 
             // is the right button of the mouse clicked ?
-            if (ms.LeftButton == ButtonState.Pressed)
+            if ((ms.LeftButton == ButtonState.Pressed) &&
+                (this.State != EntityState.MeleeAttacking) &&
+                (this.State != EntityState.RangeAttacking) &&
+                (this.State != EntityState.NoMovement))
             {
                 // Update hero state to running
                 this.State = EntityState.Running;
@@ -177,12 +235,6 @@ namespace HelProject.GameWorld.Entities
                 this.ApplyFluidMovement(direction, newPosition, newBounds, elapsedTime);
 
                 this.Direction = direction; // Update the direction the hero is facing
-
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
     }

@@ -178,7 +178,9 @@ namespace HelProject.GameWorld.Entities
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            this.State = EntityState.Idle;
 
+            // Centers the attack bounds of the entity
             this.AttackBounds.X = this.Position.X - this.AttackBounds.Width / 2f;
             this.AttackBounds.Y = this.Position.Y - this.AttackBounds.Height / 2f;
         }
@@ -199,11 +201,14 @@ namespace HelProject.GameWorld.Entities
                 spriteBatch.Draw(this.Texture, position, Color.White);
             }
 
-            Vector2 start = ScreenManager.Instance.GetCorrectScreenPosition(this.AttackBounds.Position, PlayScreen.Instance.Camera.Position);
-            Vector2 end = ScreenManager.Instance.GetCorrectScreenPosition(new Vector2(this.AttackBounds.Position.X + this.AttackBounds.Width, this.AttackBounds.Position.Y + this.AttackBounds.Height), PlayScreen.Instance.Camera.Position);
-            end.X += 1f;
-            end.Y += 1f;
-            Primitives2D.Instance.DrawRectangle(spriteBatch, start, end, Color.Red);
+            if (MainGame.Instance.DEBUG_MODE)
+            {
+                Vector2 start = ScreenManager.Instance.GetCorrectScreenPosition(this.AttackBounds.Position, PlayScreen.Instance.Camera.Position);
+                Vector2 end = ScreenManager.Instance.GetCorrectScreenPosition(new Vector2(this.AttackBounds.Position.X + this.AttackBounds.Width, this.AttackBounds.Position.Y + this.AttackBounds.Height), PlayScreen.Instance.Camera.Position);
+                end.X += 1f;
+                end.Y += 1f;
+                Primitives2D.Instance.DrawRectangle(spriteBatch, start, end, Color.Red);
+            }
         }
 
         /// <summary>
@@ -301,6 +306,15 @@ namespace HelProject.GameWorld.Entities
         }
 
         /// <summary>
+        /// Basic melee attack
+        /// </summary>
+        /// <param name="target">Targeted enemy</param>
+        public void BasicMeleeAttack(HEntity target)
+        {
+            target.ActualFeatures.LifePoints -= 5;
+        }
+
+        /// <summary>
         /// State of the entity
         /// </summary>
         public enum EntityState
@@ -310,6 +324,7 @@ namespace HelProject.GameWorld.Entities
             MeleeAttacking,
             RangeAttacking,
             SpellCasting,
+            NoMovement,
         }
     }
 }
