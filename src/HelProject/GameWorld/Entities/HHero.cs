@@ -111,7 +111,7 @@ namespace HelProject.GameWorld.Entities
             base.Update(gameTime);
 
             this.UpdateNoMovementKey();
-            this.UpdateBasicAttack();
+            this.UpdateBasicAttack(gameTime);
             this.UpdateMovement(gameTime);
             this.UpdateTeleportUsage();
             this.PlayerHealth.ActualValue = this.ActualFeatures.LifePoints;
@@ -156,7 +156,7 @@ namespace HelProject.GameWorld.Entities
         /// <summary>
         /// Checks if the player is attacking something
         /// </summary>
-        private void UpdateBasicAttack()
+        private void UpdateBasicAttack(GameTime gameTime)
         {
             if (InputManager.Instance.MsState.LeftButton == ButtonState.Pressed)
             {
@@ -168,7 +168,7 @@ namespace HelProject.GameWorld.Entities
                         if (target.Bounds.Intersects(this.AttackBounds))
                         {
                             this.State = EntityState.MeleeAttacking;
-                            this.BasicMeleeAttack(target);
+                            this.BasicMeleeAttack(target, gameTime);
                         }
                     }
                 }

@@ -99,6 +99,16 @@ namespace HelProject.Features
         }
 
         /// <summary>
+        /// Calaculates the received damage
+        /// </summary>
+        /// <param name="damage">Damage given</param>
+        /// <returns>Real received damage</returns>
+        public float GetReceivedPhysicalDamage(float damage)
+        {
+            return damage - (this.GetTotalArmor() * 0.075f * damage);
+        }
+
+        /// <summary>
         /// Calculates the total strenght within the items, spells and initial values
         /// </summary>
         /// <returns>Total strenght</returns>

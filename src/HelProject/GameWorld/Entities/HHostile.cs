@@ -162,7 +162,7 @@ namespace HelProject.GameWorld.Entities
                (this.IsAlerted && this.AlertedFieldOfView.Intersects(PlayScreen.Instance.PlayableCharacter.Bounds)))
             {
                 this.IsAlerted = true;
-                this.UpdateAttackOnPlayer();
+                this.UpdateAttackOnPlayer(gameTime);
                 this.UpdateMovementTowardsPlayer(gameTime);
             }
             else
@@ -174,13 +174,13 @@ namespace HelProject.GameWorld.Entities
         /// <summary>
         /// Attacks the player
         /// </summary>
-        private void UpdateAttackOnPlayer()
+        private void UpdateAttackOnPlayer(GameTime gameTime)
         {
             HHero target = PlayScreen.Instance.PlayableCharacter;
             if (target.Bounds.Intersects(this.AttackBounds))
             {
                 this.State = EntityState.MeleeAttacking;
-                this.BasicMeleeAttack(target);
+                this.BasicMeleeAttack(target, gameTime);
             }
         }
 

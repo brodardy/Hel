@@ -12,6 +12,7 @@ using HelProject.Tools;
 using HelProject.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 namespace HelProject.GameWorld.Entities
@@ -25,7 +26,7 @@ namespace HelProject.GameWorld.Entities
         public const float DEFAULT_AGILITY = 5.0f;
         public const float DEFAULT_VITALITY = 5.0f;
         public const float DEFAULT_MAGIC = 5.0f;
-        public const float DEFAULT_ATTACKSPEED = 0.6f;
+        public const float DEFAULT_ATTACKSPEED = 0.0f;
         public const float DEFAULT_MINUMUMDAMAGE = 1.0f;
         public const float DEFAULT_MAXIMUMDAMAGE = 3.0f;
         public const float DEFAULT_MANAREGENERATION = 1.0f;
@@ -43,6 +44,8 @@ namespace HelProject.GameWorld.Entities
         private FRectangle _bounds;
         private FRectangle _attackBounds;
         private Texture2D _texture;
+        private Random _rand;
+        private double _lastAttackTime;
 
         /// <summary>
         /// Attack bounds of the entity
@@ -169,6 +172,8 @@ namespace HelProject.GameWorld.Entities
             this.AttackBounds = new FRectangle(DEFAULT_ATTACKBOUND_WIDTH, DEFAULT_ATTACKBOUND_HEIGHT);
             this.AttackBounds.X = this.Position.X - this.AttackBounds.Width / 2f;
             this.AttackBounds.Y = this.Position.Y - this.AttackBounds.Height / 2f;
+            this._rand = new Random();
+            this._lastAttackTime = 0d;
         }
 
         /// <summary>
@@ -309,9 +314,16 @@ namespace HelProject.GameWorld.Entities
         /// Basic melee attack
         /// </summary>
         /// <param name="target">Targeted enemy</param>
-        public void BasicMeleeAttack(HEntity target)
+        public void BasicMeleeAttack(HEntity target, GameTime gameTime)
         {
-            target.ActualFeatures.LifePoints -= 5;
+            double currentTime = gameTime.TotalGameTime.TotalSeconds;
+            if (currentTime - this._lastAttackTime >= this.FeatureCalculator.GetTotalAttackSpeed())
+            {
+                target.ActualFeatures.LifePoints -= this.FeatureCalculator.GetReceivedPhysicalDamage(this._rand.Next(
+                    (int)this.ActualFeatures.MinimumDamage, (int)this.ActualFeatures.MaximumDamage
+                    ));
+            }
+            this._lastAttackTime = currentTime;
         }
 
         /// <summary>
