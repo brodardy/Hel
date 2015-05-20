@@ -126,7 +126,6 @@ namespace HelProject.UI.HUD
         public void Draw(SpriteBatch spriteBatch)
         {
             Primitives2D.Instance.FillRectangle(spriteBatch, this.Container, this.BackgroundColor);
-            Primitives2D.Instance.DrawRectangle(spriteBatch, this.Container, this.BorderColor);
             Vector2 start = Vector2.Zero;
             Vector2 end = Vector2.Zero;
             int fillingPos = 0;
@@ -152,11 +151,12 @@ namespace HelProject.UI.HUD
                     break;
                 case FillingDirection.BottomToTop:
                     fillingPos = (int)((this.Container.Y + this.Container.Height) - ((this.FillerPercentage / 100f) * this.Container.Height));
-                    start = new Vector2(this.Container.Position.X + 1, fillingPos +1);
+                    start = new Vector2(this.Container.Position.X + 1, fillingPos + 1);
                     end = new Vector2(this.Container.Position.X + this.Container.Width - 1, this.Container.Position.Y + this.Container.Height - 1);
                     Primitives2D.Instance.FillRectangle(spriteBatch, start, end, this.FillerColor);
                     break;
             }
+            Primitives2D.Instance.DrawRectangle(spriteBatch, this.Container, this.BorderColor);
         }
 
         /// <summary>

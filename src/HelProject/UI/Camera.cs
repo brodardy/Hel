@@ -5,6 +5,8 @@
  * Description : Camera class for the screen
  */
 
+using HelProject.GameWorld.Map;
+using HelProject.Tools;
 using Microsoft.Xna.Framework;
 
 namespace HelProject.UI
@@ -86,6 +88,25 @@ namespace HelProject.UI
             this.Width = width;
             this.Height = height;
             this.Zoom = zoom;
+        }
+
+        /// <summary>
+        /// Gets the current mouse position relative to the map
+        /// </summary>
+        /// <returns>Mouse position relative to the map</returns>
+        public Vector2 GetMousePositionRelativeToMap()
+        {
+            Vector2 pos = InputManager.Instance.MsState.Position.ToVector2();
+            Vector2 firstCellPos = ScreenManager.Instance.GetCorrectScreenPosition(PlayScreen.Instance.CurrentMap.Cells[0, 0].Position, this.Position) / (float)HCell.TILE_SIZE;
+            float offSetX = -firstCellPos.X;
+            float offSetY = -firstCellPos.Y;
+
+            pos /= (float)HCell.TILE_SIZE;
+
+            pos.X += offSetX;
+            pos.Y += offSetY;
+
+            return pos;
         }
     }
 }

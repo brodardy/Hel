@@ -9,6 +9,7 @@ using HelProject.Features;
 using HelProject.GameWorld.Map;
 using HelProject.Tools;
 using HelProject.UI;
+using HelProject.UI.HUD;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -25,6 +26,16 @@ namespace HelProject.GameWorld.Entities
         private FRectangle _fieldOfView;
         private FRectangle _alertedFieldOfView;
         private bool _isAlerted;
+        private FillingBar _healthBar;
+
+        /// <summary>
+        /// Health bar of the hostile
+        /// </summary>
+        public FillingBar HealthBar
+        {
+            get { return _healthBar; }
+            set { _healthBar = value; }
+        }
 
         /// <summary>
         /// The unit is alerted
@@ -67,6 +78,8 @@ namespace HelProject.GameWorld.Entities
             this.IsAlerted = false;
             this.FieldOfView = new FRectangle(fieldOfView, fieldOfView);
             this.AlertedFieldOfView = new FRectangle(fieldOfView * ALERT_FOV_MUTLIPLIER, fieldOfView * ALERT_FOV_MUTLIPLIER);
+            this.HealthBar = new FillingBar(FillingBar.FillingDirection.LeftToRight, new FRectangle(30, 5), Color.Black, Color.Red, Color.Black,
+                this.FeatureCalculator.GetTotalLifePoints(), this.ActualFeatures.LifePoints);
         }
 
         /// <summary>
@@ -119,6 +132,10 @@ namespace HelProject.GameWorld.Entities
                 this.State = EntityState.Idle;
                 this.IsAlerted = false;
             }
+
+            this.HealthBar.ActualValue = this.ActualFeatures.LifePoints;
+            Vector2 hbPos = new Vector2((this.Position.X - this.HealthBar.Container.Width / 2 / HCell.TILE_SIZE) + 1f / HCell.TILE_SIZE, this.Position.Y - this.Texture.Height / HCell.TILE_SIZE);
+            this.HealthBar.Container.Position = ScreenManager.Instance.GetCorrectScreenPosition(hbPos, PlayScreen.Instance.Camera.Position);
         }
 
         /// <summary>
@@ -128,9 +145,8 @@ namespace HelProject.GameWorld.Entities
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
+            this.HealthBar.Draw(spriteBatch);
         }
-
-
 
         /// <summary>
         /// Centers the field of view to the position

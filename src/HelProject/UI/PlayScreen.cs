@@ -35,6 +35,7 @@ namespace HelProject.UI
         private static PlayScreen _instance;
         private Camera _camera;
         private FillingBar _playerHealth;
+        private SpriteFont font;
 
         /// <summary>
         /// Health of the player
@@ -135,6 +136,7 @@ namespace HelProject.UI
         public override void LoadContent()
         {
             base.LoadContent();
+            font = Content.Load<SpriteFont>("Lane");
 
             this.LoadMaps();
             this.LoadPlayableCharacter();
@@ -182,6 +184,16 @@ namespace HelProject.UI
             this.PlayableCharacter.Draw(spriteBatch);
             this.DrawHostiles(spriteBatch);
             this.PlayerHealth.Draw(spriteBatch);
+
+            Primitives2D.Instance.FillRectangle(spriteBatch, 0, 0, 200, 150, new Color(Color.LightBlue, 0.5f));
+            Primitives2D.Instance.DrawRectangle(spriteBatch, 0, 0, 200, 150, Color.Black, 5);
+
+            spriteBatch.DrawString(font, "Camera position (IG unit)", new Vector2(10, 10), Color.Black);
+            spriteBatch.DrawString(font, "X => " + Camera.Position.X.ToString(), new Vector2(15, 30), Color.Black);
+            spriteBatch.DrawString(font, "Y => " + Camera.Position.Y.ToString(), new Vector2(15, 50), Color.Black);
+            spriteBatch.DrawString(font, "Mouse position (IG unit)", new Vector2(10, 80), Color.Black);
+            spriteBatch.DrawString(font, "X => " + Camera.GetMousePositionRelativeToMap().X, new Vector2(15, 100), Color.Black);
+            spriteBatch.DrawString(font, "Y => " + Camera.GetMousePositionRelativeToMap().Y.ToString(), new Vector2(15, 120), Color.Black);
         }
 
         /// <summary>
