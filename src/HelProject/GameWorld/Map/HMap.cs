@@ -48,9 +48,19 @@ namespace HelProject.GameWorld.Map
         private ContentManager _content; // content manager
         private float _scale;
         private List<HHostile> _hostiles; // enemies of the map
+        private List<HItem> _onFloorItems;
         #endregion
 
         #region PROPRIETIES
+        /// <summary>
+        /// Items currently on the floor
+        /// </summary>
+        public List<HItem> OnFloorItems
+        {
+            get { return _onFloorItems; }
+            set { _onFloorItems = value; }
+        }
+
         /// <summary>
         /// Enemies present in the map
         /// </summary>
@@ -137,6 +147,7 @@ namespace HelProject.GameWorld.Map
             this.NonWalkableSpacePercentage = nonWalkableSpacePercentage;
             this.Scale = scale;
             this.Hostiles = new List<HHostile>();
+            this.OnFloorItems = new List<HItem>();
 
             this.ClearMap();
             this.MakeRandomlyFilledMap();
@@ -489,6 +500,9 @@ namespace HelProject.GameWorld.Map
             {
                 this.Hostiles = new List<HHostile>();
             }
+
+            if (this.OnFloorItems == null)
+                this.OnFloorItems = new List<HItem>();
         }
 
         /// <summary>
@@ -529,6 +543,24 @@ namespace HelProject.GameWorld.Map
                         spriteBatch.Draw(TextureManager.Instance.GetTexture(cell.Type), position, null, null, null, 0.0f, new Vector2(this.Scale, this.Scale), Color.White);
                     }
                 }
+            }
+
+            FRectangle limits = new FRectangle(startPoint.X, startPoint.Y, endPoint.X - startPoint.X, endPoint.Y - endPoint.Y);
+            this.DrawItems(spriteBatch, camera, limits);
+        }
+
+        /// <summary>
+        /// Draws all the items that are on the floor of the map
+        /// </summary>
+        /// <param name="spriteBatch">Sprite batch</param>
+        /// <param name="camera">Camera of the game</param>
+        /// <param name="limits">Limits where the item will be drawn</param>
+        public void DrawItems(SpriteBatch spriteBatch, Camera camera, FRectangle limits)
+        {
+            int nbrItem = this.OnFloorItems.Count;
+            for (int i = 0; i < nbrItem; i++)
+            {
+                this.OnFloorItems[i].Draw(spriteBatch);
             }
         }
 

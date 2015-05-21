@@ -6,13 +6,17 @@
  */
 
 using HelProject.Features;
+using HelProject.Tools;
+using HelProject.UI;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace HelProject.GameWorld
 {
     /// <summary>
     /// Item class
     /// </summary>
-    public class HItem
+    public class HItem : HObject
     {
         private const bool DEFAULT_ISONFLOOR_VALUE = true;
 
@@ -20,6 +24,26 @@ namespace HelProject.GameWorld
         private ItemTypes _itemType;
         private bool _isOnFloor;
         private FeatureCollection _features;
+        private string _imageName;
+        private string _description;
+
+        /// <summary>
+        /// description or summary, or story, just additional content for the eyes
+        /// </summary>
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value; }
+        }
+
+        /// <summary>
+        /// Name of the related texture2D
+        /// </summary>
+        public string ImageName
+        {
+            get { return _imageName; }
+            set { _imageName = value; }
+        }
 
         /// <summary>
         /// Name of the item
@@ -58,15 +82,21 @@ namespace HelProject.GameWorld
         }
 
         /// <summary>
+        /// Creates an empty item
+        /// </summary>
+        public HItem() : this("DEFAULT_ITEM", ItemTypes.Sword, new FeatureCollection(), "cursor_normal", false, Vector2.Zero, string.Empty) { /* no code... */ }
+
+        /// <summary>
         /// Creates an item on the floor
         /// </summary>
         /// <param name="name">Name of the item</param>
         /// <param name="type">Type of the item</param>
         /// <param name="features">Given features of the item</param>
+        /// <param name="imageName">Image name</param>
         /// <remarks>
         /// IsOnFloor == true
         /// </remarks>
-        public HItem(string name, ItemTypes type, FeatureCollection features) : this(name, type, features, DEFAULT_ISONFLOOR_VALUE) { /* no code... */ }
+        public HItem(string name, ItemTypes type, FeatureCollection features, string imageName) : this(name, type, features, imageName, DEFAULT_ISONFLOOR_VALUE, Vector2.Zero, string.Empty) { /* no code... */ }
 
         /// <summary>
         /// Creates an item
@@ -75,12 +105,40 @@ namespace HelProject.GameWorld
         /// <param name="type">Type of the item</param>
         /// <param name="features">Given features of the item</param>
         /// <param name="isOnFloor">Is the item on the floor</param>
-        public HItem(string name, ItemTypes type, FeatureCollection features, bool isOnFloor)
+        /// <param name="imageName">Image name</param>
+        /// <param name="position">Position of the item (IG unit)</param>
+        public HItem(string name, ItemTypes type, FeatureCollection features, string imageName, bool isOnFloor, Vector2 position) : this(name, type, features, imageName, isOnFloor, position, string.Empty) { /* no code... */ }
+
+        /// <summary>
+        /// Creates an item
+        /// </summary>
+        /// <param name="name">Name of the item</param>
+        /// <param name="type">Type of the item</param>
+        /// <param name="features">Given features of the item</param>
+        /// <param name="isOnFloor">Is the item on the floor</param>
+        /// <param name="imageName">Image name</param>
+        /// <param name="position">Position of the item (IG unit)</param>
+        /// <param name="description">Summary of the weapon</param>
+        public HItem(string name, ItemTypes type, FeatureCollection features, string imageName, bool isOnFloor, Vector2 position, string description)
         {
             this.Name = name;
             this.ItemType = type;
             this.Features = features;
             this.IsOnFloor = isOnFloor;
+            this.ImageName = imageName;
+            this.Position = position;
+            this.IsWalkable = true;
+            this.Description = description;
+        }
+        /// <summary>
+        /// Draws the item
+        /// </summary>
+        /// <param name="spriteBatch">Sprite batch</param>
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+            Vector2 position = ScreenManager.Instance.GetCorrectScreenPosition(this.Position, PlayScreen.Instance.Camera.Position);
+            spriteBatch.Draw(TextureManager.Instance.GetTexture(this.ImageName), position, null, null, null, 0.0f, new Vector2(1f, 1f), Color.White);
         }
 
         /// <summary>

@@ -68,7 +68,10 @@ namespace HelProject.UI
         {
             base.Update(gameTime);
             BackgroundImage.Update(gameTime);
-            if (InputManager.Instance.ReleasedKeys.Count > 0)
+            if (InputManager.Instance.ReleasedKeys.Count > 0 ||
+                InputManager.Instance.MsState.LeftButton == ButtonState.Pressed ||
+                InputManager.Instance.MsState.RightButton == ButtonState.Pressed ||
+                InputManager.Instance.MsState.MiddleButton == ButtonState.Pressed)
             {
                 if (this.NextScreen == null)
                 {

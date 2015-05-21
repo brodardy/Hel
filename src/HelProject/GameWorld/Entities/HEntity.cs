@@ -26,7 +26,7 @@ namespace HelProject.GameWorld.Entities
         public const float DEFAULT_AGILITY = 5.0f;
         public const float DEFAULT_VITALITY = 5.0f;
         public const float DEFAULT_MAGIC = 5.0f;
-        public const float DEFAULT_ATTACKSPEED = 0.0f;
+        public const float DEFAULT_ATTACKSPEED = 0.6f;
         public const float DEFAULT_MINUMUMDAMAGE = 1.0f;
         public const float DEFAULT_MAXIMUMDAMAGE = 3.0f;
         public const float DEFAULT_MANAREGENERATION = 1.0f;
@@ -46,6 +46,16 @@ namespace HelProject.GameWorld.Entities
         private Texture2D _texture;
         private Random _rand;
         private double _lastAttackTime;
+        private bool _isDead;
+
+        /// <summary>
+        /// Is the entity dead
+        /// </summary>
+        public bool IsDead
+        {
+            get { return _isDead; }
+            set { _isDead = value; }
+        }
 
         /// <summary>
         /// Attack bounds of the entity
@@ -174,6 +184,7 @@ namespace HelProject.GameWorld.Entities
             this.AttackBounds.Y = this.Position.Y - this.AttackBounds.Height / 2f;
             this._rand = new Random();
             this._lastAttackTime = 0d;
+            this.IsDead = false;
         }
 
         /// <summary>
@@ -206,7 +217,7 @@ namespace HelProject.GameWorld.Entities
                 spriteBatch.Draw(this.Texture, position, Color.White);
             }
 
-            if (MainGame.Instance.DEBUG_MODE)
+            if (MainGame.DEBUG_MODE)
             {
                 Vector2 start = ScreenManager.Instance.GetCorrectScreenPosition(this.AttackBounds.Position, PlayScreen.Instance.Camera.Position);
                 Vector2 end = ScreenManager.Instance.GetCorrectScreenPosition(new Vector2(this.AttackBounds.Position.X + this.AttackBounds.Width, this.AttackBounds.Position.Y + this.AttackBounds.Height), PlayScreen.Instance.Camera.Position);
@@ -317,13 +328,28 @@ namespace HelProject.GameWorld.Entities
         public void BasicMeleeAttack(HEntity target, GameTime gameTime)
         {
             double currentTime = gameTime.TotalGameTime.TotalSeconds;
-            if (currentTime - this._lastAttackTime >= this.FeatureCalculator.GetTotalAttackSpeed())
+            float secPerAttack = 1f / this.ActualFeatures.AttackSpeed;
+
+            if (currentTime - this._lastAttackTime >= secPerAttack)
             {
-                target.ActualFeatures.LifePoints -= this.FeatureCalculator.GetReceivedPhysicalDamage(this._rand.Next(
-                    (int)this.ActualFeatures.MinimumDamage, (int)this.ActualFeatures.MaximumDamage
-                    ));
+                float minDmg = this.ActualFeatures.MinimumDamage;
+                float maxDmg = this.ActualFeatures.MaximumDamage;
+                float receivedDamage = (float)this._rand.NextDouble();
+                receivedDamage = (maxDmg - minDmg) * receivedDamage + minDmg;
+                float realReceivedDamage = this.FeatureCalculator.GetReceivedPhysicalDamage(receivedDamage);
+                realReceivedDamage = realReceivedDamage * (this.ActualFeatures.Strenght / 100 + 1);
+                target.ActualFeatures.LifePoints -= realReceivedDamage;
+                this._lastAttackTime = currentTime;
             }
-            this._lastAttackTime = currentTime;
+        }
+
+        /// <summary>
+        /// Checks if the hostile is dead
+        /// </summary>
+        public void CheckLife()
+        {
+            if (this.ActualFeatures.LifePoints <= 0f)
+                this.IsDead = true;
         }
 
         /// <summary>

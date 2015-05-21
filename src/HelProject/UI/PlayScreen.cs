@@ -8,6 +8,7 @@
 #region USING STATEMENTS
 using HelHelProject.Tools;
 using HelProject.Features;
+using HelProject.GameWorld;
 using HelProject.GameWorld.Entities;
 using HelProject.GameWorld.Map;
 using HelProject.Tools;
@@ -34,7 +35,7 @@ namespace HelProject.UI
         private HHero _hero;
         private static PlayScreen _instance;
         private Camera _camera;
-        
+
         private SelectionAid _selectionAssistant;
 
         private SpriteFont font;
@@ -148,6 +149,22 @@ namespace HelProject.UI
             // Camera initialisation, gets the width and height of the window
             // and the position of the hero
             this.Camera = new Camera(this.PlayableCharacter.Position, MainGame.Instance.GraphicsDevice.Viewport.Width, MainGame.Instance.GraphicsDevice.Viewport.Height);
+
+            XmlManager<HItem> item = new XmlManager<HItem>();
+            item.TypeClass = typeof(HItem);
+            FeatureCollection itFeatures = new FeatureCollection();
+            itFeatures.SetAllToZero();
+            itFeatures.InitialAttackSpeed = 1.4f;
+            itFeatures.MinimumDamage = 15.0f;
+            itFeatures.MaximumDamage = 24.0f;
+            itFeatures.Strenght = 6.0f;
+            itFeatures.Vitality = 3.0f;
+            itFeatures.AttackSpeed = 15.0f;
+            HItem it = new HItem("Death blade", HItem.ItemTypes.Sword, itFeatures, "cursor_normal", true, new Vector2(50f, 50f), "Blade of the death maiden");
+
+            item.Save(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\item.xml", it);
+
+            this.MapDifficultyEasy.OnFloorItems.Add(it);
         }
 
         /// <summary>
@@ -170,6 +187,7 @@ namespace HelProject.UI
             this.UpdateMapControl();
             this.PlayableCharacter.Update(gameTime);
             this.UpdateHostiles(gameTime);
+            this.ManageDeadEntities();
             this.SelectionAssistant.Update(gameTime);
         }
 
@@ -184,7 +202,7 @@ namespace HelProject.UI
             this.DrawHostiles(spriteBatch);
             this.DrawSelection(spriteBatch);
 
-            if (MainGame.Instance.DEBUG_MODE)
+            if (MainGame.DEBUG_MODE)
             {
                 Primitives2D.Instance.FillRectangle(spriteBatch, 0, 0, 200, 150, new Color(Color.LightBlue, 0.5f));
                 Primitives2D.Instance.DrawRectangle(spriteBatch, 0, 0, 200, 150, Color.Black, 5);
@@ -230,19 +248,22 @@ namespace HelProject.UI
         /// </summary>
         private void LoadHostiles()
         {
+            FeatureCollection f = new FeatureCollection();
+            f.SetToDraugrLvlOne();
+
             for (int i = 0; i < 75; i++)
             {
-                this.MapDifficultyEasy.Hostiles.Add(new HHostile(new FeatureCollection(), this.MapDifficultyEasy.GetRandomFloorPoint(), 1f, 1.5f, "draugr"));
+                this.MapDifficultyEasy.Hostiles.Add(new HHostile(f, this.MapDifficultyEasy.GetRandomFloorPoint(), 1f, 1.5f, "draugr"));
             }
 
             for (int i = 0; i < 175; i++)
             {
-                this.MapDifficultyMedium.Hostiles.Add(new HHostile(new FeatureCollection(), this.MapDifficultyMedium.GetRandomFloorPoint(), 1f, 1.5f, "draugr"));
+                this.MapDifficultyMedium.Hostiles.Add(new HHostile(f, this.MapDifficultyMedium.GetRandomFloorPoint(), 1f, 1.5f, "draugr"));
             }
 
             for (int i = 0; i < 250; i++)
             {
-                this.MapDifficultyHard.Hostiles.Add(new HHostile(new FeatureCollection(), this.MapDifficultyHard.GetRandomFloorPoint(), 1f, 1.5f, "draugr"));
+                this.MapDifficultyHard.Hostiles.Add(new HHostile(f, this.MapDifficultyHard.GetRandomFloorPoint(), 1f, 1.5f, "draugr"));
             }
         }
 
@@ -273,6 +294,36 @@ namespace HelProject.UI
             for (int i = 0; i < nbrHostiles; i++)
             {
                 hostiles[i].Update(gameTime);
+            }
+        }
+
+        /// <summary>
+        /// Removes dead hostiles
+        /// </summary>
+        private void ManageDeadEntities()
+        {
+            List<HHostile> hostiles = this.CurrentMap.Hostiles;
+            List<HHostile> hostilesToDestroy = new List<HHostile>();
+            int nbrHostiles = hostiles.Count;
+
+            for (int i = 0; i < nbrHostiles; i++)
+            {
+                if (hostiles[i].IsDead)
+                    hostilesToDestroy.Add(hostiles[i]);
+            }
+
+            int nbrHostilesToDestroy = hostilesToDestroy.Count;
+            for (int i = 0; i < nbrHostilesToDestroy; i++)
+            {
+                hostilesToDestroy[i].UnloadContent();
+                hostiles.Remove(hostilesToDestroy[i]);
+            }
+
+            if (this.PlayableCharacter.IsDead)
+            {
+                PlayScreen.Instance.TransitionToMap(PlayScreen.Instance.MapTown);
+                this.PlayableCharacter.ActualFeatures.LifePoints = this.PlayableCharacter.MaximizedFeatures.LifePoints;
+                this.PlayableCharacter.IsDead = false;
             }
         }
 
@@ -347,18 +398,26 @@ namespace HelProject.UI
             if (InputManager.Instance.IsKeyboardKeyDown(Keys.F9))
             {
                 if (this.CurrentMap == this.MapDifficultyEasy)
-                    this.CurrentMap = this.MapDifficultyMedium;
+                    TransitionToMap(this.MapDifficultyMedium);
                 else if (this.CurrentMap == this.MapDifficultyMedium)
-                    this.CurrentMap = this.MapDifficultyHard;
+                    TransitionToMap(this.MapDifficultyHard);
                 else if (this.CurrentMap == this.MapDifficultyHard)
-                    this.CurrentMap = this.MapTown;
+                    TransitionToMap(this.MapTown);
                 else if (this.CurrentMap == this.MapTown)
-                    this.CurrentMap = this.MapDifficultyEasy;
-
-                this.PlayableCharacter.Position = this.CurrentMap.GetRandomFloorPoint();
-                this.PlayableCharacter.Bounds.SetBoundsWithTexture(this.PlayableCharacter.Position, this.PlayableCharacter.Texture.Width, this.PlayableCharacter.Texture.Height);
-                this.Camera.Position = this.PlayableCharacter.Position;
+                    TransitionToMap(this.MapDifficultyEasy);
             }
+        }
+
+        /// <summary>
+        /// Transitions to another map
+        /// </summary>
+        /// <param name="map"></param>
+        public void TransitionToMap(HMap map)
+        {
+            this.CurrentMap = map;
+            this.PlayableCharacter.Position = this.CurrentMap.GetRandomFloorPoint();
+            this.PlayableCharacter.Bounds.SetBoundsWithTexture(this.PlayableCharacter.Position, this.PlayableCharacter.Texture.Width, this.PlayableCharacter.Texture.Height);
+            this.Camera.Position = this.PlayableCharacter.Position;
         }
     }
 }

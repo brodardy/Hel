@@ -12,11 +12,12 @@ namespace HelProject
     /// </summary>
     public class MainGame : Game
     {
+        public const bool DEBUG_MODE = true;
+
         private static MainGame _instance;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Vector2 _cursorPosition;
-        public bool DEBUG_MODE;
 
         /// <summary>
         /// Instance of the Main Game
@@ -39,7 +40,6 @@ namespace HelProject
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            DEBUG_MODE = true;
         }
 
         /// <summary>
@@ -125,7 +125,8 @@ namespace HelProject
 
             _spriteBatch.Begin();
             ScreenManager.Instance.Draw(_spriteBatch);
-            _spriteBatch.Draw(TextureManager.Instance.LoadedTextures["cursor_normal"], this._cursorPosition, Color.White);
+            if (this.IsActive)
+                _spriteBatch.Draw(TextureManager.Instance.LoadedTextures["cursor_normal"], this._cursorPosition, Color.White);
             _spriteBatch.End();
 
             base.Draw(gameTime);

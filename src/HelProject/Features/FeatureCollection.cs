@@ -212,25 +212,25 @@ namespace HelProject.Features
         /// </summary>
         public FeatureCollection()
         {
-            this._agility = 5f;
-            this._armor = .0f;
-            this._attackSpeed = 0.6f;
+            this._agility = 0f;
+            this._armor = 0f;
+            this._attackSpeed = 0f;
             this._initialAttackSpeed = 0f;
-            this._initialMovementSpeed = 3.0f;
-            this._initialManaRegeneration = .0f;
-            this._lifeRegeneration = .0f;
-            this._magic = 5f;
-            this._magicResistance = .0f;
-            this._manaRegeneration = 1f;
-            this._maximumDamage = 3f;
-            this._maximumMagicDamage = .0f;
-            this._minimumDamage = 1f;
-            this._minimumMagicDamage = .0f;
-            this._movementSpeed = .0f;
-            this._strenght = 5f;
-            this._vitality = 5f;
-            this._initialLifePoints = 30.0f;
-            this._lifePoints = .0f;
+            this._initialMovementSpeed = 0f;
+            this._initialManaRegeneration = 0f;
+            this._lifeRegeneration = 0f;
+            this._magic = 0f;
+            this._magicResistance = 0f;
+            this._manaRegeneration = 0f;
+            this._maximumDamage = 0f;
+            this._maximumMagicDamage = 0f;
+            this._minimumDamage = 0f;
+            this._minimumMagicDamage = 0f;
+            this._movementSpeed = 0f;
+            this._strenght = 0f;
+            this._vitality = 0f;
+            this._initialLifePoints = 0f;
+            this._lifePoints = 0f;
         }
 
         /// <summary>
@@ -259,6 +259,58 @@ namespace HelProject.Features
             obj.Vitality = this.Vitality;
 
             return obj;
+        }
+
+        /// <summary>
+        /// Sets all features to zero
+        /// </summary>
+        public void SetAllToZero()
+        {
+            this._agility = 0f;
+            this._armor = 0f;
+            this._attackSpeed = 0f;
+            this._initialAttackSpeed = 0f;
+            this._initialMovementSpeed = 0f;
+            this._initialManaRegeneration = 0f;
+            this._lifeRegeneration = 0f;
+            this._magic = 0f;
+            this._magicResistance = 0f;
+            this._manaRegeneration = 0f;
+            this._maximumDamage = 0f;
+            this._maximumMagicDamage = 0f;
+            this._minimumDamage = 0f;
+            this._minimumMagicDamage = 0f;
+            this._movementSpeed = 0f;
+            this._strenght = 0f;
+            this._vitality = 0f;
+            this._initialLifePoints = 0f;
+            this._lifePoints = 0f;
+        }
+
+        /// <summary>
+        /// Sets the features for a draugr level 1
+        /// </summary>
+        public void SetToDraugrLvlOne()
+        {
+            this._agility = 0f;
+            this._armor = .0f;
+            this._attackSpeed = 0f;
+            this._initialAttackSpeed = 0.6f;
+            this._initialMovementSpeed = 3.0f;
+            this._initialManaRegeneration = .0f;
+            this._lifeRegeneration = .0f;
+            this._magic = 0f;
+            this._magicResistance = .0f;
+            this._manaRegeneration = 0f;
+            this._maximumDamage = 3f;
+            this._maximumMagicDamage = .0f;
+            this._minimumDamage = 1f;
+            this._minimumMagicDamage = .0f;
+            this._movementSpeed = .0f;
+            this._strenght = 0f;
+            this._vitality = 0f;
+            this._initialLifePoints = 30.0f;
+            this._lifePoints = .0f;
         }
     }
 }

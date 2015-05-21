@@ -115,6 +115,7 @@ namespace HelProject.GameWorld.Entities
             this.UpdateMovement(gameTime);
             this.UpdateTeleportUsage();
             this.PlayerHealth.ActualValue = this.ActualFeatures.LifePoints;
+            this.CheckLife();
 
             PlayScreen.Instance.Camera.Position = this.Position; // Apply the new position to the camera
         }

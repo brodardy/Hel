@@ -111,6 +111,7 @@ namespace HelProject.GameWorld.Entities
             this.CenterFieldOfView();
             this.UpdatePursuit(gameTime);
             this.UpdateHealthBar();
+            this.CheckLife();
         }
 
         /// <summary>
@@ -122,7 +123,7 @@ namespace HelProject.GameWorld.Entities
             base.Draw(spriteBatch);
             this.HealthBar.Draw(spriteBatch);
 
-            if (MainGame.Instance.DEBUG_MODE)
+            if (MainGame.DEBUG_MODE)
             {
                 if (this.IsAlerted)
                 {
@@ -141,15 +142,6 @@ namespace HelProject.GameWorld.Entities
                     Primitives2D.Instance.DrawRectangle(spriteBatch, start, end, Color.Blue);
                 }
             }
-        }
-
-        /// <summary>
-        /// Destroys the hostile in the current map
-        /// </summary>
-        public void Destroy()
-        {
-            PlayScreen.Instance.CurrentMap.Hostiles.Remove(this);
-            this.UnloadContent();
         }
 
         /// <summary>

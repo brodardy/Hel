@@ -165,42 +165,47 @@ namespace HelProject.Tools
         /// </summary>
         private void UpdateKeyboardInput()
         {
-            KbState = Keyboard.GetState();
-
-            // Verifies all the keys of the keyboard
-            foreach (Keys key in Enum.GetValues(typeof(Keys)))
+            if (MainGame.Instance.IsActive)
             {
-                // If the key is not pressed and it is not in the release key list and is in one of the other two list
-                // we add it to the released key list and remove it in the others
-                if (KbState.IsKeyUp(key) && !this.IsKeyboardKeyReleased(key) &&
-                    (this.IsKeyboardKeyPressed(key) || this.IsKeyboardKeyDown(key)))
+                this.KbState = Keyboard.GetState();
+
+                // Verifies all the keys of the keyboard
+                foreach (Keys key in Enum.GetValues(typeof(Keys)))
                 {
-                    this.DownKeys.Remove(key);
-                    this.PressedKeys.Remove(key);
-                    this.ReleasedKeys.Add(key);
-                }
-                else if (KbState.IsKeyUp(key) && this.IsKeyboardKeyReleased(key)) // If it is already in the released key list
-                {                                                                 // remove it
-                    this.ReleasedKeys.Remove(key);
-                }
-                else
-                {
-                    // If the key is down and is not yet pressed
-                    if (KbState.IsKeyDown(key) && !this.IsKeyboardKeyDown(key) && !this.IsKeyboardKeyPressed(key))
+                    // If the key is not pressed and it is not in the release key list and is in one of the other two list
+                    // we add it to the released key list and remove it in the others
+                    if (this.KbState.IsKeyUp(key) && !this.IsKeyboardKeyReleased(key) &&
+                        (this.IsKeyboardKeyPressed(key) || this.IsKeyboardKeyDown(key)))
                     {
-                        // remove it from the other lists (to be sure)
-                        this.ReleasedKeys.Remove(key);
+                        this.DownKeys.Remove(key);
                         this.PressedKeys.Remove(key);
-                        this.DownKeys.Add(key); // and add it to the down key list
+                        this.ReleasedKeys.Add(key);
                     }
-                    else if (KbState.IsKeyDown(key) && !this.IsKeyboardKeyPressed(key)) // If it's already in the down key list
-                    {                                                                   // and isn't in the pressed list
-                        this.DownKeys.Remove(key); // remove it from the other lists
+                    else if (this.KbState.IsKeyUp(key) && this.IsKeyboardKeyReleased(key)) // If it is already in the released key list
+                    {                                                                 // remove it
                         this.ReleasedKeys.Remove(key);
-                        this.PressedKeys.Add(key); // add it to the pressed list
+                    }
+                    else
+                    {
+                        // If the key is down and is not yet pressed
+                        if (this.KbState.IsKeyDown(key) && !this.IsKeyboardKeyDown(key) && !this.IsKeyboardKeyPressed(key))
+                        {
+                            // remove it from the other lists (to be sure)
+                            this.ReleasedKeys.Remove(key);
+                            this.PressedKeys.Remove(key);
+                            this.DownKeys.Add(key); // and add it to the down key list
+                        }
+                        else if (this.KbState.IsKeyDown(key) && !this.IsKeyboardKeyPressed(key)) // If it's already in the down key list
+                        {                                                                   // and isn't in the pressed list
+                            this.DownKeys.Remove(key); // remove it from the other lists
+                            this.ReleasedKeys.Remove(key);
+                            this.PressedKeys.Add(key); // add it to the pressed list
+                        }
                     }
                 }
             }
+            else
+                this.KbState = new KeyboardState();
         }
 
         /// <summary>
@@ -208,7 +213,10 @@ namespace HelProject.Tools
         /// </summar>
         private void UpdateMouseInput()
         {
-            this.MsState = Mouse.GetState();
+            if (MainGame.Instance.IsActive)
+                this.MsState = Mouse.GetState();
+            else
+                this.MsState = new MouseState();
         }
         #endregion
     }
