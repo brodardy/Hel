@@ -61,7 +61,6 @@
     <Compile Include="GameWorld\Spells\HSpellSingleTarget.cs" />
     <Compile Include="GameWorld\Spells\HSpellZone.cs" />
     <Compile Include="MainGame.cs" />
-    <Compile Include="Tools\Drawing.cs" />
     <Compile Include="Tools\FRectangle.cs" />
     <Compile Include="Tools\InputManager.cs" />
     <Compile Include="Tools\Primitives2D.cs" />

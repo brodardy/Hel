@@ -213,7 +213,7 @@ Le jeu-vidéo est en deux dimensions (2D) avec une vue de dessus\footnote{Une vu
 	\item Le joueur possède des sorts qu'il peut placer dans les touches attribuées pour les enclencher.
 \end{description}
 
-\subsection{Méchanismes}
+\subsection{Mécanismes}
 \subsubsection{Salle}
 La salle du jeu change à chaque fois que le joueur meurt. Cette salle peut avoir de nouveaux éléments, de nouvelles textures ou même de nouveaux ennemis.
 
@@ -1113,6 +1113,7 @@ Le portail mène vers un niveau (le terrain de combat) généré d'où il ne peu
 % --------------------------------------------------
 \chapter{Analyse organique}
 \section{Monogame}
+Monogame fournit des fonctionnalités indispensable pour le développement d'un jeu. Il offre la boucle de jeu de base qui permet de mettre à jour tous les éléments du programme (voir figure \ref{fig:loopmg}) ainsi que beaucoup de classe utiles pour le développement de jeu.
 \begin{figure}[H]
 	\begin{center}
 	\includegraphics[width=0.8\textwidth]{loopmg}
@@ -1120,7 +1121,53 @@ Le portail mène vers un niveau (le terrain de combat) généré d'où il ne peu
 	\label{fig:loopmg}
 	\end{center}
 \end{figure}
-\section{Génération de la carte}
+\section{Les bases}
+\subsection{Architecture du jeu}
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=0.8\textwidth]{StatesOfProgram}
+	\caption{Différents états du programme}
+	\label{fig:StatesOfProgram}
+	\end{center}
+\end{figure}
+\subsection{Classe de jeu de base}
+\label{subsec:classdebase}
+Tout les éléments du jeu hérite de la classe HObject, ce qui permet une grande simplification pour le développement (Voir figure  \ref{fig:HObject}). Cette classe abstraite présente :\\(\textit{\textbf{f}} signifie que c'est une méthode de la classe et \textit{\textbf{p}} signifie que c'est une propriété de la classe.)
+\begin{description}[labelindent=0.5cm]
+	\item[\textit{p} IsWalkable] permet de savoir si l'élément peut être superposé avec un autre.
+	\item[\textit{p} Position] position précise relative à la carte.
+	\item[\textit{f} LoadContent] permet de charger du contenu.
+	\item[\textit{f} UnloadContent] permet de décharger du contenu.
+	\item[\textit{f} Update] permet de mettre à jour l'objet.
+	\item[\textit{f} Draw] permet de dessiner l'objet sur l'écran.
+\end{description}
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.8\textwidth]{HObject}
+	\caption{Diagramme de classe de HObject}
+	\label{fig:HObject}
+	\end{center}
+\end{figure}
+\newpage
+\section{Gestion de la carte}
+La carte est constituée d'un tableau à deux dimensions de classe \emph{HCell}. Il possède une hauteur et une largeur ainsi qu'une liste de tous les objets et ennemis présent. Des fonctions de bases pour \emph{get/set} les cellules sont nécessaires :
+\begin{itemize}
+	\item Prendre une cellule \textbf{désignée}
+	\item Prendre les cellules \textbf{voisines} d'une cellule
+	\item Prendre les cellules \textbf{voisines non-accessible} d'une cellule
+	\item Prendre le \textbf{nombre} de cellules voisines non-accessible d'une cellule
+	\item Prendre la cellule se trouvant \textbf{dessous} d'une cellule
+	\item Prendre la cellule se trouvant \textbf{dessus} d'une cellule
+	\item Prendre la cellule se trouvant \textbf{à gauche} d'une cellule
+	\item Prendre la cellule se trouvant \textbf{à droite} d'une cellule
+	\item Prendre une cellule \textbf{aléatoire} et qui est \textbf{accessible}
+\end{itemize}
+\subsection{Cellules}
+Les cellules hérite de \textit{HObject}\footnote{Voir section \ref{subsec:classdebase} pour les objets de bases} et ils possèdent des limites et un type. Les limites est de type \textit{FRectangle}\footnote{Voir section \ref{subsec:intersections} pour la classe float rectangle} ce qui permet de détecter les intersections avec les autres objets. Le type de la cellule est un string qui permet de l'identifier, ce string peut être lié à une texture du \textit{TextureManager}\footnote{Voir section \ref{subsec:texturemanager} pour la gestion de texture}.
+\subsection{Génération de la carte}
+La génération est faite grâce a un algorithme d'automate cellulaire modifié pour créer des apparences de cavernes. Chaque cellule, selon son état et ses voisins peut changer. Dans ce cas, ce sont des cellules carrés placées dans un tableau à deux dimensions. Une cellule possède donc au maximum 8 voisins en comptant les diagonales. Il est bien sûr possible d'augmenter l'étendu des voisins pour compter plus de variables et augmenter la taille des salles de la caverne.
+
+Afin de créer un effet aléatoire, il est nécessaire d'initialiser le tableau avec environ 40\% de cellules pleines et avec des bords plein, afin d'éviter que le joueur ne parte de la carte. L'algorithme peut ensuite être appliquer au tableau. Il est nécessaire de l'appliquer plusieurs fois pour augmenter les aspects \emph{naturels} d'une caverne (voir figure \ref{fig:mapgeneration}).
 \begin{figure}[H]
 	\begin{center}
 	\includegraphics[width=1\textwidth]{mapgeneration}
@@ -1128,31 +1175,9 @@ Le portail mène vers un niveau (le terrain de combat) généré d'où il ne peu
 	\label{fig:mapgeneration}
 	\end{center}
 \end{figure}
-\section{Gestion de l'écran}
-\begin{figure}[H]
-	\begin{center}
-	\includegraphics[width=1\textwidth]{screenmanagement}
-	\caption{Diagramme de classe de la gestion d'écrans}
-	\label{fig:screenmanagement}
-	\end{center}
-\end{figure}
-\section{Gestion des entrées}
-\begin{figure}[H]
-	\begin{center}
-	\includegraphics[width=0.35\textwidth]{InputManager}
-	\caption{Diagramme de classe du manager d'entrées}
-	\label{fig:InputManager}
-	\end{center}
-\end{figure}
-\section{Sérialisation XML}
-\begin{figure}[H]
-	\begin{center}
-	\includegraphics[width=0.35\textwidth]{XmlManager}
-	\caption{Diagramme de classe du manager de sérialisation XML}
-	\label{fig:XmlManager}
-	\end{center}
-\end{figure}
-\section{Caractéristiques}
+
+\section{Éléments du jeu}
+\subsection{Caractéristiques}
 \begin{figure}[H]
 	\begin{center}
 	\includegraphics[width=0.5\textwidth]{FeatureGlobalWork}
@@ -1167,8 +1192,8 @@ Le portail mène vers un niveau (le terrain de combat) généré d'où il ne peu
 	\label{fig:FeatureCollection}
 	\end{center}
 \end{figure}
-
-\section{Objets du monde}
+% Expliquer le fonctionnement des caractéristiques
+\subsection{Entités}
 \begin{figure}[H]
 	\begin{center}
 	\includegraphics[width=1\textwidth]{WorldObjects}
@@ -1176,7 +1201,8 @@ Le portail mène vers un niveau (le terrain de combat) généré d'où il ne peu
 	\label{fig:WorldObjects}
 	\end{center}
 \end{figure}
-\subsection{Personnages}
+\subsubsection{Personnages}
+% Expliquer la base des personnage
 \begin{figure}[H]
 	\begin{center}
 	\includegraphics[width=.35\textwidth]{HEntity}
@@ -1184,6 +1210,7 @@ Le portail mène vers un niveau (le terrain de combat) généré d'où il ne peu
 	\label{fig:HEntity}
 	\end{center}
 \end{figure}
+\subsubsection{Personnage jouable}
 \begin{figure}[H]
 	\begin{center}
 	\includegraphics[width=.35\textwidth]{HHero}
@@ -1191,6 +1218,48 @@ Le portail mène vers un niveau (le terrain de combat) généré d'où il ne peu
 	\label{fig:HHero}
 	\end{center}
 \end{figure}
+\subsubsection{Déplacement}
+\subsubsection{Objets}
+\subsubsection{Attaques}
+\subsubsection{Sorts}
+\subsubsection{Ennemis}
+% Expliquer l'IA
+\subsection{Objects}
+\section{Outils de développement}
+\subsection{Primitives 2D}
+\subsection{Intersections}
+\label{subsec:intersections}
+\subsection{Gestion des entrées}
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=0.35\textwidth]{InputManager}
+	\caption{Diagramme de classe du manager d'entrées}
+	\label{fig:InputManager}
+	\end{center}
+\end{figure}
+\subsection{Sérialisation XML}
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=0.35\textwidth]{XmlManager}
+	\caption{Diagramme de classe du manager de sérialisation XML}
+	\label{fig:XmlManager}
+	\end{center}
+\end{figure}
+
+\section{Vue}
+\subsection{Gestion de l'écran}
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=1\textwidth]{screenmanagement}
+	\caption{Diagramme de classe de la gestion d'écrans}
+	\label{fig:screenmanagement}
+	\end{center}
+\end{figure}
+\subsection{Gestion des textures}
+\label{subsec:texturemanager}
+\subsection{Camera de jeu}
+\subsection{Menu}
+\subsection{Affichage tête haute (HUD)}
 \newpage
 % --------------------------------------------------
 \chapter{Tests}
