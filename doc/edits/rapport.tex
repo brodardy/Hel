@@ -1406,24 +1406,94 @@ Les attaque à distance peuvent seulement toucher une autre entité avec le proj
 Malheureusement, Monogame n'offre pas de primitives 2D pour dessiner sur l'écran, c'est-à-dire les points, les ligne, les rectangles, les polygones et les ellipses. C'est pourquoi il est nécessaire de faire une classe primitive 2D (voir figure \ref{fig:Primitives2D}).
 \begin{figure}[h]
 	\begin{center}
-	\includegraphics[width=0.35\textwidth]{Primitives2D}
+	\includegraphics[width=0.7\textwidth]{Primitives2D}
 	\caption{Diagramme de classe des primitives 2D}
 	\label{fig:Primitives2D}
 	\end{center}
 \end{figure}
-
+\subsubsection{Les méthodes}
+\paragraph{LoadContent} est ce qui permet de créer le pixel par défaut avec un teinture blanche. Ce pixel de type Texture2D est indispensable, parce que c'est celui-ci qui sera manipuler pour faire des divers formes.
+\paragraph{DrawLine} dessine une line entre deux points spécifiés.
+\paragraph{DrawRectangle} dessine un rectangle entre deux points spécifiés.
+\paragraph{FillRectangle} dessine un rectangle plein entre deux points spécifiés.
 \subsection{Intersections}
+Les intersections sont la base des interactions entre les éléments du jeu. C'est pourquoi chaque entité et cellule du jeu posséde des limites. Monogame n'offre qu'une classe Rectangle avec des entiers, mais pour plus de précision il faut des nombres à virgule. C'est pourquoi la classe FRectangle (voir figure \ref{fig:FRectangle}) est faite. Il possède aussi une méthode d'intersection qui détecte si le rectangle même croise un autre.
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.7\textwidth]{FRectangle}
+	\caption{Diagramme de classe de FRectangle}
+	\label{fig:FRectangle}
+	\end{center}
+\end{figure}
 \label{subsec:intersections}
 \subsection{Gestion des entrées}
-\begin{figure}[H]
+Il a fallu penser facon la plus efficace pour gérer les entrées. L'objectif est d'éviter de mettre des entrés directement dans la classe. C'est pourquoi la classe InputManager est faite.  Il permet de mettre à jour tous les entrées et de le placés dans des listes correspondant :
+
+\begin{description}[labelindent=0.5cm]
+	\item[DownKeys] Les touches qui viennent d'être appuyées.
+	\item[PressedKeys] Les touches qui sont appuyées.
+	\item[ReleasedKeys] Les touches qui viennent d'être relachées.
+\end{description}
+
+\begin{figure}[h]
 	\begin{center}
-	\includegraphics[width=0.8\textwidth]{InputManager}
+	\includegraphics[width=0.35\textwidth]{InputManager}
 	\caption{Diagramme de classe du manager d'entrées}
 	\label{fig:InputManager}
 	\end{center}
 \end{figure}
-\subsubsection{Les méthodes en détails}
-\paragraph{LoadContent} doit être appelé au début de la 
+
+Les touches ne peuvent pas se retrouvés dans plusieurs listes en même temps.
+
+\begin{lstlisting}[caption=Mise-à-jour des entrées, label=lst:inputUpdate]
+/// <summary>
+/// Updates the states of the keyboard
+/// </summary>
+private void UpdateKeyboardInput()
+{
+	if (MainGame.Instance.IsActive)
+	{
+		this.KbState = Keyboard.GetState();
+		
+		// Verifies all the keys of the keyboard
+		foreach (Keys key in Enum.GetValues(typeof(Keys)))
+		{
+			// If the key is not pressed and it is not in the release key list and is in one of the other two list
+			// we add it to the released key list and remove it in the others
+			if (this.KbState.IsKeyUp(key) && !this.IsKeyboardKeyReleased(key) &&
+			(this.IsKeyboardKeyPressed(key) || this.IsKeyboardKeyDown(key)))
+			{
+				this.DownKeys.Remove(key);
+				this.PressedKeys.Remove(key);
+				this.ReleasedKeys.Add(key);
+			}
+			else if (this.KbState.IsKeyUp(key) && this.IsKeyboardKeyReleased(key)) // If it is already in the released key list
+			{        // remove it
+				this.ReleasedKeys.Remove(key);
+			}
+			else
+			{
+				// If the key is down and is not yet pressed
+				if (this.KbState.IsKeyDown(key) && !this.IsKeyboardKeyDown(key) && !this.IsKeyboardKeyPressed(key))
+				{
+				// remove it from the other lists (to be sure)
+					this.ReleasedKeys.Remove(key);
+					this.PressedKeys.Remove(key);
+					this.DownKeys.Add(key); // and add it to the down key list
+				}
+				else if (this.KbState.IsKeyDown(key) && !this.IsKeyboardKeyPressed(key)) // If it's already in the down key list
+				{                                                                   // and isn't in the pressed list
+					this.DownKeys.Remove(key); // remove it from the other lists
+					this.ReleasedKeys.Remove(key);
+					this.PressedKeys.Add(key); // add it to the pressed list
+				}
+			}
+		}
+	}
+	else
+	this.KbState = new KeyboardState();
+}
+\end{lstlisting}
 \subsection{Sérialisation XML}
 \begin{figure}[H]
 	\begin{center}
@@ -1445,6 +1515,7 @@ Malheureusement, Monogame n'offre pas de primitives 2D pour dessiner sur l'écra
 \subsection{Gestion des textures}
 \label{subsec:texturemanager}
 \subsection{Camera de jeu}
+\subsection{Barres de vie}
 \subsection{Menu}
 \subsection{Affichage tête haute (HUD)}
 \newpage
