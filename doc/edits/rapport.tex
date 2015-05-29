@@ -1403,16 +1403,27 @@ Les attaque à distance peuvent seulement toucher une autre entité avec le proj
 \subsection{Sorts}
 \section{Outils de développement}
 \subsection{Primitives 2D}
+Malheureusement, Monogame n'offre pas de primitives 2D pour dessiner sur l'écran, c'est-à-dire les points, les ligne, les rectangles, les polygones et les ellipses. C'est pourquoi il est nécessaire de faire une classe primitive 2D (voir figure \ref{fig:Primitives2D}).
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.35\textwidth]{Primitives2D}
+	\caption{Diagramme de classe des primitives 2D}
+	\label{fig:Primitives2D}
+	\end{center}
+\end{figure}
+
 \subsection{Intersections}
 \label{subsec:intersections}
 \subsection{Gestion des entrées}
 \begin{figure}[H]
 	\begin{center}
-	\includegraphics[width=0.35\textwidth]{InputManager}
+	\includegraphics[width=0.8\textwidth]{InputManager}
 	\caption{Diagramme de classe du manager d'entrées}
 	\label{fig:InputManager}
 	\end{center}
 \end{figure}
+\subsubsection{Les méthodes en détails}
+\paragraph{LoadContent} doit être appelé au début de la 
 \subsection{Sérialisation XML}
 \begin{figure}[H]
 	\begin{center}
