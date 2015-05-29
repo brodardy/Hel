@@ -61,20 +61,26 @@
 
 \setlength{\parindent}{0cm}
 
-\lstset{
-    basicstyle=\ttfamily,
-    stringstyle=\ttfamily\color{green!50!black},
-    keywordstyle=\bfseries\color{blue},
-    commentstyle=\itshape\color{red!50!black},
-    showstringspaces=true,
-    tabsize=4,
-    frame=single,
-    numbers=left,
-    numberstyle=\tiny,
-    firstnumber=1,
-    stepnumber=1,
-    numbersep=5pt,
-    breaklines=true
+\usepackage{color}
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.9,0,0}
+
+\lstset{language=[Sharp]C,
+	showspaces=false,
+	showtabs=false,
+	breaklines=true,
+	showstringspaces=false,
+	breakatwhitespace=true,
+	escapeinside={(*@}{@*)},
+	commentstyle=\color{greencomments},
+	keywordstyle=\color{bluekeywords}\bfseries,
+	stringstyle=\color{redstrings},
+	basicstyle=\ttfamily,
+	frame=single,
+	numbers=left,
+	numberstyle=\tiny,
+	tabsize=2,
 }
 
 \graphicspath{{img/}}
@@ -1121,13 +1127,32 @@ Monogame fournit des fonctionnalités indispensable pour le développement d'un 
 	\label{fig:loopmg}
 	\end{center}
 \end{figure}
-\section{Les bases}
+\subsection{Les boucles de jeu}
+\subsubsection{La boucle \textit{LoadContent}}
+La boucle \textit{LoadContent} sert à initialiser du contenu. Cette méthode peut se retrouver dans des classes pour initialiser le contenu de la classe comme les textures par exemple. La méthode est appelée une fois lors de l'initialisation.
+\subsubsection{La boucle \textit{UnloadContent}}
+La boucle \textit{UnloadContent} sert à retirer les variables comme les textures pour être sûr de leurs déchargement. La méthode est appelée seulement implicitement ou lors de la fermeture du programme.
+\subsubsection{La boucle \textit{Update}}
+La boucle \textit{Update} sert à mettre à jour tous les contenu non-graphique du jeu. Cette méthode peut se retrouver dans des classes qui nécessite d'étre mis-à-jour régulièrement quand il est possible. Elle est appelée constamment par Monogame.
+\subsubsection{La boucle \textit{Draw}}
+La boucle \textit{Draw} dessine le contenu sur l'écran du jeu. Cette méthode peut se retrouver dans des classes pour dessiner son contenu. Il est appelé constamment quand il est possible, car la boucle Update possède la priorité et si celui-ci est chargée, Monogame ignorera la méthode \textit{Draw}.
+\subsection{Les fonctionnalités utiles pour le projet}
+Monogame offre une gamme de fonctionnalités et de classes. 
+
+\section{La structure du projet}
 \subsection{Architecture du jeu}
 \begin{figure}[H]
 	\begin{center}
 	\includegraphics[width=0.8\textwidth]{StatesOfProgram}
 	\caption{Différents états du programme}
 	\label{fig:StatesOfProgram}
+	\end{center}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=1\textwidth]{WorldObjects}
+	\caption{Schémas de hiérarchisation des objets du monde}
+	\label{fig:WorldObjects}
 	\end{center}
 \end{figure}
 \subsection{Classe de jeu de base}
@@ -1175,9 +1200,11 @@ Afin de créer un effet aléatoire, il est nécessaire d'initialiser le tableau 
 	\label{fig:mapgeneration}
 	\end{center}
 \end{figure}
-
 \section{Éléments du jeu}
 \subsection{Caractéristiques}
+\label{subsec:caracteristiques}
+Les caractéristique font l'essence même du jeu. Il faut qu'il soit placé dans tous les entités du jeu, parce que ceux-ci se repose dessus pour tous leurs actions. Les objets ou "items" sont des choses que les entités peuvent porter pour augmenter leurs caractéristiques global (Voir figure \ref{fig:FeatureGlobalWork}).
+Pour gérer tous les calculs entre les caractéristique, un manager de caractéristiques doit être placé sur l'entité. Le manager analysera tous les éléments possédant des caractéristique et fera une somme global pour fixer les caractéristiques final de l'entité.
 \begin{figure}[H]
 	\begin{center}
 	\includegraphics[width=0.5\textwidth]{FeatureGlobalWork}
@@ -1192,39 +1219,188 @@ Afin de créer un effet aléatoire, il est nécessaire d'initialiser le tableau 
 	\label{fig:FeatureCollection}
 	\end{center}
 \end{figure}
-% Expliquer le fonctionnement des caractéristiques
-\subsection{Entités}
-\begin{figure}[H]
+Le \textit{FeatureCollection} est la classe qui permet de stocker ces caractéristiques. Elle ne fait rien de spécial sauf stocker ses valeurs. C'est pourquoi trois propriétés de caractéristiques existe sur une entité (voir listing \ref{lst:maxforceentity}) :
+\begin{description}[labelindent=0.5cm]
+	\item[InitialValue] Les caractéristiques initial de l'entité
+	\item[MaximizedFeatures] Les caractéristiques maximum en tenant compte des sorts et des objets qu'il porte.
+	\item[ActualFeatures] Les caractéristiques en tenant compte des sorts et des objets qu'il porte et aussi de dégâts et effets néfaste de l'entité.
+\end{description}
+Voir figure \ref{fig:FeatureCollection} pour le diagramme de classe d'une collection de caractéristiques.
+\begin{lstlisting}[caption=Exemple de calcul de la force maximal d'une entité, label=lst:maxforceentity]
+/// <summary>
+/// Calculates the total strenght within the items, spells and initial values
+/// </summary>
+/// <returns>Total strenght</returns>
+public float GetTotalStrenght() {
+	// Gets the initial strenght of the entity
+	float str = this.InitialFeatures.Strenght;
+	// For each currently active spell, we add the strenght of it
+	for (int i = 0; i < this.ActiveSpells.Count; i++)
+	{
+		str += this.ActiveSpells[i].Features.Strenght;
+	}
+	// For each worn item of the entity, we add the strenght of it
+	for (int i = 0; i < this.ActiveItems.Count; i++)
+	{
+		str += this.ActiveItems[i].Features.Strenght;
+	}
+	return str; // return the total
+	
+}
+\end{lstlisting}
+\subsection{La classe entité}
+La classe entité (\textit{HEntity}, voir figure \ref{fig:HEntity}) est une classe abstraite qui forme la base de tous les entités "intelligent" du jeu. C'est-à-dire des unités qui possèdent des caractéristiques pour interagir avec le joueur.
+\begin{figure}[h]
 	\begin{center}
-	\includegraphics[width=1\textwidth]{WorldObjects}
-	\caption{Schémas de hiérarchisation des objets du monde}
-	\label{fig:WorldObjects}
-	\end{center}
-\end{figure}
-\subsubsection{Personnages}
-% Expliquer la base des personnage
-\begin{figure}[H]
-	\begin{center}
-	\includegraphics[width=.35\textwidth]{HEntity}
+	\includegraphics[width=.6\textwidth]{HEntity}
 	\caption{Diagramme de classe d'une entité du jeu}
 	\label{fig:HEntity}
 	\end{center}
 \end{figure}
-\subsubsection{Personnage jouable}
-\begin{figure}[H]
+Pour une explication de InitialFeatures, ActualFeatures et MaximizedFeatures, voir la section \ref{subsec:caracteristiques} sur les caractéristiques.
+
+\subsubsection{Les états}
+Une entité doit également posséder un état pour savoir ce qu'il es en train de faire. Ses états sont les suivants : 
+\begin{description}[labelindent=0.5cm]
+	\item[S0 Idle] Il ne fait rien
+	\item[S1 Running] Il est en déplacement
+	\item[S2 MeleeAttacking] Il exécute une attaque au corps-à-corps
+	\item[S3 RangeAttacking] Il exécute une attaque à distance
+	\item[S4 SpellCasting] Il exécute un sort
+\end{description}
+
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=.6\textwidth]{StatesEntity}
+	\caption{Machine d'état d'une entité}
+	\label{fig:StatesEntity}
+	\end{center}
+\end{figure}
+
+\subsubsection{Le déplacement d'une entité}
+Il est aussi important mettre en place un mécanisme de déplacement de l'entité (voir section \ref{subsubsec:deplacement}) et avec ça une direction au quelle l'unité fait face. Cette direction doit être mise-à-jour à chaque déplacement. La direction sert de référence pour tirer des projectile dans le bon endroit.
+
+\subsubsection{Les limites de collisions}
+Les limites ou \textit{Bounds} sert de zone de collision. Tous autre objets du jeu possédant la propriété \textit{IsWalkable} (voir section \ref{subsec:classdebase}) à false, se trouvera bloqué par celui-ci. De même que tout projectile ou attaque fait dans la zone engendrera des dégâts à l'entité.
+
+\subsubsection{La portée d'action}
+Une entité doit pouvoir interagir avec les autres, c'est pourquoi il faut aussi ajouter des limites d'attaques ou \textit{attack bounds}. Ce qui permet de connaître la portée des attaques de cette entité. Lorsque qu'une autre entité se trouve dans cette zone celui-ci peut se faire attaquer. Par exemple, lorsque qu'une portée d'une entité touche les limites (correspondant à la texture) d'une autre entité, celui-ci peut désormais l'attaquer (Voir figure \ref{fig:hitbox}).
+
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=.5\textwidth]{hitbox}
+	\caption{Portée des entités}
+	\label{fig:hitbox}
+	\end{center}
+\end{figure}
+
+\subsubsection{La texture}
+Les textures sont simple d'intégration puisqu'il fait partie de fonctionnalités que monogame offre. Il faut alors chargée une \textit{Texture2D} et le dessiner. Les animations ne sont pas fait parce que ce n'est pas une priorité.
+\begin{lstlisting}[caption=Affichage de la texture sur l'écran, label=lst:afftextuecran]
+Vector2 position = ScreenManager.Instance.GetCorrectScreenPosition(boundsPosA, PlayScreen.Instance.Camera.Position);
+spriteBatch.Draw(this.Texture, position, Color.White);
+\end{lstlisting}
+
+\subsubsection{Le temps de dernière attaque}
+Il est important de garder en mémoire le temps de la dernière attaque d'une entité, c'est ce qui permet de régler le temps qu'il y a entre chaque attaque avec les caractéristiques de celui-ci. Pour connaître le nombre d'attaque par seconde ($v$), il fait diviser $1$ par la vitesse d'attaque de l'entité ($a$). $(v = \frac{1}{a})$. Si le temps entre la dernière attaque et le temps actuel est plus grand ou égal à $v$ ($t_1 - t_2 >= v$), l'entité est libre d'effectuer une action.
+
+\subsubsection{La mort de l'entité}
+Si l'entité se retrouve avec 0 dans ses points de vie, celui-ci est mort. Une fois cette propriété à \textit{true}, l'unité se fait effacer par le gestionnaire de partie.
+
+\subsection{Personnage jouable}
+Le personnage jouable est une entité qui est contrôlée par l'utilisateur. Il possède donc des méthodes et propriétés qui lui sont propres. Le personnage a en plus :
+\begin{itemize}
+	\item Des sorts
+	\item Des objets (\textit{items})
+	\item Des actions par périphériques d'entrée
+\end{itemize}
+\begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=.35\textwidth]{HHero}
 	\caption{Diagramme de classe du personnage jouable}
 	\label{fig:HHero}
 	\end{center}
 \end{figure}
-\subsubsection{Déplacement}
-\subsubsection{Objets}
-\subsubsection{Attaques}
-\subsubsection{Sorts}
-\subsubsection{Ennemis}
-% Expliquer l'IA
-\subsection{Objects}
+\subsection{Déplacement}
+\label{subsubsec:deplacement}
+Le déplacement d'une entité se fait avec des vecteurs. La méthode prend deux vecteurs : la position et le point de déplacement. 
+$$\vec{v} = \vec{v_1} - \vec{v_2}$$
+Il faut ensuite normaliser ce vecteur qui est la direction. $|\vec{v}|$. Pour connaître la nouvelle position selon le temps et vitesse de déplacement cette formule est appliquée:
+$$\vec{v} * \Delta t * s$$
+$\vec{v}$ : Vecteur de direction normalisé\\
+$\Delta t$ : Temps écoulé depuis le dernier \textit{Update}\\
+$s$ : Vitesse de déplacement de l'entité
+
+Il faut ensuite addition ce vecteur à la position actuel du personnage.
+
+\subsubsection{Gestion des obstacles}
+Lors d'un déplacement il est important de prendre en compte les obstacles autour de l'entité, c'est pourquoi il faut faire un vérification de la nouvelle position avec les éléments du jeu, cellule de la carte et autres entités. Si celui-ci est obstrué, on retire un des axes du vecteur de déplacement et réessaye, si il est de-nouveau obstrué, il faut remettre l'axe retiré et essayer avec l'autre. Si il n'y a toujours pas de solution, il ne faut pas validé le déplacement (voir figure \ref{fig:ObstacleManagement}).
+\begin{figure}[htp]
+	\begin{center}
+	\includegraphics[width=.75\textwidth]{ObstacleManagement}
+	\caption{Diagramme de flux du management d'obstacle}
+	\label{fig:ObstacleManagement}
+	\end{center}
+\end{figure}
+
+\subsection{Ennemis}
+Les ennemis sont des entité possédant une "intelligence" contrôlée par l'ordinateur. Cette unité possède plus de zone de détection pour faire illusion d'une intelligence pour que le jeu soit plus jouable. Les propriétés ajouté sont :
+\begin{description}[labelindent=0.5cm]
+	\item[FieldOfView] La zone de détection
+	\item[IsAlerted] L'ennemi à détecter le joueur
+\end{description}
+
+Pour que cet entité détecte des joueur, une zone de détection. Cette zone de détection est faite avec un FRectangle (voir section \ref{subsec:intersections}) qui permet de voir si les limites du joueur et de l'ennemi se touchent. Une fois détecter cette zone agrandi et l'entité passe en mode alerte jusqu'à qu'il perde de vue le joueur (voir figure \ref{fig:DetectionJoueur}).
+
+\begin{figure}[htp]
+	\begin{center}
+	\includegraphics[width=.8\textwidth]{DetectionJoueur}
+	\caption{Diagramme de flux de la détection des hostiles}
+	\label{fig:DetectionJoueur}
+	\end{center}
+\end{figure}
+
+\subsection{Objets - \textit{items}}
+Les \textit{items} sont des objets que le personnage jouable peut ramasser et stocker dans son inventaire. Il peut de même les équiper sur soit. Les items possèdent des caractéristiques (voir section \ref{subsec:caracteristiques}), une fois que le personnage joueur équipe un item, il ajoute les caractéristiques de l'item sur soit grâce au manager de caractéristiques (voir listing \ref{lst:maxforceentity} pour un exemple de calcul du manager).
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=.4\textwidth]{HItem}
+	\caption{Diagramme de classe de HItem}
+	\label{fig:HItem}
+	\end{center}
+\end{figure}
+\subsection{Attaques}
+\subsubsection{Corps-à-corps}
+Les attaque corps à corps peuvent seulement toucher une autre entité. La cible choisi doit se trouver dans la zone d'attaque au corps-à-corps. Lui infligeant ainsi des dégâts selon les caractéristiques. Voir listing \ref{lst:basicmeleeattack}.
+\begin{lstlisting}[caption=Attaque au corps-à-corps, label=lst:basicmeleeattack]
+/// <summary>
+/// Basic melee attack
+/// </summary>
+/// <param name="target">Targeted enemy</param>
+public void BasicMeleeAttack(HEntity target, GameTime gameTime)
+{
+	// Gets the current time of the game
+	double currentTime = gameTime.TotalGameTime.TotalSeconds;
+	// Calculates the number of seconds per attack
+	float secPerAttack = 1f / this.ActualFeatures.AttackSpeed;
+	
+	// If the attack can be made
+	if (currentTime - this._lastAttackTime >= secPerAttack)
+	{
+		float minDmg = this.ActualFeatures.MinimumDamage;
+		float maxDmg = this.ActualFeatures.MaximumDamage;
+		float receivedDamage = (float)this._rand.NextDouble();
+		receivedDamage = (maxDmg - minDmg) * receivedDamage + minDmg;
+		float realReceivedDamage = this.FeatureCalculator.GetReceivedPhysicalDamage(receivedDamage);
+		realReceivedDamage = realReceivedDamage * (this.ActualFeatures.Strenght / 100 + 1);
+		target.ActualFeatures.LifePoints -= realReceivedDamage;
+		this._lastAttackTime = currentTime;
+	}
+}
+\end{lstlisting}
+\subsubsection{Distance}
+Les attaque à distance peuvent seulement toucher une autre entité avec le projectile. Le projectile ne peut pas aller plus loin que le zone d'attaque à distance et peut seulement toucher une entité, lui infligeant ainsi des dégâts selon les caractéristiques.
+\subsection{Sorts}
 \section{Outils de développement}
 \subsection{Primitives 2D}
 \subsection{Intersections}
@@ -1383,8 +1559,7 @@ Le planning du projet se décompose en plusieurs parties :\\
 	    \gantttitle{29}{1} % 13
 	    \gantttitle{30}{1} \ganttnewline % 14
 	    
-	    \ganttbar[bar/.append style={fill=red}]{Code backbone}{7}{13} \ganttnewline
-	    \ganttbar[bar/.append style={fill=red}]{Code essentiel}{0}{0} \ganttnewline
+	    \ganttbar[bar/.append style={fill=red}]{Code backbone}{7}{14} \ganttnewline
 	    \ganttbar[bar/.append style={fill=blue}]{Poster}{11}{11}
 	    \ganttbar[bar/.append style={fill=blue}]{}{13}{13}
 	    \ganttnewline
@@ -1417,9 +1592,9 @@ Le planning du projet se décompose en plusieurs parties :\\
 	    \gantttitle{21}{1} % 13
 	    \gantttitle{22}{1} \ganttnewline % 14
 	
-	    \ganttbar[bar/.append style={fill=red}]{Code essentiel}{0}{0} \ganttnewline
-	    \ganttbar[bar/.append style={fill=green}]{Contenu \& Équilibrage}{0}{0} \ganttnewline
-	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{0}{0}
+	    \ganttbar[bar/.append style={fill=red}]{Code essentiel}{1}{14} \ganttnewline
+	    \ganttbar[bar/.append style={fill=green}]{Contenu \& Équilibrage}{20}{22} \ganttnewline
+	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{10}{14}
 	\end{ganttchart}
 	\caption{Planning final de la première partie du mois de mai}
 	\end{center}
@@ -1437,9 +1612,9 @@ Le planning du projet se décompose en plusieurs parties :\\
 	    \gantttitle{29}{1} % 4
 	    \gantttitle{1}{2} \ganttnewline % 5
 	
-	    \ganttbar[bar/.append style={fill=green}]{Contenu \& Équilibrage}{0}{0} \ganttnewline
-	    \ganttbar[bar/.append style={fill=yellow}]{Tests}{0}{0} \ganttnewline
-	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{0}{0} \ganttnewline
+	    \ganttbar[bar/.append style={fill=green}]{Contenu \& Équilibrage}{4}{5} \ganttnewline
+	    \ganttbar[bar/.append style={fill=yellow}]{Tests}{4}{5} \ganttnewline
+	    \ganttbar[bar/.append style={fill=blue}]{Documentation}{1}{5} \ganttnewline
 	    \ganttmilestone{Rendu final}{6}
 	\end{ganttchart}
 	\caption{Planning final de la deuxième partie du mois de mai et le mois de juin}
@@ -1449,4 +1624,5 @@ Le planning du projet se décompose en plusieurs parties :\\
 % --------------------------------------------------
 \listoffigures
 \listoftables
+\lstlistoflistings
 \end{document}
