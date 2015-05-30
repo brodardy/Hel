@@ -1109,12 +1109,7 @@ Il y a 3 ennemis de bases de différentes tailles : petite, moyenne et grande.
 Le monde du jeu est basé sur un concept simple. Le personnage commence dans un village (base principale) où il peut trouver un coffre et un portail pour se téléporter.
 Le portail mène vers un niveau (le terrain de combat) généré d'où il ne peut plus revenir dans le village sans mourir. Ce niveau est composé de 3 zone de difficultés, chacun plus difficile que l'autre.
 \subsection{Village}
-\subsubsection{Coffre}
-\subsubsection{Portail}
-\subsection{Terrain de combat}
-\section{Interface utilisateur}
-
-\section{Contrôles}
+En cours d'un jeu, le joueur apparait dans un vilage où il y a a disposition, un coffre de stockage et des teleporteurs pour aller dans les différentes cartes.
 \newpage
 % --------------------------------------------------
 \chapter{Analyse organique}
@@ -1495,6 +1490,19 @@ private void UpdateKeyboardInput()
 }
 \end{lstlisting}
 \subsection{Sérialisation XML}
+Il est important de pouvoir serialisé les objets en XML. Ceci permet d'ajouter du contenu facilement et sans toucher au code source. C'est pourquoi la classe XmlManager est générique. Il permet de sérialisé tous les objets si ceux-ci sont approprié pour la sérialisation (voir figure \ref{fig:XmlManager}).
+
+\paragraph{Load} permet de charger un XML et de rendre un objet (voir listing \ref{lst:xmlload}).
+\paragraph{Save} permet de sauvegarder un objet en XML.
+\begin{lstlisting}[caption=Désérialisation d'un XML, label=lst:xmlload]
+T instance;
+using (TextReader reader = new StreamReader(path))
+{
+	XmlSerializer xml = new XmlSerializer(TypeClass);
+	instance = (T)xml.Deserialize(reader);
+}
+return instance;
+\end{lstlisting}
 \begin{figure}[H]
 	\begin{center}
 	\includegraphics[width=0.35\textwidth]{XmlManager}
@@ -1505,23 +1513,99 @@ private void UpdateKeyboardInput()
 
 \section{Vue}
 \subsection{Gestion de l'écran}
-\begin{figure}[H]
+Pour centralisé les différents mode d'affichage (écran de présentation, menu et jeu), un gestionnaire d'écran qui centralise tous ces modes est nécessaire. Ce gestionnaire s'accroche sur les boucles de monogame et possède un écran actif. Cet écran actif est mise-à-jour à travers ces boucles, ce qui permet un transition fluide entre les modes. La taille d'un écran est également mémoriser dans ce gestionnaire pour garder une uniformité des écrans (voir figure \ref{screenmanagement}).
+\begin{figure}[p]
 	\begin{center}
 	\includegraphics[width=1\textwidth]{screenmanagement}
 	\caption{Diagramme de classe de la gestion d'écrans}
 	\label{fig:screenmanagement}
 	\end{center}
 \end{figure}
+\subsubsection{Les transitions}
+Pour passé d'un mode d'affichage à un autre, une transition est nécessaire. C'est pourquoi la class ScreenManager contient un compteur qui garde le temps passer sur une mode d'affichage. Avec une méthode, il suffit de changé l'écran actuel après un certain temps ou lorsqu'un évennement a eu lieu. Voir le listing \ref{lst:screentransition}.
+\begin{lstlisting}[caption=Transition d'écran, label=lst:screentransition]
+/// <summary>
+/// Transitions the screen to another one
+/// </summary>
+/// <param name="nextScreen"></param>
+public void Transition(GameScreen nextScreen)
+{
+	// resets the transition variables
+	this._transitionTime = 0;
+	this._transitionDelayActive = false;
+	this._transitionFirstCount = -1.0d;
+	
+	this.UnloadContent(); // unloads the content of the current screen
+	this._currentScreen = nextScreen; // place the new screen
+	this._currentScreen.LoadContent(); // loads the new screen
+}
+
+/// <summary>
+/// Activates a screen transition for the specified time
+/// </summary>
+/// <param name="nextScreen">Next screen that will appear</param>
+/// <param name="time">Time before transition</param>
+public void Transition(GameScreen nextScreen, int time)
+{
+	this._transitionScreen = nextScreen;
+	this._transitionTime = time;
+	this._transitionDelayActive = true;
+	this._transitionFirstCount = -1.0d;
+}
+\end{lstlisting}
+\subsubsection{L'écran de base}
+L'écran de base (GameScreen) est une classe absraite pour garder une même base des écrans. Un écran possède un manager de contenu qui permet la gestion, chargement et dé-chargement des contenus comme : les textures et les fonts. Une variable de type y est ajouté pour plus facilement identifier le reelle type d'écran. Bien sûr, la boucle monogame est aussi ajouté, pour offrir des possibilités de développement des écrans.
+\subsubsection{L'écran de présentation}
+L'écran de présentation ou \textit{SplashScreen}, est un simple écran possédant une image de fond qui porte le nom de l'auteur ainsi que son logo. Cet écran est en mode transition, cet-à-dire qu'il changera tous seul de mode ou lorsque l'utilisateur appui sur une touche.
+\subsubsection{L'écran de menu}
+Le menu sert d'instance d'intéraction entre le joueur et le programme. C'est pourquoi pour favoriser l'avancement du projet, il faut que le menu soit générique. C'est pourquoi son contenu s'ajoute avec des fichiers XML à l'aide du XMLManager, voir listing \ref{lst:xmlscreen}.
+
+\begin{lstlisting}[caption=Menu en XML, label=lst:xmlscreen, language=xml]
+<?xml version="1.0" encoding="utf-8" ?>
+<MenuScreen>
+	<Image>
+	<Path>SplashScreen/main2</Path>
+	<Position>
+	<X>640</X>
+	<Y>360</Y>
+	</Position>
+	</Image>
+	<Items>
+		<MenuItem>
+		<Image>
+			<Text>Play</Text>
+			<Position>
+				<X>100</X>
+				<Y>200</Y>
+			</Position>
+		</Image>
+		<LinkType>1</LinkType>
+		<Id>1</Id>
+		</MenuItem>
+		<MenuItem>
+		<Image>
+			<Text>Options</Text>
+			<Position>
+				<X>100</X>
+				<Y>230</Y>
+			</Position>
+		</Image>
+		<LinkType>1</LinkType>
+		<Id>2</Id>
+		</MenuItem>
+	</Items>
+</MenuScreen>
+\end{lstlisting}
 \subsection{Gestion des textures}
 \label{subsec:texturemanager}
-\subsection{Camera de jeu}
-\subsection{Barres de vie}
-\subsection{Menu}
-\subsection{Affichage tête haute (HUD)}
-\newpage
-% --------------------------------------------------
-\chapter{Tests}
+Pour maintenir un jeu génerique, il faut aussi rendre le texture disponible depuis un endroit pour le centralisé. C'est pourquoi les textures sont tous chargé avec des fichiers XML au lancement du jeu. Ce qui permet un modifiction facile des textures (voir figure \ref{fig:TextureManager}). La classe charge d'abords une liste XML qui contients tous les liens des textures, ensuite il charge les textures.
 
+\begin{center}
+	\includegraphics[width=.5\textwidth]{TextureManager}
+	\caption{Diagramme de classe de la gestion de textures}
+	\label{fig:TextureManager}
+	\end{center}
+\end{figure}
 \newpage
 % --------------------------------------------------
 \chapter{Conclusion}
