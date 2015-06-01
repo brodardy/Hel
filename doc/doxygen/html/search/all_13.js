@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['width',['Width',['../class_hel_project_1_1_game_world_1_1_map_1_1_h_map.html#aeb3db69a653089c32c2b61c7612bd106',1,'HelProject.GameWorld.Map.HMap.Width()'],['../class_hel_project_1_1_u_i_1_1_camera.html#ad16cc9589cf14533997a8f090c67f509',1,'HelProject.UI.Camera.Width()']]]
+  ['viewport',['ViewPort',['../class_hel_project_1_1_u_i_1_1_camera.html#a95599103c122a9b40fb225603788b6ed',1,'HelProject::UI::Camera']]],
+  ['vitality',['Vitality',['../class_hel_project_1_1_features_1_1_feature_collection.html#a27719b073c6acce4f5faba5a437e1a70',1,'HelProject::Features::FeatureCollection']]]
 ];

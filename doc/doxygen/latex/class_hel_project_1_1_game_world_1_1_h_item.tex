@@ -5,6 +5,26 @@
 Item class  
 
 
+
+
+Inheritance diagram for Hel\+Project.\+Game\+World.\+H\+Item\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{class_hel_project_1_1_game_world_1_1_h_item__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Hel\+Project.\+Game\+World.\+H\+Item\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{class_hel_project_1_1_game_world_1_1_h_item__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -36,13 +56,23 @@ enum \hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a7440e7b22ff0e62bcaf
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a85c06624c5da360525a7b109c28c3f7e}{H\+Item} (string name, \hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a7440e7b22ff0e62bcaf89a513716357b}{Item\+Types} type, \hyperlink{class_hel_project_1_1_features_1_1_feature_collection}{Feature\+Collection} features)
+\hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a53ff6613b07fb7edb20fa2a444a07dc8}{H\+Item} ()
+\begin{DoxyCompactList}\small\item\em Creates an empty item \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a0786795d6c629860dcdd64b9069c87ca}{H\+Item} (string name, \hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a7440e7b22ff0e62bcaf89a513716357b}{Item\+Types} type, \hyperlink{class_hel_project_1_1_features_1_1_feature_collection}{Feature\+Collection} features, string image\+Name)
 \begin{DoxyCompactList}\small\item\em Creates an item on the floor \end{DoxyCompactList}\item 
-\hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a917513f7394553cfc1069ea042004a2a}{H\+Item} (string name, \hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a7440e7b22ff0e62bcaf89a513716357b}{Item\+Types} type, \hyperlink{class_hel_project_1_1_features_1_1_feature_collection}{Feature\+Collection} features, bool is\+On\+Floor)
-\begin{DoxyCompactList}\small\item\em Creates an item \end{DoxyCompactList}\end{DoxyCompactItemize}
+\hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a089cacb678add3aa0de4d2a860a4d3ac}{H\+Item} (string name, \hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a7440e7b22ff0e62bcaf89a513716357b}{Item\+Types} type, \hyperlink{class_hel_project_1_1_features_1_1_feature_collection}{Feature\+Collection} features, string image\+Name, bool is\+On\+Floor, Vector2 position)
+\begin{DoxyCompactList}\small\item\em Creates an item \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_h_item_aa6589eba9b17440fdea472c2f0468655}{H\+Item} (string name, \hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a7440e7b22ff0e62bcaf89a513716357b}{Item\+Types} type, \hyperlink{class_hel_project_1_1_features_1_1_feature_collection}{Feature\+Collection} features, string image\+Name, bool is\+On\+Floor, Vector2 position, string description)
+\begin{DoxyCompactList}\small\item\em Creates an item \end{DoxyCompactList}\item 
+override void \hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a463357f63d56ec3ac4836a224c179892}{Draw} (Sprite\+Batch sprite\+Batch)
+\begin{DoxyCompactList}\small\item\em Draws the item \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
+string \hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a4f099e28dcfc8bafe78bc5ca1a14aca5}{Description}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em description or summary, or story, just additional content for the eyes \end{DoxyCompactList}\item 
+string \hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a7791b24bb2f3ad7d02ae45054040e9aa}{Image\+Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Name of the related texture2\+D \end{DoxyCompactList}\item 
 string \hyperlink{class_hel_project_1_1_game_world_1_1_h_item_ad6e286a2833c7a01297544008e6e9e67}{Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Name of the item \end{DoxyCompactList}\item 
 \hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a7440e7b22ff0e62bcaf89a513716357b}{Item\+Types} \hyperlink{class_hel_project_1_1_game_world_1_1_h_item_aeeb877e7d0f3aa3adf04c17c67bb385f}{Item\+Type}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
@@ -51,6 +81,7 @@ bool \hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a5fd0a52b0f490f80d0c
 \begin{DoxyCompactList}\small\item\em Is the item on the floor \end{DoxyCompactList}\item 
 \hyperlink{class_hel_project_1_1_features_1_1_feature_collection}{Feature\+Collection} \hyperlink{class_hel_project_1_1_game_world_1_1_h_item_a62269e669b1ff06f017424341ffd7cb9}{Features}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Given features of the item \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
 
 
 \subsection{Detailed Description}
@@ -69,15 +100,27 @@ Item types
 Weapons \+: 0 to 6, Accessories \+: 7 to 11, Armors \+: 12 to 17 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{class_hel_project_1_1_game_world_1_1_h_item_a85c06624c5da360525a7b109c28c3f7e}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}!H\+Item@{H\+Item}}
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_item_a53ff6613b07fb7edb20fa2a444a07dc8}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}!H\+Item@{H\+Item}}
+\index{H\+Item@{H\+Item}!Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}}
+\subsubsection[{H\+Item}]{\setlength{\rightskip}{0pt plus 5cm}Hel\+Project.\+Game\+World.\+H\+Item.\+H\+Item (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_h_item_a53ff6613b07fb7edb20fa2a444a07dc8}
+
+
+Creates an empty item 
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_item_a0786795d6c629860dcdd64b9069c87ca}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}!H\+Item@{H\+Item}}
 \index{H\+Item@{H\+Item}!Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}}
 \subsubsection[{H\+Item}]{\setlength{\rightskip}{0pt plus 5cm}Hel\+Project.\+Game\+World.\+H\+Item.\+H\+Item (
 \begin{DoxyParamCaption}
 \item[{string}]{name, }
 \item[{{\bf Item\+Types}}]{type, }
-\item[{{\bf Feature\+Collection}}]{features}
+\item[{{\bf Feature\+Collection}}]{features, }
+\item[{string}]{image\+Name}
 \end{DoxyParamCaption}
-)}\label{class_hel_project_1_1_game_world_1_1_h_item_a85c06624c5da360525a7b109c28c3f7e}
+)}\label{class_hel_project_1_1_game_world_1_1_h_item_a0786795d6c629860dcdd64b9069c87ca}
 
 
 Creates an item on the floor 
@@ -90,19 +133,23 @@ Creates an item on the floor
 \hline
 {\em features} & Given features of the item\\
 \hline
+{\em image\+Name} & Image name\\
+\hline
 \end{DoxyParams}
 
 
-Is\+On\+Floor == true \hypertarget{class_hel_project_1_1_game_world_1_1_h_item_a917513f7394553cfc1069ea042004a2a}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}!H\+Item@{H\+Item}}
+Is\+On\+Floor == true \hypertarget{class_hel_project_1_1_game_world_1_1_h_item_a089cacb678add3aa0de4d2a860a4d3ac}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}!H\+Item@{H\+Item}}
 \index{H\+Item@{H\+Item}!Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}}
 \subsubsection[{H\+Item}]{\setlength{\rightskip}{0pt plus 5cm}Hel\+Project.\+Game\+World.\+H\+Item.\+H\+Item (
 \begin{DoxyParamCaption}
 \item[{string}]{name, }
 \item[{{\bf Item\+Types}}]{type, }
 \item[{{\bf Feature\+Collection}}]{features, }
-\item[{bool}]{is\+On\+Floor}
+\item[{string}]{image\+Name, }
+\item[{bool}]{is\+On\+Floor, }
+\item[{Vector2}]{position}
 \end{DoxyParamCaption}
-)}\label{class_hel_project_1_1_game_world_1_1_h_item_a917513f7394553cfc1069ea042004a2a}
+)}\label{class_hel_project_1_1_game_world_1_1_h_item_a089cacb678add3aa0de4d2a860a4d3ac}
 
 
 Creates an item 
@@ -117,16 +164,91 @@ Creates an item
 \hline
 {\em is\+On\+Floor} & Is the item on the floor\\
 \hline
+{\em image\+Name} & Image name\\
+\hline
+{\em position} & Position of the item (I\+G unit)\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_item_aa6589eba9b17440fdea472c2f0468655}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}!H\+Item@{H\+Item}}
+\index{H\+Item@{H\+Item}!Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}}
+\subsubsection[{H\+Item}]{\setlength{\rightskip}{0pt plus 5cm}Hel\+Project.\+Game\+World.\+H\+Item.\+H\+Item (
+\begin{DoxyParamCaption}
+\item[{string}]{name, }
+\item[{{\bf Item\+Types}}]{type, }
+\item[{{\bf Feature\+Collection}}]{features, }
+\item[{string}]{image\+Name, }
+\item[{bool}]{is\+On\+Floor, }
+\item[{Vector2}]{position, }
+\item[{string}]{description}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_h_item_aa6589eba9b17440fdea472c2f0468655}
+
+
+Creates an item 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the item\\
+\hline
+{\em type} & Type of the item\\
+\hline
+{\em features} & Given features of the item\\
+\hline
+{\em is\+On\+Floor} & Is the item on the floor\\
+\hline
+{\em image\+Name} & Image name\\
+\hline
+{\em position} & Position of the item (I\+G unit)\\
+\hline
+{\em description} & Summary of the weapon\\
+\hline
 \end{DoxyParams}
 
 
+\subsection{Member Function Documentation}
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_item_a463357f63d56ec3ac4836a224c179892}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}!Draw@{Draw}}
+\index{Draw@{Draw}!Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}}
+\subsubsection[{Draw}]{\setlength{\rightskip}{0pt plus 5cm}override void Hel\+Project.\+Game\+World.\+H\+Item.\+Draw (
+\begin{DoxyParamCaption}
+\item[{Sprite\+Batch}]{sprite\+Batch}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_hel_project_1_1_game_world_1_1_h_item_a463357f63d56ec3ac4836a224c179892}
+
+
+Draws the item 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Batch} & Sprite batch\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_hel_project_1_1_game_world_1_1_h_object_aa48c9288756739f80a59bdf6f4fe7f3f}{Hel\+Project.\+Game\+World.\+H\+Object}.
+
+
+
 \subsection{Property Documentation}
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_item_a4f099e28dcfc8bafe78bc5ca1a14aca5}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}!Description@{Description}}
+\index{Description@{Description}!Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}}
+\subsubsection[{Description}]{\setlength{\rightskip}{0pt plus 5cm}string Hel\+Project.\+Game\+World.\+H\+Item.\+Description\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_game_world_1_1_h_item_a4f099e28dcfc8bafe78bc5ca1a14aca5}
+
+
+description or summary, or story, just additional content for the eyes 
+
 \hypertarget{class_hel_project_1_1_game_world_1_1_h_item_a62269e669b1ff06f017424341ffd7cb9}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}!Features@{Features}}
 \index{Features@{Features}!Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}}
 \subsubsection[{Features}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Feature\+Collection} Hel\+Project.\+Game\+World.\+H\+Item.\+Features\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_game_world_1_1_h_item_a62269e669b1ff06f017424341ffd7cb9}
 
 
 Given features of the item 
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_h_item_a7791b24bb2f3ad7d02ae45054040e9aa}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}!Image\+Name@{Image\+Name}}
+\index{Image\+Name@{Image\+Name}!Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}}
+\subsubsection[{Image\+Name}]{\setlength{\rightskip}{0pt plus 5cm}string Hel\+Project.\+Game\+World.\+H\+Item.\+Image\+Name\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_game_world_1_1_h_item_a7791b24bb2f3ad7d02ae45054040e9aa}
+
+
+Name of the related texture2\+D 
 
 \hypertarget{class_hel_project_1_1_game_world_1_1_h_item_a5fd0a52b0f490f80d0c7abec4b3293c5}{}\index{Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}!Is\+On\+Floor@{Is\+On\+Floor}}
 \index{Is\+On\+Floor@{Is\+On\+Floor}!Hel\+Project\+::\+Game\+World\+::\+H\+Item@{Hel\+Project\+::\+Game\+World\+::\+H\+Item}}

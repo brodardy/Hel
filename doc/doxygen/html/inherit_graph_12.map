@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_hel_project_1_1_u_i_1_1_camera.html" title="Camera class for the screen " alt="" coords="5,5,152,32"/>
+<area shape="rect" id="node1" href="$class_hel_project_1_1_u_i_1_1_game_screen.html" title="Base class for all the screens of the game " alt="" coords="5,56,184,83"/>
+<area shape="rect" id="node2" href="$class_hel_project_1_1_u_i_1_1_menu_1_1_menu_screen.html" title="Title screen of the game " alt="" coords="232,5,443,32"/>
+<area shape="rect" id="node3" href="$class_hel_project_1_1_u_i_1_1_play_screen.html" title="Screen for the gameplay " alt="" coords="253,56,422,83"/>
+<area shape="rect" id="node4" href="$class_hel_project_1_1_u_i_1_1_splash_screen.html" title="Splash screen " alt="" coords="246,107,429,133"/>
 </map>

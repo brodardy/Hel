@@ -12,7 +12,7 @@ Inheritance diagram for Hel\+Project.\+Game\+World.\+Entities.\+H\+Entity\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=235pt]{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity__inherit__graph}
+\includegraphics[width=350pt]{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity__inherit__graph}
 \end{center}
 \end{figure}
 
@@ -33,7 +33,8 @@ enum \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_af004
 {\bfseries Melee\+Attacking}, 
 {\bfseries Range\+Attacking}, 
 \\*
-{\bfseries Spell\+Casting}
+{\bfseries Spell\+Casting}, 
+{\bfseries No\+Movement}
  \}
 \begin{DoxyCompactList}\small\item\em State of the entity \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
@@ -43,10 +44,20 @@ enum \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_af004
 \begin{DoxyCompactList}\small\item\em Creates an entity \end{DoxyCompactList}\item 
 \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_af078f47455d53ed5785b07a41fbec28a}{H\+Entity} (Vector2 position)
 \begin{DoxyCompactList}\small\item\em Creates an entity \end{DoxyCompactList}\item 
-\hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a9a43246b0100b8963eb5410ad1eff235}{H\+Entity} (\hyperlink{class_hel_project_1_1_features_1_1_feature_collection}{Feature\+Collection} initial\+Features, Vector2 position, float width, float height, Texture2\+D texture)
+\hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a1d40c7e2b78f21e2866e8339221a537d}{H\+Entity} (\hyperlink{class_hel_project_1_1_features_1_1_feature_collection}{Feature\+Collection} initial\+Features, Vector2 position, float width, float height, string texture\+Name)
 \begin{DoxyCompactList}\small\item\em Creates an entity \end{DoxyCompactList}\item 
+override void \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a3feda059e3ebd1a20579260a6dc60291}{Update} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the entity \end{DoxyCompactList}\item 
 override void \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_aac4efdcaa42e096838556aba9345f8d5}{Draw} (Sprite\+Batch sprite\+Batch)
-\begin{DoxyCompactList}\small\item\em Draws the entity \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Draws the entity \end{DoxyCompactList}\item 
+void \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a69383bd603d893820aaa8ce83dbde7c8}{Apply\+Fluid\+Movement} (Vector2 direction, Vector2 new\+Position, \hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle}{F\+Rectangle} new\+Bounds, float elapsed\+Time)
+\begin{DoxyCompactList}\small\item\em Corrects the movement. When the entity touches an unwalkable object, it slides instead of stopping completly \end{DoxyCompactList}\item 
+bool \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_aae0d26ad34844b800ff4608f51d81548}{Is\+Character\+Surface\+Walkable} (Vector2 position, \hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle}{F\+Rectangle} bounds)
+\begin{DoxyCompactList}\small\item\em Checks if the surface where the hero is present if walkable \end{DoxyCompactList}\item 
+void \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_aa52555f6c5958eae0596dac05ac51958}{Basic\+Melee\+Attack} (\hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity}{H\+Entity} target, Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Basic melee attack \end{DoxyCompactList}\item 
+void \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a6f85c104941a1c6920950e2672df32b4}{Check\+Life} ()
+\begin{DoxyCompactList}\small\item\em Checks if the hostile is dead \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -79,10 +90,20 @@ override void \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_ent
 \item 
 \hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a3ae3951348143dcec12a91af4d95f7d5}{}const float {\bfseries D\+E\+F\+A\+U\+L\+T\+\_\+\+L\+I\+F\+E\+P\+O\+I\+N\+T\+S} = 100.\+0f\label{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a3ae3951348143dcec12a91af4d95f7d5}
 
+\item 
+\hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a856db5b61dd25c6487492a863f3a73c8}{}const float {\bfseries D\+E\+F\+A\+U\+L\+T\+\_\+\+A\+T\+T\+A\+C\+K\+B\+O\+U\+N\+D\+\_\+\+W\+I\+D\+T\+H} = 1.\+8f\label{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a856db5b61dd25c6487492a863f3a73c8}
+
+\item 
+\hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_ac4930df44e962b5bc1e29f6a54ed509e}{}const float {\bfseries D\+E\+F\+A\+U\+L\+T\+\_\+\+A\+T\+T\+A\+C\+K\+B\+O\+U\+N\+D\+\_\+\+H\+E\+I\+G\+H\+T} = 2.\+7f\label{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_ac4930df44e962b5bc1e29f6a54ed509e}
+
 \end{DoxyCompactItemize}
 \subsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
+bool \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a5ca32a01d263b7bc52df0f2458f5fe06}{Is\+Dead}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Is the entity dead \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle}{F\+Rectangle} \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_ac17e8931e8d6412e9e77ff6029ec1ac1}{Attack\+Bounds}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Attack bounds of the entity \end{DoxyCompactList}\item 
 Texture2\+D \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a11ba8f188ffd338f024d396ab0b27cbb}{Texture}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Texture of the entity \end{DoxyCompactList}\item 
 \hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle}{F\+Rectangle} \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a2f205d2e351dadd9c7e4bcfc9b06b970}{Bounds}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
@@ -145,7 +166,7 @@ Creates an entity
 {\em position} & Position of the entity\\
 \hline
 \end{DoxyParams}
-\hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a9a43246b0100b8963eb5410ad1eff235}{}\index{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}!H\+Entity@{H\+Entity}}
+\hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a1d40c7e2b78f21e2866e8339221a537d}{}\index{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}!H\+Entity@{H\+Entity}}
 \index{H\+Entity@{H\+Entity}!Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}}
 \subsubsection[{H\+Entity}]{\setlength{\rightskip}{0pt plus 5cm}Hel\+Project.\+Game\+World.\+Entities.\+H\+Entity.\+H\+Entity (
 \begin{DoxyParamCaption}
@@ -153,9 +174,9 @@ Creates an entity
 \item[{Vector2}]{position, }
 \item[{float}]{width, }
 \item[{float}]{height, }
-\item[{Texture2\+D}]{texture}
+\item[{string}]{texture\+Name}
 \end{DoxyParamCaption}
-)}\label{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a9a43246b0100b8963eb5410ad1eff235}
+)}\label{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a1d40c7e2b78f21e2866e8339221a537d}
 
 
 Creates an entity 
@@ -170,6 +191,59 @@ Creates an entity
 
 
 \subsection{Member Function Documentation}
+\hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a69383bd603d893820aaa8ce83dbde7c8}{}\index{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}!Apply\+Fluid\+Movement@{Apply\+Fluid\+Movement}}
+\index{Apply\+Fluid\+Movement@{Apply\+Fluid\+Movement}!Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}}
+\subsubsection[{Apply\+Fluid\+Movement}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+Game\+World.\+Entities.\+H\+Entity.\+Apply\+Fluid\+Movement (
+\begin{DoxyParamCaption}
+\item[{Vector2}]{direction, }
+\item[{Vector2}]{new\+Position, }
+\item[{{\bf F\+Rectangle}}]{new\+Bounds, }
+\item[{float}]{elapsed\+Time}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a69383bd603d893820aaa8ce83dbde7c8}
+
+
+Corrects the movement. When the entity touches an unwalkable object, it slides instead of stopping completly 
+
+
+\begin{DoxyParams}{Parameters}
+{\em direction} & Direction of the movement\\
+\hline
+{\em new\+Position} & The new calculated position\\
+\hline
+{\em new\+Bounds} & The new bounds according to the position\\
+\hline
+{\em elapsed\+Time} & Elapsed game time in seconds\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_aa52555f6c5958eae0596dac05ac51958}{}\index{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}!Basic\+Melee\+Attack@{Basic\+Melee\+Attack}}
+\index{Basic\+Melee\+Attack@{Basic\+Melee\+Attack}!Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}}
+\subsubsection[{Basic\+Melee\+Attack}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+Game\+World.\+Entities.\+H\+Entity.\+Basic\+Melee\+Attack (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+Entity}}]{target, }
+\item[{Game\+Time}]{game\+Time}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_aa52555f6c5958eae0596dac05ac51958}
+
+
+Basic melee attack 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & Targeted enemy\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a6f85c104941a1c6920950e2672df32b4}{}\index{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}!Check\+Life@{Check\+Life}}
+\index{Check\+Life@{Check\+Life}!Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}}
+\subsubsection[{Check\+Life}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+Game\+World.\+Entities.\+H\+Entity.\+Check\+Life (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a6f85c104941a1c6920950e2672df32b4}
+
+
+Checks if the hostile is dead 
+
 \hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_aac4efdcaa42e096838556aba9345f8d5}{}\index{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}!Draw@{Draw}}
 \index{Draw@{Draw}!Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}}
 \subsubsection[{Draw}]{\setlength{\rightskip}{0pt plus 5cm}override void Hel\+Project.\+Game\+World.\+Entities.\+H\+Entity.\+Draw (
@@ -192,7 +266,53 @@ Reimplemented from \hyperlink{class_hel_project_1_1_game_world_1_1_h_object_aa48
 
 
 
-Reimplemented in \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_hero_a8a08422c569dbff045d597aa1663c338}{Hel\+Project.\+Game\+World.\+Entities.\+H\+Hero}.
+Reimplemented in \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_hero_a8a08422c569dbff045d597aa1663c338}{Hel\+Project.\+Game\+World.\+Entities.\+H\+Hero}, and \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_hostile_a548b6f33addf42cbe85d4058ace51d76}{Hel\+Project.\+Game\+World.\+Entities.\+H\+Hostile}.
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_aae0d26ad34844b800ff4608f51d81548}{}\index{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}!Is\+Character\+Surface\+Walkable@{Is\+Character\+Surface\+Walkable}}
+\index{Is\+Character\+Surface\+Walkable@{Is\+Character\+Surface\+Walkable}!Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}}
+\subsubsection[{Is\+Character\+Surface\+Walkable}]{\setlength{\rightskip}{0pt plus 5cm}bool Hel\+Project.\+Game\+World.\+Entities.\+H\+Entity.\+Is\+Character\+Surface\+Walkable (
+\begin{DoxyParamCaption}
+\item[{Vector2}]{position, }
+\item[{{\bf F\+Rectangle}}]{bounds}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_aae0d26ad34844b800ff4608f51d81548}
+
+
+Checks if the surface where the hero is present if walkable 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Position of the hero\\
+\hline
+{\em bounds} & Bounds of the hero\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a3feda059e3ebd1a20579260a6dc60291}{}\index{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}!Update@{Update}}
+\index{Update@{Update}!Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}override void Hel\+Project.\+Game\+World.\+Entities.\+H\+Entity.\+Update (
+\begin{DoxyParamCaption}
+\item[{Game\+Time}]{game\+Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a3feda059e3ebd1a20579260a6dc60291}
+
+
+Updates the entity 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_hel_project_1_1_game_world_1_1_h_object_a2e4ba3d334e48c9b74cc1b2b821f030b}{Hel\+Project.\+Game\+World.\+H\+Object}.
+
+
+
+Reimplemented in \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_hero_a421c030a8fde6fe6707b5416d0db46ff}{Hel\+Project.\+Game\+World.\+Entities.\+H\+Hero}, and \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_hostile_a3ce954aa41e47c306487d94ba64ae822}{Hel\+Project.\+Game\+World.\+Entities.\+H\+Hostile}.
 
 
 
@@ -203,6 +323,13 @@ Reimplemented in \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_
 
 
 Actual features of the entity 
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_ac17e8931e8d6412e9e77ff6029ec1ac1}{}\index{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}!Attack\+Bounds@{Attack\+Bounds}}
+\index{Attack\+Bounds@{Attack\+Bounds}!Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}}
+\subsubsection[{Attack\+Bounds}]{\setlength{\rightskip}{0pt plus 5cm}{\bf F\+Rectangle} Hel\+Project.\+Game\+World.\+Entities.\+H\+Entity.\+Attack\+Bounds\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_ac17e8931e8d6412e9e77ff6029ec1ac1}
+
+
+Attack bounds of the entity 
 
 \hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a2f205d2e351dadd9c7e4bcfc9b06b970}{}\index{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}!Bounds@{Bounds}}
 \index{Bounds@{Bounds}!Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}}
@@ -231,6 +358,13 @@ Feature manager to calculate the actual features
 
 
 Initial feature of the entity 
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a5ca32a01d263b7bc52df0f2458f5fe06}{}\index{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}!Is\+Dead@{Is\+Dead}}
+\index{Is\+Dead@{Is\+Dead}!Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}}
+\subsubsection[{Is\+Dead}]{\setlength{\rightskip}{0pt plus 5cm}bool Hel\+Project.\+Game\+World.\+Entities.\+H\+Entity.\+Is\+Dead\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_a5ca32a01d263b7bc52df0f2458f5fe06}
+
+
+Is the entity dead 
 
 \hypertarget{class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity_afb7fd74a8073bf8311bceba415e6022c}{}\index{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}!Maximized\+Features@{Maximized\+Features}}
 \index{Maximized\+Features@{Maximized\+Features}!Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity@{Hel\+Project\+::\+Game\+World\+::\+Entities\+::\+H\+Entity}}

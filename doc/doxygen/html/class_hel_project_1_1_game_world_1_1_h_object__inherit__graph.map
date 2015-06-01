@@ -1,5 +1,7 @@
 <map id="HelProject.GameWorld.HObject" name="HelProject.GameWorld.HObject">
-<area shape="rect" id="node2" href="$class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity.html" title="Base abstract class for the entities of the game " alt="" coords="5,80,212,121"/>
-<area shape="rect" id="node4" href="$class_hel_project_1_1_game_world_1_1_map_1_1_h_cell.html" title="Cell of a map " alt="" coords="236,80,424,121"/>
-<area shape="rect" id="node3" href="$class_hel_project_1_1_game_world_1_1_entities_1_1_h_hero.html" title="Controllable entity " alt="" coords="5,169,212,211"/>
+<area shape="rect" id="node2" href="$class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity.html" title="Base abstract class for the entities of the game " alt="" coords="260,37,467,79"/>
+<area shape="rect" id="node5" href="$class_hel_project_1_1_game_world_1_1_h_item.html" title="Item class " alt="" coords="267,103,460,130"/>
+<area shape="rect" id="node6" href="$class_hel_project_1_1_game_world_1_1_map_1_1_h_cell.html" title="Cell of a map " alt="" coords="269,155,457,196"/>
+<area shape="rect" id="node3" href="$class_hel_project_1_1_game_world_1_1_entities_1_1_h_hero.html" title="Controllable entity " alt="" coords="515,5,721,47"/>
+<area shape="rect" id="node4" href="$class_hel_project_1_1_game_world_1_1_entities_1_1_h_hostile.html" title="HelProject.GameWorld.Entities.\lHHostile" alt="" coords="515,71,721,112"/>
 </map>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['zoom',['Zoom',['../class_hel_project_1_1_u_i_1_1_camera.html#a785b2a428a8b4f4401e208a2e1396d42',1,'HelProject::UI::Camera']]]
+  ['xmlmanager',['XmlManager',['../class_hel_project_1_1_tools_1_1_xml_manager.html',1,'HelProject::Tools']]],
+  ['xmlmanager_3c_20helproject_3a_3aui_3a_3agamescreen_20_3e',['XmlManager&lt; HelProject::UI::GameScreen &gt;',['../class_hel_project_1_1_tools_1_1_xml_manager.html',1,'HelProject::Tools']]]
 ];

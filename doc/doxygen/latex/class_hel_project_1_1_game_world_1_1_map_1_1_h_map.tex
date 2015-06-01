@@ -8,7 +8,9 @@ Used the create a map for the game
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a93cc2548c1f18d85d09ae9c87affd97f}{H\+Map} (int height, int width, float scale=1.\+0f, int non\+Walkable\+Space\+Percentage=\+H\+Map.\+D\+E\+F\+A\+U\+L\+T\+\_\+\+N\+O\+N\+W\+A\+L\+K\+A\+B\+L\+E\+\_\+\+C\+E\+L\+L\+S\+\_\+\+P\+E\+R\+C\+E\+N\+T\+A\+G\+E)
+\hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a392c8a341df9fe757320121d8d7ccd08}{H\+Map} (\hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell}{H\+Cell}\mbox{[},\mbox{]} cells, float scale=1.\+0f)
+\begin{DoxyCompactList}\small\item\em Creates a map from given cells \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a7318bd52a1e87a96da5094cc2b6bd019}{H\+Map} (int width, int height, float scale=1.\+0f, int non\+Walkable\+Space\+Percentage=\+H\+Map.\+D\+E\+F\+A\+U\+L\+T\+\_\+\+N\+O\+N\+W\+A\+L\+K\+A\+B\+L\+E\+\_\+\+C\+E\+L\+L\+S\+\_\+\+P\+E\+R\+C\+E\+N\+T\+A\+G\+E)
 \begin{DoxyCompactList}\small\item\em Creates a map full of non-\/walkable cells \end{DoxyCompactList}\item 
 void \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a50af4bbf5a7d9fd131c70050798230a1}{Make\+Randomly\+Filled\+Map} ()
 \begin{DoxyCompactList}\small\item\em Fills the map randomly with borders \end{DoxyCompactList}\item 
@@ -22,6 +24,10 @@ bool \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a31940bf03949
 \begin{DoxyCompactList}\small\item\em Places a walkable cell depending on it\textquotesingle{}s neighbors \end{DoxyCompactList}\item 
 int \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_ac11321d7ff766f5ff1a57bfc941d721e}{Get\+Number\+Of\+Adjacent\+Unwalkable\+Cells} (int x, int y, int scope\+X, int scope\+Y)
 \begin{DoxyCompactList}\small\item\em Gets the number of adjacent non-\/walkable cells around the specified cell \end{DoxyCompactList}\item 
+List$<$ \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell}{H\+Cell} $>$ \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a8fe60c382ebc4b0cb407e8e318c08d8b}{Get\+Adjacent\+Unwalkable\+Cells} (int x, int y, int scope\+X, int scope\+Y)
+\begin{DoxyCompactList}\small\item\em Gets the adjacent non-\/walkable cells around the given point and scope \end{DoxyCompactList}\item 
+List$<$ \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell}{H\+Cell} $>$ \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a45d1bd903b1626f6f968d53e6861847b}{Get\+Adjacent\+Cells} (int x, int y, int scope\+X, int scope\+Y, bool include\+Designated\+Cell=false)
+\begin{DoxyCompactList}\small\item\em Gets the adjacent cells of the position \end{DoxyCompactList}\item 
 bool \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a5bca0c19006ab0058c11ebe44c888df5}{Is\+Cell\+Nonwalkable} (int x, int y)
 \begin{DoxyCompactList}\small\item\em Verifies if the specified cell is walkable \end{DoxyCompactList}\item 
 bool \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a1e2dbc41db3641f79cfcd8b319e5378d}{Is\+Cell\+Out\+Of\+Bounds} (int x, int y)
@@ -38,8 +44,27 @@ void \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a83dff5b5aecb
 \begin{DoxyCompactList}\small\item\em Unloads the content \end{DoxyCompactList}\item 
 void \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_af561c3a13ca537b9f32c3d2cc122c2d7}{Draw} (Sprite\+Batch sprite\+Batch, \hyperlink{class_hel_project_1_1_u_i_1_1_camera}{Camera} camera)
 \begin{DoxyCompactList}\small\item\em Draws the map \end{DoxyCompactList}\item 
-Vector2 \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a82276f06e5f66ea64564d52a69d8a90d}{Get\+Random\+Spawn\+Point} ()
-\begin{DoxyCompactList}\small\item\em Gets a random walkable area \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_aa20928d3f1d18d4b1625c5326f65e0cd}{Draw\+Items} (Sprite\+Batch sprite\+Batch, \hyperlink{class_hel_project_1_1_u_i_1_1_camera}{Camera} camera, \hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle}{F\+Rectangle} limits)
+\begin{DoxyCompactList}\small\item\em Draws all the items that are on the floor of the map \end{DoxyCompactList}\item 
+Vector2 \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_afd943562de7043cdf18b27ede54d2f7b}{Get\+Random\+Floor\+Point} ()
+\begin{DoxyCompactList}\small\item\em Gets a random walkable area \end{DoxyCompactList}\item 
+void \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a765937b037dbeafac4fb455e393d8d9b}{Decorate\+Map} ()
+\begin{DoxyCompactList}\small\item\em Decorates the map \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell}{H\+Cell} \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a07c6bee8336fab355258507d1c189a81}{Get\+Top\+Cell} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Gets the top cell \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell}{H\+Cell} \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a8e1d71f1100f0c949039cee325413e21}{Get\+Bottom\+Cell} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Gets the bottom cell \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell}{H\+Cell} \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_ae35fa29d0071ce316675883d42818024}{Get\+Left\+Cell} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Gets the Left cell \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell}{H\+Cell} \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a6f599e28b7a3133e6857e61534b44e34}{Get\+Right\+Cell} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Gets the Right cell \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a014aa4c548e54e2aba3fa8cec42fcb56}{Save\+To\+Xml} (\hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map}{H\+Map} map, string path)
+\begin{DoxyCompactList}\small\item\em Save the cells in an X\+M\+L file \end{DoxyCompactList}\item 
+static \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell}{H\+Cell}\mbox{[},\mbox{]} \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_ae8b095cbbd47a2dbf88b8380f5765a78}{Load\+From\+Xml} (string path)
+\begin{DoxyCompactList}\small\item\em Loads a map from an xml file \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -73,6 +98,10 @@ Vector2 \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a82276f06e
 \subsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
+List$<$ \hyperlink{class_hel_project_1_1_game_world_1_1_h_item}{H\+Item} $>$ \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a4da83fe2eddc89c152e737b682068f57}{On\+Floor\+Items}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Items currently on the floor \end{DoxyCompactList}\item 
+List$<$ \hyperlink{class_hel_project_1_1_game_world_1_1_entities_1_1_h_hostile}{H\+Hostile} $>$ \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a282de8bad37c11eecbfeffa2243addf4}{Hostiles}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Enemies present in the map \end{DoxyCompactList}\item 
 float \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a023973ffc8b857d992378e235632021c}{Scale}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Scale of the map \end{DoxyCompactList}\item 
 int \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_aa4a0c49d61c84b21d2a40745843b20df}{Non\+Walkable\+Space\+Percentage}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
@@ -80,7 +109,9 @@ int \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_aa4a0c49d61c84
 int \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_aeb6bb95a8fa7aebc3aaacc656ec70a76}{Height}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Height of the map \end{DoxyCompactList}\item 
 int \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_aeb3db69a653089c32c2b61c7612bd106}{Width}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
-\begin{DoxyCompactList}\small\item\em Width of the map \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Width of the map \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell}{H\+Cell}\mbox{[},\mbox{]} \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a535482869e34bb0cb22cd82227a0b18b}{Cells}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Cells of the map \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -89,16 +120,35 @@ Used the create a map for the game
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a93cc2548c1f18d85d09ae9c87affd97f}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!H\+Map@{H\+Map}}
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a392c8a341df9fe757320121d8d7ccd08}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!H\+Map@{H\+Map}}
 \index{H\+Map@{H\+Map}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
 \subsubsection[{H\+Map}]{\setlength{\rightskip}{0pt plus 5cm}Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+H\+Map (
 \begin{DoxyParamCaption}
-\item[{int}]{height, }
+\item[{{\bf H\+Cell}}]{cells\mbox{[},\mbox{]}, }
+\item[{float}]{scale = {\ttfamily 1.0f}}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a392c8a341df9fe757320121d8d7ccd08}
+
+
+Creates a map from given cells 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cells} & Cells of the map\\
+\hline
+{\em scale} & Scale of the map\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a7318bd52a1e87a96da5094cc2b6bd019}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!H\+Map@{H\+Map}}
+\index{H\+Map@{H\+Map}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{H\+Map}]{\setlength{\rightskip}{0pt plus 5cm}Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+H\+Map (
+\begin{DoxyParamCaption}
 \item[{int}]{width, }
+\item[{int}]{height, }
 \item[{float}]{scale = {\ttfamily 1.0f}, }
 \item[{int}]{non\+Walkable\+Space\+Percentage = {\ttfamily HMap.DEFAULT\+\_\+NONWALKABLE\+\_\+CELLS\+\_\+PERCENTAGE}}
 \end{DoxyParamCaption}
-)}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a93cc2548c1f18d85d09ae9c87affd97f}
+)}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a7318bd52a1e87a96da5094cc2b6bd019}
 
 
 Creates a map full of non-\/walkable cells 
@@ -128,6 +178,17 @@ Use the \textquotesingle{}Make\textquotesingle{} methods to transform the map
 
 Clears the map, all the cells are null 
 
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a765937b037dbeafac4fb455e393d8d9b}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Decorate\+Map@{Decorate\+Map}}
+\index{Decorate\+Map@{Decorate\+Map}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{Decorate\+Map}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Decorate\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a765937b037dbeafac4fb455e393d8d9b}
+
+
+Decorates the map 
+
 \hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_af561c3a13ca537b9f32c3d2cc122c2d7}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Draw@{Draw}}
 \index{Draw@{Draw}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
 \subsubsection[{Draw}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Draw (
@@ -147,6 +208,109 @@ Draws the map
 {\em camera} & Camera to determine where to draw\\
 \hline
 \end{DoxyParams}
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_aa20928d3f1d18d4b1625c5326f65e0cd}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Draw\+Items@{Draw\+Items}}
+\index{Draw\+Items@{Draw\+Items}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{Draw\+Items}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Draw\+Items (
+\begin{DoxyParamCaption}
+\item[{Sprite\+Batch}]{sprite\+Batch, }
+\item[{{\bf Camera}}]{camera, }
+\item[{{\bf F\+Rectangle}}]{limits}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_aa20928d3f1d18d4b1625c5326f65e0cd}
+
+
+Draws all the items that are on the floor of the map 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Batch} & Sprite batch\\
+\hline
+{\em camera} & Camera of the game\\
+\hline
+{\em limits} & Limits where the item will be drawn\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a45d1bd903b1626f6f968d53e6861847b}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Get\+Adjacent\+Cells@{Get\+Adjacent\+Cells}}
+\index{Get\+Adjacent\+Cells@{Get\+Adjacent\+Cells}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{Get\+Adjacent\+Cells}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf H\+Cell}$>$ Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Get\+Adjacent\+Cells (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{scope\+X, }
+\item[{int}]{scope\+Y, }
+\item[{bool}]{include\+Designated\+Cell = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a45d1bd903b1626f6f968d53e6861847b}
+
+
+Gets the adjacent cells of the position 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position\\
+\hline
+{\em y} & Y position\\
+\hline
+{\em scope\+X} & X scope\\
+\hline
+{\em scope\+Y} & Y scope\\
+\hline
+{\em include\+Designated\+Cell} & Include the specified cell ?\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Adjacent cells
+\end{DoxyReturn}
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a8fe60c382ebc4b0cb407e8e318c08d8b}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Get\+Adjacent\+Unwalkable\+Cells@{Get\+Adjacent\+Unwalkable\+Cells}}
+\index{Get\+Adjacent\+Unwalkable\+Cells@{Get\+Adjacent\+Unwalkable\+Cells}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{Get\+Adjacent\+Unwalkable\+Cells}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf H\+Cell}$>$ Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Get\+Adjacent\+Unwalkable\+Cells (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{scope\+X, }
+\item[{int}]{scope\+Y}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a8fe60c382ebc4b0cb407e8e318c08d8b}
+
+
+Gets the adjacent non-\/walkable cells around the given point and scope 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position\\
+\hline
+{\em y} & Y position\\
+\hline
+{\em scope\+X} & Scope on the X axis\\
+\hline
+{\em scope\+Y} & Scope on the Y axis\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of the adjacent non-\/walkable cells
+\end{DoxyReturn}
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a8e1d71f1100f0c949039cee325413e21}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Get\+Bottom\+Cell@{Get\+Bottom\+Cell}}
+\index{Get\+Bottom\+Cell@{Get\+Bottom\+Cell}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{Get\+Bottom\+Cell}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+Cell} Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Get\+Bottom\+Cell (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a8e1d71f1100f0c949039cee325413e21}
+
+
+Gets the bottom cell 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position of the cell\\
+\hline
+{\em y} & Y postiion of the cell\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Bottom cell
+\end{DoxyReturn}
 \hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_add08dfb4ddb7dec19bd52684e6051da2}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Get\+Cell@{Get\+Cell}}
 \index{Get\+Cell@{Get\+Cell}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
 \subsubsection[{Get\+Cell}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+Cell} Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Get\+Cell (
@@ -191,6 +355,28 @@ Gets a copy of the specified cell
 \begin{DoxyReturn}{Returns}
 Copy of the cell
 \end{DoxyReturn}
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_ae35fa29d0071ce316675883d42818024}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Get\+Left\+Cell@{Get\+Left\+Cell}}
+\index{Get\+Left\+Cell@{Get\+Left\+Cell}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{Get\+Left\+Cell}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+Cell} Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Get\+Left\+Cell (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_ae35fa29d0071ce316675883d42818024}
+
+
+Gets the Left cell 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position of the cell\\
+\hline
+{\em y} & Y postiion of the cell\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Left cell
+\end{DoxyReturn}
 \hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_ac11321d7ff766f5ff1a57bfc941d721e}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Get\+Number\+Of\+Adjacent\+Unwalkable\+Cells@{Get\+Number\+Of\+Adjacent\+Unwalkable\+Cells}}
 \index{Get\+Number\+Of\+Adjacent\+Unwalkable\+Cells@{Get\+Number\+Of\+Adjacent\+Unwalkable\+Cells}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
 \subsubsection[{Get\+Number\+Of\+Adjacent\+Unwalkable\+Cells}]{\setlength{\rightskip}{0pt plus 5cm}int Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Get\+Number\+Of\+Adjacent\+Unwalkable\+Cells (
@@ -219,19 +405,63 @@ Gets the number of adjacent non-\/walkable cells around the specified cell
 \begin{DoxyReturn}{Returns}
 numbers of non-\/walkable cells around the specified cell
 \end{DoxyReturn}
-\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a82276f06e5f66ea64564d52a69d8a90d}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Get\+Random\+Spawn\+Point@{Get\+Random\+Spawn\+Point}}
-\index{Get\+Random\+Spawn\+Point@{Get\+Random\+Spawn\+Point}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
-\subsubsection[{Get\+Random\+Spawn\+Point}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Get\+Random\+Spawn\+Point (
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_afd943562de7043cdf18b27ede54d2f7b}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Get\+Random\+Floor\+Point@{Get\+Random\+Floor\+Point}}
+\index{Get\+Random\+Floor\+Point@{Get\+Random\+Floor\+Point}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{Get\+Random\+Floor\+Point}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Get\+Random\+Floor\+Point (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a82276f06e5f66ea64564d52a69d8a90d}
+)}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_afd943562de7043cdf18b27ede54d2f7b}
 
 
 Gets a random walkable area 
 
 \begin{DoxyReturn}{Returns}
+Position of the walkable position
+\end{DoxyReturn}
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a6f599e28b7a3133e6857e61534b44e34}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Get\+Right\+Cell@{Get\+Right\+Cell}}
+\index{Get\+Right\+Cell@{Get\+Right\+Cell}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{Get\+Right\+Cell}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+Cell} Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Get\+Right\+Cell (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a6f599e28b7a3133e6857e61534b44e34}
 
+
+Gets the Right cell 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position of the cell\\
+\hline
+{\em y} & Y postiion of the cell\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Right cell
+\end{DoxyReturn}
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a07c6bee8336fab355258507d1c189a81}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Get\+Top\+Cell@{Get\+Top\+Cell}}
+\index{Get\+Top\+Cell@{Get\+Top\+Cell}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{Get\+Top\+Cell}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+Cell} Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Get\+Top\+Cell (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a07c6bee8336fab355258507d1c189a81}
+
+
+Gets the top cell 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position of the cell\\
+\hline
+{\em y} & Y postiion of the cell\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Top cell
 \end{DoxyReturn}
 \hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a5bca0c19006ab0058c11ebe44c888df5}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Is\+Cell\+Nonwalkable@{Is\+Cell\+Nonwalkable}}
 \index{Is\+Cell\+Nonwalkable@{Is\+Cell\+Nonwalkable}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
@@ -288,6 +518,25 @@ Result in boolean
 
 Loads the content 
 
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_ae8b095cbbd47a2dbf88b8380f5765a78}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Load\+From\+Xml@{Load\+From\+Xml}}
+\index{Load\+From\+Xml@{Load\+From\+Xml}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{Load\+From\+Xml}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf H\+Cell} \mbox{[},\mbox{]} Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Load\+From\+Xml (
+\begin{DoxyParamCaption}
+\item[{string}]{path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_ae8b095cbbd47a2dbf88b8380f5765a78}
+
+
+Loads a map from an xml file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path of the file\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Cells of the map
+\end{DoxyReturn}
 \hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a338b82cacb27f45c792f090e6bfc12fe}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Make\+Caverns@{Make\+Caverns}}
 \index{Make\+Caverns@{Make\+Caverns}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
 \subsubsection[{Make\+Caverns}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Make\+Caverns (
@@ -342,6 +591,23 @@ Places a walkable cell depending on it\textquotesingle{}s neighbors
 {\em cell} & \\
 \hline
 \end{DoxyParams}
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a014aa4c548e54e2aba3fa8cec42fcb56}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Save\+To\+Xml@{Save\+To\+Xml}}
+\index{Save\+To\+Xml@{Save\+To\+Xml}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{Save\+To\+Xml}]{\setlength{\rightskip}{0pt plus 5cm}static void Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Save\+To\+Xml (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+Map}}]{map, }
+\item[{string}]{path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a014aa4c548e54e2aba3fa8cec42fcb56}
+
+
+Save the cells in an X\+M\+L file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path of the file\\
+\hline
+\end{DoxyParams}
 \hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_ac2ef04c6930b46bea691379183ca57f4}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Set\+Cell@{Set\+Cell}}
 \index{Set\+Cell@{Set\+Cell}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
 \subsubsection[{Set\+Cell}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Set\+Cell (
@@ -378,6 +644,13 @@ Unloads the content
 
 
 \subsection{Property Documentation}
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a535482869e34bb0cb22cd82227a0b18b}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Cells@{Cells}}
+\index{Cells@{Cells}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{Cells}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+Cell} \mbox{[},\mbox{]} Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Cells\hspace{0.3cm}{\ttfamily [get]}}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a535482869e34bb0cb22cd82227a0b18b}
+
+
+Cells of the map 
+
 \hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_aeb6bb95a8fa7aebc3aaacc656ec70a76}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Height@{Height}}
 \index{Height@{Height}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
 \subsubsection[{Height}]{\setlength{\rightskip}{0pt plus 5cm}int Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Height\hspace{0.3cm}{\ttfamily [get]}}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_aeb6bb95a8fa7aebc3aaacc656ec70a76}
@@ -385,12 +658,26 @@ Unloads the content
 
 Height of the map 
 
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a282de8bad37c11eecbfeffa2243addf4}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Hostiles@{Hostiles}}
+\index{Hostiles@{Hostiles}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{Hostiles}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf H\+Hostile}$>$ Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Hostiles\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a282de8bad37c11eecbfeffa2243addf4}
+
+
+Enemies present in the map 
+
 \hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_aa4a0c49d61c84b21d2a40745843b20df}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Non\+Walkable\+Space\+Percentage@{Non\+Walkable\+Space\+Percentage}}
 \index{Non\+Walkable\+Space\+Percentage@{Non\+Walkable\+Space\+Percentage}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
 \subsubsection[{Non\+Walkable\+Space\+Percentage}]{\setlength{\rightskip}{0pt plus 5cm}int Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+Non\+Walkable\+Space\+Percentage\hspace{0.3cm}{\ttfamily [get]}}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_aa4a0c49d61c84b21d2a40745843b20df}
 
 
 Percentage of walkable area in the map 
+
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a4da83fe2eddc89c152e737b682068f57}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!On\+Floor\+Items@{On\+Floor\+Items}}
+\index{On\+Floor\+Items@{On\+Floor\+Items}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}
+\subsubsection[{On\+Floor\+Items}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf H\+Item}$>$ Hel\+Project.\+Game\+World.\+Map.\+H\+Map.\+On\+Floor\+Items\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a4da83fe2eddc89c152e737b682068f57}
+
+
+Items currently on the floor 
 
 \hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_map_a023973ffc8b857d992378e235632021c}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}!Scale@{Scale}}
 \index{Scale@{Scale}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Map}}

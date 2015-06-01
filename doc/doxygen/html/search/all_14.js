@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['xmlmanager',['XmlManager',['../class_hel_project_1_1_tools_1_1_xml_manager.html',1,'HelProject::Tools']]],
-  ['xmlmanager_3c_20helproject_3a_3aui_3a_3agamescreen_20_3e',['XmlManager&lt; HelProject::UI::GameScreen &gt;',['../class_hel_project_1_1_tools_1_1_xml_manager.html',1,'HelProject::Tools']]]
+  ['width',['Width',['../class_hel_project_1_1_game_world_1_1_map_1_1_h_map.html#aeb3db69a653089c32c2b61c7612bd106',1,'HelProject.GameWorld.Map.HMap.Width()'],['../class_hel_project_1_1_u_i_1_1_camera.html#ad16cc9589cf14533997a8f090c67f509',1,'HelProject.UI.Camera.Width()']]]
 ];

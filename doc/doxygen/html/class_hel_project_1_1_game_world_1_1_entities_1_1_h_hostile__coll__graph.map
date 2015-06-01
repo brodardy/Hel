@@ -1,0 +1,4 @@
+<map id="HelProject.GameWorld.Entities.HHostile" name="HelProject.GameWorld.Entities.HHostile">
+<area shape="rect" id="node2" href="$class_hel_project_1_1_game_world_1_1_entities_1_1_h_entity.html" title="Base abstract class for the entities of the game " alt="" coords="76,80,141,107"/>
+<area shape="rect" id="node3" href="$class_hel_project_1_1_game_world_1_1_h_object.html" title="Abstract class for all entities of the game " alt="" coords="74,5,143,32"/>
+</map>

@@ -14,7 +14,11 @@ Rectangle with float parameters
 \begin{DoxyCompactList}\small\item\em Creates a rectangle with float parameters \end{DoxyCompactList}\item 
 bool \hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle_a2019f4db5e6a0da6eb5db3a5be41eecb}{Intersects} (\hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle}{F\+Rectangle} rectangle)
 \begin{DoxyCompactList}\small\item\em Finds if this rectangle is intersecting with another \end{DoxyCompactList}\item 
-void \hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle_ac285d24e4e9b2d2c8feeed0f46c43cd8}{Set\+Bounds} (Vector2 position, int texture\+Width, int texture\+Height)
+bool \hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle_aad81bdd93b008d00e83698ec1d37158d}{Intersects} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Finds if a point is intersecting with this rectangle \end{DoxyCompactList}\item 
+bool \hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle_a92993f4e29ac4fb482aa7863b3c49d12}{Intersects} (Vector2 position)
+\begin{DoxyCompactList}\small\item\em Finds if a vector is intersecting with this rectangle \end{DoxyCompactList}\item 
+void \hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle_af85c47017ac547826574b8911e45d38e}{Set\+Bounds\+With\+Texture} (Vector2 position, int texture\+Width, int texture\+Height)
 \begin{DoxyCompactList}\small\item\em Sets the position of the bounds accordingly to the given position \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -42,7 +46,7 @@ float \hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle_a3908c6198bfd09f182
 \begin{DoxyCompactList}\small\item\em Left position \end{DoxyCompactList}\item 
 float \hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle_ad758ded56c229a9a801193c0671cd5da}{Right}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Right position \end{DoxyCompactList}\item 
-Vector2 \hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle_a77d6c7b832edfa34e2a4402c400d8e59}{Position}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+Vector2 \hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle_a77d6c7b832edfa34e2a4402c400d8e59}{Position}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Position of the rectangle \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -118,15 +122,56 @@ Finds if this rectangle is intersecting with another
 \begin{DoxyReturn}{Returns}
 Results if it\textquotesingle{}s intersecting
 \end{DoxyReturn}
-http\+://stackoverflow.\+com/questions/13390333/two-\/rectangles-\/intersection \hypertarget{class_hel_project_1_1_tools_1_1_f_rectangle_ac285d24e4e9b2d2c8feeed0f46c43cd8}{}\index{Hel\+Project\+::\+Tools\+::\+F\+Rectangle@{Hel\+Project\+::\+Tools\+::\+F\+Rectangle}!Set\+Bounds@{Set\+Bounds}}
-\index{Set\+Bounds@{Set\+Bounds}!Hel\+Project\+::\+Tools\+::\+F\+Rectangle@{Hel\+Project\+::\+Tools\+::\+F\+Rectangle}}
-\subsubsection[{Set\+Bounds}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+Tools.\+F\+Rectangle.\+Set\+Bounds (
+http\+://stackoverflow.\+com/questions/13390333/two-\/rectangles-\/intersection \hypertarget{class_hel_project_1_1_tools_1_1_f_rectangle_aad81bdd93b008d00e83698ec1d37158d}{}\index{Hel\+Project\+::\+Tools\+::\+F\+Rectangle@{Hel\+Project\+::\+Tools\+::\+F\+Rectangle}!Intersects@{Intersects}}
+\index{Intersects@{Intersects}!Hel\+Project\+::\+Tools\+::\+F\+Rectangle@{Hel\+Project\+::\+Tools\+::\+F\+Rectangle}}
+\subsubsection[{Intersects}]{\setlength{\rightskip}{0pt plus 5cm}bool Hel\+Project.\+Tools.\+F\+Rectangle.\+Intersects (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_tools_1_1_f_rectangle_aad81bdd93b008d00e83698ec1d37158d}
+
+
+Finds if a point is intersecting with this rectangle 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position of the point\\
+\hline
+{\em y} & Y position of the point\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Results if it\textquotesingle{}s intersecting
+\end{DoxyReturn}
+\hypertarget{class_hel_project_1_1_tools_1_1_f_rectangle_a92993f4e29ac4fb482aa7863b3c49d12}{}\index{Hel\+Project\+::\+Tools\+::\+F\+Rectangle@{Hel\+Project\+::\+Tools\+::\+F\+Rectangle}!Intersects@{Intersects}}
+\index{Intersects@{Intersects}!Hel\+Project\+::\+Tools\+::\+F\+Rectangle@{Hel\+Project\+::\+Tools\+::\+F\+Rectangle}}
+\subsubsection[{Intersects}]{\setlength{\rightskip}{0pt plus 5cm}bool Hel\+Project.\+Tools.\+F\+Rectangle.\+Intersects (
+\begin{DoxyParamCaption}
+\item[{Vector2}]{position}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_tools_1_1_f_rectangle_a92993f4e29ac4fb482aa7863b3c49d12}
+
+
+Finds if a vector is intersecting with this rectangle 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Position\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Results if it\textquotesingle{}s intersecting
+\end{DoxyReturn}
+\hypertarget{class_hel_project_1_1_tools_1_1_f_rectangle_af85c47017ac547826574b8911e45d38e}{}\index{Hel\+Project\+::\+Tools\+::\+F\+Rectangle@{Hel\+Project\+::\+Tools\+::\+F\+Rectangle}!Set\+Bounds\+With\+Texture@{Set\+Bounds\+With\+Texture}}
+\index{Set\+Bounds\+With\+Texture@{Set\+Bounds\+With\+Texture}!Hel\+Project\+::\+Tools\+::\+F\+Rectangle@{Hel\+Project\+::\+Tools\+::\+F\+Rectangle}}
+\subsubsection[{Set\+Bounds\+With\+Texture}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+Tools.\+F\+Rectangle.\+Set\+Bounds\+With\+Texture (
 \begin{DoxyParamCaption}
 \item[{Vector2}]{position, }
 \item[{int}]{texture\+Width, }
 \item[{int}]{texture\+Height}
 \end{DoxyParamCaption}
-)}\label{class_hel_project_1_1_tools_1_1_f_rectangle_ac285d24e4e9b2d2c8feeed0f46c43cd8}
+)}\label{class_hel_project_1_1_tools_1_1_f_rectangle_af85c47017ac547826574b8911e45d38e}
 
 
 Sets the position of the bounds accordingly to the given position 
@@ -150,7 +195,7 @@ Left position
 
 \hypertarget{class_hel_project_1_1_tools_1_1_f_rectangle_a77d6c7b832edfa34e2a4402c400d8e59}{}\index{Hel\+Project\+::\+Tools\+::\+F\+Rectangle@{Hel\+Project\+::\+Tools\+::\+F\+Rectangle}!Position@{Position}}
 \index{Position@{Position}!Hel\+Project\+::\+Tools\+::\+F\+Rectangle@{Hel\+Project\+::\+Tools\+::\+F\+Rectangle}}
-\subsubsection[{Position}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Hel\+Project.\+Tools.\+F\+Rectangle.\+Position\hspace{0.3cm}{\ttfamily [get]}}\label{class_hel_project_1_1_tools_1_1_f_rectangle_a77d6c7b832edfa34e2a4402c400d8e59}
+\subsubsection[{Position}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Hel\+Project.\+Tools.\+F\+Rectangle.\+Position\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_tools_1_1_f_rectangle_a77d6c7b832edfa34e2a4402c400d8e59}
 
 
 Position of the rectangle 

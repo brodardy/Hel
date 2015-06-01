@@ -33,10 +33,16 @@ override void \hyperlink{class_hel_project_1_1_u_i_1_1_play_screen_a90c75361ad40
 override void \hyperlink{class_hel_project_1_1_u_i_1_1_play_screen_a012a79b297f9e09a0d21dbe952a653db}{Update} (Game\+Time game\+Time)
 \begin{DoxyCompactList}\small\item\em Updates the mechanisms \end{DoxyCompactList}\item 
 override void \hyperlink{class_hel_project_1_1_u_i_1_1_play_screen_a0f290e8d07d6632fd53a66efc585e853}{Draw} (Sprite\+Batch sprite\+Batch)
-\begin{DoxyCompactList}\small\item\em Draws on the window \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Draws on the window \end{DoxyCompactList}\item 
+void \hyperlink{class_hel_project_1_1_u_i_1_1_play_screen_a0b4785cbfbf29d287b40c003a2b0001d}{Transition\+To\+Map} (\hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map}{H\+Map} map)
+\begin{DoxyCompactList}\small\item\em Transitions to another map \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
+\hyperlink{class_hel_project_1_1_u_i_1_1_selection_aid}{Selection\+Aid} \hyperlink{class_hel_project_1_1_u_i_1_1_play_screen_a06addd08f18e59b70cded27e325a6ed1}{Selection\+Assistant}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Selection assistant for the game \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map}{H\+Map} \hyperlink{class_hel_project_1_1_u_i_1_1_play_screen_a8f6f7d590c13e9f21db49c181daabc32}{Map\+Town}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Starting point of the game \+: The town \end{DoxyCompactList}\item 
 \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map}{H\+Map} \hyperlink{class_hel_project_1_1_u_i_1_1_play_screen_a6fa66d24cfdc2801ecfd0e72f1c1669b}{Map\+Difficulty\+Easy}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Map of the game with easy difficulty \end{DoxyCompactList}\item 
 \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_map}{H\+Map} \hyperlink{class_hel_project_1_1_u_i_1_1_play_screen_a4dc67a0bb9e4dfc7fabcb35e45529771}{Map\+Difficulty\+Medium}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
@@ -94,6 +100,22 @@ Loads the content of the window
 
 Reimplemented from \hyperlink{class_hel_project_1_1_u_i_1_1_game_screen_aa4e15890ede3b8da390ffe0cecff3703}{Hel\+Project.\+U\+I.\+Game\+Screen}.
 
+\hypertarget{class_hel_project_1_1_u_i_1_1_play_screen_a0b4785cbfbf29d287b40c003a2b0001d}{}\index{Hel\+Project\+::\+U\+I\+::\+Play\+Screen@{Hel\+Project\+::\+U\+I\+::\+Play\+Screen}!Transition\+To\+Map@{Transition\+To\+Map}}
+\index{Transition\+To\+Map@{Transition\+To\+Map}!Hel\+Project\+::\+U\+I\+::\+Play\+Screen@{Hel\+Project\+::\+U\+I\+::\+Play\+Screen}}
+\subsubsection[{Transition\+To\+Map}]{\setlength{\rightskip}{0pt plus 5cm}void Hel\+Project.\+U\+I.\+Play\+Screen.\+Transition\+To\+Map (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+Map}}]{map}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_u_i_1_1_play_screen_a0b4785cbfbf29d287b40c003a2b0001d}
+
+
+Transitions to another map 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map} & \\
+\hline
+\end{DoxyParams}
 \hypertarget{class_hel_project_1_1_u_i_1_1_play_screen_a90c75361ad40bff449d2a560ef8f4464}{}\index{Hel\+Project\+::\+U\+I\+::\+Play\+Screen@{Hel\+Project\+::\+U\+I\+::\+Play\+Screen}!Unload\+Content@{Unload\+Content}}
 \index{Unload\+Content@{Unload\+Content}!Hel\+Project\+::\+U\+I\+::\+Play\+Screen@{Hel\+Project\+::\+U\+I\+::\+Play\+Screen}}
 \subsubsection[{Unload\+Content}]{\setlength{\rightskip}{0pt plus 5cm}override void Hel\+Project.\+U\+I.\+Play\+Screen.\+Unload\+Content (
@@ -174,12 +196,26 @@ Map of the game with hard difficulty
 
 Map of the game with medium difficulty 
 
+\hypertarget{class_hel_project_1_1_u_i_1_1_play_screen_a8f6f7d590c13e9f21db49c181daabc32}{}\index{Hel\+Project\+::\+U\+I\+::\+Play\+Screen@{Hel\+Project\+::\+U\+I\+::\+Play\+Screen}!Map\+Town@{Map\+Town}}
+\index{Map\+Town@{Map\+Town}!Hel\+Project\+::\+U\+I\+::\+Play\+Screen@{Hel\+Project\+::\+U\+I\+::\+Play\+Screen}}
+\subsubsection[{Map\+Town}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+Map} Hel\+Project.\+U\+I.\+Play\+Screen.\+Map\+Town\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_u_i_1_1_play_screen_a8f6f7d590c13e9f21db49c181daabc32}
+
+
+Starting point of the game \+: The town 
+
 \hypertarget{class_hel_project_1_1_u_i_1_1_play_screen_a404ed230e991ee3a7563c23fc053f383}{}\index{Hel\+Project\+::\+U\+I\+::\+Play\+Screen@{Hel\+Project\+::\+U\+I\+::\+Play\+Screen}!Playable\+Character@{Playable\+Character}}
 \index{Playable\+Character@{Playable\+Character}!Hel\+Project\+::\+U\+I\+::\+Play\+Screen@{Hel\+Project\+::\+U\+I\+::\+Play\+Screen}}
 \subsubsection[{Playable\+Character}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+Hero} Hel\+Project.\+U\+I.\+Play\+Screen.\+Playable\+Character\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_u_i_1_1_play_screen_a404ed230e991ee3a7563c23fc053f383}
 
 
 Playable character 
+
+\hypertarget{class_hel_project_1_1_u_i_1_1_play_screen_a06addd08f18e59b70cded27e325a6ed1}{}\index{Hel\+Project\+::\+U\+I\+::\+Play\+Screen@{Hel\+Project\+::\+U\+I\+::\+Play\+Screen}!Selection\+Assistant@{Selection\+Assistant}}
+\index{Selection\+Assistant@{Selection\+Assistant}!Hel\+Project\+::\+U\+I\+::\+Play\+Screen@{Hel\+Project\+::\+U\+I\+::\+Play\+Screen}}
+\subsubsection[{Selection\+Assistant}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Selection\+Aid} Hel\+Project.\+U\+I.\+Play\+Screen.\+Selection\+Assistant\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_u_i_1_1_play_screen_a06addd08f18e59b70cded27e325a6ed1}
+
+
+Selection assistant for the game 
 
 
 

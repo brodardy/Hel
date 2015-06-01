@@ -31,6 +31,8 @@ Collaboration diagram for Hel\+Project.\+Game\+World.\+Map.\+H\+Cell\+:\nopagebr
 \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell_a32bbca9e2eadd8aeeb956629418f00f1}{H\+Cell} (Vector2 position)
 \begin{DoxyCompactList}\small\item\em Cell that represents a part of the map \end{DoxyCompactList}\item 
 \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell_ac17c0998ae60d46ea3b6e1d7ca29e54e}{H\+Cell} (bool is\+Walkable, Vector2 position)
+\begin{DoxyCompactList}\small\item\em Cell that represents a part of the map \end{DoxyCompactList}\item 
+\hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell_a3660e3a5fc19aae5e1188f73330d645b}{H\+Cell} (bool is\+Walkable, Vector2 position, string type)
 \begin{DoxyCompactList}\small\item\em Cell that represents a part of the map \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -42,7 +44,9 @@ Collaboration diagram for Hel\+Project.\+Game\+World.\+Map.\+H\+Cell\+:\nopagebr
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{class_hel_project_1_1_tools_1_1_f_rectangle}{F\+Rectangle} \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell_a04c8b19e74486d6a2c05b700895290aa}{Bounds}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\begin{DoxyCompactList}\small\item\em Bounds of the cells \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Bounds of the cells \end{DoxyCompactList}\item 
+string \hyperlink{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell_a5565694259c3692972bea83e774a1012}{Type}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Type of the cell \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
@@ -102,7 +106,31 @@ Cell that represents a part of the map
 \end{DoxyParams}
 
 
-The cell position is rounded to the base digit. 
+The cell position is rounded to the base digit. \hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell_a3660e3a5fc19aae5e1188f73330d645b}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Cell@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Cell}!H\+Cell@{H\+Cell}}
+\index{H\+Cell@{H\+Cell}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Cell@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Cell}}
+\subsubsection[{H\+Cell}]{\setlength{\rightskip}{0pt plus 5cm}Hel\+Project.\+Game\+World.\+Map.\+H\+Cell.\+H\+Cell (
+\begin{DoxyParamCaption}
+\item[{bool}]{is\+Walkable, }
+\item[{Vector2}]{position, }
+\item[{string}]{type}
+\end{DoxyParamCaption}
+)}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell_a3660e3a5fc19aae5e1188f73330d645b}
+
+
+Cell that represents a part of the map 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\+Walkable} & The cell can be \textquotesingle{}walked\textquotesingle{} on by entities\\
+\hline
+{\em position} & The position of the cell\\
+\hline
+{\em type} & Type of the cell\\
+\hline
+\end{DoxyParams}
+
+
+The cell position is rounded to the base digit. The type of the often corresponds with a texture 
 
 \subsection{Property Documentation}
 \hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell_a04c8b19e74486d6a2c05b700895290aa}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Cell@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Cell}!Bounds@{Bounds}}
@@ -112,7 +140,14 @@ The cell position is rounded to the base digit.
 
 Bounds of the cells 
 
+\hypertarget{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell_a5565694259c3692972bea83e774a1012}{}\index{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Cell@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Cell}!Type@{Type}}
+\index{Type@{Type}!Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Cell@{Hel\+Project\+::\+Game\+World\+::\+Map\+::\+H\+Cell}}
+\subsubsection[{Type}]{\setlength{\rightskip}{0pt plus 5cm}string Hel\+Project.\+Game\+World.\+Map.\+H\+Cell.\+Type\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\label{class_hel_project_1_1_game_world_1_1_map_1_1_h_cell_a5565694259c3692972bea83e774a1012}
 
+
+Type of the cell 
+
+Often corresponds with a texture 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
