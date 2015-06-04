@@ -1,0 +1,9 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {french}
+\beamer@sectionintoc {1}{Contexte du projet}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Cahier des charges}{4}{0}{1}
+\beamer@subsectionintoc {1}{2}{\IeC {\'E}tude du march\IeC {\'e}}{7}{0}{1}
+\beamer@sectionintoc {2}{Fonctionnalit\IeC {\'e}s}{9}{0}{2}
+\beamer@sectionintoc {3}{M\IeC {\'e}thodes mises en \IeC {\oe }uvre}{11}{0}{3}
+\beamer@sectionintoc {4}{D\IeC {\'e}monstration}{13}{0}{4}
+\beamer@sectionintoc {5}{Conclusion et perspectives}{15}{0}{5}

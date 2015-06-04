@@ -1,0 +1,144 @@
+\documentclass{beamer}
+
+% ---- PACKAGES ----
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% ---- THEME ----
+\usetheme{Dresden}
+\usecolortheme{beaver}
+
+% ---- PAGE NUMBER ----
+\setbeamertemplate{footline}%{miniframes theme}
+{%
+	\begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot}
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+		leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
+		\leavevmode{\usebeamerfont{author in head/foot}\insertshortauthor}%
+		\hfill%
+		{\usebeamerfont{institute in head/foot}\usebeamercolor[fg]{institute in head/foot}\insertshortinstitute}%
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+		leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+		{\usebeamerfont{title in head/foot}\insertshorttitle} \hfill     \insertframenumber%
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+	\end{beamercolorbox}
+}
+
+% ---- TITLE PAGE DECLARATION ----
+\title[Hel : The pixelated horror]{Hel : The pixelated horror}
+\subtitle{Travail de diplôme 2015}
+\author{Yannick R. Brodard}
+\institute{Centre de Formation Professionnelle Technique\\École d'informatique}
+\date{Vendredi, 5 juin 2015}
+\subject{Computer Science}
+
+% ---- DOCUMENT BEGINNING ----
+\begin{document}
+\frame{\titlepage}
+
+% ---- TABLE OF CONTENTS
+\begin{frame}
+\frametitle{Sommaire}
+\tableofcontents[hideallsubsections]
+\end{frame}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection,hideallsubsections]
+  \end{frame}
+}
+
+% ---- CONTEXTE DU PROJET ----
+\section{Contexte du projet}
+\subsection{Cahier des charges}
+\begin{frame}
+\frametitle{Sujet}
+\begin{itemize}
+	\item Jeu-vidéo 2D
+	\item Aspects RPG
+	\begin{itemize}
+		\item Système de compétences
+		\item Système d'objets
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{But}
+\begin{itemize}
+	\item Gagner des compétences
+	\item Trouver des objets pour améliorer son personnage
+	\item Parcourir un monde qui n'est jamais deux fois le même
+	\item Vaincre les ennemis et le boss \textit{Hel}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Détails}
+\begin{itemize}
+	\item Le joueur peut :
+	\begin{itemize}
+		\item Se déplacer
+		\item Attaquer
+		\item Invoquer des sorts
+	\end{itemize}
+	\item La carte est générée aléatoirement
+	\item Un système de progression du personnage est mis en place
+	\begin{itemize}
+		\item Points de caractéristiques
+		\item Points de compétences
+	\end{itemize}
+	\item Des objets sont trouvables pour le joueur
+\end{itemize}
+\end{frame}
+
+\subsection{Étude du marché}
+\begin{frame}
+\frametitle{Le marché actuel}
+\begin{itemize}
+	\item Diablo III, poids lourd actuel
+	\item Path of Exile, concurrent de Diablo III
+	\item Bastion, jeu indépendant remarquable
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Adaptation au marché}
+\begin{itemize}
+	\item Rendre le jeu équilibré pour satisfaire les hardcores-gamers ainsi qu'introduire des débutants.
+	\item Rendre le jeu générique pour facilement ajouté du contenu. Ce qui permet un développement plus solide de la communauté.
+	\item \textit{Rendre le jeu graphiquement attractif}
+\end{itemize}
+\end{frame}
+
+% ---- FONCTIONNALITÉS ----
+\section{Fonctionnalités}
+\begin{frame}
+\frametitle{This is the second slide}
+\end{frame}
+
+% ---- MÉTHODES MISES EN OEUVRE ----
+\section{Méthodes mises en œuvre}
+\begin{frame}
+\frametitle{This is the third slide}
+\end{frame}
+
+% ---- DÉMONSTRATION ----
+\section{Démonstration}
+\begin{frame}
+\frametitle{This is the fourth slide}
+\end{frame}
+
+% ---- CONCLUSION ET PERPECTIVES ----
+\section{Conclusion et perspectives}
+\begin{frame}
+\frametitle{This is the fifth slide}
+\end{frame}
+
+\end{document}
