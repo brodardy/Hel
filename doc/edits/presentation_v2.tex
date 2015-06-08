@@ -1,0 +1,226 @@
+\documentclass{beamer}
+
+% ---- PACKAGES ----
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% ---- THEME ----
+\usetheme{Dresden}
+\usecolortheme{beaver}
+
+% ---- PAGE NUMBER ----
+\setbeamertemplate{footline}%{miniframes theme}
+{%
+	\begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot}
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+		leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
+		\leavevmode{\usebeamerfont{author in head/foot}\insertshortauthor}%
+		\hfill%
+		{\usebeamerfont{institute in head/foot}\usebeamercolor[fg]{institute in head/foot}\insertshortinstitute}%
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+		leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+		{\usebeamerfont{title in head/foot}\insertshorttitle} \hfill     \insertframenumber%
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+	\end{beamercolorbox}
+}
+
+% ---- TITLE PAGE DECLARATION ----
+\title[Hel : The pixelated horror]{Hel : The pixelated horror}
+\subtitle{Travail de diplôme 2015}
+\author{Yannick R. Brodard}
+\institute{Centre de Formation Professionnelle Technique\\École d'informatique}
+\date{Vendredi, 5 juin 2015}
+\subject{Computer Science}
+
+% ---- DOCUMENT BEGINNING ----
+\begin{document}
+\frame{\titlepage}
+
+% ---- TABLE OF CONTENTS
+\begin{frame}
+\frametitle{Sommaire}
+\tableofcontents[hideallsubsections]
+\end{frame}
+
+%\AtBeginSection[]
+%{
+%  \begin{frame}
+%    \frametitle{Sommaire}
+%    \tableofcontents[currentsection,hideallsubsections]
+%  \end{frame}
+%}
+
+% ---- CONTEXTE DU PROJET ----
+\section{Introduction}
+\subsection{}
+\begin{frame}
+\begin{columns}
+\column{0.5\textwidth}
+	\begin{itemize}
+		\item Jeu-vidéo 2D
+		\item Aspects RPG
+		\begin{itemize}
+			\item Système de compétences
+			\item Système d'objets
+		\end{itemize}
+		\item Monogame
+	\end{itemize}
+\column{0.5\textwidth}
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{img/pres_monogame_logo.png}
+\end{figure}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{itemize}
+	\item Les jeux hack 'n' slash sont :
+	\begin{itemize}
+		\item Trop faciles
+		\item Trop complexes
+	\end{itemize}
+	\item Trouver le juste milieu
+	\item Défi à soi-même
+\end{itemize}
+\column{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{img/pres_diablo3.png}\\
+\includegraphics[width=0.5\textwidth]{img/pres_poe.png}\\
+\includegraphics[width=0.5\textwidth]{img/pres_bastion.png}
+\end{center}
+\end{columns}
+\end{frame}
+
+% ---- FONCTIONNALITÉS ----
+\section{Fonctionnalités}
+\subsection{}
+\begin{frame}
+Le jeu possède :
+\begin{itemize}
+	\item Une carte générée aléatoirement
+	\item Un personnage contrôlable
+	\item Des ennemis indépendants
+	\item Un menu de navigation
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Règles du jeu}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{itemize}
+	\item Vaincre des ennemis
+	\item Gagner des points de compétences
+	\item Trouver des objets
+	\item Vaincre le boss "Hel"
+\end{itemize}
+\column{0.5\textwidth}
+\begin{center}
+\includegraphics[width=.45\textwidth]{img/pres_strenght.png}\\
+\includegraphics[width=.45\textwidth]{img/pres_vitality.png}\\
+\includegraphics[width=.45\textwidth]{img/pres_agility.png}\\
+\includegraphics[width=.45\textwidth]{img/pres_magic.png}
+\end{center}
+\end{columns}
+\end{frame}
+
+% ---- MÉTHODES MISES EN OEUVRE ----
+\section{Méthodes}
+\subsection{}
+
+\begin{frame}
+\begin{center}
+\includegraphics[width=1\textwidth]{img/pres_boucles.png}\\
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Outils de développement}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{itemize}
+	\item Primitives 2D
+	\item Collisions/intersections
+	\item Gestion des entrées
+	\item Sérialisation XML
+\end{itemize}
+\column{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{img/pres_prim2d.png}\\
+\includegraphics[width=0.5\textwidth]{img/pres_keys.jpg}\\
+\end{center}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Entités}
+\begin{itemize}
+	\item Des éléments "vivants" du jeu
+	\item Possède vie, mana et caractéristique
+	\item Peut se déplacer et attaquer
+\end{itemize}
+\end{frame}
+	
+\begin{frame}
+\begin{center}
+\includegraphics[width=0.75\textwidth]{img/pres_depl.png}\\
+$$\vec{v}=p_1-p_2$$
+$$p=|\vec{v}|*\Delta t*s+p_1$$
+%$p$ : nouvelle position\\
+%$p_1$ : position du personnage\\
+%$p_2$ : position du clique\\
+%$s$ : vitesse de déplacement\\
+%$\Delta t$ : temps de jeu\\
+%$\vec{v}$ : direction du déplacement
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Carte}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{itemize}
+	\item Génération aléatoire
+	\item Utilise un algorithme d'automate cellulaire
+\end{itemize}
+\column{0.5\textwidth}
+\begin{center}
+\includegraphics[width=1\textwidth]{img/map_example.png}\\
+\end{center}
+\end{columns}
+\end{frame}
+
+% ---- DEMONSTRATION ----
+\section{Démonstration}
+\subsection{}
+\begin{frame}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{img/pres_demo.png}
+\end{center}
+\end{frame}
+
+% ---- CONCLUSION ET PERPECTIVES ----
+\section{Conclusion}
+\subsection{}
+\begin{frame}
+\begin{itemize}
+\item Conclusion
+\begin{itemize}
+	\item Manque le système d'objets et de points de compétences.
+	\item Le contenu s'ajoute facilement
+	\item Demande beaucoup de temps
+\end{itemize}
+\item Perspectives
+\begin{itemize}
+	\item Le projet sera continué
+	\item Peut être suivi sur GitHub
+\end{itemize}
+\end{itemize}
+\end{frame}
+\end{document}
