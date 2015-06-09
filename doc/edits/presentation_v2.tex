@@ -33,8 +33,8 @@
 \subtitle{Travail de diplôme 2015}
 \author{Yannick R. Brodard}
 \institute{Centre de Formation Professionnelle Technique\\École d'informatique}
-\date{Vendredi, 5 juin 2015}
-\subject{Computer Science}
+\date{Mercredi, 10 juin 2015}
+\subject{Informatique}
 
 % ---- DOCUMENT BEGINNING ----
 \begin{document}
@@ -71,28 +71,45 @@
 	\end{itemize}
 \column{0.5\textwidth}
 \begin{figure}
-\includegraphics[width=0.5\textwidth]{img/pres_monogame_logo.png}
+\includegraphics[width=1\textwidth]{img/hitbox.png}
 \end{figure}
 \end{columns}
 \end{frame}
 
 \begin{frame}
 \begin{columns}
+\frametitle{Pourquoi ce sujet ?}
 \column{0.5\textwidth}
 \begin{itemize}
-	\item Les jeux hack 'n' slash sont :
+	\item Les jeux ressemblants sont :
 	\begin{itemize}
 		\item Trop faciles
-		\item Trop complexes
+		\item ou trop complexes
 	\end{itemize}
 	\item Trouver le juste milieu
 	\item Défi à soi-même
 \end{itemize}
 \column{0.5\textwidth}
 \begin{center}
-\includegraphics[width=0.5\textwidth]{img/pres_diablo3.png}\\
-\includegraphics[width=0.5\textwidth]{img/pres_poe.png}\\
-\includegraphics[width=0.5\textwidth]{img/pres_bastion.png}
+\includegraphics[width=0.45\textwidth]{img/pres_diablo3.png}\\
+\includegraphics[width=0.45\textwidth]{img/pres_poe.png}\\
+\includegraphics[width=0.45\textwidth]{img/pres_bastion.png}
+\end{center}
+\end{columns}
+\end{frame}
+
+% ---- HEL ET ENVIRONNEMENT
+\begin{frame}
+\frametitle{Hel et son histoire}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{itemize}
+	\item Basé sur la mythologie nordique
+	\item Hel, déesse de la mort
+\end{itemize}
+\column{0.5\textwidth}
+\begin{center}
+\includegraphics[width=.75\textwidth]{img/Hel_goddess_of_death.jpg}
 \end{center}
 \end{columns}
 \end{frame}
@@ -100,13 +117,65 @@
 % ---- FONCTIONNALITÉS ----
 \section{Fonctionnalités}
 \subsection{}
+
+% ---- MONOGAME ----
+\begin{frame}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{itemize}
+	\item Boucle de jeu
+	\item Gestion des textures
+	\item Gestion de l'affichage
+	\item Utilisation du GPU
+\end{itemize}
+\column{0.5\textwidth}
+\begin{center}
+\includegraphics[width=.75\textwidth]{img/pres_monogame_logo.png}
+\end{center}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\includegraphics[width=.85\textwidth]{img/pres_boucles.png}\\
+\end{center}
+\end{frame}
+
+% ---- OUTILS ----
+\begin{frame}
+\frametitle{Outils de développement}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{itemize}
+	\item Primitives 2D
+	\item Collisions/intersections
+	\item Gestion des entrées
+	\item Sérialisation XML
+\end{itemize}
+\column{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{img/pres_prim2d.png}\\
+\includegraphics[width=0.5\textwidth]{img/pres_keys.jpg}\\
+\end{center}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\begin{figure}
+\includegraphics[width=0.65\textwidth]{img/pres_xml.png}
+\caption{Fichier XML du village}
+\end{figure}
+\end{center}
+\end{frame}
+
 \begin{frame}
 Le jeu possède :
 \begin{itemize}
+	\item Des règles de jeu
 	\item Une carte générée aléatoirement
 	\item Un personnage contrôlable
 	\item Des ennemis indépendants
-	\item Un menu de navigation
 \end{itemize}
 \end{frame}
 
@@ -135,59 +204,15 @@ Le jeu possède :
 \subsection{}
 
 \begin{frame}
-\begin{center}
-\includegraphics[width=1\textwidth]{img/pres_boucles.png}\\
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Outils de développement}
-\begin{columns}
-\column{0.5\textwidth}
-\begin{itemize}
-	\item Primitives 2D
-	\item Collisions/intersections
-	\item Gestion des entrées
-	\item Sérialisation XML
-\end{itemize}
-\column{0.5\textwidth}
-\begin{center}
-\includegraphics[width=0.5\textwidth]{img/pres_prim2d.png}\\
-\includegraphics[width=0.5\textwidth]{img/pres_keys.jpg}\\
-\end{center}
-\end{columns}
-\end{frame}
-
-\begin{frame}
-\frametitle{Entités}
-\begin{itemize}
-	\item Des éléments "vivants" du jeu
-	\item Possède vie, mana et caractéristique
-	\item Peut se déplacer et attaquer
-\end{itemize}
-\end{frame}
-	
-\begin{frame}
-\begin{center}
-\includegraphics[width=0.75\textwidth]{img/pres_depl.png}\\
-$$\vec{v}=p_1-p_2$$
-$$p=|\vec{v}|*\Delta t*s+p_1$$
-%$p$ : nouvelle position\\
-%$p_1$ : position du personnage\\
-%$p_2$ : position du clique\\
-%$s$ : vitesse de déplacement\\
-%$\Delta t$ : temps de jeu\\
-%$\vec{v}$ : direction du déplacement
-\end{center}
-\end{frame}
-
-\begin{frame}
 \frametitle{Carte}
 \begin{columns}
 \column{0.5\textwidth}
 \begin{itemize}
 	\item Génération aléatoire
 	\item Utilise un algorithme d'automate cellulaire
+	\begin{itemize}
+		\item Réagi selon les voisins
+	\end{itemize}
 \end{itemize}
 \column{0.5\textwidth}
 \begin{center}
@@ -195,6 +220,20 @@ $$p=|\vec{v}|*\Delta t*s+p_1$$
 \end{center}
 \end{columns}
 \end{frame}
+
+\begin{frame}
+\frametitle{Les éléments du jeu}
+\begin{center}
+\includegraphics[width=1\textwidth]{img/WorldObjects.png}
+\end{center}
+\end{frame}
+	
+\begin{frame}
+\begin{center}
+\includegraphics[width=0.69\textwidth]{img/HEntity.png}
+\end{center}
+\end{frame}
+
 
 % ---- DEMONSTRATION ----
 \section{Démonstration}
@@ -212,15 +251,22 @@ $$p=|\vec{v}|*\Delta t*s+p_1$$
 \begin{itemize}
 \item Conclusion
 \begin{itemize}
-	\item Manque le système d'objets et de points de compétences.
-	\item Le contenu s'ajoute facilement
-	\item Demande beaucoup de temps
+	\item Terminer le système d'objets et de points de compétences.
+	\item Ajout de contenu est simple
+	\item Nécessite beaucoup de temps de travail
 \end{itemize}
 \item Perspectives
 \begin{itemize}
-	\item Le projet sera continué
-	\item Peut être suivi sur GitHub
+	\item Une version stable d'ici quelques mois
+	\item Peut être suivi sur GitHub : \url{www.github.com/brodardy}
 \end{itemize}
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions ?}
+\begin{center}
+\includegraphics[width=0.25\textwidth]{img/question.png}
+\end{center}
 \end{frame}
 \end{document}
